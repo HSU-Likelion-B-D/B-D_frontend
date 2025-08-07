@@ -1,0 +1,72 @@
+// @use './variables' as *; 불러오기
+// color: $color-main 사용
+
+// 색상
+// gray
+$color-gray-900: #111111;
+$color-gray-800: #333333;
+$color-gray-700: #505050;
+$color-gray-600: #666666;
+$color-gray-500: #767676;
+$color-gray-400: #888888;
+$color-gray-300: #999999;
+$color-gray-200: #bbbbbb;
+$color-gray-100: #e1e1e1;
+$color-gray-50: #f1f1f5;
+// main
+$color-main-900: #004f45;
+$color-main-800: #006559;
+$color-main-700: #008777;
+$color-main-600: #00a995;
+$color-main-500: #00b49e;
+$color-main-400: #00cbb2;
+$color-main-300: #00e1c6;
+$color-main-200: #b0f6ed;
+$color-main-100: #d9fbf6;
+$color-main-50: #e6fcf9;
+// sub
+$color-sub-900: #102457;
+$color-sub-800: #152f70;
+$color-sub-700: #1c3e95;
+$color-sub-600: #234ebb;
+$color-sub-500: #2653c7;
+$color-sub-400: #2a5ee0;
+$color-sub-300: #2f68f9;
+$color-sub-200: #bfd0fd;
+$color-sub-100: #e0e8fe;
+$color-sub-50: #eaf0fe;
+// font
+$font_b01: #111111;
+$font_b02: #555555;
+$font_b03: #767676;
+$font_b04: #999999;
+$font_w01: #ffffff;
+//line
+$line-light: #f1f1f5;
+$line-regular: #e5e5ec;
+$line-black: #111111;
+
+@mixin flex(
+  $direction: row,
+  $align-items: center,
+  $justify-content: center,
+  $gap: null
+) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+@function rem($size) {
+  @return calc($size / 16px * 1rem);
+}
+
+@function vw($size) {
+  @return calc($size / 1920px * 100vw);
+}
+
+@function vh($size) {
+  @return calc($size / 1080px * 100vh);
+}
