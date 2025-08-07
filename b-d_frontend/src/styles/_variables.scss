@@ -2,17 +2,6 @@
 // color: $color-main 사용
 
 // 색상
-// gray
-$color-gray-900: #111111;
-$color-gray-800: #333333;
-$color-gray-700: #505050;
-$color-gray-600: #666666;
-$color-gray-500: #767676;
-$color-gray-400: #888888;
-$color-gray-300: #999999;
-$color-gray-200: #bbbbbb;
-$color-gray-100: #e1e1e1;
-$color-gray-50: #f1f1f5;
 // main
 $color-main: #0c9ce9;
 // sub
@@ -22,41 +11,12 @@ $color-sub-02: #929292;
 $color-sub-03: #595959;
 // white
 $color-white: #ffffff;
-// mint
-$color-mint-900: #004f45;
-$color-mint-800: #006559;
-$color-mint-700: #008777;
-$color-mint-600: #00a995;
-$color-mint-500: #00b49e;
-$color-mint-400: #00cbb2;
-$color-mint-300: #00e1c6;
-$color-mint-200: #b0f6ed;
-$color-mint-100: #d9fbf6;
-$color-mint-50: #e6fcf9;
-// blue
-$color-blue-900: #102457;
-$color-blue-800: #152f70;
-$color-blue-700: #1c3e95;
-$color-blue-600: #234ebb;
-$color-blue-500: #2653c7;
-$color-blue-400: #2a5ee0;
-$color-blue-300: #2f68f9;
-$color-blue-200: #bfd0fd;
-$color-blue-100: #e0e8fe;
-$color-blue-50: #eaf0fe;
+$color-red: #ff0000;
+$color-green: #42bc54;
 // font
-$font_b01: #111111;
-$font_b02: #555555;
-$font_b03: #767676;
-$font_b04: #999999;
-$font_w01: #ffffff;
 $font_weight_bold: 700;
 $font_weight_semibold: 600;
 $font_weight_regular: 400;
-//line
-$line-light: #f1f1f5;
-$line-regular: #e5e5ec;
-$line-black: #111111;
 
 @mixin flex(
   $direction: row,
