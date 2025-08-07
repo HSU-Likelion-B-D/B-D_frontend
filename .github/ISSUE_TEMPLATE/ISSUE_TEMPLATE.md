@@ -1,3 +1,10 @@
+---
+name: Feature Request
+about: 새로운 기능 또는 작업 추가
+title: "[FEATURE] "
+labels: feature
+---
+
 ## ✨ 이슈 제목 (ex. 로그인 API 오류 처리 추가)
 
 ### ✅ 이슈 유형
