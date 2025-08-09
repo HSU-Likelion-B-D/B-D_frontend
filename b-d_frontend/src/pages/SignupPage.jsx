@@ -2,6 +2,7 @@ import React, { use } from "react";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
 import { useState } from "react";
+import styles from "@/styles/SignupPage/SignupPage.module.scss";
 const inputFields = [
   {
     label: "이름 / 성함",
@@ -36,13 +37,14 @@ const passwordFields = [
 ];
 
 const SignupPage = () => {
-  const [form, setErrors] = useState({
+  // name을 기준으로 폼 상태 관리
+  const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
+  // 모든 input의 onChange handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({
@@ -52,12 +54,14 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="signup-container">
-      <img className="logo"></img>
-      <p className="signup-subtitle">
-        <span className="signup-highlight">비디</span>는 당신을 알고 싶어요.
+    <div className={styles.signup - container}>
+      <img className={styles.logo}></img>
+      <p className={styles.signup - subtitle}>
+        <span className={styles.signup - highlight}>비디</span>는 당신을 알고
+        싶어요.
       </p>
-      <form className="signup-form">
+      <form className={styles.signup - form}>
+        {/*이름,이메일 입력 필드*/}
         {inputFields.map((field) => (
           <div key={field.name}>
             <label>
@@ -72,7 +76,7 @@ const SignupPage = () => {
               onChange={handleChange}
               placeholder={field.placeholder}
               required={field.required}
-              className="signup-input"
+              className={styles.signup - input}
             />
           </div>
         ))}
@@ -85,11 +89,11 @@ const SignupPage = () => {
             onChange={handleChange}
             placeholder="인증번호를 입력해주세요."
           />
-          <Button type="button" className="verification-button">
+          <Button type="button" className={styles.verification - button}>
             인증번호 확인
           </Button>
         </div>
-
+        {/*비밀번호 입력 필드*/}
         {passwordFields.map((field) => (
           <Input
             key={field.name}
@@ -100,16 +104,16 @@ const SignupPage = () => {
             onChange={handleChange}
             placeholder={field.placeholder}
             required={field.required}
-            className="signup-input"
+            className={styles.signup - input}
           />
         ))}
 
-        <div className="signup-links">
-          <span className="find-password">비밀번호 찾기</span>
-          <span className="divider"> | </span>
-          <span className="login-link">로그인</span>
+        <div className={styles.signup - links}>
+          <span className={styles.find - password}>비밀번호 찾기</span>
+          <span className={styles.divider}> | </span>
+          <span className={styles.login - link}>로그인</span>
         </div>
-        <Button type="submit" className="signup-submit-btn">
+        <Button type="submit" className={styles.signup - submit - btn}>
           회원가입
         </Button>
       </form>
