@@ -1,6 +1,7 @@
 import React, { use } from "react";
 import Input from "../components/SingupPage/Input";
-
+import Button from "../components/SingupPage/Button";
+import { useState } from "react";
 const inputFields = [
   {
     label: "이름 / 성함",
@@ -85,21 +86,31 @@ const SignupPage = () => {
             onChange={handleChange}
             placeholder="인증번호를 입력해주세요."
           />
+          <Button type="button" className="verification-button">
+            인증번호 확인
+          </Button>
         </div>
 
         {passwordFields.map((field) => (
-          <Input
-            key={field.name}
-            label={field.label}
-            type={field.type}
-            name={field.name}
-            value={form[field.name]}
-            onChange={handleChange}
-            placeholder={field.placeholder}
-            required={field.required}
-            className="signup-input"
-          />
+          <div key={field.name}>
+            <label>
+              {field.label}
+              {field.required && <span style={{ color: "red" }}>*</span>}
+            </label>
+            <Input
+              key={field.name}
+              label={field.label}
+              type={field.type}
+              name={field.name}
+              value={form[field.name]}
+              onChange={handleChange}
+              placeholder={field.placeholder}
+              required={field.required}
+              className="signup-input"
+            />
+          </div>
         ))}
+
         <div className="signup-links">
           <span className="find-password">비밀번호 찾기</span>
           <span className="divider"> | </span>
