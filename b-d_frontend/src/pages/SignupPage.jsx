@@ -63,6 +63,13 @@ const SignupPage = () => {
     }));
   };
 
+  const handleClear = (name) => {
+    setForm((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+  };
+
   return (
     <div className={styles.container}>
       <img src={logo} className={styles.logo}></img>
@@ -86,6 +93,7 @@ const SignupPage = () => {
               placeholder={field.placeholder}
               required={field.required}
               className={styles.input}
+              onClear={handleClear}
             />
           </div>
         ))}
@@ -100,6 +108,7 @@ const SignupPage = () => {
             onChange={(e) => setVerificationCode(e.target.value)}
             placeholder="인증번호를 입력해주세요."
             className={styles.input}
+            onClear={handleClear}
           />
           <Button
             type="button"
@@ -122,6 +131,7 @@ const SignupPage = () => {
             placeholder={field.placeholder}
             required={field.required}
             className={styles.input}
+            onClear={handleClear}
           />
         ))}
 

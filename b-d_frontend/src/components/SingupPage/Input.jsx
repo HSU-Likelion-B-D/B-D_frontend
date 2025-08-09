@@ -32,7 +32,7 @@ const Input = ({
 
       <button
         type="button"
-        onClick={() => onClear(name)}
+        onClick={() => onClear && onClear(name)}
         className={styles.xButton}
         tabIndex={-1}
       >
