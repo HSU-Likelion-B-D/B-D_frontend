@@ -1,0 +1,71 @@
+@use "../variables" as *;
+.container {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(column, center, center);
+  .background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    background: #fff;
+
+    span {
+      position: absolute;
+      display: block;
+    }
+
+    /* ellipse 0: top-center large gradient */
+    .e0 {
+      left: 50%;
+      top: -34vh;
+      width: 95vh;
+      height: 95vh;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #ffffff 0%, #bee4ff 100%);
+      border-radius: 50%;
+      filter: blur(12px);
+    }
+
+    /* ellipse 1: top-left small gradient (rotated) */
+    .e1 {
+      left: -5vw;
+      top: -8vh;
+      width: 60vh;
+      height: 60vh;
+      transform: rotate(-20.3775deg);
+      background: linear-gradient(180deg, #ffffff 0%, #bfeaff 100%);
+      border-radius: 50%;
+      filter: blur(27px);
+      opacity: 0.95;
+    }
+
+    /* ellipse 2: left-center small gradient (rotated) */
+    .e2 {
+      left: -10vw;
+      top: 25vh;
+      width: 60vh;
+      height: 60vh;
+      transform: rotate(135.745deg);
+      background: linear-gradient(180deg, #ffffff 0%, #8ae2ff 100%);
+      border-radius: 50%;
+      filter: blur(11.5px);
+      opacity: 0.95;
+    }
+
+    /* ellipse 3: bottom-right big gradient (rotated) */
+    .e3 {
+      right: -20vw;
+      bottom: -25vh;
+      width: 100vh;
+      height: 100vh;
+      transform: rotate(20.3802deg);
+      background: linear-gradient(180deg, #ffffff 0%, #a1e0ff 100%);
+      border-radius: 50%;
+      filter: blur(27px);
+      opacity: 0.95;
+    }
+  }
+}
