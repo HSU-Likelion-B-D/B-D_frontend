@@ -121,4 +121,15 @@
     margin-top: 12px;
     cursor: pointer;
   }
+
+  .activeSubmitBtn {
+    background: $color-main; // 파란색
+    color: #fff;
+    cursor: pointer;
+  }
+  .submitBtn:disabled {
+    background: #e0e0e0;
+    color: #fff;
+    cursor: not-allowed;
+  }
 }

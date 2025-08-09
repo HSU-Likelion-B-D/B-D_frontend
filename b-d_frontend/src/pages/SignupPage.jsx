@@ -39,7 +39,10 @@ const passwordFields = [
 
 const SignupPage = () => {
   const [verificationCode, setVerificationCode] = useState("");
+  // 인증번호 입력 필드 상태 관리
+  // 인증번호 입력 필드가 채워졌는지 확인
   const isFilled = verificationCode.trim() !== "";
+
   // name을 기준으로 폼 상태 관리
   const [form, setForm] = useState({
     name: "",
@@ -47,6 +50,9 @@ const SignupPage = () => {
     password: "",
     confirmPassword: "",
   });
+  // 모든 input이 채워졌는지 확인
+  const allFilled = Object.values(form).every((v) => v && v.trim() !== "");
+
   // 모든 input의 onChange handler
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -123,7 +129,13 @@ const SignupPage = () => {
           <span className={styles.divider}> | </span>
           <span className={styles.loginLink}>로그인</span>
         </div>
-        <Button type="submit" className={styles.submitBtn}>
+        <Button
+          type="submit"
+          className={`${styles.submitBtn} ${
+            allFilled ? styles.activeSubmitBtn : ""
+          }`}
+          disabled={!allFilled}
+        >
           회원가입
         </Button>
       </form>
