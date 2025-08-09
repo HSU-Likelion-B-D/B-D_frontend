@@ -54,8 +54,10 @@ const SignupPage = () => {
   return (
     <div className="signup-container">
       <img className="logo"></img>
-      <p>비디는 당신을 알고 싶어요.</p>
-      <form>
+      <p className="signup-subtitle">
+        <span className="signup-highlight">비디</span>는 당신을 알고 싶어요.
+      </p>
+      <form className="signup-form">
         {inputFields.map((field) => (
           <div key={field.name}>
             <label>
@@ -70,6 +72,7 @@ const SignupPage = () => {
               onChange={handleChange}
               placeholder={field.placeholder}
               required={field.required}
+              className="signup-input"
             />
           </div>
         ))}
@@ -94,14 +97,17 @@ const SignupPage = () => {
             onChange={handleChange}
             placeholder={field.placeholder}
             required={field.required}
+            className="signup-input"
           />
         ))}
-        <div>
-          <span>비밀번호 찾기</span>
-          <span> | </span>
-          <span>로그인</span>
+        <div className="signup-links">
+          <span className="find-password">비밀번호 찾기</span>
+          <span className="divider"> | </span>
+          <span className="login-link">로그인</span>
         </div>
-        <Button type="submit">회원가입</Button>
+        <Button type="submit" className="signup-submit-btn">
+          회원가입
+        </Button>
       </form>
     </div>
   );
