@@ -38,6 +38,8 @@ const passwordFields = [
 ];
 
 const SignupPage = () => {
+  const [verificationCode, setVerificationCode] = useState("");
+  const isFilled = verificationCode.trim() !== "";
   // name을 기준으로 폼 상태 관리
   const [form, setForm] = useState({
     name: "",
@@ -88,11 +90,16 @@ const SignupPage = () => {
             type="text"
             name="verificationCode"
             value={form.verificationCode}
-            onChange={handleChange}
+            onChange={(e) => setVerificationCode(e.target.value)}
             placeholder="인증번호를 입력해주세요."
             className={styles.input}
           />
-          <Button type="button" className={styles.confirmBtn}>
+          <Button
+            type="button"
+            className={`${styles.confirmBtn} ${
+              isFilled ? styles.activeConfirmBtn : ""
+            }`}
+          >
             확인
           </Button>
         </div>

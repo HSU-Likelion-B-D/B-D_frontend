@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "../../styles/SignupPage/Input.module.scss";
 const Input = ({
   label,
   type = "text",
@@ -8,10 +8,11 @@ const Input = ({
   onChange,
   placeholder,
   required = false,
+  onClear,
   ...props
 }) => {
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       {label && (
         <p>
           {label}
@@ -25,8 +26,18 @@ const Input = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
+        style={{ paddingRight: "48px" }} // x버튼 공간 확보
         {...props}
       />
+
+      <button
+        type="button"
+        onClick={() => onClear(name)}
+        className={styles.xButton}
+        tabIndex={-1}
+      >
+        x
+      </button>
     </div>
   );
 };
