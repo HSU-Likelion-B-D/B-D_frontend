@@ -28,7 +28,6 @@ const passwordFields = [
     required: true,
   },
   {
-    label: "",
     name: "confirmPassword",
     type: "password",
     placeholder: "비밀번호를 재입력해주세요.",
@@ -92,23 +91,17 @@ const SignupPage = () => {
         </div>
 
         {passwordFields.map((field) => (
-          <div key={field.name}>
-            <label>
-              {field.label}
-              {field.required && <span style={{ color: "red" }}>*</span>}
-            </label>
-            <Input
-              key={field.name}
-              label={field.label}
-              type={field.type}
-              name={field.name}
-              value={form[field.name]}
-              onChange={handleChange}
-              placeholder={field.placeholder}
-              required={field.required}
-              className="signup-input"
-            />
-          </div>
+          <Input
+            key={field.name}
+            label={field.label ? field.label : undefined}
+            type={field.type}
+            name={field.name}
+            value={form[field.name]}
+            onChange={handleChange}
+            placeholder={field.placeholder}
+            required={field.required}
+            className="signup-input"
+          />
         ))}
 
         <div className="signup-links">

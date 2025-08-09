@@ -1,6 +1,7 @@
 import React from "react";
 
 const Input = ({
+  label,
   type = "text",
   name,
   value,
@@ -11,6 +12,12 @@ const Input = ({
 }) => {
   return (
     <div>
+      {label && (
+        <p>
+          {label}
+          {required && <span style={{ color: "red" }}>*</span>}
+        </p>
+      )}
       <input
         type={type}
         name={name}
