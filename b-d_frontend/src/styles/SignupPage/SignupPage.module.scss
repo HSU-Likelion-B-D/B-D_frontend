@@ -48,8 +48,8 @@
     color: #fff;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: rem(16px);
+    font-weight: $font_weight_semibold;
     cursor: pointer;
   }
 
@@ -69,6 +69,12 @@
     margin-top: 6px;
     margin-bottom: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    &::label {
+      font-size: rem(20px);
+    }
+    &::placeholder {
+      color: $color-sub-01;
+    }
   }
 
   .form label {
@@ -80,13 +86,13 @@
 
   .verificationBtn {
     width: 100%;
+    height: 38px;
     background: $color-main;
     color: $color-white;
     border: none;
-    border-radius: 8px;
-    padding: 12px 0;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 12px;
+    font-size: rem(16px);
+    font-weight: $font_weight_semibold;
     margin-bottom: 8px;
     cursor: pointer;
   }
@@ -96,7 +102,7 @@
     justify-content: center;
     align-items: center;
     font-size: 0.95rem;
-    color: #888;
+    color: $color-sub-03;
     margin: 18px 0 8px 0;
     gap: 12px;
     .findPwd,
@@ -110,15 +116,17 @@
   }
 
   .submitBtn {
-    width: 100%;
-    background: #d3d3d3;
-    color: #fff;
+    display: block;
+    margin: 32px auto 0 auto; // 위 여백, 좌우 자동, 아래 여백
+    width: vw(362px);
+    height: vw(60px);
+    background: $color-sub-01;
+    color: $color-white;
     border: none;
-    border-radius: 8px;
-    padding: 16px 0;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: rem(16px);
+    font-weight: $font_weight_semibold;
     margin-top: 12px;
+    margin-bottom: 10px;
     cursor: pointer;
   }
 

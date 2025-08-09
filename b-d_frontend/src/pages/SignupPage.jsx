@@ -50,7 +50,8 @@ const SignupPage = () => {
     password: "",
     confirmPassword: "",
   });
-  // 모든 input이 채워졌는지 확인
+
+  // 모든 input이 채워졌는지 확인 -> 회원가입 버튼에서 사용
   const allFilled = Object.values(form).every((v) => v && v.trim() !== "");
 
   // 모든 input의 onChange handler
