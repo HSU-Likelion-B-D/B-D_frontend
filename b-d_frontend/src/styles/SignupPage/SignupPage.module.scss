@@ -1,0 +1,147 @@
+@use "../variables" as *;
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #eaf6ff 0%, #fff 60%);
+
+  .logo {
+    width: 60px;
+    margin: 123px auto 66px auto;
+    display: block;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 98px;
+  }
+
+  .highlight {
+    color: $color-main;
+    font-weight: bold;
+  }
+
+  .form {
+    width: 100%;
+    max-width: 420px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 0 auto;
+  }
+
+  .verifyContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .confirmBtn {
+    min-width: 100px;
+    height: 48px;
+    background: #d3d3d3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: rem(16px);
+    font-weight: $font_weight_semibold;
+    cursor: pointer;
+  }
+
+  .activeConfirmBtn {
+    background: $color-main; // 파란색 변수 또는 #2196f3
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px 18px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: $color-white;
+    margin-top: 6px;
+    margin-bottom: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    &::label {
+      font-size: rem(20px);
+    }
+    &::placeholder {
+      color: $color-sub-01;
+    }
+  }
+
+  .form label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+    display: block;
+  }
+
+  .verificationBtn {
+    width: 100%;
+    height: 38px;
+    background: $color-main;
+    color: $color-white;
+    border: none;
+    border-radius: 12px;
+    font-size: rem(16px);
+    font-weight: $font_weight_semibold;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .disabledBtn {
+    background: #e0e0e0;
+    color: $color-white;
+  }
+
+  .signupLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    color: $color-sub-03;
+    margin: 18px 0 8px 0;
+    gap: 12px;
+    .findPwd,
+    .loginLink {
+      cursor: pointer;
+    }
+
+    .divider {
+      color: #bbb;
+    }
+  }
+
+  .submitBtn {
+    display: block;
+    margin: 32px auto 0 auto; // 위 여백, 좌우 자동, 아래 여백
+    width: vw(362px);
+    height: vw(60px);
+    background: $color-sub-01;
+    color: $color-white;
+    border: none;
+    font-size: rem(16px);
+    font-weight: $font_weight_semibold;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .activeSubmitBtn {
+    background: $color-main; // 파란색
+    color: #fff;
+    cursor: pointer;
+  }
+  .submitBtn:disabled {
+    background: #e0e0e0;
+    color: #fff;
+    cursor: not-allowed;
+  }
+}
