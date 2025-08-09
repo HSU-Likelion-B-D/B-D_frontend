@@ -96,6 +96,10 @@
     margin-bottom: 8px;
     cursor: pointer;
   }
+  .disabledBtn {
+    background: #e0e0e0;
+    color: $color-white;
+  }
 
   .signupLink {
     display: flex;

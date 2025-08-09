@@ -38,6 +38,8 @@ const passwordFields = [
 ];
 
 const SignupPage = () => {
+  // 인증번호 전송 상태 관리
+  const [isVerifySent, setIsVerifySent] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   // 인증번호 입력 필드 상태 관리
   // 인증번호 입력 필드가 채워졌는지 확인
@@ -63,11 +65,18 @@ const SignupPage = () => {
     }));
   };
 
+  // x버튼 클릭시 해당 input의 value를 초기화하는 함수
+  // name을 인자로 받아서 해당 input의 value를 ""로 설정
   const handleClear = (name) => {
     setForm((prev) => ({
       ...prev,
       [name]: "",
     }));
+  };
+
+  // 인증번호 받기 버튼 클릭시 호출되는 함수
+  const handleVerifySend = () => {
+    setIsVerifySent(true);
   };
 
   return (
@@ -97,7 +106,14 @@ const SignupPage = () => {
             />
           </div>
         ))}
-        <Button type="button" className={styles.verificationBtn}>
+        <Button
+          type="button"
+          onClick={handleVerifySend}
+          disabled={isVerifySent}
+          className={`${styles.verificationBtn} ${
+            isVerifySent ? styles.disabledBtn : ""
+          }`}
+        >
           인증번호 받기
         </Button>
         <div className={styles.verifyContainer}>
