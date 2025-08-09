@@ -1,8 +1,9 @@
 import React, { use } from "react";
+import logo from "../assets/logo.svg";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
 import { useState } from "react";
-import styles from "@/styles/SignupPage/SignupPage.module.scss";
+import styles from "../styles/SignupPage/SignupPage.module.scss";
 const inputFields = [
   {
     label: "이름 / 성함",
@@ -54,13 +55,12 @@ const SignupPage = () => {
   };
 
   return (
-    <div className={styles.signup - container}>
-      <img className={styles.logo}></img>
-      <p className={styles.signup - subtitle}>
-        <span className={styles.signup - highlight}>비디</span>는 당신을 알고
-        싶어요.
+    <div className={styles.container}>
+      <img src={logo} className={styles.logo}></img>
+      <p className={styles.subtitle}>
+        <span className={styles.highlight}>비디</span>는 당신을 알고 싶어요.
       </p>
-      <form className={styles.signup - form}>
+      <form className={styles.form}>
         {/*이름,이메일 입력 필드*/}
         {inputFields.map((field) => (
           <div key={field.name}>
@@ -76,21 +76,24 @@ const SignupPage = () => {
               onChange={handleChange}
               placeholder={field.placeholder}
               required={field.required}
-              className={styles.signup - input}
+              className={styles.input}
             />
           </div>
         ))}
-        <Button type="button">인증번호 받기</Button>
-        <div>
+        <Button type="button" className={styles.verificationBtn}>
+          인증번호 받기
+        </Button>
+        <div className={styles.verifyContainer}>
           <Input
             type="text"
             name="verificationCode"
             value={form.verificationCode}
             onChange={handleChange}
             placeholder="인증번호를 입력해주세요."
+            className={styles.input}
           />
-          <Button type="button" className={styles.verification - button}>
-            인증번호 확인
+          <Button type="button" className={styles.confirmBtn}>
+            확인
           </Button>
         </div>
         {/*비밀번호 입력 필드*/}
@@ -104,16 +107,16 @@ const SignupPage = () => {
             onChange={handleChange}
             placeholder={field.placeholder}
             required={field.required}
-            className={styles.signup - input}
+            className={styles.input}
           />
         ))}
 
-        <div className={styles.signup - links}>
-          <span className={styles.find - password}>비밀번호 찾기</span>
+        <div className={styles.signupLink}>
+          <span className={styles.findPwd}>비밀번호 찾기</span>
           <span className={styles.divider}> | </span>
-          <span className={styles.login - link}>로그인</span>
+          <span className={styles.loginLink}>로그인</span>
         </div>
-        <Button type="submit" className={styles.signup - submit - btn}>
+        <Button type="submit" className={styles.submitBtn}>
           회원가입
         </Button>
       </form>

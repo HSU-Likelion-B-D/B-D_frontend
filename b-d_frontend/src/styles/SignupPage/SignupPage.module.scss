@@ -1,1 +1,118 @@
 @use "../variables" as *;
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #eaf6ff 0%, #fff 60%);
+
+  .logo {
+    width: 60px;
+    margin: 123px auto 66px auto;
+    display: block;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 98px;
+  }
+
+  .highlight {
+    color: $color-main;
+    font-weight: bold;
+  }
+
+  .form {
+    width: 100%;
+    max-width: 420px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 0 auto;
+  }
+
+  .verifyContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .confirmBtn {
+    min-width: 100px;
+    height: 48px;
+    background: #d3d3d3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px 18px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fff;
+    margin-top: 6px;
+    margin-bottom: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .form label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+    display: block;
+  }
+
+  .verificationBtn {
+    width: 100%;
+    background: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+
+  .signupLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #888;
+    margin: 18px 0 8px 0;
+    gap: 12px;
+    .findPwd,
+    .loginLink {
+      cursor: pointer;
+    }
+
+    .divider {
+      color: #bbb;
+    }
+  }
+
+  .submitBtn {
+    width: 100%;
+    background: #d3d3d3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+}
