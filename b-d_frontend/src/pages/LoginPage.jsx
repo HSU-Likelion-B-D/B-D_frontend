@@ -4,10 +4,12 @@ import logo from "../assets/logo.svg";
 import { useForm } from "react-hook-form";
 import eye from "../assets/eye.svg";
 import eyeColor from "../assets/eye-color.svg";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
   const [keepLogin, setKeepLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -148,14 +150,21 @@ export const LoginPage = () => {
           </div>
           <div className={styles.links}>
             <div className={styles.link}>비밀번호 찾기</div>|
-            <div className={styles.link}>회원가입</div>
+            <div
+              className={styles.link}
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              회원가입
+            </div>
           </div>
           <button
             type="submit"
             disabled={isSubmitting || !watchedEmail || !watchedPassword}
             className={styles.submitButton}
           >
-            {isSubmitting ? "로그인 중..." : "로그인"}
+            로그인
           </button>
         </form>
       </div>
