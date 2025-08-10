@@ -1,23 +1,30 @@
-import React, { use } from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import logo from "../assets/logo.svg";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
-import { useState } from "react";
-import styles from "../styles/SignupPage/SignupPage.module.scss";
+import styles from "../styles/pages/SignupPage.module.scss";
+
 const inputFields = [
   {
     label: "이름 / 성함",
     name: "name",
     type: "text",
     placeholder: "당신을 어떤식으로 불러드릴까요?",
-    required: true,
+    validation: { required: "이름을 입력해주세요" },
   },
   {
     label: "이메일",
     name: "email",
     type: "email",
     placeholder: "이메일 주소를 입력해주세요",
-    required: true,
+    validation: {
+      required: "이메일을 입력해주세요",
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "올바른 이메일 형식이 아닙니다",
+      },
+    },
   },
 ];
 
@@ -28,84 +35,88 @@ const passwordFields = [
     type: "password",
     placeholder: "비밀번호를 입력해주세요.",
     required: true,
+    validation: {
+      required: "비밀번호를 입력해주세요",
+      minLength: {
+        value: 6,
+        message: "비밀번호는 최소 6자 이상이어야 합니다",
+      },
+    },
   },
   {
     name: "confirmPassword",
     type: "password",
     placeholder: "비밀번호를 재입력해주세요.",
-    required: true,
+    required: false,
+    validation: {
+      required: "비밀번호를 다시 입력해주세요",
+      validate: (value, { password }) =>
+        value === password || "비밀번호가 일치하지 않습니다",
+    },
   },
 ];
 
 const SignupPage = () => {
-  // 인증번호 전송 상태 관리
-  const [isVerifySent, setIsVerifySent] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
-  // 인증번호 입력 필드 상태 관리
-  // 인증번호 입력 필드가 채워졌는지 확인
-  const isFilled = verificationCode.trim() !== "";
-
-  // name을 기준으로 폼 상태 관리
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    watch,
+    setValue,
+  } = useForm({
+    mode: "onChange",
   });
 
-  // 모든 input이 채워졌는지 확인 -> 회원가입 버튼에서 사용
-  const allFilled = Object.values(form).every((v) => v && v.trim() !== "");
+  const [isVerifySent, setIsVerifySent] = useState(false);
+  const [verificationCode, setVerificationCode] = useState("");
 
-  // 모든 input의 onChange handler
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const onSubmit = (data) => {
+    console.log("회원가입 데이터:", data);
   };
 
-  // x버튼 클릭시 해당 input의 value를 초기화하는 함수
-  // name을 인자로 받아서 해당 input의 value를 ""로 설정
   const handleClear = (name) => {
-    setForm((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
+    setValue(name, "");
   };
 
-  // 인증번호 받기 버튼 클릭시 호출되는 함수
   const handleVerifySend = () => {
     setIsVerifySent(true);
   };
 
+  const isFilled = verificationCode.trim() !== "";
+  const allFilled = Object.keys(watch()).every(
+    (key) => watch(key)?.trim() !== ""
+  );
+
   return (
     <div className={styles.container}>
-      <img src={logo} className={styles.logo}></img>
+      <img src={logo} className={styles.logo} alt="logo" />
       <p className={styles.subtitle}>
         <span className={styles.highlight}>비디</span>는 당신을 알고 싶어요.
       </p>
-      <form className={styles.form}>
-        {/*이름,이메일 입력 필드*/}
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         {inputFields.map((field) => (
-          <div key={field.name}>
+          <div key={field.name} className={styles.formItem}>
             <label>
               {field.label}
-              {field.required && <span style={{ color: "red" }}>*</span>}
+              <span style={{ color: "red" }}>*</span>
             </label>
-
             <Input
               type={field.type}
-              name={field.name}
-              value={form[field.name]}
-              onChange={handleChange}
               placeholder={field.placeholder}
-              required={field.required}
-              className={styles.input}
-              onClear={handleClear}
+              className={`${styles.input} ${
+                errors[field.name] ? styles.error : ""
+              }`}
+              {...register(field.name, field.validation)}
+              onClear={() => handleClear(field.name)}
             />
+            {errors[field.name] && (
+              <div className={styles.errorMessage}>
+                {errors[field.name].message}
+              </div>
+            )}
           </div>
         ))}
+
         <Button
           type="button"
           onClick={handleVerifySend}
@@ -120,11 +131,11 @@ const SignupPage = () => {
           <Input
             type="text"
             name="verificationCode"
-            value={form.verificationCode}
+            value={verificationCode}
             onChange={(e) => setVerificationCode(e.target.value)}
             placeholder="인증번호를 입력해주세요."
             className={styles.input}
-            onClear={handleClear}
+            onClear={() => setVerificationCode("")}
           />
           <Button
             type="button"
@@ -135,35 +146,40 @@ const SignupPage = () => {
             확인
           </Button>
         </div>
-        {/*비밀번호 입력 필드*/}
+
         {passwordFields.map((field) => (
-          <Input
-            key={field.name}
-            label={field.label ? field.label : undefined}
-            type={field.type}
-            name={field.name}
-            value={form[field.name]}
-            onChange={handleChange}
-            placeholder={field.placeholder}
-            required={field.required}
-            className={styles.input}
-            onClear={handleClear}
-          />
+          <div key={field.name} className={styles.formItem}>
+            {field.name === "password" && field.label && (
+              <label>
+                {field.label}
+                {field.required && <span style={{ color: "red" }}>*</span>}
+              </label>
+            )}
+            <Input
+              type={field.type}
+              placeholder={field.placeholder}
+              className={`${styles.input} ${
+                errors[field.name] ? styles.error : ""
+              }`}
+              {...register(field.name, field.validation)}
+              onClear={() => handleClear(field.name)}
+            />
+            {errors[field.name] && (
+              <div className={styles.errorMessage}>
+                {errors[field.name].message}
+              </div>
+            )}
+          </div>
         ))}
 
-        <div className={styles.signupLink}>
-          <span className={styles.findPwd}>비밀번호 찾기</span>
-          <span className={styles.divider}> | </span>
-          <span className={styles.loginLink}>로그인</span>
-        </div>
         <Button
           type="submit"
           className={`${styles.submitBtn} ${
             allFilled ? styles.activeSubmitBtn : ""
           }`}
-          disabled={!allFilled}
+          disabled={isSubmitting || !allFilled}
         >
-          회원가입
+          {isSubmitting ? "회원가입 중..." : "회원가입"}
         </Button>
       </form>
     </div>

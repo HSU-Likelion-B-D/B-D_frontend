@@ -5,11 +5,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(180deg, #eaf6ff 0%, #fff 60%);
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
 
   .logo {
     width: 60px;
-    margin: 123px auto 66px auto;
+    margin: vw(123px) auto 66px auto;
     display: block;
   }
 
@@ -17,7 +19,7 @@
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 98px;
+    margin-bottom: vw(98px);
   }
 
   .highlight {
@@ -31,7 +33,7 @@
     background: transparent;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 12px;
     margin: 0 auto;
   }
 
@@ -39,6 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 29px;
   }
 
   .confirmBtn {
@@ -51,10 +54,11 @@
     font-size: rem(16px);
     font-weight: $font_weight_semibold;
     cursor: pointer;
+    align-items: center;
   }
 
   .activeConfirmBtn {
-    background: $color-main; // 파란색 변수 또는 #2196f3
+    background: $color-main;
     color: #fff;
     cursor: pointer;
   }
@@ -71,34 +75,47 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     &::label {
       font-size: rem(20px);
+      color: $color-sub-03;
     }
     &::placeholder {
       color: $color-sub-01;
     }
   }
 
+  .input.error {
+    border-color: red;
+  }
+
+  .errorMessage {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 4px;
+  }
+
   .form label {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 2px;
+    font-size: rem(20px);
+    font-weight: 600;
+    color: $color-sub-03;
+    margin-bottom: 8px;
     display: block;
   }
 
   .verificationBtn {
     width: 100%;
-    height: 38px;
+    height: 40px;
     background: $color-main;
     color: $color-white;
     border: none;
     border-radius: 12px;
-    font-size: rem(16px);
+    font-size: 1rem;
     font-weight: $font_weight_semibold;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   .disabledBtn {
     background: #e0e0e0;
-    color: $color-white;
+    color: $color-sub-01;
   }
 
   .signupLink {
