@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/pages/LoginPage.module.scss";
 import logo from "../assets/logo.svg";
 import { useForm } from "react-hook-form";
 
 export const LoginPage = () => {
+  const [keepLogin, setKeepLogin] = useState(false);
   const {
     register,
     handleSubmit,
@@ -43,7 +44,13 @@ export const LoginPage = () => {
             <input
               type="email"
               placeholder="이메일을 입력해주세요."
-              className={`${styles.input} ${errors.email ? styles.error : ""}`}
+              className={`${styles.input} ${
+                errors.email
+                  ? styles.error
+                  : watchedEmail && !errors.email
+                  ? styles.valid
+                  : ""
+              }`}
               {...register("email", {
                 required: "이메일을 입력해주세요",
                 pattern: {
@@ -62,13 +69,17 @@ export const LoginPage = () => {
               type="password"
               placeholder="비밀번호를 입력해주세요. (영문, 숫자 포함 8자~12자)"
               className={`${styles.input} ${
-                errors.password ? styles.error : ""
+                errors.password
+                  ? styles.error
+                  : watchedPassword && !errors.password
+                  ? styles.valid
+                  : ""
               }`}
               {...register("password", {
                 required: "비밀번호를 입력해주세요",
                 minLength: {
-                  value: 6,
-                  message: "비밀번호는 최소 6자 이상이어야 합니다",
+                  value: 8,
+                  message: "비밀번호는 최소 8자 이상이어야 합니다",
                 },
               })}
             />
@@ -77,6 +88,22 @@ export const LoginPage = () => {
                 {errors.password.message}
               </div>
             )}
+          </div>
+          <div className={styles.checkbox}>
+            <input
+              type="checkbox"
+              id="keepLogin"
+              checked={keepLogin}
+              onChange={(e) => setKeepLogin(e.target.checked)}
+              className={styles.checkboxInput}
+            />
+            <label htmlFor="keepLogin" className={styles.checkboxLabel}>
+              로그인 상태 유지
+            </label>
+          </div>
+          <div className={styles.links}>
+            <div className={styles.link}>비밀번호 찾기</div>|
+            <div className={styles.link}>회원가입</div>
           </div>
           <button
             type="submit"

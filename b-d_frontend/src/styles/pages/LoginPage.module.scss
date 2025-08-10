@@ -3,7 +3,8 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  @include flex(column, center, center);
+  @include flex(column, center, flex-start);
+  line-height: 1.75;
 
   .content {
     position: relative;
@@ -12,7 +13,8 @@
     @include flex(column, center, center);
 
     .logo {
-      margin-bottom: vh(40px);
+      margin-top: vh(123px);
+      margin-bottom: vh(66px);
       width: vw(60px);
       height: vh(55px);
     }
@@ -30,11 +32,12 @@
     }
 
     .form {
-      width: vw(603px);
+      width: 100%;
+      margin-top: vh(98px);
       @include flex(column, center, center);
 
       .formItem {
-        margin-bottom: vh(24px);
+        margin-bottom: vh(33px);
         width: 100%;
 
         .formItemTitle {
@@ -55,24 +58,84 @@
 
           &::placeholder {
             color: #d9d9d9;
+            font-size: rem(20px);
           }
 
           &.error {
             box-shadow: 0 0 10px 0 rgba(255, 0, 0, 0.5);
           }
+
+          &.valid {
+            box-shadow: 0 0 10px 0 rgba(66, 188, 84, 0.7);
+          }
         }
 
         .errorMessage {
+          position: absolute;
           color: $color-red;
           font-size: rem(14px);
           margin-top: vh(4px);
           font-weight: $font_weight_regular;
+          line-height: 1.75;
         }
       }
     }
 
+    .checkbox {
+      @include flex(row, center, center, vw(10px));
+      font-size: rem(14px);
+      font-weight: $font_weight_regular;
+      color: $color-sub-03;
+      text-align: left;
+      align-self: flex-start;
+      margin-bottom: vh(58px);
+
+      .checkboxInput {
+        appearance: none;
+        width: vw(24px);
+        height: vw(24px);
+        border-radius: 50%;
+        background-color: #d9d9d9;
+        cursor: pointer;
+        position: relative;
+
+        &:checked {
+          border-color: $color-main;
+          border: 2px solid $color-main;
+          background-color: white;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: vw(13px);
+            height: vw(13px);
+            background-color: $color-main;
+            border-radius: 50%;
+          }
+        }
+
+        &:hover {
+          border-color: $color-main;
+        }
+      }
+
+      .checkboxLabel {
+        cursor: pointer;
+      }
+    }
+
+    .links {
+      @include flex(row, center, center);
+      font-size: rem(14px);
+      line-height: 1.75;
+      margin-bottom: vh(78px);
+      gap: vw(50px);
+    }
+
     .submitButton {
-      width: vw(362px);
       padding: vh(16px) vw(160px);
       background: $color-main;
       color: white;
@@ -80,7 +143,7 @@
       font-size: rem(16px);
       font-weight: $font_weight_semibold;
       cursor: pointer;
-
+      margin-bottom: vh(139px);
       &:disabled {
         background: $color-sub-01;
         cursor: not-allowed;
