@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/MainPage/MainPage.module.scss";
+import styles from "@/styles/pages/MainPage.module.scss";
 import SelectBox from "@/components/MainPage/SelectBox";
 import logo from "../assets/logo.svg";
 import nemo from "../assets/main-nemo.svg";
@@ -7,12 +7,6 @@ import seaAnemone from "../assets/main-seaAnemone.svg";
 function MainPage() {
   return (
     <div className={styles.container}>
-      <div className={styles.background}>
-        <span className={styles.e0} />
-        <span className={styles.e1} />
-        <span className={styles.e2} />
-        <span className={styles.e3} />
-      </div>
       <div className={styles.content}>
         <img className={styles.logo} src={logo} alt="logo" />
         <div className={styles.title}>

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/MainPage/SelectBox.module.scss";
+import styles from "@/styles/components/SelectBox.module.scss";
 
 function SelectBox({ title, content1, content2, style }) {
   return (

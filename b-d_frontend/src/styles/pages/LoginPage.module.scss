@@ -1,0 +1,90 @@
+@use "../variables" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(column, center, center);
+
+  .content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    @include flex(column, center, center);
+
+    .logo {
+      margin-bottom: vh(40px);
+      width: vw(60px);
+      height: vh(55px);
+    }
+
+    .title {
+      font-size: rem(46px);
+      font-weight: $font_weight_semibold;
+      text-align: center;
+      line-height: 1.75;
+
+      span {
+        font-weight: $font_weight_bold;
+        color: $color-main;
+      }
+    }
+
+    .form {
+      width: vw(603px);
+      @include flex(column, center, center);
+
+      .formItem {
+        margin-bottom: vh(24px);
+        width: 100%;
+
+        .formItemTitle {
+          font-size: rem(20px);
+          font-weight: $font_weight_regular;
+          color: $color-sub-03;
+          margin-bottom: vh(6px);
+        }
+
+        .input {
+          width: 100%;
+          padding: vh(17px) vw(18px);
+          border: none;
+          border-radius: 12px;
+          font-size: rem(20px);
+          background-color: #fff;
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+
+          &::placeholder {
+            color: #d9d9d9;
+          }
+
+          &.error {
+            box-shadow: 0 0 10px 0 rgba(255, 0, 0, 0.5);
+          }
+        }
+
+        .errorMessage {
+          color: $color-red;
+          font-size: rem(14px);
+          margin-top: vh(4px);
+          font-weight: $font_weight_regular;
+        }
+      }
+    }
+
+    .submitButton {
+      width: vw(362px);
+      padding: vh(16px) vw(160px);
+      background: $color-main;
+      color: white;
+      border: none;
+      font-size: rem(16px);
+      font-weight: $font_weight_semibold;
+      cursor: pointer;
+
+      &:disabled {
+        background: $color-sub-01;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
