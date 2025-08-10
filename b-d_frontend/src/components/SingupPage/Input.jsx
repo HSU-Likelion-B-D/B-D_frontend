@@ -9,6 +9,7 @@ const Input = ({
   placeholder,
   required = false,
   onClear,
+  showClearButton = true,
   ...props
 }) => {
   return (
@@ -29,15 +30,16 @@ const Input = ({
         style={{ paddingRight: "48px" }} // x버튼 공간 확보
         {...props}
       />
-
-      <button
-        type="button"
-        onClick={() => onClear && onClear(name)}
-        className={styles.xButton}
-        tabIndex={-1}
-      >
-        x
-      </button>
+      {showClearButton && (
+        <button
+          type="button"
+          onClick={() => onClear && onClear(name)}
+          className={styles.xButton}
+          tabIndex={-1}
+        >
+          x
+        </button>
+      )}
     </div>
   );
 };

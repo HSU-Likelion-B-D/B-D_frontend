@@ -1,0 +1,33 @@
+@use "../variables" as *;
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+  .whiteBox {
+    background-color: $color-white;
+    width: vw(1187px);
+    height: vw(1120px);
+    .logo {
+      width: 60px;
+      margin: vw(123px) auto 66px auto;
+      display: block;
+    }
+
+    .subtitle {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: vw(98px);
+    }
+
+    .highlight {
+      color: $color-main;
+      font-weight: bold;
+    }
+  }
+}

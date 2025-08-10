@@ -13,11 +13,11 @@ function App() {
       <Routes>
         <Route element={<BubbleLayout />}>
           <Route path="/" element={<MainPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
