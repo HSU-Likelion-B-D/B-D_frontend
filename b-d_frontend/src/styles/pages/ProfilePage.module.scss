@@ -3,7 +3,7 @@
 .whiteBox {
   background-color: #fff;
   width: vw(1187px);
-  height: vh(1000px);
+  height: vh(1128px);
   border-radius: 22px;
   display: flex; // Add flexbox for centering
   flex-direction: column; // Stack children vertically
@@ -46,7 +46,7 @@
   font-size: 20px;
   color: #666; // 서브 텍스트 색상
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .nicknameContainer {
@@ -173,7 +173,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-bottom: vh(98px);
 }
 
 .profileImage {
@@ -186,8 +186,8 @@
 
 .cameraButton {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: 1px;
+  right: 3px;
   background: $color-main;
   color: white;
   border: none;
