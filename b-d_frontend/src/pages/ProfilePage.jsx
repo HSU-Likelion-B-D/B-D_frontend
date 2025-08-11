@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "../styles/pages/ProfilePage.module.scss";
+import logo from "../assets/logo.svg";
 
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
-
 const ProfilePage = () => {
   const [formData, setFormData] = useState({
     nickname: "",
@@ -23,6 +23,7 @@ const ProfilePage = () => {
       setNicknameMessage("");
       setIsError(false);
       setIsSuccess(false);
+      setIsButtonDisabled(false); // Reset button state
     }
   };
 
@@ -49,9 +50,6 @@ const ProfilePage = () => {
       setIsError(false);
       setIsSuccess(true);
     }
-
-    // 버튼 상태를 다시 활성화
-    setTimeout(() => setIsButtonDisabled(false), 2000); // 2초 후 버튼 활성화
   };
 
   const handleSubmit = (event) => {
@@ -62,9 +60,11 @@ const ProfilePage = () => {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
+      <img src={logo} className={styles.logo} alt="logo" />
       <h1 className={styles.subtitle}>
         <span className={styles.highlight}>당신</span>을 알려주세요!
       </h1>
+      <p className={styles.description}>비디는 당신이 궁금해요.</p>
       <label htmlFor="nickname" className={styles.label}>
         닉네임<span>*</span>
       </label>
@@ -83,7 +83,7 @@ const ProfilePage = () => {
         <button
           type="button"
           className={`${styles.checkButton} ${
-            isButtonDisabled ? "disabled" : ""
+            isButtonDisabled ? styles.disabled : ""
           }`}
           onClick={handleNicknameCheck}
           disabled={isButtonDisabled}
@@ -103,6 +103,11 @@ const ProfilePage = () => {
         onChange={handleInputChange}
         className={styles.input}
       />
+      <div className={styles.signupLink}>
+        <span className={styles.findPwd}>비밀번호 찾기</span>
+        <span className={styles.divider}> | </span>
+        <span className={styles.loginLink}>로그인</span>
+      </div>
       <button type="submit" className={styles.submitBtn}>
         다음으로
       </button>

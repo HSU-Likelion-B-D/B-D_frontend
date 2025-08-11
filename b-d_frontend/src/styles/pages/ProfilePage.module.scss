@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -26,7 +28,7 @@
   font-size: 2rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 98px;
+  margin-bottom: 20px;
 }
 
 .highlight {
@@ -53,6 +55,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .errorInput {
@@ -117,4 +120,22 @@
 
 .label span {
   color: red;
+}
+
+.signupLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.95rem;
+  color: $color-sub-03;
+  margin: 18px 0 8px 0;
+  gap: 12px;
+  .findPwd,
+  .loginLink {
+    cursor: pointer;
+  }
+
+  .divider {
+    color: #bbb;
+  }
 }
