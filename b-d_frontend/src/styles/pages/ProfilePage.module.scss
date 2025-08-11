@@ -1,9 +1,12 @@
 @use "../variables" as *;
 
+.whole {
+  height: 100vh; // 전체 높이를 100vh로 설정
+}
 .whiteBox {
   background-color: #fff;
   width: vw(1187px);
-  height: vh(1128px);
+  height: auto;
   border-radius: 22px;
   display: flex; // Add flexbox for centering
   flex-direction: column; // Stack children vertically

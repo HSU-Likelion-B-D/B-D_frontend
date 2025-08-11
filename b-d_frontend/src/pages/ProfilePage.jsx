@@ -82,7 +82,7 @@ const ProfilePage = () => {
     formData.nickname.trim() !== "" && formData.description.trim() !== "";
 
   return (
-    <>
+    <div className={styles.whole}>
       <form className={styles.container} onSubmit={handleSubmit}>
         <div className={styles.whiteBox}>
           <ProgressBar progress={25} />
@@ -174,7 +174,7 @@ const ProfilePage = () => {
         </div>
       </form>
       {isGalleryOpen && <GalleryPopup onClose={toggleGallery} />}
-    </>
+    </div>
   );
 };
 
