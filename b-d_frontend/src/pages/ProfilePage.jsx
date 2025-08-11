@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "../styles/pages/ProfilePage.module.scss";
 import logo from "../assets/logo.svg";
+import ProgressBar from "../components/ProfilePage/ProgressBar";
 
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
@@ -62,67 +63,78 @@ const ProfilePage = () => {
     formData.nickname.trim() !== "" && formData.description.trim() !== "";
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
-      <img src={logo} className={styles.logo} alt="logo" />
-      <h1 className={styles.subtitle}>
-        <span className={styles.highlight}>당신</span>을 알려주세요!
-      </h1>
-      <p className={styles.description}>비디는 당신이 궁금해요.</p>
+    <>
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <div className={styles.whiteBox}>
+          <ProgressBar progress={25} />
+          <img src={logo} className={styles.logo} alt="logo" />
+          <h1 className={styles.subtitle}>
+            <span className={styles.highlight}>당신</span>을 알려주세요!
+          </h1>
+          <p className={styles.description}>비디는 당신이 궁금해요.</p>
 
-      <div className={styles.nicknameGroup}>
-        <label htmlFor="nickname" className={styles.label}>
-          닉네임<span>*</span>
-        </label>
-        <div className={styles.nicknameContainer}>
+          <div className={styles.nicknameGroup}>
+            <label htmlFor="nickname" className={styles.label}>
+              닉네임<span>*</span>
+            </label>
+            <div className={styles.nicknameContainer}>
+              <input
+                id="nickname"
+                name="nickname"
+                type="text"
+                value={formData.nickname}
+                onChange={handleInputChange}
+                placeholder="닉네임을 입력하세요"
+                className={`${styles.input} ${
+                  isError ? styles.errorInput : ""
+                } ${isSuccess ? styles.successInput : ""}`}
+              />
+              <button
+                type="button"
+                className={`${styles.checkButton} ${
+                  isButtonDisabled ? styles.disabled : ""
+                }`}
+                onClick={handleNicknameCheck}
+                disabled={isButtonDisabled}
+              >
+                중복확인
+              </button>
+            </div>
+            {nicknameMessage && (
+              <p
+                className={
+                  isError ? styles.errorMessage : styles.successMessage
+                }
+              >
+                {nicknameMessage}
+              </p>
+            )}
+          </div>
+
           <input
-            id="nickname"
-            name="nickname"
-            type="text"
-            value={formData.nickname}
+            name="description"
+            placeholder="가게를 간단히 소개해주세요."
+            value={formData.description}
             onChange={handleInputChange}
-            placeholder="닉네임을 입력하세요"
-            className={`${styles.input} ${isError ? styles.errorInput : ""} ${
-              isSuccess ? styles.successInput : ""
-            }`}
+            className={styles.textarea}
           />
+          <div className={styles.signupLink}>
+            <span className={styles.findPwd}>비밀번호 찾기</span>
+            <span className={styles.divider}> | </span>
+            <span className={styles.loginLink}>로그인</span>
+          </div>
           <button
-            type="button"
-            className={`${styles.checkButton} ${
-              isButtonDisabled ? styles.disabled : ""
+            type="submit"
+            className={`${styles.submitBtn} ${
+              !isFormValid ? styles.disabled : ""
             }`}
-            onClick={handleNicknameCheck}
-            disabled={isButtonDisabled}
+            disabled={!isFormValid}
           >
-            중복확인
+            다음으로
           </button>
         </div>
-        {nicknameMessage && (
-          <p className={isError ? styles.errorMessage : styles.successMessage}>
-            {nicknameMessage}
-          </p>
-        )}
-      </div>
-
-      <input
-        name="description"
-        placeholder="가게를 간단히 소개해주세요."
-        value={formData.description}
-        onChange={handleInputChange}
-        className={styles.textarea}
-      />
-      <div className={styles.signupLink}>
-        <span className={styles.findPwd}>비밀번호 찾기</span>
-        <span className={styles.divider}> | </span>
-        <span className={styles.loginLink}>로그인</span>
-      </div>
-      <button
-        type="submit"
-        className={`${styles.submitBtn} ${!isFormValid ? styles.disabled : ""}`}
-        disabled={!isFormValid}
-      >
-        다음으로
-      </button>
-    </form>
+      </form>
+    </>
   );
 };
 

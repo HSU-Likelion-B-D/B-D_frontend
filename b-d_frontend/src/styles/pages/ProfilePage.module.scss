@@ -1,5 +1,17 @@
 @use "../variables" as *;
 
+.whiteBox {
+  background-color: #fff;
+  width: vw(1187px);
+  height: vh(1000px);
+  border-radius: 22px;
+  display: flex; // Add flexbox for centering
+  flex-direction: column; // Stack children vertically
+  align-items: center; // Center horizontally
+  justify-content: center; // Center vertically
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 .container {
   min-height: 100vh;
   display: flex;
@@ -9,18 +21,12 @@
   overflow-y: auto;
   position: relative;
   z-index: 10;
-}
-
-.whiteBox {
-  background-color: #fff;
-  width: 1187px;
-  height: 1120px;
-  border-radius: 22px;
+  padding-bottom: 50px; // Add padding to prevent content from being cut off
 }
 
 .logo {
   width: 60px;
-  margin: 123px auto 66px auto;
+  margin: 10px auto 66px auto;
   display: block;
 }
 
@@ -48,7 +54,15 @@
   align-items: center;
   gap: 29px; // 닉네임 입력 필드와 버튼 간 간격
 }
-
+.label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 1rem;
+}
+.label span {
+  color: red;
+}
 .input {
   width: vw(433px);
   height: vh(69px);
@@ -134,17 +148,6 @@
     background-color: #ddd; // 버튼 비활성화 시 색상
     cursor: not-allowed;
   }
-}
-
-.label {
-  display: block; // Ensure label is treated as a block element
-  margin-bottom: 8px; // Add spacing between label and input
-  text-align: left; // Align text to the left
-  font-size: 1rem; // Adjust font size for better readability
-}
-
-.label span {
-  color: red;
 }
 
 .signupLink {
