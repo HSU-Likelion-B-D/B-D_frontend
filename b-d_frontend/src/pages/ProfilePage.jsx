@@ -58,6 +58,9 @@ const ProfilePage = () => {
     // Here, you can send `formData` to your API or database
   };
 
+  const isFormValid =
+    formData.nickname.trim() !== "" && formData.description.trim() !== "";
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <img src={logo} className={styles.logo} alt="logo" />
@@ -112,7 +115,11 @@ const ProfilePage = () => {
         <span className={styles.divider}> | </span>
         <span className={styles.loginLink}>로그인</span>
       </div>
-      <button type="submit" className={styles.submitBtn}>
+      <button
+        type="submit"
+        className={`${styles.submitBtn} ${!isFormValid ? styles.disabled : ""}`}
+        disabled={!isFormValid}
+      >
         다음으로
       </button>
     </form>
