@@ -121,7 +121,7 @@
   width: vw(620px);
   height: vh(178px);
   border-radius: 12px;
-  margin-top: 52px;
+  margin-top: vh(52px);
   border: 1px solid #ddd;
   border-radius: 12px;
   font-size: 1rem;
@@ -131,23 +131,6 @@
   vertical-align: top;
   padding: 10px;
   line-height: 1.5;
-}
-
-.submitBtn {
-  display: block;
-  margin: 32px auto 0 auto;
-  width: 362px;
-  height: 60px;
-  background: #2196f3;
-  color: #fff;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  &.disabled {
-    background-color: #ddd; // 버튼 비활성화 시 색상
-    cursor: not-allowed;
-  }
 }
 
 .signupLink {
@@ -166,4 +149,63 @@
   .divider {
     color: #bbb;
   }
+}
+
+.submitBtn {
+  display: block;
+  margin: 32px auto vh(52px) auto;
+  width: 362px;
+  height: 60px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  &.disabled {
+    background-color: #ddd; // 버튼 비활성화 시 색상
+    cursor: not-allowed;
+  }
+}
+
+.profileSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.cameraButton {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: $color-main;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.cameraIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cameraButton:hover {
+  background: #0056b3;
 }

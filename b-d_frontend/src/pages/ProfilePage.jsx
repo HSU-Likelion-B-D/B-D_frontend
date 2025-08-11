@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "../styles/pages/ProfilePage.module.scss";
 import logo from "../assets/logo.svg";
+import profile from "../assets/profile.png";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
-
+import GalleryPopup from "../components/ProfilePage/GalleryPopup";
+import camera from "../assets/camera.png";
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,8 @@ const ProfilePage = () => {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState(profile);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -59,6 +63,21 @@ const ProfilePage = () => {
     // Here, you can send `formData` to your API or database
   };
 
+  const toggleGallery = () => {
+    setIsGalleryOpen((prev) => !prev);
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfileImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const isFormValid =
     formData.nickname.trim() !== "" && formData.description.trim() !== "";
 
@@ -72,6 +91,26 @@ const ProfilePage = () => {
             <span className={styles.highlight}>당신</span>을 알려주세요!
           </h1>
           <p className={styles.description}>비디는 당신이 궁금해요.</p>
+
+          <div className={styles.profileSection}>
+            <img
+              src={profileImage}
+              alt="Profile"
+              className={styles.profileImage}
+            />
+            <label htmlFor="fileUpload" className={styles.cameraButton}>
+              <span role="img" aria-label="camera">
+                <img src={camera} className={styles.cameraIcon} alt="camera" />
+              </span>
+            </label>
+            <input
+              id="fileUpload"
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleFileUpload}
+            />
+          </div>
 
           <div className={styles.nicknameGroup}>
             <label htmlFor="nickname" className={styles.label}>
@@ -134,6 +173,7 @@ const ProfilePage = () => {
           </button>
         </div>
       </form>
+      {isGalleryOpen && <GalleryPopup onClose={toggleGallery} />}
     </>
   );
 };
