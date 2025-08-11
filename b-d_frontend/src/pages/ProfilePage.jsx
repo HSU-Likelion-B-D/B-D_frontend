@@ -65,43 +65,47 @@ const ProfilePage = () => {
         <span className={styles.highlight}>당신</span>을 알려주세요!
       </h1>
       <p className={styles.description}>비디는 당신이 궁금해요.</p>
-      <label htmlFor="nickname" className={styles.label}>
-        닉네임<span>*</span>
-      </label>
-      <div className={styles.nicknameContainer}>
-        <input
-          id="nickname"
-          name="nickname"
-          type="text"
-          value={formData.nickname}
-          onChange={handleInputChange}
-          placeholder="닉네임을 입력하세요"
-          className={`${styles.input} ${isError ? styles.errorInput : ""} ${
-            isSuccess ? styles.successInput : ""
-          }`}
-        />
-        <button
-          type="button"
-          className={`${styles.checkButton} ${
-            isButtonDisabled ? styles.disabled : ""
-          }`}
-          onClick={handleNicknameCheck}
-          disabled={isButtonDisabled}
-        >
-          중복확인
-        </button>
+
+      <div className={styles.nicknameGroup}>
+        <label htmlFor="nickname" className={styles.label}>
+          닉네임<span>*</span>
+        </label>
+        <div className={styles.nicknameContainer}>
+          <input
+            id="nickname"
+            name="nickname"
+            type="text"
+            value={formData.nickname}
+            onChange={handleInputChange}
+            placeholder="닉네임을 입력하세요"
+            className={`${styles.input} ${isError ? styles.errorInput : ""} ${
+              isSuccess ? styles.successInput : ""
+            }`}
+          />
+          <button
+            type="button"
+            className={`${styles.checkButton} ${
+              isButtonDisabled ? styles.disabled : ""
+            }`}
+            onClick={handleNicknameCheck}
+            disabled={isButtonDisabled}
+          >
+            중복확인
+          </button>
+        </div>
+        {nicknameMessage && (
+          <p className={isError ? styles.errorMessage : styles.successMessage}>
+            {nicknameMessage}
+          </p>
+        )}
       </div>
-      {nicknameMessage && (
-        <p className={isError ? styles.errorMessage : styles.successMessage}>
-          {nicknameMessage}
-        </p>
-      )}
-      <textarea
+
+      <input
         name="description"
         placeholder="가게를 간단히 소개해주세요."
         value={formData.description}
         onChange={handleInputChange}
-        className={styles.input}
+        className={styles.textarea}
       />
       <div className={styles.signupLink}>
         <span className={styles.findPwd}>비밀번호 찾기</span>
