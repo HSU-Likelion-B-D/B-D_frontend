@@ -25,7 +25,7 @@
       margin-bottom: vh(98px);
     }
     .form {
-      width: vw(603px);
+      width: 100%;
       @include flex(column, center, center);
 
       .formItem {
@@ -84,7 +84,9 @@
 
       .confirmBtn {
         width: vw(141px);
-        height: vh(71px);
+        height: auto;
+        padding: vh(21px) 0;
+        text-align: center;
         background: $color-sub-01;
         color: #fff;
         border: none;
@@ -120,29 +122,25 @@
     }
 
     .submitBtn {
-      display: block;
-      margin: 32px auto 0 auto; // 위 여백, 좌우 자동, 아래 여백
-      width: vw(362px);
-      height: vw(60px);
-      background: $color-sub-01;
-      color: $color-white;
+      padding: vh(16px) vw(160px);
+      background: $color-main;
+      color: white;
       border: none;
       font-size: rem(16px);
       font-weight: $font_weight_semibold;
-      margin-top: 12px;
-      margin-bottom: 10px;
       cursor: pointer;
+      margin-bottom: vh(139px);
+      line-height: 1.75;
+      &:disabled {
+        background: $color-sub-01;
+        cursor: not-allowed;
+      }
     }
 
     .activeSubmitBtn {
-      background: $color-main; // 파란색
+      background: $color-main;
       color: #fff;
       cursor: pointer;
-    }
-    .submitBtn:disabled {
-      background: #e0e0e0;
-      color: #fff;
-      cursor: not-allowed;
     }
   }
 }

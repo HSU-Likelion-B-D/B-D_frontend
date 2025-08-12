@@ -26,7 +26,7 @@ const Input = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        style={{ paddingRight: "48px" }} // x버튼 공간 확보
+        style={{ paddingRight: "48px" }}
         {...props}
       />
 
