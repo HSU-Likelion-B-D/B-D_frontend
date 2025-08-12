@@ -38,6 +38,15 @@
           margin-bottom: vh(6px);
           line-height: 1.75;
         }
+        .input {
+          &.error {
+            box-shadow: 0 0 10px 0 rgba(255, 0, 0, 0.5);
+          }
+
+          &.valid {
+            box-shadow: 0 0 10px 0 rgba(66, 188, 84, 0.7);
+          }
+        }
 
         .errorMessage {
           position: absolute;
