@@ -32,22 +32,21 @@
 
   .xButton {
     position: absolute;
-    right: 16px;
+    padding: 0.6rem;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
     background: #b3b3b3;
-    color: #fff;
     border: none;
-    border-radius: 50%;
-    padding: 1rem;
+    font-size: 1rem;
+    color: #fff;
     cursor: pointer;
     width: vw(23px);
     height: vw(23px);
-    font-size: 1rem;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    border-radius: 50%;
+    line-height: 1.75;
   }
 }
