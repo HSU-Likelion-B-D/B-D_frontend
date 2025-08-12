@@ -12,7 +12,7 @@ const Input = ({
   ...props
 }) => {
   return (
-    <div style={{ position: "relative" }}>
+    <div className={styles.inputContainer}>
       {label && (
         <p>
           {label}
