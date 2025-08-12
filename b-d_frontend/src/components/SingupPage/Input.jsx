@@ -36,7 +36,7 @@ const Input = ({
         className={styles.xButton}
         tabIndex={-1}
       >
-        x
+        ×
       </button>
     </div>
   );
