@@ -1,0 +1,89 @@
+@use "../variables" as *;
+.container {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(column, center, center);
+
+  .content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    @include flex(column, center, center);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border-radius: 44px;
+    padding: vh(28px) vw(136px);
+    .header {
+      width: 100%;
+      @include flex(row, space-between, center, vw(593px));
+      .iconContainer {
+        @include flex(row, space-between, center, vw(45px));
+        .chatContainer {
+          position: relative;
+          .chatIcon {
+            width: vw(45px);
+            height: vw(45px);
+            .chatCount {
+              position: absolute;
+              top: vw(-10px);
+              right: vw(-10px);
+              background-color: #ff4242;
+              width: vw(38px);
+              height: vw(38px);
+              border-radius: 50%;
+              font-size: vw(10px);
+              font-weight: 700;
+              color: #fff;
+              text-align: center;
+              line-height: 1.6;
+            }
+          }
+        }
+        .alarmContainer {
+          .alarmIcon {
+            width: vw(45px);
+            height: vw(45px);
+          }
+        }
+      }
+      .logoContainer {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+
+        .logo {
+          width: vw(59px);
+          height: vh(46px);
+        }
+      }
+      .rightIconContainer {
+        @include flex(row, center, center, vw(30px));
+        .userInfoContainer {
+          @include flex(row, center, center, vw(12px));
+          .userNameContainer {
+            @include flex(row, center, center, 1rem);
+            font-size: vw(20px);
+            line-height: 1.75;
+            color: #929292;
+            text-align: center;
+            .userName {
+            }
+          }
+          .profileContainer {
+            .profileIcon {
+              width: vw(49px);
+              height: vw(49px);
+            }
+          }
+        }
+        .hamburgerContainer {
+          .hamburgerIcon {
+            width: vw(29px);
+            height: vw(29px);
+          }
+        }
+      }
+    }
+  }
+}

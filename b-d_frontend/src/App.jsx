@@ -7,6 +7,7 @@ import { MainLayout } from "./components/MainLayout";
 import { LoginPage } from "./pages/LoginPage";
 import { FindPWPage } from "./pages/FindPWPage";
 import { NewPWPage } from "./pages/NewPWPage";
+import MainPage from "./pages/MainPage";
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +22,7 @@ function App() {
           <Route path="/new-password" element={<NewPWPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="/main" element={<StartPage />} />
+          <Route path="/main" element={<MainPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
