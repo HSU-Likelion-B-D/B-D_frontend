@@ -149,7 +149,15 @@ export const LoginPage = () => {
             </label>
           </div>
           <div className={styles.links}>
-            <div className={styles.link}>비밀번호 찾기</div>|
+            <div
+              className={styles.link}
+              onClick={() => {
+                navigate("/find-password");
+              }}
+            >
+              비밀번호 찾기
+            </div>
+            |
             <div
               className={styles.link}
               onClick={() => {
