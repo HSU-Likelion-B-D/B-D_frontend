@@ -5,7 +5,7 @@ import { BubbleLayout } from "./components/BubbleLayout";
 import { SimpleLayout } from "./components/SimpleLayout";
 import { LoginPage } from "./pages/LoginPage";
 import { FindPWPage } from "./pages/FindPWPage";
-
+import { NewPWPage } from "./pages/NewPWPage";
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +17,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find-password" element={<FindPWPage />} />
+          <Route path="/new-password" element={<NewPWPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

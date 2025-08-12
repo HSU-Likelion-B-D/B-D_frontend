@@ -119,6 +119,9 @@ export const FindPWPage = () => {
               allFilled ? styles.activeSubmitBtn : ""
             }`}
             disabled={isSubmitting || !allFilled}
+            onClick={() => {
+              navigate("/new-password");
+            }}
           >
             다음
           </Button>

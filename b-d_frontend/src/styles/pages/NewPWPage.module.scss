@@ -1,0 +1,215 @@
+@use "../variables" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(column, center, flex-start);
+
+  .content {
+    position: relative;
+    z-index: 1;
+    @include flex(column, center, center);
+
+    .logo {
+      margin-top: vh(53px);
+      margin-bottom: vh(136px);
+      width: vw(60px);
+      height: vh(55px);
+    }
+
+    .title {
+      font-size: rem(46px);
+      font-weight: $font_weight_semibold;
+      text-align: center;
+      line-height: 1.75;
+      margin-bottom: vh(98px);
+    }
+    .form {
+      width: 100%;
+      @include flex(column, center, center);
+
+      .formItem {
+        margin-bottom: vh(33px);
+        width: 100%;
+
+        .formItemTitle {
+          font-size: rem(20px);
+          font-weight: $font_weight_regular;
+          color: $color-sub-03;
+          margin-bottom: vh(6px);
+          line-height: 1.75;
+        }
+
+        .inputContainer {
+          position: relative;
+          width: 100%;
+          line-height: 1.75;
+
+          .input {
+            width: 100%;
+            padding: vh(17px) vw(20px);
+            padding-right: vw(50px); // X 버튼 공간 확보
+            border: none;
+            border-radius: 12px;
+            font-size: rem(20px);
+            background-color: #fff;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+            line-height: 1.75;
+
+            &::placeholder {
+              color: #d9d9d9;
+              font-size: rem(20px);
+              line-height: 1.75;
+            }
+
+            &.error {
+              box-shadow: 0 0 10px 0 rgba(255, 0, 0, 0.5);
+            }
+
+            &.valid {
+              box-shadow: 0 0 10px 0 rgba(66, 188, 84, 0.7);
+            }
+          }
+
+          .clearButton {
+            position: absolute;
+            padding: 0.6rem;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #b3b3b3;
+            border: none;
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
+            width: vw(23px);
+            height: vw(23px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            line-height: 1.75;
+          }
+
+          .passwordToggleButton {
+            position: absolute;
+            right: calc(20px + 40px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: vw(28px);
+            height: vw(28px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        .errorMessage {
+          position: absolute;
+          color: $color-red;
+          font-size: rem(14px);
+          margin-top: vh(4px);
+          font-weight: $font_weight_regular;
+          line-height: 1.75;
+        }
+      }
+
+      .verificationBtnContainer {
+        width: 100%;
+        margin-bottom: vh(33px);
+        .verificationBtn {
+          width: 100%;
+          height: 40px;
+          background: $color-main;
+          color: $color-white;
+          border: none;
+          border-radius: 12px;
+          font-size: 1rem;
+          font-weight: $font_weight_semibold;
+          margin-bottom: 12px;
+          cursor: pointer;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .verifyContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: vw(29px);
+      margin-bottom: vh(72px);
+
+      .verifyInput {
+        width: 100%;
+        padding: vh(17px) vw(20px);
+        padding-right: vw(50px);
+      }
+
+      .confirmBtn {
+        width: vw(141px);
+        height: auto;
+        padding: vh(21px) 0;
+        text-align: center;
+        background: $color-sub-01;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: rem(16px);
+        line-height: 1.75;
+        font-weight: $font_weight_semibold;
+        cursor: pointer;
+        align-items: center;
+      }
+
+      .activeConfirmBtn {
+        background: $color-main;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+
+    .links {
+      @include flex(row, center, center);
+      font-size: rem(14px);
+      line-height: 1.75;
+      margin-top: vh(111px);
+      margin-bottom: vh(78px);
+      gap: vw(50px);
+      .link {
+        cursor: pointer;
+      }
+    }
+
+    .disabledBtn {
+      background: #e0e0e0;
+      color: $color-sub-01;
+    }
+
+    .submitBtn {
+      padding: vh(16px) vw(160px);
+      background: $color-main;
+      color: white;
+      border: none;
+      font-size: rem(16px);
+      font-weight: $font_weight_semibold;
+      cursor: pointer;
+      margin-bottom: vh(139px);
+      line-height: 1.75;
+      &:disabled {
+        background: $color-sub-01;
+        cursor: not-allowed;
+      }
+    }
+
+    .activeSubmitBtn {
+      background: $color-main;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
