@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "@/styles/pages/MainPage.module.scss";
-import SelectBox from "@/components/MainPage/SelectBox";
+import styles from "@/styles/pages/StartPage.module.scss";
+import SelectBox from "@/components/StartPage/SelectBox";
 import { logo, main_nemo, main_seaAnemone } from "@/assets";
-function MainPage() {
+function StartPage() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -45,4 +45,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default StartPage;
