@@ -2,14 +2,12 @@
 
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   @include flex(column, center, flex-start);
-  line-height: 1.75;
 
   .content {
     position: relative;
     z-index: 1;
-    height: 100vh;
     @include flex(column, center, center);
 
     .logo {
@@ -28,6 +26,7 @@
       span {
         font-weight: $font_weight_bold;
         color: $color-main;
+        line-height: 1.75;
       }
     }
 
@@ -45,11 +44,13 @@
           font-weight: $font_weight_regular;
           color: $color-sub-03;
           margin-bottom: vh(6px);
+          line-height: 1.75;
         }
 
         .inputContainer {
           position: relative;
           width: 100%;
+          line-height: 1.75;
 
           .input {
             width: 100%;
@@ -60,10 +61,12 @@
             font-size: rem(20px);
             background-color: #fff;
             box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+            line-height: 1.75;
 
             &::placeholder {
               color: #d9d9d9;
               font-size: rem(20px);
+              line-height: 1.75;
             }
 
             &.error {
@@ -78,7 +81,7 @@
           .clearButton {
             position: absolute;
             padding: 0.6rem;
-            right: vw(20px);
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
             background: #b3b3b3;
@@ -92,11 +95,12 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            line-height: 1.75;
           }
 
           .passwordToggleButton {
             position: absolute;
-            right: vw(80px);
+            right: calc(20px + 40px);
             top: 50%;
             transform: translateY(-50%);
             background: none;
@@ -130,6 +134,7 @@
       align-self: flex-start;
       margin-top: vh(10px);
       margin-bottom: vh(58px);
+      line-height: 1.75;
 
       .checkboxInput {
         appearance: none;
@@ -188,6 +193,7 @@
       font-weight: $font_weight_semibold;
       cursor: pointer;
       margin-bottom: vh(139px);
+      line-height: 1.75;
       &:disabled {
         background: $color-sub-01;
         cursor: not-allowed;
