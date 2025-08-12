@@ -3,6 +3,7 @@ import SignupPage from "./pages/SignupPage.jsx";
 import StartPage from "./pages/StartPage";
 import { BubbleLayout } from "./components/BubbleLayout";
 import { SimpleLayout } from "./components/SimpleLayout";
+import { MainLayout } from "./components/MainLayout";
 import { LoginPage } from "./pages/LoginPage";
 import { FindPWPage } from "./pages/FindPWPage";
 import { NewPWPage } from "./pages/NewPWPage";
@@ -18,6 +19,9 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find-password" element={<FindPWPage />} />
           <Route path="/new-password" element={<NewPWPage />} />
+        </Route>
+        <Route element={<MainLayout />}>
+          <Route path="/main" element={<StartPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
