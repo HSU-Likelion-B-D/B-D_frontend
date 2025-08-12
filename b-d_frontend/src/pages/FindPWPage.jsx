@@ -20,7 +20,19 @@ export const FindPWPage = () => {
 
   const [isVerifySent, setIsVerifySent] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
 
+  // 이메일 유효성 검사 함수
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // 이메일 입력값 변경 감지
+  const handleEmailChange = (e) => {
+    const email = e.target.value;
+    setIsValidEmail(validateEmail(email));
+  };
   const onSubmit = (data) => {
     console.log("회원가입 데이터:", data);
   };
@@ -56,6 +68,7 @@ export const FindPWPage = () => {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "올바른 이메일 형식이 아닙니다",
                 },
+                onChange: handleEmailChange,
               })}
               onClear={() => handleClear("email")}
             />
@@ -67,9 +80,9 @@ export const FindPWPage = () => {
             <Button
               type="button"
               onClick={handleVerifySend}
-              disabled={isVerifySent}
+              disabled={isVerifySent || !isValidEmail}
               className={`${styles.verificationBtn} ${
-                isVerifySent ? styles.disabledBtn : ""
+                isVerifySent || !isValidEmail ? styles.disabledBtn : ""
               }`}
             >
               인증번호 받기
