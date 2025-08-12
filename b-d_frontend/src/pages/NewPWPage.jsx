@@ -33,7 +33,6 @@ export const NewPWPage = () => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const toggleConfirmPasswordVisibility = () => {
