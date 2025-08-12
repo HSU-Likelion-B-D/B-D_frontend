@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "@/styles/pages/FindPWPage.module.scss";
-import logo from "../assets/logo.svg";
+import { logo } from "@/assets";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
 import { useForm } from "react-hook-form";

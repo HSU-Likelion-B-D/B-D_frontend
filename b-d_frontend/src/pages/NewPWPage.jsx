@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styles from "@/styles/pages/NewPWPage.module.scss";
-import logo from "../assets/logo.svg";
+import { logo, eye, eye_color } from "@/assets";
 import Button from "../components/SingupPage/Button";
-import eye from "../assets/eye.svg";
-import eyeColor from "../assets/eye-color.svg";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -85,7 +83,7 @@ export const NewPWPage = () => {
                 {showPassword ? (
                   <img src={eye} alt="eye" />
                 ) : (
-                  <img src={eyeColor} alt="eye" />
+                  <img src={eye_color} alt="eye" />
                 )}
               </button>
             </div>
@@ -133,7 +131,7 @@ export const NewPWPage = () => {
                 {showConfirmPassword ? (
                   <img src={eye} alt="eye" />
                 ) : (
-                  <img src={eyeColor} alt="eye" />
+                  <img src={eye_color} alt="eye" />
                 )}
               </button>
             </div>
