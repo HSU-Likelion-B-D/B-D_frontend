@@ -29,7 +29,7 @@ const ProfilePage = () => {
       setNicknameMessage("");
       setIsError(false);
       setIsSuccess(false);
-      setIsButtonDisabled(false); // Reset button state
+      setIsButtonDisabled(false); // 버튼 reset
     }
   };
 
@@ -61,7 +61,7 @@ const ProfilePage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Form Data:", formData);
-    // Here, you can send `formData` to your API or database
+    // `formData` 백으로 보내기
   };
 
   const toggleGallery = () => {
@@ -165,13 +165,14 @@ const ProfilePage = () => {
             )}
           </div>
 
-          <input
+          <textarea
             name="description"
             placeholder="가게를 간단히 소개해주세요."
             value={formData.description}
             onChange={handleInputChange}
             className={styles.textarea}
           />
+
           <div className={styles.signupLink}>
             <span className={styles.findPwd}>비밀번호 찾기</span>
             <span className={styles.divider}> | </span>
