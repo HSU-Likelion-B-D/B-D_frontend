@@ -47,3 +47,56 @@
   text-align: center;
   margin-bottom: 30px;
 }
+.addressContainer {
+  display: flex;
+  align-items: center;
+  gap: 29px; // 사업장 입력 필드와 버튼 간 간격
+}
+.label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 1rem;
+}
+.label span {
+  color: red;
+}
+.input {
+  width: vw(433px);
+  height: vh(69px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.detailInput {
+  width: vw(433px);
+  height: vh(69px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 34px;
+}
+.searchButton {
+  width: vw(150px);
+  height: vh(71px);
+  padding: 8px 16px;
+  background-color: #2196f3;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #fff;
+  gap: 29px;
+
+  &:hover {
+    background-color: #1976d2;
+  }
+
+  &.disabled {
+    background-color: #ddd; // 버튼 비활성화 시 색상
+    cursor: not-allowed;
+  }
+}
