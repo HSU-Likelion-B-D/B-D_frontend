@@ -101,23 +101,11 @@
   }
 }
 
-.addDescription {
-  text-align: left;
-  margin-left: 0;
-  margin-top: 10px;
-  color: #999;
-  font-size: 18px;
-  width: vw(433px); // input과 정확히 동일한 너비
-  max-width: none;
-  padding-left: 0; // input과 동일하게
-  box-sizing: border-box;
-  margin-right: auto; // 왼쪽에 딱 붙게
-}
-
 .addressDescription {
+  position: relative;
   text-align: left;
-  margin-left: 0;
-  margin-top: 10px;
+  margin-left: 250px; // 왼쪽 여백
+  margin-top: 20px;
   color: #999;
   font-size: 18px;
   width: vw(433px); // input과 동일한 너비
@@ -127,9 +115,13 @@
   margin-right: auto;
 }
 
-.addressDescription p {
+.address1 {
   margin: 0;
   line-height: 1.7;
+}
+
+.address2 {
+  text-indent: 2em;
 }
 
 .address {

@@ -66,11 +66,11 @@ const AddressPage = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div clasName={styles.addDescription}>
-          <p className={styles.address}>
-            EX) 서울특별시 성북구 삼선교로 16길 116{" "}
+        <div className={styles.addressDescription}>
+          <p className={styles.address1}>
+            EX) 서울특별시 성북구 삼선교로 16길 116
           </p>
-          <p className={styles.address}> 서울특별시 송파구 올림픽로 300</p>
+          <p className={styles.address2}>서울특별시 송파구 올림픽로 300</p>
         </div>
 
         <div className={styles.signupLink}>
