@@ -124,7 +124,14 @@ const SelectKWPage = () => {
           </span>
         </div>
 
-        <button type="submit" className={styles.submitBtn} onClick={handleNext}>
+        <button
+          type="submit"
+          className={`${styles.submitBtn} ${
+            selected.length > 1 ? styles.active : ""
+          }`}
+          onClick={handleNext}
+          disabled={selected.length === 0}
+        >
           다음으로
         </button>
       </div>

@@ -99,14 +99,16 @@
   margin: 32px auto vh(52px) auto;
   width: 362px;
   height: 60px;
-  background: #2196f3;
-  color: #fff;
+  background: $color-sub-01; // 비활성화(회색)
+  color: $color-white;
   border: none;
   font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  &.disabled {
-    background-color: #ddd; // 버튼 비활성화 시 색상
-    cursor: not-allowed;
+  font-weight: $font-weight-bold;
+  cursor: not-allowed;
+  transition: background 0.2s;
+
+  &.active {
+    background: $color-main; // 활성화(파란색)
+    cursor: pointer;
   }
 }

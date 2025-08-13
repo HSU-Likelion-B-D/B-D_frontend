@@ -1,6 +1,8 @@
 @use "../variables" as *;
 
 .button {
+  @include flex(column, center, center);
+  text-align: center;
   width: vw(156px);
   height: vh(55px);
   padding: 12px 24px;
@@ -14,7 +16,6 @@
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 4px 12px 0 rgba(0, 79, 255, 0.06);
-  text-align: center;
 }
 .selected {
   background: #009fe3;
