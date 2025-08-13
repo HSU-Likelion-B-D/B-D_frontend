@@ -8,7 +8,8 @@
   border: 1px solid #ddd;
   background: #fff;
   color: $color-sub-03;
-  font-size: 10px;
+  font-size: rem(11px);
+  font-weight: $font-weight-bold;
   margin: 8px;
   cursor: pointer;
   transition: all 0.2s;
