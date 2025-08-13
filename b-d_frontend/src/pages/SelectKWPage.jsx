@@ -69,6 +69,7 @@ const SelectKWPage = () => {
               key={sp}
               selected={selected.includes(sp)}
               onClick={() => handleClick(sp)}
+              error={showError}
             >
               #{sp}
             </SelectButton>
@@ -91,6 +92,7 @@ const SelectKWPage = () => {
               key={kw}
               selected={selected.includes(kw)}
               onClick={() => handleClick(kw)}
+              error={showError}
             >
               #{kw}
             </SelectButton>

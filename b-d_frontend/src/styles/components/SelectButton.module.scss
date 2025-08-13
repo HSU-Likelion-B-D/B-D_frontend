@@ -14,9 +14,14 @@
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 4px 12px 0 rgba(0, 79, 255, 0.06);
+  text-align: center;
 }
 .selected {
   background: #009fe3;
   color: #fff;
   border-color: #009fe3;
+}
+.error {
+  border: 1.5px solid #ffbcbc !important;
+  box-shadow: 0 0 8px 0 #ffbcbc;
 }

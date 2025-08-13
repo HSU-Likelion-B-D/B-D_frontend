@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "../../styles/components/SelectButton.module.scss";
-const SelectButton = ({ children, selected, onClick }) => {
+const SelectButton = ({ children, selected, onClick, error }) => {
   return (
     <div>
       <button
-        className={`${styles.button} ${selected ? styles.selected : ""}`}
+        className={`${styles.button} ${selected ? styles.selected : ""} ${
+          error ? styles.error : ""
+        }`}
         onClick={onClick}
         type="button"
       >
