@@ -5,7 +5,7 @@
   .profileImg {
     width: vw(174px);
     height: vw(174px);
-    margin-bottom: 13px;
+    margin-bottom: vh(13px);
   }
   .profileInfo {
     @include flex(column, center, center);
@@ -19,7 +19,7 @@
       font-size: rem(20px);
       line-height: 1.75;
       color: #929292;
-      margin-bottom: 8px;
+      margin-bottom: vh(8px);
     }
     .rating {
       @include flex(row, center, center, vw(3px));
@@ -32,6 +32,7 @@
         line-height: 1.75;
         color: $color-main;
         font-weight: $font_weight_bold;
+        margin-right: 0.5rem;
       }
       .ratingCount {
         font-size: rem(26px);

@@ -9,6 +9,7 @@ import profile_icon from "./profile-icon.svg";
 import hamburger_icon from "./hamburger-icon.svg";
 import profile_img from "./profile-img.svg";
 import star_icon from "./star-icon.svg";
+import busy_left from "./busy-left.svg";
 export {
   logo,
   eye,
@@ -21,4 +22,5 @@ export {
   hamburger_icon,
   profile_img,
   star_icon,
+  busy_left,
 };

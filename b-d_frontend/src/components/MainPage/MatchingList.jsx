@@ -1,5 +1,6 @@
 import styles from "@/styles/components/MatchingList.module.scss";
 import MatchingItem from "./MatchingItem";
+import { busy_left } from "@/assets";
 export default function MatchingList() {
   return (
     <div className={styles.container}>
@@ -13,7 +14,10 @@ export default function MatchingList() {
         <MatchingItem />
         <MatchingItem />
       </div>
-      <button className={styles.seemoreButton}>자세히 보러가기</button>
+      <div className={styles.buttonContainer}>
+        <img src={busy_left} className={styles.busyLeft} />
+        <button className={styles.seemoreButton}>자세히 보러가기</button>
+      </div>
     </div>
   );
 }

@@ -28,15 +28,25 @@
     @include flex(column, center, center, 25px);
     margin-bottom: 32px;
   }
-  .seemoreButton {
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    background-color: $color-main;
-    color: #fff;
-    font-size: rem(16px);
-    font-weight: $font_weight_semibold;
-    line-height: 1.75;
-    padding: vh(16px) vw(114px);
+  .buttonContainer {
+    position: relative;
+    .busyLeft {
+      position: absolute;
+      top: vh(-143px);
+      right: vw(-2px);
+      width: vw(159px);
+      height: vh(168px);
+    }
+    .seemoreButton {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background-color: $color-main;
+      color: #fff;
+      font-size: rem(16px);
+      font-weight: $font_weight_semibold;
+      line-height: 1.75;
+      padding: vh(16px) vw(114px);
+    }
   }
 }
