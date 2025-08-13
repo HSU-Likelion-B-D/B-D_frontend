@@ -53,6 +53,48 @@
   margin-bottom: 30px;
 }
 
+.profileSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: vh(98px);
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.cameraButton {
+  position: absolute;
+  bottom: 1px;
+  right: 3px;
+  background: $color-main;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.cameraIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cameraButton:hover {
+  background: #0056b3;
+}
+
 .nicknameContainer {
   display: flex;
   align-items: center;
@@ -75,6 +117,25 @@
   border-radius: 12px;
   font-size: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.clearButton {
+  position: absolute;
+  padding: 0.6rem;
+  right: vw(20px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #b3b3b3;
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  width: vw(23px);
+  height: vw(23px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .errorInput {
@@ -170,65 +231,4 @@
     background-color: #ddd; // 버튼 비활성화 시 색상
     cursor: not-allowed;
   }
-}
-
-.profileSection {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: vh(98px);
-}
-
-.profileImage {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ddd;
-}
-
-.cameraButton {
-  position: absolute;
-  bottom: 1px;
-  right: 3px;
-  background: $color-main;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-.cameraIcon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cameraButton:hover {
-  background: #0056b3;
-}
-
-.clearButton {
-  position: absolute;
-  padding: 0.6rem;
-  right: vw(20px);
-  top: 50%;
-  transform: translateY(-50%);
-  background: #b3b3b3;
-  border: none;
-  font-size: 1rem;
-  color: #fff;
-  cursor: pointer;
-  width: vw(23px);
-  height: vw(23px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
 }
