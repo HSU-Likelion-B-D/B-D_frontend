@@ -6,8 +6,10 @@ import ProgressBar from "../components/ProfilePage/ProgressBar";
 import GalleryPopup from "../components/ProfilePage/GalleryPopup";
 import camera from "../assets/camera.png";
 import Input from "../components/SingupPage/Input";
+import { useNavigate } from "react-router-dom";
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nickname: "",
     description: "",
@@ -174,9 +176,23 @@ const ProfilePage = () => {
           />
 
           <div className={styles.signupLink}>
-            <span className={styles.findPwd}>비밀번호 찾기</span>
+            <span
+              className={styles.findPwd}
+              onClick={() => {
+                navigate("/find-password");
+              }}
+            >
+              비밀번호 찾기
+            </span>
             <span className={styles.divider}> | </span>
-            <span className={styles.loginLink}>로그인</span>
+            <span
+              className={styles.loginLink}
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              로그인
+            </span>
           </div>
           <button
             type="submit"

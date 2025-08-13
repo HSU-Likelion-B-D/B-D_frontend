@@ -3,7 +3,9 @@ import ProgressBar from "../components/ProfilePage/ProgressBar";
 import styles from "../styles/pages/AddressPage.module.scss";
 import logo from "../assets/logo.svg";
 import Input from "../components/SingupPage/Input";
+import { useNavigate } from "react-router-dom";
 const AddressPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     address: "",
     detailAddress: "",
@@ -74,9 +76,23 @@ const AddressPage = () => {
         </div>
 
         <div className={styles.signupLink}>
-          <span className={styles.findPwd}>비밀번호 찾기</span>
+          <span
+            className={styles.findPwd}
+            onClick={() => {
+              navigate("/find-password");
+            }}
+          >
+            비밀번호 찾기
+          </span>
           <span className={styles.divider}> | </span>
-          <span className={styles.loginLink}>로그인</span>
+          <span
+            className={styles.loginLink}
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </span>
         </div>
         <button
           type="submit"
