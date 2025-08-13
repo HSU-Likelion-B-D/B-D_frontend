@@ -15,7 +15,20 @@ const species = [
   "기타",
 ];
 
-const atmosphere = [];
+const atmosphere = [
+  "감성적인",
+  "빈티지",
+  "러블리",
+  "힙한",
+  "직장인",
+  "자연친화적",
+  "조용한",
+  "활기찬",
+  "10대",
+  "20대",
+  "가족모임",
+  "단체",
+];
 
 const SelectKWPage = () => {
   const [selected, setSelected] = useState([]);
@@ -59,6 +72,21 @@ const SelectKWPage = () => {
             한개 이상의 항목을 선택하여주세요.
           </div>
         )}
+        <p className={styles.description}>
+          #이런_<span className={styles.highlight}>분위기의</span>
+          _가게를_운영해요.
+        </p>
+        <div className={styles.buttonGroup}>
+          {atmosphere.map((kw) => (
+            <SelectButton
+              key={kw}
+              selected={selected.includes(kw)}
+              onClick={() => handleClick(kw)}
+            >
+              #{kw}
+            </SelectButton>
+          ))}
+        </div>
       </div>
     </div>
   );
