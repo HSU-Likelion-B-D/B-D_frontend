@@ -5,6 +5,7 @@ import profile from "../assets/profile.png";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import GalleryPopup from "../components/ProfilePage/GalleryPopup";
 import camera from "../assets/camera.png";
+import Input from "../components/SingupPage/Input";
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
   const [formData, setFormData] = useState({
@@ -117,17 +118,19 @@ const ProfilePage = () => {
               닉네임<span>*</span>
             </label>
             <div className={styles.nicknameContainer}>
-              <input
+              <Input
                 id="nickname"
                 name="nickname"
                 type="text"
                 value={formData.nickname}
                 onChange={handleInputChange}
                 placeholder="닉네임을 입력하세요"
+                showClearButton={true}
                 className={`${styles.input} ${
                   isError ? styles.errorInput : ""
                 } ${isSuccess ? styles.successInput : ""}`}
               />
+
               <button
                 type="button"
                 className={`${styles.checkButton} ${

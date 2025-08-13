@@ -4,9 +4,9 @@
   height: 100vh; // 전체 높이를 100vh로 설정
 }
 .whiteBox {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8); // Set transparency
   width: vw(1187px);
-  height: auto;
+  height: auto; // Adjust height dynamically
   border-radius: 22px;
   display: flex; // Add flexbox for centering
   flex-direction: column; // Stack children vertically
@@ -14,6 +14,7 @@
   justify-content: center; // Center vertically
   margin-top: 30px;
   margin-bottom: 30px;
+  padding-bottom: 20px; // Add padding to ensure spacing
 }
 .container {
   min-height: 100vh;
@@ -211,4 +212,23 @@
 
 .cameraButton:hover {
   background: #0056b3;
+}
+
+.clearButton {
+  position: absolute;
+  padding: 0.6rem;
+  right: vw(20px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #b3b3b3;
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  width: vw(23px);
+  height: vw(23px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
