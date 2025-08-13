@@ -3,7 +3,7 @@ import styles from "../styles/pages/SelectKWPage.module.scss";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import logo from "../assets/logo.svg";
 import SelectButton from "../components/SelectKWPage/SelectButton";
-
+import { useNavigate } from "react-router-dom";
 const species = [
   "음식/음료",
   "쇼핑/소매",
@@ -33,6 +33,7 @@ const atmosphere = [
 const SelectKWPage = () => {
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = (sp) => {
     // 버튼 중복 선택 로직
@@ -120,7 +121,7 @@ const SelectKWPage = () => {
           </span>
         </div>
 
-        <button className={styles.submitBtn} onClick={handleNext}>
+        <button type="submit" className={styles.submitBtn} onClick={handleNext}>
           다음으로
         </button>
       </div>
