@@ -20,6 +20,14 @@ const atmosphere = [];
 const SelectKWPage = () => {
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
+
+  const handleClick = (sp) => {
+    // 버튼 중복 선택 로직
+    setSelected((prev) =>
+      prev.includes(sp) ? prev.filter((item) => item !== sp) : [...prev, sp]
+    );
+    setShowError(false);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
