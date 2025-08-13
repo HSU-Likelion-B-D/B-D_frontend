@@ -67,7 +67,7 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: rem(20px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 .detailInput {
@@ -95,6 +95,79 @@
     background-color: #1976d2;
   }
 
+  &.disabled {
+    background-color: #ddd; // 버튼 비활성화 시 색상
+    cursor: not-allowed;
+  }
+}
+
+.addDescription {
+  text-align: left;
+  margin-left: 0;
+  margin-top: 10px;
+  color: #999;
+  font-size: 18px;
+  width: vw(433px); // input과 정확히 동일한 너비
+  max-width: none;
+  padding-left: 0; // input과 동일하게
+  box-sizing: border-box;
+  margin-right: auto; // 왼쪽에 딱 붙게
+}
+
+.addressDescription {
+  text-align: left;
+  margin-left: 0;
+  margin-top: 10px;
+  color: #999;
+  font-size: 18px;
+  width: vw(433px); // input과 동일한 너비
+  max-width: none;
+  padding-left: 0;
+  box-sizing: border-box;
+  margin-right: auto;
+}
+
+.addressDescription p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.address {
+  text-align: start;
+  margin-top: 20px;
+  color: $color-sub-02;
+  font-size: 20px;
+}
+
+.signupLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.95rem;
+  color: $color-sub-03;
+  margin: 281px 0 8px 0;
+  gap: 50px;
+  .findPwd,
+  .loginLink {
+    cursor: pointer;
+  }
+
+  .divider {
+    color: #bbb;
+  }
+}
+
+.submitBtn {
+  display: block;
+  margin: 32px auto vh(52px) auto;
+  width: 362px;
+  height: 60px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
   &.disabled {
     background-color: #ddd; // 버튼 비활성화 시 색상
     cursor: not-allowed;

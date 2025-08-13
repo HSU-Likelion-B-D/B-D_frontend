@@ -6,6 +6,7 @@ import Input from "../components/SingupPage/Input";
 const AddressPage = () => {
   const [formData, setFormData] = useState({
     address: "",
+    detailAddress: "",
   });
 
   const handleInputChange = (event) => {
@@ -14,9 +15,6 @@ const AddressPage = () => {
       ...prevData,
       [name]: value,
     }));
-    if (name === "address") {
-      setFormData("");
-    }
   };
   const clearAddress = () => {
     setFormData((prevData) => ({
@@ -24,6 +22,8 @@ const AddressPage = () => {
       address: "",
     }));
   };
+
+  const isFormValid = formData.address.trim() !== "";
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
@@ -56,15 +56,37 @@ const AddressPage = () => {
             </button>
           </div>
           <Input
-            id="address"
-            name="address"
+            id="detailAddress"
+            name="detailAddress"
             type="text"
-            value={formData.address}
+            value={formData.detailAddress}
             placeholder="상세 주소"
             showClearButton={false}
             className={styles.detailInput}
+            onChange={handleInputChange}
           />
         </div>
+        <div clasName={styles.addDescription}>
+          <p className={styles.address}>
+            EX) 서울특별시 성북구 삼선교로 16길 116{" "}
+          </p>
+          <p className={styles.address}> 서울특별시 송파구 올림픽로 300</p>
+        </div>
+
+        <div className={styles.signupLink}>
+          <span className={styles.findPwd}>비밀번호 찾기</span>
+          <span className={styles.divider}> | </span>
+          <span className={styles.loginLink}>로그인</span>
+        </div>
+        <button
+          type="submit"
+          className={`${styles.submitBtn} ${
+            !isFormValid ? styles.disabled : ""
+          }`}
+          disabled={!isFormValid}
+        >
+          다음으로
+        </button>
       </div>
       {/*whiteBox 닫는 div */}
     </div>
