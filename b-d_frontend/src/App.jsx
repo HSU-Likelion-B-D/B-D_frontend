@@ -8,6 +8,7 @@ import { LoginPage } from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
 import AddressPage from "./pages/AddressPage";
+import SelectKWPage from "./pages/SelectKWPage";
 
 import { FindPWPage } from "./pages/FindPWPage";
 import { NewPWPage } from "./pages/NewPWPage";
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/address" element={<AddressPage />} />
+          <Route path="/select-keyword" element={<SelectKWPage />} />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
