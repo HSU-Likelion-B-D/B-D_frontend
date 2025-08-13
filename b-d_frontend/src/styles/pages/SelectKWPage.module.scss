@@ -58,3 +58,43 @@
   justify-items: center; // 버튼 가운데 정렬
   margin: 24px 0;
 }
+.errorMsg {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+
+.signupLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.95rem;
+  color: $color-sub-03;
+  margin: 53px 0 8px 0;
+  gap: 50px;
+  .findPwd,
+  .loginLink {
+    cursor: pointer;
+  }
+
+  .divider {
+    color: #bbb;
+  }
+}
+
+.submitBtn {
+  display: block;
+  margin: 32px auto vh(52px) auto;
+  width: 362px;
+  height: 60px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  &.disabled {
+    background-color: #ddd; // 버튼 비활성화 시 색상
+    cursor: not-allowed;
+  }
+}

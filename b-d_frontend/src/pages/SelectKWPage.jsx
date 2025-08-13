@@ -41,6 +41,13 @@ const SelectKWPage = () => {
     );
     setShowError(false);
   };
+
+  const handleNext = () => {
+    if (selected.length === 0) {
+      setShowError(true);
+      return;
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
@@ -87,6 +94,35 @@ const SelectKWPage = () => {
             </SelectButton>
           ))}
         </div>
+        {showError && (
+          <div className={styles.errorMsg}>
+            한개 이상의 항목을 선택하여주세요.
+          </div>
+        )}
+
+        <div className={styles.signupLink}>
+          <span
+            className={styles.findPwd}
+            onClick={() => {
+              navigate("/find-password");
+            }}
+          >
+            비밀번호 찾기
+          </span>
+          <span className={styles.divider}> | </span>
+          <span
+            className={styles.loginLink}
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </span>
+        </div>
+
+        <button className={styles.submitBtn} onClick={handleNext}>
+          다음으로
+        </button>
       </div>
     </div>
   );
