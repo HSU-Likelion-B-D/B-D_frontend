@@ -81,5 +81,9 @@
         }
       }
     }
+    .topContainer {
+      @include flex(row, space-between, center, vw(100px));
+      width: 100%;
+    }
   }
 }
