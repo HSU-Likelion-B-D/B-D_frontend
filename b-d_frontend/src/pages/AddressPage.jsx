@@ -6,7 +6,7 @@ const AddressPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
-        <ProgressBar progress={25} />
+        <ProgressBar progress={35} />
         <img src={logo} className={styles.logo} alt="logo" />
         <h1 className={styles.subtitle}>
           당신의 <span className={styles.highlight}>가게</span>를 알려주세요!
