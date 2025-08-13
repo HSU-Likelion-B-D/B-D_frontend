@@ -171,6 +171,11 @@ const SignupPage = () => {
             )}
           </div>
         ))}
+        <div className={styles.signupLink}>
+          <span className={styles.findPwd}>비밀번호 찾기</span>
+          <span className={styles.divider}> | </span>
+          <span className={styles.loginLink}>로그인</span>
+        </div>
 
         <Button
           type="submit"

@@ -9,6 +9,7 @@ const Input = ({
   placeholder,
   required = false,
   onClear,
+  showClearButton = true,
   ...props
 }) => {
   return (
@@ -30,14 +31,17 @@ const Input = ({
         {...props}
       />
 
-      <button
-        type="button"
-        onClick={() => onClear && onClear(name)}
-        className={styles.xButton}
-        tabIndex={-1}
-      >
-        ×
-      </button>
+      {showClearButton && (
+        <button
+          type="button"
+          onClick={() => onClear && onClear(name)}
+          className={styles.xButton}
+          tabIndex={-1}
+        >
+          x
+        </button>
+      )}
+
     </div>
   );
 };
