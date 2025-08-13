@@ -8,7 +8,7 @@ import chat_icon from "./chat-icon.svg";
 import profile_icon from "./profile-icon.svg";
 import hamburger_icon from "./hamburger-icon.svg";
 import profile_img from "./profile-img.svg";
-
+import star_icon from "./star-icon.svg";
 export {
   logo,
   eye,
@@ -20,4 +20,5 @@ export {
   profile_icon,
   hamburger_icon,
   profile_img,
+  star_icon,
 };
