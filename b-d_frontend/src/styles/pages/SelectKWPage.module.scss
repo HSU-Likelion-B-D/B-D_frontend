@@ -38,12 +38,20 @@
   color: $color-sub-03;
 }
 
+.description {
+  font-size: 20px;
+  color: #666; // 서브 텍스트 색상
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
 .highlight {
   color: #2196f3; // 강조 색상
   font-weight: bold;
 }
 
-.description {
+.keyDescription {
   font-size: 20px;
   color: #666; // 서브 텍스트 색상
   text-align: center;
@@ -104,8 +112,8 @@
   border: none;
   font-size: 16px;
   font-weight: $font-weight-bold;
-  cursor: not-allowed;
   transition: background 0.2s;
+  cursor: pointer;
 
   &.active {
     background: $color-main; // 활성화(파란색)

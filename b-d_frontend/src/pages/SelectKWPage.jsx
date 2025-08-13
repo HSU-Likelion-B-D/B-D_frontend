@@ -60,7 +60,7 @@ const SelectKWPage = () => {
         <p className={styles.description}>
           당신의 사업장을 설명할 수 있는 키워드를 모두 골라주세요.
         </p>
-        <p className={styles.description}>
+        <p className={styles.keyDescription}>
           #이런_<span className={styles.highlight}>일</span>을_하고있어요.
         </p>
         <div className={styles.buttonGroup}>
@@ -82,7 +82,7 @@ const SelectKWPage = () => {
           </div>
         )}
         <div className={styles.middleDivider}></div>
-        <p className={styles.description}>
+        <p className={styles.keyDescription}>
           #이런_<span className={styles.highlight}>분위기의</span>
           _가게를_운영해요.
         </p>
@@ -130,7 +130,6 @@ const SelectKWPage = () => {
             selected.length > 1 ? styles.active : ""
           }`}
           onClick={handleNext}
-          disabled={selected.length === 0}
         >
           다음으로
         </button>
