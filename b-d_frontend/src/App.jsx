@@ -7,6 +7,7 @@ import { LoginPage } from "./pages/LoginPage";
 
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
+import AddressPage from "./pages/AddressPage";
 
 import { FindPWPage } from "./pages/FindPWPage";
 import { NewPWPage } from "./pages/NewPWPage";
@@ -18,6 +19,7 @@ function App() {
         <Route element={<BubbleLayout />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/address" element={<AddressPage />} />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
