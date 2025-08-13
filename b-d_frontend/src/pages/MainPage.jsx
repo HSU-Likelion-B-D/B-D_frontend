@@ -13,13 +13,13 @@ function MainPage() {
       <div className={styles.content}>
         <div className={styles.header}>
           <div className={styles.iconContainer}>
-            <div className={styles.chatContainer}>
-              <img className={styles.chatIcon} src={chat_icon} alt="chat" />
-              <div className={styles.chatCount}>1</div>
+            <div className={styles.iconBox}>
+              <img className={styles.icon} src={chat_icon} alt="chat" />
+              <div className={styles.count}>1</div>
             </div>
-            <div className={styles.alarmContainer}>
-              <img className={styles.alarmIcon} src={alarm_icon} alt="alarm" />
-              <div className={styles.alarmCount}>1</div>
+            <div className={styles.iconBox}>
+              <img className={styles.icon} src={alarm_icon} alt="alarm" />
+              <div className={styles.count}>1</div>
             </div>
           </div>
           <div className={styles.logoContainer}>
