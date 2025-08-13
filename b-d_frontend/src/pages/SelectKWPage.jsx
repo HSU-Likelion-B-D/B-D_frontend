@@ -80,6 +80,7 @@ const SelectKWPage = () => {
             한개 이상의 항목을 선택하여주세요.
           </div>
         )}
+        <div className={styles.middleDivider}></div>
         <p className={styles.description}>
           #이런_<span className={styles.highlight}>분위기의</span>
           _가게를_운영해요.
