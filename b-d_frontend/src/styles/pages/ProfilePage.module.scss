@@ -4,17 +4,17 @@
   height: 100vh; // 전체 높이를 100vh로 설정
 }
 .whiteBox {
-  background-color: rgba(255, 255, 255, 0.8); // Set transparency
+  background-color: rgba(255, 255, 255, 0.8); // 투명도
   width: vw(1187px);
-  height: auto; // Adjust height dynamically
+  height: auto;
   border-radius: 22px;
-  display: flex; // Add flexbox for centering
-  flex-direction: column; // Stack children vertically
-  align-items: center; // Center horizontally
-  justify-content: center; // Center vertically
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-top: 30px;
   margin-bottom: 30px;
-  padding-bottom: 20px; // Add padding to ensure spacing
+  padding-bottom: 20px;
 }
 .container {
   min-height: 100vh;
@@ -25,7 +25,7 @@
   overflow-y: auto;
   position: relative;
   z-index: 10;
-  padding-bottom: 50px; // Add padding to prevent content from being cut off
+  padding-bottom: 50px;
 }
 
 .logo {
@@ -143,8 +143,8 @@
   align-items: center;
   font-size: 0.95rem;
   color: $color-sub-03;
-  margin: 18px 0 8px 0;
-  gap: 12px;
+  margin: 53px 0 8px 0;
+  gap: 50px;
   .findPwd,
   .loginLink {
     cursor: pointer;

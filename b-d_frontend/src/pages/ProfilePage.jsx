@@ -82,6 +82,17 @@ const ProfilePage = () => {
   const isFormValid =
     formData.nickname.trim() !== "" && formData.description.trim() !== "";
 
+  const clearNickname = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      nickname: "",
+    }));
+    setNicknameMessage("");
+    setIsError(false);
+    setIsSuccess(false);
+    setIsButtonDisabled(false);
+  };
+
   return (
     <div className={styles.whole}>
       <form className={styles.container} onSubmit={handleSubmit}>
@@ -126,6 +137,7 @@ const ProfilePage = () => {
                 onChange={handleInputChange}
                 placeholder="닉네임을 입력하세요"
                 showClearButton={true}
+                onClear={clearNickname}
                 className={`${styles.input} ${
                   isError ? styles.errorInput : ""
                 } ${isSuccess ? styles.successInput : ""}`}
