@@ -1,0 +1,18 @@
+@use "../variables" as *;
+
+.button {
+  padding: 12px 24px;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #222;
+  font-size: 16px;
+  margin: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.selected {
+  background: #009fe3;
+  color: #fff;
+  border-color: #009fe3;
+}

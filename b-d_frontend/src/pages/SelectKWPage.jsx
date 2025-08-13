@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/pages/SelectKWPage.module.scss";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import logo from "../assets/logo.svg";
+import SelectButton from "../components/SelectKWPage/SelectButton";
+
+const species = [
+  "음식/음료",
+  "쇼핑/소매",
+  "반려동물",
+  "뷰티/서비스",
+  "운동/건강",
+  "문화/체험",
+  "콘텐츠",
+  "기타",
+];
+
+const atmosphere = [];
+
 const SelectKWPage = () => {
+  const [selected, setSelected] = useState([]);
+  const [showError, setShowError] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
@@ -17,6 +34,23 @@ const SelectKWPage = () => {
         <p className={styles.description}>
           #이런_<span className={styles.highlight}>일</span>을_하고있어요.
         </p>
+        <div className={styles.buttonGroup}>
+          {species.map((sp) => (
+            <SelectButton
+              key={sp}
+              selected={selected.includes(sp)}
+              onClick={() => handleClick(sp)}
+            >
+              #{sp}
+            </SelectButton>
+          ))}
+        </div>
+        {/*업종 button Group */}
+        {showError && (
+          <div className={styles.errorMsg}>
+            한개 이상의 항목을 선택하여주세요.
+          </div>
+        )}
       </div>
     </div>
   );
