@@ -13,7 +13,7 @@ const Input = ({
   ...props
 }) => {
   return (
-    <div style={{ position: "relative" }}>
+    <div className={styles.inputContainer}>
       {label && (
         <p>
           {label}
@@ -27,9 +27,10 @@ const Input = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        style={{ paddingRight: "48px" }} // x버튼 공간 확보
+        style={{ paddingRight: "48px" }}
         {...props}
       />
+
       {showClearButton && (
         <button
           type="button"
@@ -40,6 +41,7 @@ const Input = ({
           x
         </button>
       )}
+
     </div>
   );
 };

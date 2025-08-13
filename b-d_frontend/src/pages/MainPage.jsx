@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "@/styles/pages/MainPage.module.scss";
 import SelectBox from "@/components/MainPage/SelectBox";
-import logo from "../assets/logo.svg";
-import nemo from "../assets/main-nemo.svg";
-import seaAnemone from "../assets/main-seaAnemone.svg";
+import { logo, main_nemo, main_seaAnemone } from "@/assets";
 function MainPage() {
   return (
     <div className={styles.container}>
@@ -28,7 +26,7 @@ function MainPage() {
           />
           <img
             className={styles.seaAnemone}
-            src={seaAnemone}
+            src={main_seaAnemone}
             alt="seaAnemone"
           />
           <SelectBox
@@ -39,7 +37,7 @@ function MainPage() {
               textAlign: "start",
             }}
           />
-          <img className={styles.nemo} src={nemo} alt="nemo" />
+          <img className={styles.nemo} src={main_nemo} alt="nemo" />
         </div>
         <button className={styles.button}>다음으로</button>
       </div>

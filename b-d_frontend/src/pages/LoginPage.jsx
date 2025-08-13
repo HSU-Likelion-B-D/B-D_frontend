@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styles from "@/styles/pages/LoginPage.module.scss";
-import logo from "../assets/logo.svg";
+import { logo, eye, eye_color } from "@/assets";
 import { useForm } from "react-hook-form";
-import eye from "../assets/eye.svg";
-import eyeColor from "../assets/eye-color.svg";
 import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
@@ -126,7 +124,7 @@ export const LoginPage = () => {
                 {showPassword ? (
                   <img src={eye} alt="eye" />
                 ) : (
-                  <img src={eyeColor} alt="eye" />
+                  <img src={eye_color} alt="eye" />
                 )}
               </button>
             </div>
@@ -149,7 +147,15 @@ export const LoginPage = () => {
             </label>
           </div>
           <div className={styles.links}>
-            <div className={styles.link}>비밀번호 찾기</div>|
+            <div
+              className={styles.link}
+              onClick={() => {
+                navigate("/find-password");
+              }}
+            >
+              비밀번호 찾기
+            </div>
+            |
             <div
               className={styles.link}
               onClick={() => {
