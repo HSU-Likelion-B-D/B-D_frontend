@@ -67,9 +67,10 @@
   }
 
   .input {
-    width: vw(659px); //input 너비 조정
+    width: vw(603px); //input 너비 조정
     max-width: 100%; //input 너비 조정
-    font-size: 1rem;
+    height: vh(69px);
+    font-size: rem(20px);
     padding: 14px 18px;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
