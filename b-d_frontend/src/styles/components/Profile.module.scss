@@ -1,0 +1,45 @@
+@use "../variables" as *;
+.container {
+  z-index: 10;
+  @include flex(column, center, center);
+  .profileImg {
+    width: vw(174px);
+    height: vw(174px);
+    margin-bottom: vh(13px);
+  }
+  .profileInfo {
+    @include flex(column, center, center);
+    .profileName {
+      font-size: rem(26px);
+      font-weight: $font_weight_bold;
+      line-height: 1.75;
+      color: $color-sub-03;
+    }
+    .profileDescription {
+      font-size: rem(20px);
+      line-height: 1.75;
+      color: #929292;
+      margin-bottom: vh(8px);
+    }
+    .rating {
+      @include flex(row, center, center, vw(3px));
+      .starIcon {
+        width: vw(43px);
+        height: vw(43px);
+      }
+      .ratingValue {
+        font-size: rem(26px);
+        line-height: 1.75;
+        color: $color-main;
+        font-weight: $font_weight_bold;
+        margin-right: 0.5rem;
+      }
+      .ratingCount {
+        font-size: rem(26px);
+        line-height: 1.75;
+        color: $color-sub-02;
+        font-weight: $font_weight_bold;
+      }
+    }
+  }
+}

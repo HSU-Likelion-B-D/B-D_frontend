@@ -1,73 +1,63 @@
 @use "../variables" as *;
 .container {
-  width: 100%;
   min-height: 100vh;
   @include flex(column, center, center);
+  margin: vh(40px) 0;
 
   .content {
     position: relative;
     z-index: 1;
     height: 100%;
+    width: 100%;
     @include flex(column, center, center);
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(4px);
-    border-radius: 22px;
-    padding: vh(28px) vw(136px);
-    .logo {
-      margin-top: vh(42px);
-      margin-bottom: vh(20px);
-      width: vw(50px);
-      height: vh(46px);
-    }
-    .title {
-      text-align: center;
-      line-height: 1.5;
-      font-size: rem(46px);
-      font-weight: $font_weight_semibold;
-      margin-bottom: vh(20px);
-      span {
-        font-weight: $font_weight_bold;
-        color: $color-main;
-      }
-    }
-    .description {
-      font-size: rem(20px);
-      font-weight: $font_weight_regular;
-      color: $color-sub-02;
-      margin-bottom: vh(86px);
-    }
-    .selectBoxContainer {
+    border-radius: 44px;
+    padding: vh(28px) vw(129px);
+    .topContainer {
+      @include flex(row, end, space-between, vw(70px));
+      margin-top: vh(18px);
+      margin-bottom: vh(49px);
       width: 100%;
-      display: flex;
-      gap: vw(71px);
-      margin-bottom: vh(135px);
-      position: relative;
-      .nemo {
-        position: absolute;
-        top: vh(120px);
-        right: vw(-39px);
-        width: vw(170px);
-        height: vh(164px);
-      }
-      .seaAnemone {
-        position: absolute;
-        top: vh(92px);
-        left: vw(-39px);
-        width: vw(185px);
-        height: vh(195px);
+      .profileContainer {
+        @include flex(column, center, center);
+        .buttonContainer {
+          margin-top: vh(33px);
+          @include flex(column, center, center, 19px);
+          .Button {
+            @include flex(column, start, center);
+            width: vw(452px);
+            padding: vh(13px) vw(36px) vh(8px) vw(36px);
+            border: none;
+            border-radius: 44px;
+            background-color: #fff;
+            box-shadow: 0 0 12px 1px rgba(12, 156, 233, 0.6);
+            .ButtonTitle {
+              font-size: rem(22px);
+              font-weight: $font_weight_semibold;
+              color: $color-sub-03;
+              line-height: 1.5;
+              span {
+                color: $color-main;
+              }
+            }
+            .ButtonSubtitle {
+              font-size: rem(20px);
+              color: $color-sub-02;
+              line-height: 1.5;
+              text-align: start;
+            }
+          }
+        }
       }
     }
-    .button {
-      background-color: $color-sub-01;
-      border: none;
-      padding: vh(16px) vw(153px);
-      color: #fff;
-      font-size: rem(16px);
-      font-weight: $font_weight_semibold;
-      cursor: pointer;
-      &:hover {
-        background-color: #0c9ce9;
-      }
+    .banner {
+      width: 100%;
+      height: vh(176px);
+      background-color: #dfdfdf;
+    }
+    .bottomContainer {
+      margin-top: vh(59px);
     }
   }
 }
