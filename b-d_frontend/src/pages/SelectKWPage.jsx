@@ -134,7 +134,6 @@ const SelectKWPage = () => {
           다음으로
         </button>
       </div>
-      ㄴ
     </div>
   );
 };
