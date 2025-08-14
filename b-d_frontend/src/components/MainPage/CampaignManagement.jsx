@@ -2,8 +2,10 @@ import { useState } from "react";
 import styles from "@/styles/components/MainPage/CampaignManagement.module.scss";
 import { hamburger_icon, star_icon } from "@/assets";
 import CampaignItem from "./CampaignItem";
+import CampaignModal from "./CampaignModal";
 export default function CampaignManagement() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isCampaignModalOpen, setIsCampaignModalOpen] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -17,7 +19,16 @@ export default function CampaignManagement() {
           </div>
         </div>
         <div className={styles.headerRight}>
-          <img src={hamburger_icon} alt="hamburger" />
+          <img
+            src={hamburger_icon}
+            alt="hamburger"
+            onClick={() => setIsCampaignModalOpen(!isCampaignModalOpen)}
+          />
+          {isCampaignModalOpen && (
+            <div className={styles.campaignModal}>
+              <CampaignModal />
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.content}>
