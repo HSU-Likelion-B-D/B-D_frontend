@@ -13,6 +13,7 @@ import AddressPage from "./pages/AddressPage";
 import SelectKWPage from "./pages/SelectKWPage";
 import FindPWPage from "./pages/FindPWPage";
 import NewPWPage from "./pages/NewPWPage";
+import CompletePage from "./pages/CompletePage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/address" element={<AddressPage />} />
           <Route path="/select-keyword" element={<SelectKWPage />} />
+          <Route path="/complete" element={<CompletePage />} />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
