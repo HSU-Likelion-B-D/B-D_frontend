@@ -11,14 +11,11 @@
 }
 
 .whiteBox {
+  @include flex(column, center, center);
   background-color: rgba(255, 255, 255, 0.8); // 투명도
   width: vw(1187px);
   height: auto;
   border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin-top: 30px;
   margin-bottom: 30px;
   padding-bottom: 20px;
