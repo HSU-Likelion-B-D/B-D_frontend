@@ -12,6 +12,7 @@ import profile_img from "./profile-img.svg";
 import star_icon from "./star-icon.svg";
 import busy_left from "./busy-left.svg";
 import busy_dilly_together from "./busy-dilly-together.svg";
+import store_img from "./store-img.svg";
 export {
   logo,
   eye,
@@ -27,4 +28,5 @@ export {
   star_icon,
   busy_left,
   busy_dilly_together,
+  store_img,
 };

@@ -7,10 +7,22 @@
   .mainContainer {
     @include flex(row, center, center, vw(31px));
     .profileContainer {
+      position: relative;
+      .redCircle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: vw(26px);
+        height: vw(26px);
+        border-radius: 50%;
+        border: vw(5px) solid #fff;
+        background-color: $color-red-01;
+      }
       .profileImg {
+        margin-left: vw(18px);
         width: vw(75px);
         height: vw(75px);
-        border-radius: 22px;
+        border-radius: vw(22px);
       }
     }
     .content {

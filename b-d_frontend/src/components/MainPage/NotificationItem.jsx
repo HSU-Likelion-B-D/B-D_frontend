@@ -1,12 +1,13 @@
 import styles from "@/styles/components/MainPage/NotificationItem.module.scss";
-import { main_busy } from "@/assets";
+import { main_busy, store_img } from "@/assets";
 
 export default function NotificationItem() {
   return (
     <div className={styles.container}>
       <div className={styles.mainContainer}>
         <div className={styles.profileContainer}>
-          <img src={main_busy} className={styles.profileImg} />
+          <div className={styles.redCircle} />
+          <img src={store_img} className={styles.profileImg} />
         </div>
         <div className={styles.content}>
           <div className={styles.title}>
