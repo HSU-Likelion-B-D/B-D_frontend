@@ -26,7 +26,8 @@
           @include flex(column, center, center, 19px);
           .Button {
             @include flex(column, start, center);
-            width: vw(452px);
+            min-width: vw(452px);
+            width: max-content;
             padding: vh(13px) vw(36px) vh(8px) vw(36px);
             border: none;
             border-radius: 44px;

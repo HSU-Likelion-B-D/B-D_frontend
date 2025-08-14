@@ -1,7 +1,8 @@
 @use "../../variables" as *;
 
 .container {
-  width: vw(124px);
+  min-width: vw(124px);
+  width: max-content;
   padding: vh(9px) vw(14px);
   z-index: 1000;
   background-color: $color-white;
