@@ -1,0 +1,28 @@
+@use "../variables" as *;
+
+.button {
+  @include flex(column, center, center);
+  text-align: center;
+  width: vw(156px);
+  height: vh(55px);
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: $color-sub-03;
+  font-size: rem(11px);
+  font-weight: $font-weight-bold;
+  margin: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0, 79, 255, 0.06);
+}
+.selected {
+  background: #009fe3;
+  color: #fff;
+  border-color: #009fe3;
+}
+.error {
+  border: 1.5px solid #ffbcbc !important;
+  box-shadow: 0 0 8px 0 #ffbcbc;
+}

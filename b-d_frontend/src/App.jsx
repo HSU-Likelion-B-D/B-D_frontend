@@ -1,19 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignupPage from "./pages/SignupPage.jsx";
 import StartPage from "./pages/StartPage";
+import MainPage from "./pages/MainPage";
 import { BubbleLayout } from "./components/BubbleLayout";
 import { SimpleLayout } from "./components/SimpleLayout";
 import { MainLayout } from "./components/MainLayout";
 import { LoginPage } from "./pages/LoginPage";
+
+import SignupPage from "./pages/SignupPage";
+import ProfilePage from "./pages/ProfilePage";
+import AddressPage from "./pages/AddressPage";
+import SelectKWPage from "./pages/SelectKWPage";
+
 import { FindPWPage } from "./pages/FindPWPage";
 import { NewPWPage } from "./pages/NewPWPage";
-import MainPage from "./pages/MainPage";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<BubbleLayout />}>
           <Route path="/" element={<StartPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/address" element={<AddressPage />} />
+          <Route path="/select-keyword" element={<SelectKWPage />} />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />

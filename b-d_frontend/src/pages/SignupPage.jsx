@@ -4,6 +4,7 @@ import { logo } from "@/assets";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
 import styles from "../styles/pages/SignupPage.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const inputFields = [
   {
@@ -57,6 +58,7 @@ const passwordFields = [
 ];
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -171,6 +173,25 @@ const SignupPage = () => {
             )}
           </div>
         ))}
+        <div className={styles.signupLink}>
+          <span
+            className={styles.findPwd}
+            onClick={() => {
+              navigate("/find-password");
+            }}
+          >
+            비밀번호 찾기
+          </span>
+          <span className={styles.divider}> | </span>
+          <span
+            className={styles.loginLink}
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </span>
+        </div>
 
         <Button
           type="submit"
