@@ -29,7 +29,7 @@
 
   .form {
     width: 100%;
-    max-width: 420px;
+    max-width: vw(659px);
     background: transparent;
     display: flex;
     flex-direction: column;
@@ -43,10 +43,13 @@
     justify-content: space-between;
     gap: 29px;
   }
-
+  .verifyContainer .input {
+    width: 100%;
+    max-width: none;
+  }
   .confirmBtn {
-    min-width: 100px;
-    height: 48px;
+    min-width: vw(141px);
+    height: vh(71px);
     background: #d3d3d3;
     color: #fff;
     border: none;
@@ -64,15 +67,16 @@
   }
 
   .input {
-    width: 100%;
+    width: vw(659px); //input 너비 조정
+    max-width: 100%; //input 너비 조정
     font-size: 1rem;
     padding: 14px 18px;
     border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    border-radius: 12px;
     background: $color-white;
     margin-top: 6px;
     margin-bottom: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px 0 rgba(0, 79, 255, 0.06); // 그림자 스타일 수정
     &::label {
       font-size: rem(20px);
       color: $color-sub-03;
@@ -110,6 +114,7 @@
     font-size: 1rem;
     font-weight: $font_weight_semibold;
     margin-bottom: 12px;
+    margin-top: vh(30px);
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
