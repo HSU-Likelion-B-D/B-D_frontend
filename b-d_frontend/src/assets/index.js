@@ -13,6 +13,9 @@ import star_icon from "./star-icon.svg";
 import busy_left from "./busy-left.svg";
 import busy_dilly_together from "./busy-dilly-together.svg";
 import store_img from "./store-img.svg";
+import complete_icon from "./complete-icon.svg";
+
+
 export {
   logo,
   eye,
@@ -29,4 +32,5 @@ export {
   busy_left,
   busy_dilly_together,
   store_img,
+  complete_icon,
 };
