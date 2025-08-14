@@ -5,10 +5,39 @@ import { useForm } from "react-hook-form";
 import { main_busy } from "@/assets";
 
 export default function CreateProposalPage() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+  });
+
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  // 필수 필드들의 값을 모니터링
+  const watchedFields = watch([
+    "proposalTitle",
+    "proposerName",
+    "storeLocation",
+    "minAmount",
+    "maxAmount",
+    "startYear",
+    "startMonth",
+    "startDay",
+    "endYear",
+    "endMonth",
+    "endDay",
+    "agreement",
+  ]);
+
+  // 모든 필수 필드가 채워졌는지 확인
+  const isFormValid = watchedFields.every(
+    (field) => field && field.toString().trim() !== ""
+  );
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -222,7 +251,13 @@ export default function CreateProposalPage() {
               아래 조항들을 포함한 제안서 내용을 모두 읽었습니다.
             </label>
           </div>
-          <button type="submit" className={styles.submitButton}>
+          <button
+            type="submit"
+            className={`${styles.submitButton} ${
+              isFormValid ? styles.active : ""
+            }`}
+            disabled={!isFormValid}
+          >
             다음으로
           </button>
         </form>

@@ -121,11 +121,11 @@
           width: vw(113px);
         }
         .proposalDateMonth {
-          width: vw(43px);
+          width: vw(45px);
           padding: vh(10px) vw(10px);
         }
         .proposalDateDay {
-          width: vw(43px);
+          width: vw(45px);
           padding: vh(10px) vw(10px);
         }
       }
@@ -208,9 +208,15 @@
         font-weight: $font_weight_semibold;
         cursor: pointer;
         line-height: 1.75;
+
         &:disabled {
-          background: $color-sub-02;
+          background: $color-sub-01;
           cursor: not-allowed;
+        }
+
+        &.active {
+          background: $color-main;
+          cursor: pointer;
         }
       }
     }
