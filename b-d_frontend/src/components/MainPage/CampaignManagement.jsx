@@ -25,6 +25,7 @@ export default function CampaignManagement() {
         <CampaignItem />
       </div>
       <div className={styles.footer}>
+        <div className={styles.footerLeft}>{"<"}</div>
         <div className={styles.pageNation}>
           {[1, 2, 3, 4, 5].map((page) => (
             <div
@@ -38,6 +39,7 @@ export default function CampaignManagement() {
             </div>
           ))}
         </div>
+        <div className={styles.footerRight}>{">"}</div>
       </div>
     </div>
   );
