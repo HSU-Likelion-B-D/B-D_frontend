@@ -1,4 +1,4 @@
-import styles from "@/styles/components/Profile.module.scss";
+import styles from "@/styles/components/MainPage/Profile.module.scss";
 import { profile_img, star_icon } from "@/assets";
 export default function Profile() {
   return (

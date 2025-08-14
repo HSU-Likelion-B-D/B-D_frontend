@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/components/Input.module.scss";
+import styles from "../../styles/components/SignupPage/Input.module.scss";
 const Input = ({
   label,
   type = "text",
@@ -41,7 +41,6 @@ const Input = ({
           x
         </button>
       )}
-
     </div>
   );
 };

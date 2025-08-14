@@ -1,18 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StartPage from "./pages/StartPage";
-import MainPage from "./pages/MainPage";
+// Layout
 import { BubbleLayout } from "./components/BubbleLayout";
 import { SimpleLayout } from "./components/SimpleLayout";
 import { MainLayout } from "./components/MainLayout";
-import { LoginPage } from "./pages/LoginPage";
-
+// Pages
+import LoginPage from "./pages/LoginPage";
+import StartPage from "./pages/StartPage";
+import MainPage from "./pages/MainPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
 import AddressPage from "./pages/AddressPage";
 import SelectKWPage from "./pages/SelectKWPage";
-
-import { FindPWPage } from "./pages/FindPWPage";
-import { NewPWPage } from "./pages/NewPWPage";
+import FindPWPage from "./pages/FindPWPage";
+import NewPWPage from "./pages/NewPWPage";
 
 function App() {
   return (
@@ -20,7 +20,6 @@ function App() {
       <Routes>
         <Route element={<BubbleLayout />}>
           <Route path="/" element={<StartPage />} />
-          <Route path="/" element={<MainPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/address" element={<AddressPage />} />
           <Route path="/select-keyword" element={<SelectKWPage />} />

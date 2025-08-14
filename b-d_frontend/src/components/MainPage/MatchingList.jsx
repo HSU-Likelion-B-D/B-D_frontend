@@ -1,4 +1,4 @@
-import styles from "@/styles/components/MatchingList.module.scss";
+import styles from "@/styles/components/MainPage/MatchingList.module.scss";
 import MatchingItem from "./MatchingItem";
 import { busy_left } from "@/assets";
 export default function MatchingList() {

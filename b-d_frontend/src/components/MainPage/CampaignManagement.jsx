@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "@/styles/components/CampaignManagement.module.scss";
+import styles from "@/styles/components/MainPage/CampaignManagement.module.scss";
 import { hamburger_icon, star_icon } from "@/assets";
 import CampaignItem from "./CampaignItem";
 export default function CampaignManagement() {

@@ -5,7 +5,7 @@ import Button from "../components/SingupPage/Button";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export const NewPWPage = () => {
+export default function NewPWPage() {
   const navigate = useNavigate();
   const {
     register,
@@ -176,4 +176,4 @@ export const NewPWPage = () => {
       </div>
     </div>
   );
-};
+}

@@ -1,4 +1,4 @@
-import styles from "@/styles/components/MatchingItem.module.scss";
+import styles from "@/styles/components/MainPage/MatchingItem.module.scss";
 import { profile_img } from "@/assets";
 export default function MatchingItem() {
   return (

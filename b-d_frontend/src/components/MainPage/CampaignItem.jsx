@@ -1,4 +1,4 @@
-import styles from "@/styles/components/CampaignItem.module.scss";
+import styles from "@/styles/components/MainPage/CampaignItem.module.scss";
 import { profile_img } from "@/assets";
 export default function CampaignItem() {
   return (

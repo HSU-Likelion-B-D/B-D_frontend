@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/components/GalleryPopup.module.scss";
+import styles from "../../styles/components/ProfilePage/GalleryPopup.module.scss";
 
 const GalleryPopup = ({ onClose }) => {
   return (
