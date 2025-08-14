@@ -6,8 +6,10 @@ import {
   profile_icon,
   hamburger_icon,
 } from "@/assets";
-
-export default function Header() {
+import ProfileModal from "./ProfileModal";
+import { useState } from "react";
+export default function Header({ setIsNotificationModalOpen }) {
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   return (
     <div className={styles.header}>
       <div className={styles.iconContainer}>
@@ -15,7 +17,10 @@ export default function Header() {
           <img className={styles.icon} src={chat_icon} alt="chat" />
           <div className={styles.count}>1</div>
         </div>
-        <div className={styles.iconBox}>
+        <div
+          className={styles.iconBox}
+          onClick={() => setIsNotificationModalOpen(true)}
+        >
           <img className={styles.icon} src={alarm_icon} alt="alarm" />
           <div className={styles.count}>1</div>
         </div>
@@ -41,7 +46,13 @@ export default function Header() {
             className={styles.hamburgerIcon}
             src={hamburger_icon}
             alt="hamburger"
+            onClick={() => setIsProfileModalOpen(!isProfileModalOpen)}
           />
+          {isProfileModalOpen && (
+            <div className={styles.profileModal}>
+              <ProfileModal />
+            </div>
+          )}
         </div>
       </div>
     </div>

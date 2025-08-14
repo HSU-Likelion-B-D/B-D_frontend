@@ -38,10 +38,27 @@
         }
       }
     }
+    .headerRight {
+      position: relative;
+      img {
+        cursor: pointer;
+        width: vw(29px);
+        height: vw(29px);
+      }
+      .campaignModal {
+        position: absolute;
+        top: vw(50px);
+        right: vw(2px);
+      }
+    }
   }
   .content {
     @include flex(column, center, center, vh(39px));
     width: 100%;
+    .campaignImage {
+      width: vw(409px);
+      height: vw(282px);
+    }
   }
   .footer {
     @include flex(row, center, center, vw(13px));

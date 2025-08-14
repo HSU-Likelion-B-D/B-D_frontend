@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/pages/MainPage.module.scss";
 import Profile from "@/components/MainPage/Profile";
 import Header from "@/components/MainPage/Header";
 import MatchingList from "@/components/MainPage/MatchingList";
 import CampaignManagement from "@/components/MainPage/CampaignManagement";
-function MainPage() {
+import NotificationModal from "@/components/MainPage/NotificationModal";
+
+export default function MainPage() {
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <Header />
+        <Header setIsNotificationModalOpen={setIsNotificationModalOpen} />
         <div className={styles.topContainer}>
           <div className={styles.profileContainer}>
             <Profile />
@@ -36,8 +39,13 @@ function MainPage() {
           <CampaignManagement />
         </div>
       </div>
+      {isNotificationModalOpen && (
+        <div className={styles.notificationModal}>
+          <NotificationModal
+            setIsNotificationModalOpen={setIsNotificationModalOpen}
+          />
+        </div>
+      )}
     </div>
   );
 }
-
-export default MainPage;

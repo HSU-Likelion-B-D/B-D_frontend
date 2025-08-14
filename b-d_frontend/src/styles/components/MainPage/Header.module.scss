@@ -3,11 +3,13 @@
 .header {
   position: relative;
   width: 100%;
-  @include flex(row, space-between, center, vw(593px));
+  @include flex(row, center, space-between, vw(593px));
   .iconContainer {
     @include flex(row, space-between, center, vw(45px));
     .iconBox {
       position: relative;
+      cursor: pointer;
+
       .icon {
         width: vw(45px);
         height: vw(45px);
@@ -61,9 +63,17 @@
       }
     }
     .hamburgerContainer {
+      position: relative;
       .hamburgerIcon {
         width: vw(29px);
         height: vw(29px);
+        cursor: pointer;
+      }
+      .profileModal {
+        z-index: 1000;
+        position: absolute;
+        top: vw(50px);
+        right: vw(2px);
       }
     }
   }
