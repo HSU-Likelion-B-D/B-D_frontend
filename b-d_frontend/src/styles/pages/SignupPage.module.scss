@@ -103,6 +103,7 @@
     color: $color-sub-03;
     margin-bottom: 8px;
     display: block;
+    margin-top: 12px;
   }
 
   .verificationBtn {
@@ -148,8 +149,8 @@
     align-items: center;
     font-size: 0.95rem;
     color: $color-sub-03;
-    margin: 18px 0 8px 0;
-    gap: 12px;
+    margin: 53px 0 8px 0;
+    gap: 50px;
     .findPwd,
     .loginLink {
       cursor: pointer;
@@ -171,7 +172,7 @@
     font-size: rem(16px);
     font-weight: $font_weight_semibold;
     margin-top: 12px;
-    margin-bottom: 10px;
+    margin-bottom: vh(139px);
     cursor: pointer;
   }
 
