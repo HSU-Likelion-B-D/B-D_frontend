@@ -123,6 +123,24 @@
     color: $color-sub-01;
   }
 
+  .agreeSection {
+    margin: 24px 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .agreeItem {
+    display: flex;
+    align-items: center;
+    font-size: rem(20px);
+    color: $color-sub-03;
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+  }
+
   .signupLink {
     display: flex;
     justify-content: center;

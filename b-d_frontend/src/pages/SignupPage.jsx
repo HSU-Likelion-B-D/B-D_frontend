@@ -173,6 +173,22 @@ const SignupPage = () => {
             )}
           </div>
         ))}
+
+        <div className={styles.agreeSection}>
+          <label className={styles.agreeItem}>
+            <input type="radio" name="agree1" />
+            <span>개인정보 수집 및 이용 동의</span>
+          </label>
+          <label className={styles.agreeItem}>
+            <input type="radio" name="agree2" />
+            <span>위치 정보 수집 동의</span>
+          </label>
+          <label className={styles.agreeItem}>
+            <input type="radio" name="agree3" />
+            <span>제3자 정보 제공 동의 (광고주와 매칭 위해 필요)</span>
+          </label>
+        </div>
+
         <div className={styles.signupLink}>
           <span
             className={styles.findPwd}
