@@ -2,6 +2,7 @@
 .container {
   min-height: 100vh;
   @include flex(column, center, center);
+  margin: vh(40px) 0;
 
   .content {
     position: relative;

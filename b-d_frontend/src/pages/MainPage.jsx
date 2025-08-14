@@ -3,7 +3,7 @@ import styles from "@/styles/pages/MainPage.module.scss";
 import Profile from "@/components/MainPage/Profile";
 import Header from "@/components/MainPage/Header";
 import MatchingList from "@/components/MainPage/MatchingList";
-
+import CampaignManagement from "@/components/MainPage/CampaignManagement";
 function MainPage() {
   return (
     <div className={styles.container}>
@@ -32,7 +32,9 @@ function MainPage() {
           <MatchingList />
         </div>
         <div className={styles.banner}></div>
-        <div className={styles.bottomContainer}></div>
+        <div className={styles.bottomContainer}>
+          <CampaignManagement />
+        </div>
       </div>
     </div>
   );
