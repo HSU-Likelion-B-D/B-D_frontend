@@ -14,6 +14,7 @@ import SelectKWPage from "./pages/SelectKWPage";
 import FindPWPage from "./pages/FindPWPage";
 import NewPWPage from "./pages/NewPWPage";
 import CompletePage from "./pages/CompletePage";
+import CreateProposalPage from "./pages/CreateProposalPage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         </Route>
         <Route element={<MainLayout />}>
           <Route path="/main" element={<MainPage />} />
+          <Route path="/create-proposal" element={<CreateProposalPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
