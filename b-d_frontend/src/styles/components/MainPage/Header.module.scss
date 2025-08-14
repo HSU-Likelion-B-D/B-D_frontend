@@ -61,9 +61,17 @@
       }
     }
     .hamburgerContainer {
+      position: relative;
       .hamburgerIcon {
         width: vw(29px);
         height: vw(29px);
+        cursor: pointer;
+      }
+      .profileModal {
+        z-index: 1000;
+        position: absolute;
+        top: vw(50px);
+        right: vw(2px);
       }
     }
   }
