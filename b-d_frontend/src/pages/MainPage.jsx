@@ -5,9 +5,11 @@ import Header from "@/components/MainPage/Header";
 import MatchingList from "@/components/MainPage/MatchingList";
 import CampaignManagement from "@/components/MainPage/CampaignManagement";
 import NotificationModal from "@/components/MainPage/NotificationModal";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -16,7 +18,10 @@ export default function MainPage() {
           <div className={styles.profileContainer}>
             <Profile />
             <div className={styles.buttonContainer}>
-              <button className={styles.Button}>
+              <button
+                className={styles.Button}
+                onClick={() => navigate("/create-proposal")}
+              >
                 <div className={styles.ButtonTitle}>
                   <span>제안서</span> 만들기
                 </div>

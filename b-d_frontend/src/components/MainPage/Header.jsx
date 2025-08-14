@@ -8,11 +8,19 @@ import {
 } from "@/assets";
 import ProfileModal from "./ProfileModal";
 import { useState } from "react";
-export default function Header({ setIsNotificationModalOpen }) {
+export default function Header({
+  setIsNotificationModalOpen,
+  isCreateProposalPage = false,
+}) {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   return (
     <div className={styles.header}>
-      <div className={styles.iconContainer}>
+      <div
+        className={styles.iconContainer}
+        style={{
+          visibility: isCreateProposalPage ? "hidden" : "visible",
+        }}
+      >
         <div className={styles.iconBox}>
           <img className={styles.icon} src={chat_icon} alt="chat" />
           <div className={styles.count}>1</div>
