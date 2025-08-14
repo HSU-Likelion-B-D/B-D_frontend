@@ -8,7 +8,7 @@ import {
 } from "@/assets";
 import ProfileModal from "./ProfileModal";
 import { useState } from "react";
-export default function Header() {
+export default function Header({ setIsNotificationModalOpen }) {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   return (
     <div className={styles.header}>
@@ -17,7 +17,10 @@ export default function Header() {
           <img className={styles.icon} src={chat_icon} alt="chat" />
           <div className={styles.count}>1</div>
         </div>
-        <div className={styles.iconBox}>
+        <div
+          className={styles.iconBox}
+          onClick={() => setIsNotificationModalOpen(true)}
+        >
           <img className={styles.icon} src={alarm_icon} alt="alarm" />
           <div className={styles.count}>1</div>
         </div>

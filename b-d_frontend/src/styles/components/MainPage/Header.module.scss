@@ -8,6 +8,8 @@
     @include flex(row, space-between, center, vw(45px));
     .iconBox {
       position: relative;
+      cursor: pointer;
+
       .icon {
         width: vw(45px);
         height: vw(45px);

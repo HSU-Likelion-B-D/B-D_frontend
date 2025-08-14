@@ -61,4 +61,14 @@
       margin-top: vh(59px);
     }
   }
+  .notificationModal {
+    position: absolute;
+    top: 0;
+
+    @include flex(column, center, center);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.24);
+    z-index: 1000;
+  }
 }
