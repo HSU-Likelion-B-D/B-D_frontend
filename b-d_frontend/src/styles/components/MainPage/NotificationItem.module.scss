@@ -1,0 +1,38 @@
+@use "../../variables" as *;
+
+.container {
+  width: 100%;
+  @include flex(row, center, space-between);
+
+  .mainContainer {
+    @include flex(row, center, center, vw(31px));
+    .profileContainer {
+      .profileImg {
+        width: vw(75px);
+        height: vw(75px);
+        border-radius: 22px;
+      }
+    }
+    .content {
+      @include flex(column, start, center);
+      .title {
+        font-size: rem(28px);
+        font-weight: $font_weight_bold;
+        color: $color-sub-03;
+        span {
+          color: $color-main;
+        }
+      }
+      .description {
+        font-size: rem(20px);
+        color: $color-sub-02;
+      }
+    }
+  }
+
+  .time {
+    font-size: rem(28px);
+    color: $color-sub-02;
+    font-weight: $font_weight_bold;
+  }
+}

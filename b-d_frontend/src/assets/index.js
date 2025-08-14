@@ -4,6 +4,7 @@ import eye_color from "./eye-color.svg";
 import main_dilly from "./main-dilly.svg";
 import main_busy from "./main-busy.svg";
 import alarm_icon from "./alarm-icon.svg";
+import alarm_icon_color from "./alarm-icon-color.svg";
 import chat_icon from "./chat-icon.svg";
 import profile_icon from "./profile-icon.svg";
 import hamburger_icon from "./hamburger-icon.svg";
@@ -18,6 +19,7 @@ export {
   main_dilly,
   main_busy,
   alarm_icon,
+  alarm_icon_color,
   chat_icon,
   profile_icon,
   hamburger_icon,
