@@ -31,6 +31,8 @@ function MainPage() {
           </div>
           <MatchingList />
         </div>
+        <div className={styles.banner}></div>
+        <div className={styles.bottomContainer}></div>
       </div>
     </div>
   );

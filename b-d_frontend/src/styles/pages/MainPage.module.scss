@@ -12,10 +12,11 @@
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(4px);
     border-radius: 44px;
-    padding: vh(28px) vw(136px);
+    padding: vh(28px) vw(129px);
     .topContainer {
       @include flex(row, end, space-between, vw(70px));
       margin-top: vh(18px);
+      margin-bottom: vh(49px);
       width: 100%;
       .profileContainer {
         @include flex(column, center, center);
@@ -48,6 +49,14 @@
           }
         }
       }
+    }
+    .banner {
+      width: 100%;
+      height: vh(176px);
+      background-color: #dfdfdf;
+    }
+    .bottomContainer {
+      margin-top: vh(59px);
     }
   }
 }
