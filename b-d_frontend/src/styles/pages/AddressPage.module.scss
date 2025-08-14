@@ -80,9 +80,9 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: rem(20px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-top: 34px;
+  margin-top: vh(34px);
 }
 .searchButton {
   width: vw(150px);
@@ -157,7 +157,7 @@
   margin: 32px auto vh(52px) auto;
   width: 362px;
   height: 60px;
-  background: #2196f3;
+  background: $color-main;
   color: #fff;
   border: none;
   font-size: 16px;

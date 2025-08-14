@@ -39,7 +39,7 @@ const AddressPage = () => {
         </p>
         <div className={styles.addressPlaceGroup}>
           <label htmlFor="nickname" className={styles.label}>
-            사업장<span>*</span>
+            사업장 주소<span>*</span>
           </label>
           <div className={styles.addressInputGroup}>
             <div className={styles.addressContainer}>
