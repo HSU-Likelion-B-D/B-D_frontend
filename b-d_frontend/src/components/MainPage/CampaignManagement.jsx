@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "@/styles/components/CampaignManagement.module.scss";
 import { hamburger_icon, star_icon } from "@/assets";
-
+import CampaignItem from "./CampaignItem";
 export default function CampaignManagement() {
   const [currentPage, setCurrentPage] = useState(1);
   return (
@@ -20,7 +20,10 @@ export default function CampaignManagement() {
           <img src={hamburger_icon} alt="hamburger" />
         </div>
       </div>
-      <div className={styles.content}></div>
+      <div className={styles.content}>
+        <CampaignItem />
+        <CampaignItem />
+      </div>
       <div className={styles.footer}>
         <div className={styles.pageNation}>
           {[1, 2, 3, 4, 5].map((page) => (

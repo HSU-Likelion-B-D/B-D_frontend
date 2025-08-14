@@ -7,6 +7,7 @@
   border-radius: 44px;
   padding: vh(37px) vw(71px);
   margin: vh(40px) 0;
+  width: 100%;
   .header {
     @include flex(row, center, space-between, vw(370px));
     padding-left: vw(10px);
@@ -15,6 +16,7 @@
     .headerLeft {
       @include flex(row, center, center, vw(26px));
       .headerLeftTitle {
+        @include flex(row, center, center, vw(6px));
         font-size: rem(26px);
         font-weight: $font_weight_bold;
         color: $color-sub-03;
@@ -23,9 +25,8 @@
           color: $color-main;
         }
         img {
-          margin-left: vw(6px);
-          width: vw(20px);
-          height: vw(20px);
+          width: rem(26px);
+          height: rem(26px);
         }
       }
       .headerLeftSubtitle {
@@ -38,9 +39,14 @@
       }
     }
   }
+  .content {
+    @include flex(column, center, center, vh(39px));
+    width: 100%;
+  }
   .footer {
     @include flex(row, center, center);
     width: 100%;
+    margin-top: vh(34px);
     .pageNation {
       @include flex(row, center, center, vw(19px));
       .pageNationItem {
@@ -55,7 +61,6 @@
 
         &.active {
           color: $color-main;
-          font-weight: $font_weight_bold;
         }
       }
     }
