@@ -3,7 +3,7 @@
 .header {
   position: relative;
   width: 100%;
-  @include flex(row, space-between, center, vw(593px));
+  @include flex(row, center, space-between, vw(593px));
   .iconContainer {
     @include flex(row, space-between, center, vw(45px));
     .iconBox {
