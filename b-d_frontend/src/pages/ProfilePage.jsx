@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styles from "../styles/pages/ProfilePage.module.scss";
-import logo from "../assets/logo.svg";
-import profile from "../assets/profile.png";
+import { logo, camera, profile } from "@/assets";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import GalleryPopup from "../components/ProfilePage/GalleryPopup";
-import camera from "../assets/camera.png";
 import Input from "../components/SingupPage/Input";
 import { useNavigate } from "react-router-dom";
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
@@ -126,54 +124,56 @@ const ProfilePage = () => {
             />
           </div>
 
-          <div className={styles.nicknameGroup}>
-            <label htmlFor="nickname" className={styles.label}>
-              닉네임<span>*</span>
-            </label>
-            <div className={styles.nicknameContainer}>
-              <Input
-                id="nickname"
-                name="nickname"
-                type="text"
-                value={formData.nickname}
-                onChange={handleInputChange}
-                placeholder="닉네임을 입력하세요"
-                showClearButton={true}
-                onClear={clearNickname}
-                className={`${styles.input} ${
-                  isError ? styles.errorInput : ""
-                } ${isSuccess ? styles.successInput : ""}`}
-              />
+          <div className={styles.inputGroup}>
+            <div className={styles.nicknameGroup}>
+              <label htmlFor="nickname" className={styles.label}>
+                닉네임<span>*</span>
+              </label>
+              <div className={styles.nicknameContainer}>
+                <Input
+                  id="nickname"
+                  name="nickname"
+                  type="text"
+                  value={formData.nickname}
+                  onChange={handleInputChange}
+                  placeholder="닉네임을 입력하세요"
+                  showClearButton={true}
+                  onClear={clearNickname}
+                  className={`${styles.input} ${
+                    isError ? styles.errorInput : ""
+                  } ${isSuccess ? styles.successInput : ""}`}
+                />
 
-              <button
-                type="button"
-                className={`${styles.checkButton} ${
-                  isButtonDisabled ? styles.disabled : ""
-                }`}
-                onClick={handleNicknameCheck}
-                disabled={isButtonDisabled}
-              >
-                중복확인
-              </button>
+                <button
+                  type="button"
+                  className={`${styles.checkButton} ${
+                    isButtonDisabled ? styles.disabled : ""
+                  }`}
+                  onClick={handleNicknameCheck}
+                  disabled={isButtonDisabled}
+                >
+                  중복확인
+                </button>
+              </div>
+              {nicknameMessage && (
+                <p
+                  className={
+                    isError ? styles.errorMessage : styles.successMessage
+                  }
+                >
+                  {nicknameMessage}
+                </p>
+              )}
             </div>
-            {nicknameMessage && (
-              <p
-                className={
-                  isError ? styles.errorMessage : styles.successMessage
-                }
-              >
-                {nicknameMessage}
-              </p>
-            )}
-          </div>
 
-          <textarea
-            name="description"
-            placeholder="가게를 간단히 소개해주세요."
-            value={formData.description}
-            onChange={handleInputChange}
-            className={styles.textarea}
-          />
+            <textarea
+              name="description"
+              placeholder="가게를 간단히 소개해주세요."
+              value={formData.description}
+              onChange={handleInputChange}
+              className={styles.textarea}
+            />
+          </div>
 
           <div className={styles.signupLink}>
             <span

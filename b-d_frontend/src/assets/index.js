@@ -11,8 +11,8 @@ import profile_img from "./profile-img.svg";
 import star_icon from "./star-icon.svg";
 import busy_left from "./busy-left.svg";
 import complete_icon from "./complete-icon.svg";
-
-
+import camera from "./camera.svg";
+import profile from "./profile.svg";
 export {
   logo,
   eye,
@@ -27,4 +27,6 @@ export {
   star_icon,
   busy_left,
   complete_icon,
+  camera,
+  profile,
 };
