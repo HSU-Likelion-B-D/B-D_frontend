@@ -5,10 +5,12 @@ import Header from "@/components/MainPage/Header";
 import MatchingList from "@/components/MainPage/MatchingList";
 import CampaignManagement from "@/components/MainPage/CampaignManagement";
 import NotificationModal from "@/components/MainPage/NotificationModal";
+import RateModal from "@/components/MainPage/RateModal";
 import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+  const [isRateModalOpen, setIsRateModalOpen] = useState(true);
   const navigate = useNavigate();
   return (
     <div className={styles.container}>
@@ -45,10 +47,15 @@ export default function MainPage() {
         </div>
       </div>
       {isNotificationModalOpen && (
-        <div className={styles.notificationModal}>
+        <div className={styles.modalContainer}>
           <NotificationModal
             setIsNotificationModalOpen={setIsNotificationModalOpen}
           />
+        </div>
+      )}
+      {isRateModalOpen && (
+        <div className={styles.modalContainer}>
+          <RateModal setIsRateModalOpen={setIsRateModalOpen} />
         </div>
       )}
     </div>
