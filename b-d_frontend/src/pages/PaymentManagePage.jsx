@@ -1,6 +1,24 @@
 import React from "react";
 import styles from "../styles/pages/PaymentManagePage.module.scss";
 import Header from "../components/MainPage/Header";
+import { hamburger_icon, payment_profile } from "@/assets";
+import PaymentListItem from "../components/PaymentManage/PaymentListItem";
+
+const sampleList = [
+  {
+    id: 1,
+    imgSrc: payment_profile,
+    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
+    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
+    price: "110,000",
+    period: "25.10.01~25.12.31",
+    status: "결제하기",
+    statusColor: "#0c9ce9",
+    dDay: "D-3",
+  },
+  // ...더미 데이터 추가 가능...
+];
+
 const PaymentManagePage = () => {
   return (
     <div className={styles.container}>
@@ -8,10 +26,39 @@ const PaymentManagePage = () => {
         <Header isCreateProposalPage={true} />
       </div>
       <div className={styles.titleContainer}>
-        <h1 className={styles.subtitle}>
-          <span className={styles.highlight}>결제 및 정산</span> 관리하기
-        </h1>
+        <div className={styles.subhamContainer}>
+          <h1 className={styles.subtitle}>
+            <span className={styles.highlight}>결제 및 정산</span> 관리하기
+          </h1>
+          <div className={styles.hamburgerContainer}>
+            <img
+              className={styles.hamburgerIcon}
+              src={hamburger_icon}
+              alt="hamburger"
+              onClick={() => setIsProfileModalOpen(!isProfileModalOpen)}
+            />
+          </div>
+        </div>
         <p className={styles.description}>사장님을 기다리고 있어요!</p>
+      </div>
+      <div className={styles.listWrap}>
+        {sampleList.map((item) => (
+          <PaymentListItem
+            key={item.id}
+            imgSrc={item.imgSrc}
+            title={item.title}
+            desc={item.desc}
+            price={
+              <span style={{ color: "#2196f3", fontWeight: 700 }}>
+                {item.price}
+              </span>
+            }
+            period={item.period}
+            status={item.status}
+            statusColor={item.statusColor}
+            dDay={item.dDay}
+          />
+        ))}
       </div>
     </div>
   );

@@ -18,7 +18,6 @@
   }
   .titleContainer {
     text-align: center;
-
     .subtitle {
       font-size: rem(26px);
       font-weight: $font_weight_semibold;
@@ -28,6 +27,7 @@
         color: $color-main;
       }
     }
+
     .description {
       font-size: rem(20px);
       color: $color-sub-02;
