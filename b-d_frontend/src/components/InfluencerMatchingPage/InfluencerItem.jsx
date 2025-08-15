@@ -1,7 +1,7 @@
 import styles from "@/styles/components/InfluencerMatchingPage/InfluencerItem.module.scss";
 import { store_img, star_icon } from "@/assets";
 
-export default function InfluencerItem() {
+export default function InfluencerItem({ setIsProposalModalOpen }) {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
@@ -19,7 +19,12 @@ export default function InfluencerItem() {
           </div>
         </div>
       </div>
-      <button className={styles.proposalButton}>제안서 보내기</button>
+      <button
+        className={styles.proposalButton}
+        onClick={() => setIsProposalModalOpen(true)}
+      >
+        제안서 보내기
+      </button>
     </div>
   );
 }
