@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/pages/MainPage.module.scss";
 import Profile from "@/components/MainPage/Profile";
 import Header from "@/components/MainPage/Header";
@@ -12,6 +12,13 @@ export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [isRateModalOpen, setIsRateModalOpen] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isNotificationModalOpen || isRateModalOpen) {
+      window.scrollTo({ top: 0 });
+    }
+  }, [isNotificationModalOpen, isRateModalOpen]);
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
