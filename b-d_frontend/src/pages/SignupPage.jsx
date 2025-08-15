@@ -4,6 +4,7 @@ import { logo } from "@/assets";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
 import styles from "../styles/pages/SignupPage.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const inputFields = [
   {
@@ -57,6 +58,7 @@ const passwordFields = [
 ];
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -82,10 +84,15 @@ const SignupPage = () => {
     setIsVerifySent(true);
   };
 
+  // 동의 버튼 눌렀을때
+  const allAgreed =
+    watch("agree1") === "yes" &&
+    watch("agree2") === "yes" &&
+    watch("agree3") === "yes";
+
   const isFilled = verificationCode.trim() !== "";
-  const allFilled = Object.keys(watch()).every(
-    (key) => watch(key)?.trim() !== ""
-  );
+  const allFilled =
+    Object.keys(watch()).every((key) => watch(key)?.trim() !== "") && allAgreed;
 
   return (
     <div className={styles.container}>
@@ -171,6 +178,56 @@ const SignupPage = () => {
             )}
           </div>
         ))}
+
+        <div className={styles.agreeSection}>
+          <label className={styles.agreeItem}>
+            <input
+              type="radio"
+              name="agree1"
+              value="yes"
+              {...register("agree1", { required: true })}
+            />
+            <span>개인정보 수집 및 이용 동의</span>
+          </label>
+          <label className={styles.agreeItem}>
+            <input
+              type="radio"
+              name="agree2"
+              value="yes"
+              {...register("agree2", { required: true })}
+            />
+            <span>위치 정보 수집 동의</span>
+          </label>
+          <label className={styles.agreeItem}>
+            <input
+              type="radio"
+              name="agree3"
+              value="yes"
+              {...register("agree3", { required: true })}
+            />
+            <span>제3자 정보 제공 동의 (광고주와 매칭 위해 필요)</span>
+          </label>
+        </div>
+
+        <div className={styles.signupLink}>
+          <span
+            className={styles.findPwd}
+            onClick={() => {
+              navigate("/find-password");
+            }}
+          >
+            비밀번호 찾기
+          </span>
+          <span className={styles.divider}> | </span>
+          <span
+            className={styles.loginLink}
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </span>
+        </div>
 
         <Button
           type="submit"

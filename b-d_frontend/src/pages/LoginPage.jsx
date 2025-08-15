@@ -4,7 +4,7 @@ import { logo, eye, eye_color } from "@/assets";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const [keepLogin, setKeepLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -176,4 +176,4 @@ export const LoginPage = () => {
       </div>
     </div>
   );
-};
+}

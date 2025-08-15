@@ -1,0 +1,73 @@
+@use "../variables" as *;
+.container {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(column, center, center);
+
+  .content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    @include flex(column, center, center);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border-radius: 22px;
+    padding: vh(28px) vw(136px);
+    .logo {
+      margin-top: vh(42px);
+      margin-bottom: vh(20px);
+      width: vw(50px);
+      height: vh(46px);
+    }
+    .title {
+      text-align: center;
+      line-height: 1.5;
+      font-size: rem(46px);
+      font-weight: $font_weight_semibold;
+      margin-bottom: vh(20px);
+      span {
+        font-weight: $font_weight_bold;
+        color: $color-main;
+      }
+    }
+    .description {
+      font-size: rem(20px);
+      font-weight: $font_weight_regular;
+      color: $color-sub-02;
+      margin-bottom: vh(86px);
+    }
+    .selectBoxContainer {
+      width: 100%;
+      display: flex;
+      gap: vw(71px);
+      margin-bottom: vh(135px);
+      position: relative;
+      .nemo {
+        position: absolute;
+        top: vh(120px);
+        right: vw(-39px);
+        width: vw(170px);
+        height: vh(164px);
+      }
+      .seaAnemone {
+        position: absolute;
+        top: vh(92px);
+        left: vw(-39px);
+        width: vw(185px);
+        height: vh(195px);
+      }
+    }
+    .button {
+      background-color: $color-sub-01;
+      border: none;
+      padding: vh(16px) vw(153px);
+      color: #fff;
+      font-size: rem(16px);
+      font-weight: $font_weight_semibold;
+      cursor: pointer;
+      &:hover {
+        background-color: #0c9ce9;
+      }
+    }
+  }
+}

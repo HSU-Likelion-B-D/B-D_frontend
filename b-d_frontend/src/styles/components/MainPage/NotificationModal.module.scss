@@ -1,0 +1,64 @@
+@use "../../variables" as *;
+
+.container {
+  @include flex(column, center, center, vw(10px));
+  width: vw(1247px);
+  background-color: #fff;
+  border-radius: 22px;
+  padding: vh(60px) vw(70px);
+  z-index: 1000;
+  .header {
+    @include flex(row, center, space-between);
+    width: 100%;
+    .title {
+      @include flex(row, center, center, vw(17px));
+      .alarmIcon {
+        width: vw(29px);
+        height: vw(32px);
+      }
+      font-size: vw(26px);
+      font-weight: $font_weight_bold;
+      line-height: 1.75;
+      color: $color-sub-03;
+    }
+    .closeButton {
+      font-size: vw(26px);
+      font-weight: $font_weight_bold;
+      line-height: 1.75;
+      color: $color-sub-03;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    width: 100%;
+
+    .itemContainer {
+      margin-top: vh(68px);
+      margin-bottom: vh(27px);
+      padding-right: vw(67px);
+      @include flex(column, center, start, vh(48px));
+      max-height: vh(615px);
+      overflow-y: scroll;
+
+      /* 웹킷 기반 브라우저 스크롤바 커스텀 */
+      &::-webkit-scrollbar {
+        width: vw(28px);
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $color-sub-01;
+        border-radius: vw(14px);
+        margin: vw(2px);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $color-main;
+        border-radius: vw(14px);
+        border: vw(2px) solid $color-sub-01;
+      }
+    }
+  }
+}
