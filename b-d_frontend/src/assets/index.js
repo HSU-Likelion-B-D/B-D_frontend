@@ -10,6 +10,7 @@ import profile_icon from "./profile-icon.svg";
 import hamburger_icon from "./hamburger-icon.svg";
 import profile_img from "./profile-img.svg";
 import star_icon from "./star-icon.svg";
+import star_icon_gray from "./star-icon-gray.svg";
 import busy_left from "./busy-left.svg";
 import busy_dilly_together from "./busy-dilly-together.svg";
 import store_img from "./store-img.svg";
@@ -29,6 +30,7 @@ export {
   hamburger_icon,
   profile_img,
   star_icon,
+  star_icon_gray,
   busy_left,
   busy_dilly_together,
   store_img,

@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/pages/MainPage.module.scss";
 import Profile from "@/components/MainPage/Profile";
 import Header from "@/components/MainPage/Header";
 import MatchingList from "@/components/MainPage/MatchingList";
 import CampaignManagement from "@/components/MainPage/CampaignManagement";
 import NotificationModal from "@/components/MainPage/NotificationModal";
+import RateModal from "@/components/MainPage/RateModal";
 import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+  const [isRateModalOpen, setIsRateModalOpen] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isNotificationModalOpen || isRateModalOpen) {
+      window.scrollTo({ top: 0 });
+    }
+  }, [isNotificationModalOpen, isRateModalOpen]);
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -45,10 +54,15 @@ export default function MainPage() {
         </div>
       </div>
       {isNotificationModalOpen && (
-        <div className={styles.notificationModal}>
+        <div className={styles.modalContainer}>
           <NotificationModal
             setIsNotificationModalOpen={setIsNotificationModalOpen}
           />
+        </div>
+      )}
+      {isRateModalOpen && (
+        <div className={styles.modalContainer}>
+          <RateModal setIsRateModalOpen={setIsRateModalOpen} />
         </div>
       )}
     </div>
