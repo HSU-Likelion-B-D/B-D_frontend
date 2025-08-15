@@ -1,6 +1,6 @@
 import styles from "@/styles/pages/InfluencerMatchingPage.module.scss";
 import Header from "@/components/MainPage/Header";
-
+import InfluencerItem from "@/components/InfluencerMatchingPage/InfluencerItem";
 export default function InfluencerMatchingPage() {
   return (
     <div className={styles.container}>
@@ -18,6 +18,14 @@ export default function InfluencerMatchingPage() {
       </div>
       <div className={styles.description}>
         *블로그는 투데이 수치로 기록됩니다.
+      </div>
+      <div className={styles.influencerList}>
+        <InfluencerItem />
+        <InfluencerItem />
+        <InfluencerItem />
+        <InfluencerItem />
+        <InfluencerItem />
+        <InfluencerItem />
       </div>
     </div>
   );

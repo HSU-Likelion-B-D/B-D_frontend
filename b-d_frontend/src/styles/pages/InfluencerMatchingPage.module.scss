@@ -8,7 +8,7 @@
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(4px);
   border-radius: 44px;
-  padding: vh(24px) vw(79px);
+  padding: vh(24px) vw(100px);
   min-width: vw(1187px);
   width: max-content;
 
@@ -52,5 +52,10 @@
     font-size: rem(20px);
     color: #929292;
     line-height: 1.75;
+  }
+  .influencerList {
+    width: 100%;
+    margin-bottom: vh(100px);
+    @include flex(column, center, center, vh(54px));
   }
 }
