@@ -7,7 +7,6 @@
   z-index: 10;
   padding-bottom: 50px;
 }
-
 .whiteBox {
   background-color: rgba(255, 255, 255, 0.8); // 투명도
   width: vw(1187px);
@@ -29,7 +28,7 @@
 }
 
 .subtitle {
-  font-size: 2rem;
+  font-size: rem(40px);
   font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
@@ -42,10 +41,10 @@
 }
 
 .description {
-  font-size: 20px;
-  color: #666; // 서브 텍스트 색상
+  font-size: rem(15px);
+  color: $color-sub-02; // 서브 텍스트 색상
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: vh(87px);
 }
 .addressInputGroup {
   text-align: left;
@@ -61,6 +60,7 @@
   margin-bottom: 8px;
   text-align: left;
   font-size: 1rem;
+  margin-top: vh(80px);
 }
 .label span {
   color: red;
@@ -166,5 +166,30 @@
   &.disabled {
     background-color: #ddd; // 버튼 비활성화 시 색상
     cursor: not-allowed;
+  }
+}
+
+.postModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  > div {
+    background: $color-white; // 흰 배경
+    border-radius: 16px;
+    padding: 10px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    width: vw(1092px) !important;
+    height: vw(900px) !important;
+    max-width: 95vw !important;
+    min-width: 320px !important;
+    margin: 0 !important;
   }
 }

@@ -4,13 +4,27 @@ import styles from "../styles/pages/AddressPage.module.scss";
 import logo from "../assets/logo.svg";
 import Input from "../components/SingupPage/Input";
 import { useNavigate } from "react-router-dom";
+import DaumPostcode from "react-daum-postcode";
 const AddressPage = () => {
+  // 주소 검색 모달 상태
+  const [isPostOpen, setIsPostOpen] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     address: "",
     detailAddress: "",
   });
-
+  //주소 검색 모달
+  const handleComplete = (data) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      address: data.address,
+    }));
+    setIsPostOpen(false);
+  };
+  // 검색 버튼 눌렀을때
+  const handleAddressSearch = () => {
+    setIsPostOpen(true);
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -54,10 +68,20 @@ const AddressPage = () => {
                 onClear={clearAddress}
                 className={styles.input}
               />
-              <button type="button" className={styles.searchButton}>
+              <button
+                type="button"
+                className={styles.searchButton}
+                onClick={handleAddressSearch}
+              >
                 검색
               </button>
+              {isPostOpen && (
+                <div className={styles.postModal}>
+                  <DaumPostcode onComplete={handleComplete} autoClose />
+                </div>
+              )}
             </div>
+
             <Input
               id="detailAddress"
               name="detailAddress"
