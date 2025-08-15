@@ -37,7 +37,20 @@ const PaymentListItem = ({
     </div>
     <div className={styles.itemStatusWrap}>
       <div className={styles.itemStatus} style={{ color: statusColor }}>
-        {status} <span className={styles.statusDot} />
+        {status}{" "}
+        <span
+          className={styles.statusDot}
+          style={{
+            background:
+              status === "결제하기"
+                ? "#0c9ce9"
+                : status === "결제 완료"
+                ? "#42bc54"
+                : status === "정산 완료"
+                ? "#929292"
+                : undefined,
+          }}
+        />
       </div>
       {dDay && (
         <div className={styles.dDay} style={{ color: dDayColor }}>
