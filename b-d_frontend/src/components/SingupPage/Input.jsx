@@ -35,7 +35,7 @@ const Input = ({
         <button
           type="button"
           onClick={() => onClear && onClear(name)}
-          className={styles.xButton}
+          className={`${styles.xButton} ${props.xButtonClassName || ""}`}
           tabIndex={-1}
         >
           x

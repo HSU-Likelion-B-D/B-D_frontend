@@ -138,6 +138,7 @@ const ProfilePage = () => {
                   onChange={handleInputChange}
                   placeholder="닉네임을 입력하세요"
                   showClearButton={true}
+                  xButtonClassName={styles.profileXButton}
                   onClear={clearNickname}
                   className={`${styles.input} ${
                     isError ? styles.errorInput : ""
