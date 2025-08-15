@@ -14,8 +14,8 @@ import busy_left from "./busy-left.svg";
 import busy_dilly_together from "./busy-dilly-together.svg";
 import store_img from "./store-img.svg";
 import complete_icon from "./complete-icon.svg";
-
-
+import camera from "./camera.svg";
+import profile from "./profile.svg";
 export {
   logo,
   eye,
@@ -33,4 +33,6 @@ export {
   busy_dilly_together,
   store_img,
   complete_icon,
+  camera,
+  profile,
 };

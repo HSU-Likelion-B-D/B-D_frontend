@@ -1,6 +1,5 @@
 @use "../variables" as *;
 .container {
-  width: 100%;
   min-height: 100vh;
   @include flex(column, center, flex-start);
   overflow-y: auto;
@@ -8,7 +7,6 @@
   z-index: 10;
   padding-bottom: 50px;
 }
-
 .whiteBox {
   background-color: rgba(255, 255, 255, 0.8); // 투명도
   width: vw(1187px);
@@ -30,7 +28,7 @@
 }
 
 .subtitle {
-  font-size: 2rem;
+  font-size: rem(40px);
   font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
@@ -43,11 +41,15 @@
 }
 
 .description {
-  font-size: 20px;
-  color: #666; // 서브 텍스트 색상
+  font-size: rem(15px);
+  color: $color-sub-02; // 서브 텍스트 색상
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: vh(87px);
 }
+.addressInputGroup {
+  text-align: left;
+}
+
 .addressContainer {
   display: flex;
   align-items: center;
@@ -58,12 +60,13 @@
   margin-bottom: 8px;
   text-align: left;
   font-size: 1rem;
+  margin-top: vh(80px);
 }
 .label span {
   color: red;
 }
 .input {
-  width: vw(433px);
+  width: vw(603px);
   height: vh(69px);
   padding: 10px;
   border: 1px solid #ddd;
@@ -72,14 +75,14 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 .detailInput {
-  width: vw(433px);
+  width: vw(603px);
   height: vh(69px);
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: rem(20px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-top: 34px;
+  margin-top: vh(34px);
 }
 .searchButton {
   width: vw(150px);
@@ -105,11 +108,11 @@
 .addressDescription {
   position: relative;
   text-align: left;
-  margin-left: 250px; // 왼쪽 여백
+  //margin-left: 250px; // 왼쪽 여백
   margin-top: 20px;
   color: #999;
   font-size: 18px;
-  width: vw(433px); // input과 동일한 너비
+  width: vw(603px); // input과 동일한 너비
   max-width: none;
   padding-left: 0;
   box-sizing: border-box;
@@ -117,7 +120,6 @@
 }
 
 .address1 {
-  margin: 0;
   line-height: 1.7;
 }
 
@@ -126,7 +128,7 @@
 }
 
 .address {
-  text-align: start;
+  text-align: left;
   margin-top: 20px;
   color: $color-sub-02;
   font-size: 20px;
@@ -155,7 +157,7 @@
   margin: 32px auto vh(52px) auto;
   width: 362px;
   height: 60px;
-  background: #2196f3;
+  background: $color-main;
   color: #fff;
   border: none;
   font-size: 16px;
@@ -164,5 +166,30 @@
   &.disabled {
     background-color: #ddd; // 버튼 비활성화 시 색상
     cursor: not-allowed;
+  }
+}
+
+.postModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  > div {
+    background: $color-white; // 흰 배경
+    border-radius: 16px;
+    padding: 10px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    width: vw(1092px) !important;
+    height: vh(942px) !important;
+    max-width: 95vw !important;
+    min-width: 320px !important;
+    margin: 0 !important;
   }
 }

@@ -4,13 +4,27 @@ import styles from "../styles/pages/AddressPage.module.scss";
 import logo from "../assets/logo.svg";
 import Input from "../components/SingupPage/Input";
 import { useNavigate } from "react-router-dom";
+import DaumPostcode from "react-daum-postcode";
 const AddressPage = () => {
+  // 주소 검색 모달 상태
+  const [isPostOpen, setIsPostOpen] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     address: "",
     detailAddress: "",
   });
-
+  //주소 검색 모달
+  const handleComplete = (data) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      address: data.address,
+    }));
+    setIsPostOpen(false);
+  };
+  // 검색 버튼 눌렀을때
+  const handleAddressSearch = () => {
+    setIsPostOpen(true);
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -39,42 +53,54 @@ const AddressPage = () => {
         </p>
         <div className={styles.addressPlaceGroup}>
           <label htmlFor="nickname" className={styles.label}>
-            사업장<span>*</span>
+            사업장 주소<span>*</span>
           </label>
-          <div className={styles.addressContainer}>
-            <Input
-              id="address"
-              name="address"
-              type="text"
-              placeholder="사업장을 주소를 입력하세요"
-              value={formData.address}
-              showClearButton={true}
-              onChange={handleInputChange}
-              onClear={clearAddress}
-              className={styles.input}
-            />
-            <button type="button" className={styles.searchButton}>
-              검색
-            </button>
-          </div>
-          <Input
-            id="detailAddress"
-            name="detailAddress"
-            type="text"
-            value={formData.detailAddress}
-            placeholder="상세 주소"
-            showClearButton={false}
-            className={styles.detailInput}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={styles.addressDescription}>
-          <p className={styles.address1}>
-            EX) 서울특별시 성북구 삼선교로 16길 116
-          </p>
-          <p className={styles.address2}>서울특별시 송파구 올림픽로 300</p>
-        </div>
+          <div className={styles.addressInputGroup}>
+            <div className={styles.addressContainer}>
+              <Input
+                id="address"
+                name="address"
+                type="text"
+                placeholder="사업장을 주소를 입력하세요"
+                value={formData.address}
+                showClearButton={true}
+                onChange={handleInputChange}
+                onClear={clearAddress}
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.searchButton}
+                onClick={handleAddressSearch}
+              >
+                검색
+              </button>
+              {isPostOpen && (
+                <div className={styles.postModal}>
+                  <DaumPostcode onComplete={handleComplete} autoClose />
+                </div>
+              )}
+            </div>
 
+            <Input
+              id="detailAddress"
+              name="detailAddress"
+              type="text"
+              value={formData.detailAddress}
+              placeholder="상세 주소"
+              showClearButton={false}
+              className={styles.detailInput}
+              onChange={handleInputChange}
+            />
+
+            <div className={styles.addressDescription}>
+              <p className={styles.address1}>
+                EX) 서울특별시 성북구 삼선교로 16길 116
+              </p>
+              <p className={styles.address2}>서울특별시 송파구 올림픽로 300</p>
+            </div>
+          </div>
+        </div>
         <div className={styles.signupLink}>
           <span
             className={styles.findPwd}
