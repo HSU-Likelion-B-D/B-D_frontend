@@ -20,6 +20,7 @@ import InfluencerMatchingPage from "./pages/InfluencerMatchingPage";
 import InfluencerMainPage from "./pages/InfluencerMainPage";
 import BusinessMatchingPage from "./pages/BusinessMatchingPage";
 import InfluencerCreateProposalPage from "./pages/InfluencerCreateProposalPage";
+import InfluencerProfilePage from "./pages/InfluencerProfilePage";
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
           <Route path="/address" element={<AddressPage />} />
           <Route path="/select-keyword" element={<SelectKWPage />} />
           <Route path="/complete" element={<CompletePage />} />
+          <Route
+            path="/influencer-profile"
+            element={<InfluencerProfilePage />}
+          />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
