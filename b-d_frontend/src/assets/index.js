@@ -20,6 +20,7 @@ import profile from "./profile.svg";
 import payment_profile from "./payment-profile.svg";
 import influencer_profile from "./influencer-profile.svg";
 import influencer_profile_right from "./influencer-profile-right.svg";
+import dilly_right from "./dilly-right.svg";
 export {
   logo,
   eye,
@@ -43,4 +44,5 @@ export {
   payment_profile,
   influencer_profile,
   influencer_profile_right,
+  dilly_right,
 };

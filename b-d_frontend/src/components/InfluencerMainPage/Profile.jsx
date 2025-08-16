@@ -1,14 +1,16 @@
 import styles from "@/styles/components/MainPage/Profile.module.scss";
-import { profile_img, star_icon } from "@/assets";
+import { influencer_profile, star_icon } from "@/assets";
 export default function Profile() {
   return (
     <div className={styles.container}>
-      <img className={styles.profileImg} src={profile_img} alt="profile" />
+      <img
+        className={styles.profileImg}
+        src={influencer_profile}
+        alt="profile"
+      />
       <div className={styles.profileInfo}>
-        <div className={styles.profileName}>호호식당 대학로점</div>
-        <div className={styles.profileDescription}>
-          따뜻한 분위기에서 즐기는 일본 가정식
-        </div>
+        <div className={styles.profileName}>멋사 TV</div>
+        <div className={styles.profileDescription}>POSSIBILITY TO REALITY</div>
         <div className={styles.rating}>
           <img className={styles.starIcon} src={star_icon} alt="star" />
           <div className={styles.ratingValue}>4.5</div>

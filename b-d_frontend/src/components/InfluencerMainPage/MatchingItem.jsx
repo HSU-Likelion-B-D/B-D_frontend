@@ -5,7 +5,7 @@ export default function MatchingItem() {
     <div className={styles.container}>
       <img src={profile_img} className={styles.profileImg} />
       <div className={styles.name}>아기사자</div>
-      <div className={styles.followCount}>20k</div>
+      <div className={styles.followCount}>4.0 (33)</div>
     </div>
   );
 }
