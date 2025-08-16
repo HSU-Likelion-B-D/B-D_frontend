@@ -16,6 +16,8 @@ import NewPWPage from "./pages/NewPWPage";
 import CompletePage from "./pages/CompletePage";
 import CreateProposalPage from "./pages/CreateProposalPage";
 import PaymentManagePage from "./pages/PaymentManagePage";
+import InfluencerMatchingPage from "./pages/InfluencerMatchingPage";
+
 
 function App() {
   return (
@@ -38,6 +40,11 @@ function App() {
           <Route path="/main" element={<MainPage />} />
           <Route path="/create-proposal" element={<CreateProposalPage />} />
           <Route path="/payment-manage" element={<PaymentManagePage />} />
+          <Route
+            path="/influencer-matching"
+            element={<InfluencerMatchingPage />}
+          />
+
         </Route>
       </Routes>
     </BrowserRouter>

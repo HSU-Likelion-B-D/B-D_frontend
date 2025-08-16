@@ -1,0 +1,58 @@
+@use "../../variables" as *;
+.container {
+  z-index: 1;
+  width: 100%;
+  @include flex(row, center, space-between);
+  .info {
+    @include flex(row, center, center);
+    .profileImage {
+      width: vw(96px);
+      height: vw(96px);
+      border-radius: 50%;
+      margin-right: vw(20px);
+    }
+    .title {
+      @include flex(column, start, center);
+      .nameContainer {
+        @include flex(row, center, start);
+        .name {
+          font-size: rem(26px);
+          font-weight: $font_weight_bold;
+          color: $color-sub-03;
+          line-height: 1.75;
+        }
+        .starIcon {
+          width: vw(29px);
+          height: vw(29px);
+          margin-left: vw(11px);
+          margin-right: vw(3px);
+        }
+        .starNumber {
+          font-size: rem(26px);
+          font-weight: $font_weight_bold;
+          color: $color-main;
+          line-height: 1.75;
+          .starCount {
+            color: $color-sub-01;
+          }
+        }
+      }
+      .description {
+        margin-left: vw(5px);
+        font-size: rem(20px);
+        color: #929292;
+        line-height: 1.75;
+      }
+    }
+  }
+  .proposalButton {
+    background: $color-main;
+    color: white;
+    border: none;
+    border-radius: vw(12px);
+    padding: vh(10px) vw(30px);
+    font-size: rem(20px);
+    line-height: 1.75;
+    cursor: pointer;
+  }
+}
