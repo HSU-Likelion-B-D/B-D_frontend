@@ -62,7 +62,7 @@
     }
     .description {
       font-size: rem(20px);
-      color: $color-sub-01;
+      color: $color-sub-01 !important;
       font-weight: $font_weight_regular;
       margin-top: 0;
       margin-bottom: vw(39px);
