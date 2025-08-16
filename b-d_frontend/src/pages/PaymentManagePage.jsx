@@ -7,6 +7,7 @@ import PaymentModal from "../components/PaymentManage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
 import Pagination from "../components/PaymentManage/Pagination";
 import PaymentProgressModal from "../components/PaymentManage/PaymentProgressModal";
+import PaymentCompleteModal from "../components/PaymentManage/PaymentCompleteModal";
 const sampleList = [
   {
     id: 1,
@@ -105,6 +106,8 @@ const PaymentManagePage = () => {
   const [filter, setFilter] = useState("all");
   const [isPaymentProgressModalOpen, setIsPaymentProgressModalOpen] =
     useState(false);
+  const [isPaymentCompleteModalOpen, setIsPaymentCompleteModalOpen] =
+    useState(false);
   // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
   const pagedList = sampleList.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -184,6 +187,15 @@ const PaymentManagePage = () => {
         <div className={styles.paymentProgressModal}>
           <PaymentProgressModal
             setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
+            setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+          />
+        </div>
+      )}
+
+      {isPaymentCompleteModalOpen && (
+        <div className={styles.paymentCompleteModal}>
+          <PaymentCompleteModal
+            setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
           />
         </div>
       )}

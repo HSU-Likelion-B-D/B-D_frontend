@@ -21,6 +21,7 @@ import payment_profile from "./payment-profile.svg";
 import pay_card from "./pay-card.svg";
 import pay_transfer from "./pay-transfer.svg";
 import pay_easy from "./pay-easy.svg";
+import pay_lion from "./pay-lion.svg";
 export {
   logo,
   eye,
@@ -45,4 +46,5 @@ export {
   pay_card,
   pay_transfer,
   pay_easy,
+  pay_lion,
 };

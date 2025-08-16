@@ -1,9 +1,10 @@
 import styles from "../../styles/components/PaymentManagePage/PaymentProgressModal.module.scss";
 import { useEffect, useState } from "react";
-import { pay_card, pay_transfer, pay_easy, store_img } from "@/assets";
+import { pay_card, pay_transfer, pay_easy } from "@/assets";
 
 export default function PaymentProgressModal({
   setIsPaymentProgressModalOpen,
+  setIsPaymentCompleteModalOpen,
 }) {
   useEffect(() => {
     // 모달이 열릴 때 body 스크롤 차단
@@ -60,7 +61,10 @@ export default function PaymentProgressModal({
           </button>
           <button
             className={styles.sendButton}
-            onClick={() => setIsPaymentProgressModalOpen(false)}
+            onClick={() => {
+              setIsPaymentProgressModalOpen(false);
+              setIsPaymentCompleteModalOpen(true);
+            }}
           >
             보내기
           </button>
