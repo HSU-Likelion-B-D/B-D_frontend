@@ -1,6 +1,6 @@
 import styles from "@/styles/components/MainPage/Header.module.scss";
 import {
-  logo,
+  logo_red,
   alarm_icon,
   chat_icon,
   influencer_profile_right,
@@ -34,7 +34,7 @@ export default function Header({
         </div>
       </div>
       <div className={styles.logoContainer}>
-        <img className={styles.logo} src={logo} alt="logo" />
+        <img className={styles.logo} src={logo_red} alt="logo" />
       </div>
       <div className={styles.rightIconContainer}>
         <div className={styles.userInfoContainer}>

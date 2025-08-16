@@ -24,7 +24,7 @@ export default function BusinessMatchingPage() {
           </button>
           <div className={styles.titleContainer}>
             <div className={styles.title}>
-              <span>자영업자 </span>매칭하기
+              <span>가게 </span>매칭하기
             </div>
             <div className={styles.subtitle}>당신을 기다리고 있어요!</div>
           </div>
