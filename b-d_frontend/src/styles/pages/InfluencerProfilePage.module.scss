@@ -61,8 +61,8 @@
       margin-bottom: vh(98px);
 
       .profileImage {
-        width: vw(170px);
-        height: vw(170px);
+        width: vw(174px);
+        height: vw(174px);
         border-radius: 50%;
         object-fit: cover;
         border: 2px solid #ddd;
@@ -72,12 +72,12 @@
         position: absolute;
         bottom: 1px;
         right: 3px;
-        background: $color-main;
+        background: $color-red-01;
         color: white;
         border: none;
         border-radius: 50%;
-        width: 30px;
-        height: 30px;
+        width: 39px;
+        height: 39px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -88,12 +88,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 17px;
-        height: 17px;
+        width: 24px;
+        height: 24px;
       }
 
       .cameraButton:hover {
-        background: #0056b3;
+        background: $color-red;
       }
     }
 
