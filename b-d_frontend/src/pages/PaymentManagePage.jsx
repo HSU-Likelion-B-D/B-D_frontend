@@ -102,11 +102,21 @@ const ITEMS_PER_PAGE = 6;
 const PaymentManagePage = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filter, setFilter] = useState("all");
 
+  // 필터링된 리스트
+  const filteredList = sampleList.filter((item) => {
+    if (filter === "all") return true;
+    if (filter === "결제 대기") return item.status === "결제하기";
+    if (filter === "결제 완료") return item.status === "결제 완료";
+    if (filter === "정산 완료") return item.status === "정산 완료";
+    return true;
+  });
+  // 페이지 수는 전체 데이터 기준으로
   const totalPages = Math.ceil(sampleList.length / ITEMS_PER_PAGE);
 
   // 현재 페이지에 보여줄 데이터만 추출
-  const pagedList = sampleList.slice(
+  const pagedList = filteredList.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -131,7 +141,14 @@ const PaymentManagePage = () => {
           />
           {isPaymentModalOpen && (
             <div className={styles.paymentModal}>
-              <PaymentModal />
+              <PaymentModal
+                filter={filter}
+                setFilter={(value) => {
+                  setFilter(value);
+                  //setCurrentPage(1); // 필터 변경 시 1페이지로 이동
+                  setIsPaymentModalOpen(false); // 모달 닫기
+                }}
+              />
             </div>
           )}
         </div>

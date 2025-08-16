@@ -15,6 +15,19 @@
     color: $color-sub-03;
     font-weight: $font_weight_bold;
     line-height: 1.75;
+
+    .titleItem,
+    .menuItem,
+    .lastItem {
+      color: #bdbdbd; // 기본 회색
+      cursor: pointer;
+    }
+
+    .active {
+      color: #222; // 선택 시 검정
+      font-weight: bold;
+    }
+
     .titleItem {
       @include flex(row, center, center);
       font-size: rem(15px);
