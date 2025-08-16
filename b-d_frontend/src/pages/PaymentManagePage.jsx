@@ -1,7 +1,9 @@
 import React from "react";
+import { useState } from "react";
 import styles from "../styles/pages/PaymentManagePage.module.scss";
 import Header from "../components/MainPage/Header";
 import { hamburger_icon, payment_profile } from "@/assets";
+import PaymentModal from "../components/PaymentManage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
 
 const sampleList = [
@@ -74,6 +76,7 @@ const sampleList = [
 ];
 
 const PaymentManagePage = () => {
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -91,6 +94,11 @@ const PaymentManagePage = () => {
               alt="hamburger"
               onClick={() => setIsProfileModalOpen(!isProfileModalOpen)}
             />
+            {isProfileModalOpen && (
+              <div className={styles.profileModal}>
+                <PaymentModal />
+              </div>
+            )}
           </div>
         </div>
         <p className={styles.description}>사장님을 기다리고 있어요!</p>
