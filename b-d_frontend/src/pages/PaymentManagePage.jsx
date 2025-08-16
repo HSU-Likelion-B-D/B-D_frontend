@@ -104,22 +104,23 @@ const PaymentManagePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState("all");
 
+  // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
+  const pagedList = sampleList.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
   // 필터링된 리스트
-  const filteredList = sampleList.filter((item) => {
+  const filteredList = pagedList.filter((item) => {
+    //해당 페이지마다 필터링 가능
     if (filter === "all") return true;
     if (filter === "결제 대기") return item.status === "결제하기";
     if (filter === "결제 완료") return item.status === "결제 완료";
     if (filter === "정산 완료") return item.status === "정산 완료";
     return true;
   });
-  // 페이지 수는 전체 데이터 기준으로
-  const totalPages = Math.ceil(sampleList.length / ITEMS_PER_PAGE);
 
-  // 현재 페이지에 보여줄 데이터만 추출
-  const pagedList = filteredList.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  // 페이지 수는 전체 데이터 기준으로 - 전체 / 6개의 데이터
+  const totalPages = Math.ceil(sampleList.length / ITEMS_PER_PAGE);
 
   return (
     <div className={styles.container}>
@@ -145,7 +146,6 @@ const PaymentManagePage = () => {
                 filter={filter}
                 setFilter={(value) => {
                   setFilter(value);
-                  //setCurrentPage(1); // 필터 변경 시 1페이지로 이동
                   setIsPaymentModalOpen(false); // 모달 닫기
                 }}
               />
@@ -155,7 +155,7 @@ const PaymentManagePage = () => {
       </div>
       <div className={styles.description}>사장님을 기다리고 있어요!</div>
       <div className={styles.listWrap}>
-        {pagedList.map((item) => (
+        {filteredList.map((item) => (
           <PaymentListItem
             key={item.id}
             imgSrc={item.imgSrc}
