@@ -1,0 +1,31 @@
+@use "../../variables" as *;
+
+.container {
+  min-width: vw(124px);
+  width: max-content;
+  padding: vh(9px) vw(14px);
+  z-index: 1000;
+  background-color: $color-white;
+  border-radius: 22px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+  .contents {
+    width: 100%;
+    @include flex(column, center, center);
+    font-size: rem(15px);
+    color: $color-sub-01;
+    font-weight: $font_weight_semibold;
+    line-height: 2.5;
+    .item {
+      @include flex(row, center, center);
+      width: 100%;
+      cursor: pointer;
+      border-bottom: 1px solid $color-sub-01;
+      &:last-child {
+        border-bottom: none;
+      }
+      &.active {
+        color: $color-sub-03;
+      }
+    }
+  }
+}

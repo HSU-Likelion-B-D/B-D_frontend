@@ -22,6 +22,13 @@ import pay_card from "./pay-card.svg";
 import pay_transfer from "./pay-transfer.svg";
 import pay_easy from "./pay-easy.svg";
 import pay_lion from "./pay-lion.svg";
+import influencer_profile from "./influencer-profile.svg";
+import influencer_profile_right from "./influencer-profile-right.svg";
+import dilly_right from "./dilly-right.svg";
+import star_icon_red from "./star-icon-red.svg";
+import logo_red from "./logo-red.svg";
+import dilly_left from "./dilly-left.svg";
+
 export {
   logo,
   eye,
@@ -47,4 +54,11 @@ export {
   pay_transfer,
   pay_easy,
   pay_lion,
+  influencer_profile,
+  influencer_profile_right,
+  dilly_right,
+  star_icon_red,
+  logo_red,
+  dilly_left,
+
 };
