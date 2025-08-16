@@ -17,6 +17,7 @@
     line-height: 1.75;
     .titleItem {
       @include flex(row, center, center);
+      font-size: rem(15px);
       padding-bottom: vh(12px);
       padding-top: vh(20px);
       width: 100%;
