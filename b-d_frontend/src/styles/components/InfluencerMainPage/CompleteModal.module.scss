@@ -1,0 +1,77 @@
+@use "../../variables" as *;
+
+.container {
+  min-width: vw(857px);
+  width: max-content;
+  background-color: white;
+  border-radius: vw(22px);
+  padding: vh(104px) vw(127px);
+  @include flex(column, center, center);
+  .content {
+    width: 100%;
+    @include flex(column, center, center);
+    .title {
+      font-size: rem(26px);
+      font-weight: $font_weight_bold;
+      color: $color-sub-03;
+      margin-bottom: vh(18px);
+      .highlight {
+        color: $color-main;
+      }
+    }
+    .subTitle {
+      font-size: rem(20px);
+      color: #929292;
+      line-height: 1.75;
+      margin-bottom: vh(50px);
+    }
+    .input {
+      width: vw(603px);
+      padding: vh(17px) vw(18px);
+      border: none;
+      border-radius: vw(12px);
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+      font-size: rem(20px);
+      line-height: 1.75;
+      color: $color-red-01;
+      margin-bottom: vh(60px);
+      &::placeholder {
+        color: $color-sub-01;
+        font-size: rem(20px);
+        line-height: 1.75;
+      }
+    }
+    .description {
+      font-size: rem(20px);
+      color: $color-red-01;
+      line-height: 1.75;
+      margin-bottom: vh(23px);
+    }
+    .buttonContainer {
+      width: 100%;
+      @include flex(row, center, center, vw(45px));
+      .cancelButton,
+      .sendButton {
+        width: vw(222px);
+        padding: vh(16px) 0;
+        color: white;
+        border: none;
+        font-size: rem(16px);
+        cursor: pointer;
+        line-height: 1.75;
+      }
+      .cancelButton {
+        background: $color-sub-01;
+      }
+      .sendButton {
+        background: $color-red-01;
+
+        &.disabled {
+          background: $color-red-02;
+          color: $color-sub-03;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

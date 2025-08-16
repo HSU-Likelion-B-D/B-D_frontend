@@ -5,19 +5,19 @@ import Header from "@/components/InfluencerMainPage/Header";
 import MatchingList from "@/components/InfluencerMainPage/MatchingList";
 import CampaignManagement from "@/components/InfluencerMainPage/CampaignManagement";
 import NotificationModal from "@/components/InfluencerMainPage/NotificationModal";
-import RateModal from "@/components/InfluencerMainPage/RateModal";
+import CompleteModal from "@/components/InfluencerMainPage/CompleteModal";
 import { useNavigate } from "react-router-dom";
 
 export default function InfluencerMainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
-  const [isRateModalOpen, setIsRateModalOpen] = useState(true);
+  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isNotificationModalOpen || isRateModalOpen) {
+    if (isNotificationModalOpen || isCompleteModalOpen) {
       window.scrollTo({ top: 0 });
     }
-  }, [isNotificationModalOpen, isRateModalOpen]);
+  }, [isNotificationModalOpen, isCompleteModalOpen]);
 
   return (
     <div className={styles.container}>
@@ -60,9 +60,9 @@ export default function InfluencerMainPage() {
           />
         </div>
       )}
-      {isRateModalOpen && (
+      {isCompleteModalOpen && (
         <div className={styles.modalContainer}>
-          <RateModal setIsRateModalOpen={setIsRateModalOpen} />
+          <CompleteModal setIsCompleteModalOpen={setIsCompleteModalOpen} />
         </div>
       )}
     </div>
