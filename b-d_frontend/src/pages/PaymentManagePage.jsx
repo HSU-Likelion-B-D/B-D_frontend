@@ -137,7 +137,7 @@ const PaymentManagePage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <Header isCreateProposalPage={true} />
+        <Header />
       </div>
       <div className={styles.titleContainer}>
         <div className={styles.subhamContainer}>
