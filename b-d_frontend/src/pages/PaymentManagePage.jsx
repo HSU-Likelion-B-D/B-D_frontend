@@ -5,6 +5,7 @@ import Header from "../components/MainPage/Header";
 import { hamburger_icon, payment_profile } from "@/assets";
 import PaymentModal from "../components/PaymentManage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
+import Pagination from "../components/PaymentManage/Pagination";
 
 const sampleList = [
   {
@@ -101,8 +102,8 @@ const PaymentManagePage = () => {
             </div>
           )}
         </div>
-        <p className={styles.description}>사장님을 기다리고 있어요!</p>
       </div>
+      <div className={styles.description}>사장님을 기다리고 있어요!</div>
       <div className={styles.listWrap}>
         {sampleList.map((item) => (
           <PaymentListItem
@@ -122,6 +123,11 @@ const PaymentManagePage = () => {
           />
         ))}
       </div>
+      <Pagination
+        currentPage={1}
+        totalPages={5}
+        onPageChange={(page) => console.log("Page changed to:", page)}
+      />
     </div>
   );
 };

@@ -44,26 +44,28 @@
       top: 0;
       right: vw(75px); //오른쪽에 위치
       z-index: 2;
-    }
-    .hamburgerIcon {
-      width: vw(29px);
-      height: vw(29px);
-      cursor: pointer;
-      margin: 0;
-    }
-    .paymentModal {
-      z-index: 1000;
-      position: absolute;
-      top: 44px;
-      right: 0;
-      left: auto;
-      z-index: 10;
-    }
 
+      .hamburgerIcon {
+        width: vw(29px);
+        height: vw(29px);
+        cursor: pointer;
+        margin: 0;
+      }
+      .paymentModal {
+        z-index: 1000;
+        position: absolute;
+        top: 44px;
+        right: 0;
+        left: auto;
+        z-index: 10;
+      }
+    }
     .description {
       font-size: rem(20px);
-      color: $color-sub-02;
+      color: $color-sub-01;
+      font-weight: $font_weight_regular;
       margin-top: 0;
+      margin-bottom: vw(39px);
       text-align: center;
       width: 100%;
       position: absolute;
