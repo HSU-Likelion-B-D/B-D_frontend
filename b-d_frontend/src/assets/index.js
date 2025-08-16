@@ -16,6 +16,7 @@ import store_img from "./store-img.svg";
 import complete_icon from "./complete-icon.svg";
 import camera from "./camera.svg";
 import profile from "./profile.svg";
+import payment_profile from "./payment-profile.svg";
 export {
   logo,
   eye,
@@ -35,4 +36,5 @@ export {
   complete_icon,
   camera,
   profile,
+  payment_profile,
 };

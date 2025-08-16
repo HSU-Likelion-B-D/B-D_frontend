@@ -1,0 +1,58 @@
+@use "../../variables" as *;
+
+.container {
+  width: 100%;
+  padding: vh(22px) vw(9px);
+  z-index: 1000;
+  background-color: $color-white;
+  border-radius: 22px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+  .contents {
+    width: vw(140px);
+    height: vw(180px);
+    font-size: rem(15px);
+    @include flex(column, center, center);
+    color: $color-sub-03;
+    font-weight: $font_weight_bold;
+    line-height: 1.75;
+
+    .titleItem,
+    .menuItem,
+    .lastItem {
+      color: #bdbdbd; // 기본 회색
+      cursor: pointer;
+    }
+
+    .active {
+      color: #222; // 선택 시 검정
+      font-weight: bold;
+    }
+
+    .titleItem {
+      @include flex(row, center, center);
+      font-size: rem(15px);
+      padding-bottom: vh(12px);
+      padding-top: vh(20px);
+      width: 100%;
+      cursor: pointer;
+      border-bottom: 1px solid $color-sub-02;
+    }
+    .menuItem {
+      @include flex(row, center, center);
+      padding-bottom: vh(10px);
+      padding-top: vh(10px);
+      font-size: rem(15px);
+      width: 100%;
+      cursor: pointer;
+      border-bottom: 1px solid $color-sub-02;
+    }
+    .lastItem {
+      @include flex(row, center, center);
+      padding-bottom: vh(10px);
+      padding-top: vh(10px);
+      font-size: rem(15px);
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+}
