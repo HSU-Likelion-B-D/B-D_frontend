@@ -1,12 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/pages/PaymentManagePage.module.scss";
 import Header from "../components/MainPage/Header";
 import { hamburger_icon, payment_profile } from "@/assets";
 import PaymentModal from "../components/PaymentManage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
 import Pagination from "../components/PaymentManage/Pagination";
-
+import PaymentProgressModal from "../components/PaymentManage/PaymentProgressModal";
+import PaymentCompleteModal from "../components/PaymentManage/PaymentCompleteModal";
 const sampleList = [
   {
     id: 1,
@@ -103,6 +104,17 @@ const PaymentManagePage = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState("all");
+  const [isPaymentProgressModalOpen, setIsPaymentProgressModalOpen] =
+    useState(false);
+  const [isPaymentCompleteModalOpen, setIsPaymentCompleteModalOpen] =
+    useState(false);
+
+  // 모달이 열릴 때 스크롤을 최상단으로 이동
+  useEffect(() => {
+    if (isPaymentProgressModalOpen || isPaymentCompleteModalOpen) {
+      window.scrollTo({ top: 0 });
+    }
+  }, [isPaymentProgressModalOpen, isPaymentCompleteModalOpen]);
 
   // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
   const pagedList = sampleList.slice(
@@ -125,7 +137,7 @@ const PaymentManagePage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <Header isCreateProposalPage={true} />
+        <Header />
       </div>
       <div className={styles.titleContainer}>
         <div className={styles.subhamContainer}>
@@ -170,6 +182,7 @@ const PaymentManagePage = () => {
             status={item.status}
             statusColor={item.statusColor}
             dDay={item.dDay}
+            setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
           />
         ))}
       </div>
@@ -178,6 +191,22 @@ const PaymentManagePage = () => {
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
+      {isPaymentProgressModalOpen && (
+        <div className={styles.paymentProgressModal}>
+          <PaymentProgressModal
+            setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
+            setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+          />
+        </div>
+      )}
+
+      {isPaymentCompleteModalOpen && (
+        <div className={styles.paymentCompleteModal}>
+          <PaymentCompleteModal
+            setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+          />
+        </div>
+      )}
     </div>
   );
 };

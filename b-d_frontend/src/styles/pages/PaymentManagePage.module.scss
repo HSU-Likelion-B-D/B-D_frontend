@@ -73,4 +73,24 @@
       top: 100%;
     }
   }
+  .paymentProgressModal {
+    position: fixed;
+    top: 0;
+
+    @include flex(column, center, center);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.24);
+    z-index: 1000;
+  }
+  .paymentCompleteModal {
+    position: fixed;
+    top: 0;
+
+    @include flex(column, center, center);
+    width: 100vw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.24);
+    z-index: 1000;
+  }
 }
