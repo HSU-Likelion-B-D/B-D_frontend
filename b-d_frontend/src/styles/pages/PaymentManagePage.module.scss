@@ -74,7 +74,7 @@
     }
   }
   .paymentProgressModal {
-    position: absolute;
+    position: fixed;
     top: 0;
 
     @include flex(column, center, center);
@@ -84,12 +84,12 @@
     z-index: 1000;
   }
   .paymentCompleteModal {
-    position: absolute;
+    position: fixed;
     top: 0;
 
     @include flex(column, center, center);
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background-color: rgba(0, 0, 0, 0.24);
     z-index: 1000;
   }
