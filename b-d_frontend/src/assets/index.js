@@ -23,6 +23,7 @@ import influencer_profile_right from "./influencer-profile-right.svg";
 import dilly_right from "./dilly-right.svg";
 import star_icon_red from "./star-icon-red.svg";
 import logo_red from "./logo-red.svg";
+import dilly_left from "./dilly-left.svg";
 export {
   logo,
   eye,
@@ -49,4 +50,5 @@ export {
   dilly_right,
   star_icon_red,
   logo_red,
+  dilly_left,
 };
