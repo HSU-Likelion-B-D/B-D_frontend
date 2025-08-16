@@ -1,0 +1,80 @@
+@use "../../variables" as *;
+
+.header {
+  position: relative;
+  width: 100%;
+  @include flex(row, center, space-between, vw(593px));
+  .iconContainer {
+    @include flex(row, space-between, center, vw(45px));
+    .iconBox {
+      position: relative;
+      cursor: pointer;
+
+      .icon {
+        width: vw(45px);
+        height: vw(45px);
+      }
+      .count {
+        position: absolute;
+        top: vw(-16px);
+        left: vw(-11px);
+        background-color: #ff4242;
+        width: vw(38px);
+        height: vw(38px);
+        border-radius: 50%;
+        font-size: vw(15px);
+        font-weight: $font_weight_bold;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+  .logoContainer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    top: vh(5px);
+    .logo {
+      width: vw(59px);
+      height: vh(46px);
+    }
+  }
+  .rightIconContainer {
+    @include flex(row, center, center, vw(30px));
+    .userInfoContainer {
+      @include flex(row, center, center, vw(12px));
+      .userNameContainer {
+        @include flex(row, center, center, 0.3rem);
+        font-size: vw(20px);
+        line-height: 1.75;
+        color: #929292;
+        text-align: center;
+        .userName {
+        }
+      }
+      .profileContainer {
+        .profileIcon {
+          width: vw(49px);
+          height: vw(49px);
+        }
+      }
+    }
+    .hamburgerContainer {
+      position: relative;
+      .hamburgerIcon {
+        width: vw(29px);
+        height: vw(29px);
+        cursor: pointer;
+      }
+      .profileModal {
+        z-index: 1000;
+        position: absolute;
+        top: vw(50px);
+        right: vw(2px);
+      }
+    }
+  }
+}

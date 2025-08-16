@@ -17,7 +17,7 @@ import CompletePage from "./pages/CompletePage";
 import CreateProposalPage from "./pages/CreateProposalPage";
 import PaymentManagePage from "./pages/PaymentManagePage";
 import InfluencerMatchingPage from "./pages/InfluencerMatchingPage";
-
+import InfluencerMainPage from "./pages/InfluencerMainPage";
 
 function App() {
   return (
@@ -38,13 +38,13 @@ function App() {
         </Route>
         <Route element={<MainLayout />}>
           <Route path="/main" element={<MainPage />} />
+          <Route path="/influencer-main" element={<InfluencerMainPage />} />
           <Route path="/create-proposal" element={<CreateProposalPage />} />
           <Route path="/payment-manage" element={<PaymentManagePage />} />
           <Route
             path="/influencer-matching"
             element={<InfluencerMatchingPage />}
           />
-
         </Route>
       </Routes>
     </BrowserRouter>
