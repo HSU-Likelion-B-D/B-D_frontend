@@ -17,12 +17,14 @@
     padding: 0 vw(76px);
   }
   .titleContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    margin-top: vh(94px);
     .subhamContainer {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin: vh(94px) auto 0 auto;
-      min-height: 40px;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -33,31 +35,40 @@
       color: $color-sub-03;
       margin: 0 auto;
       text-align: center;
-      flex: 1;
-      padding: 0 60px;
       .highlight {
         color: $color-main;
       }
     }
     .hamburgerContainer {
       position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
+      top: 0;
+      right: vw(75px); //오른쪽에 위치
       z-index: 2;
     }
     .hamburgerIcon {
-      width: 32px;
-      height: 32px;
+      width: vw(29px);
+      height: vw(29px);
       cursor: pointer;
+      margin: 0;
     }
+    .paymentModal {
+      z-index: 1000;
+      position: absolute;
+      top: 44px;
+      right: 0;
+      left: auto;
+      z-index: 10;
+    }
+
     .description {
       font-size: rem(20px);
       color: $color-sub-02;
       margin-top: 0;
       text-align: center;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 100%;
     }
   }
 }

@@ -76,7 +76,7 @@ const sampleList = [
 ];
 
 const PaymentManagePage = () => {
-  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -87,19 +87,19 @@ const PaymentManagePage = () => {
           <h1 className={styles.subtitle}>
             <span className={styles.highlight}>결제 및 정산</span> 관리하기
           </h1>
-          <div className={styles.hamburgerContainer}>
-            <img
-              className={styles.hamburgerIcon}
-              src={hamburger_icon}
-              alt="hamburger"
-              onClick={() => setIsProfileModalOpen(!isProfileModalOpen)}
-            />
-            {isProfileModalOpen && (
-              <div className={styles.profileModal}>
-                <PaymentModal />
-              </div>
-            )}
-          </div>
+        </div>
+        <div className={styles.hamburgerContainer}>
+          <img
+            className={styles.hamburgerIcon}
+            src={hamburger_icon}
+            alt="hamburger"
+            onClick={() => setIsPaymentModalOpen(!isPaymentModalOpen)}
+          />
+          {isPaymentModalOpen && (
+            <div className={styles.paymentModal}>
+              <PaymentModal />
+            </div>
+          )}
         </div>
         <p className={styles.description}>사장님을 기다리고 있어요!</p>
       </div>
