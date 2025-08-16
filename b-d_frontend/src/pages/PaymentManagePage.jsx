@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/pages/PaymentManagePage.module.scss";
 import Header from "../components/MainPage/Header";
 import { hamburger_icon, payment_profile } from "@/assets";
@@ -108,6 +108,14 @@ const PaymentManagePage = () => {
     useState(false);
   const [isPaymentCompleteModalOpen, setIsPaymentCompleteModalOpen] =
     useState(false);
+
+  // 모달이 열릴 때 스크롤을 최상단으로 이동
+  useEffect(() => {
+    if (isPaymentProgressModalOpen || isPaymentCompleteModalOpen) {
+      window.scrollTo({ top: 0 });
+    }
+  }, [isPaymentProgressModalOpen, isPaymentCompleteModalOpen]);
+
   // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
   const pagedList = sampleList.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
