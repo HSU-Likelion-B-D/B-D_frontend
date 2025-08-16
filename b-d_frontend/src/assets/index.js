@@ -18,6 +18,8 @@ import complete_icon from "./complete-icon.svg";
 import camera from "./camera.svg";
 import profile from "./profile.svg";
 import payment_profile from "./payment-profile.svg";
+import influencer_profile from "./influencer-profile.svg";
+import influencer_profile_right from "./influencer-profile-right.svg";
 export {
   logo,
   eye,
@@ -39,4 +41,6 @@ export {
   camera,
   profile,
   payment_profile,
+  influencer_profile,
+  influencer_profile_right,
 };
