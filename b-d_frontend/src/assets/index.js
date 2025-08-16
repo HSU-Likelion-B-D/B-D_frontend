@@ -18,6 +18,9 @@ import complete_icon from "./complete-icon.svg";
 import camera from "./camera.svg";
 import profile from "./profile.svg";
 import payment_profile from "./payment-profile.svg";
+import pay_card from "./pay-card.svg";
+import pay_transfer from "./pay-transfer.svg";
+import pay_easy from "./pay-easy.svg";
 export {
   logo,
   eye,
@@ -39,4 +42,7 @@ export {
   camera,
   profile,
   payment_profile,
+  pay_card,
+  pay_transfer,
+  pay_easy,
 };

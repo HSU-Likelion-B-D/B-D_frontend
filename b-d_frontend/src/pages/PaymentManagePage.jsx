@@ -6,7 +6,7 @@ import { hamburger_icon, payment_profile } from "@/assets";
 import PaymentModal from "../components/PaymentManage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
 import Pagination from "../components/PaymentManage/Pagination";
-
+import PaymentProgressModal from "../components/PaymentManage/PaymentProgressModal";
 const sampleList = [
   {
     id: 1,
@@ -103,7 +103,8 @@ const PaymentManagePage = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState("all");
-
+  const [isPaymentProgressModalOpen, setIsPaymentProgressModalOpen] =
+    useState(false);
   // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
   const pagedList = sampleList.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -170,6 +171,7 @@ const PaymentManagePage = () => {
             status={item.status}
             statusColor={item.statusColor}
             dDay={item.dDay}
+            setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
           />
         ))}
       </div>
@@ -178,6 +180,13 @@ const PaymentManagePage = () => {
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
+      {isPaymentProgressModalOpen && (
+        <div className={styles.paymentProgressModal}>
+          <PaymentProgressModal
+            setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
+          />
+        </div>
+      )}
     </div>
   );
 };

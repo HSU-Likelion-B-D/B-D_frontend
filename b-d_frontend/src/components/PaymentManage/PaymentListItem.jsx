@@ -26,8 +26,12 @@ const PaymentListItem = ({
   dDay,
   dDayColor = "#e53935",
   onClick,
+  setIsPaymentProgressModalOpen,
 }) => (
-  <div className={styles.listItem} onClick={onClick}>
+  <div
+    className={styles.listItem}
+    onClick={() => setIsPaymentProgressModalOpen(true)}
+  >
     <img src={imgSrc} alt="프로필" className={styles.profileImg} />
     <div className={styles.itemContent}>
       <div className={styles.itemTitle}>{title}</div>

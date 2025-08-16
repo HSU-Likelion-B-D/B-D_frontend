@@ -1,0 +1,122 @@
+@use "../../variables" as *;
+
+.container {
+  width: vw(857px);
+  background-color: white;
+  border-radius: vw(22px);
+  padding: vh(57px) 0;
+  @include flex(column, center, center);
+  .content {
+    width: 100%;
+    @include flex(column, center, center);
+    .title {
+      font-size: rem(26px);
+      font-weight: $font_weight_bold;
+      color: $color-sub-03;
+    }
+    .subTitle {
+      font-size: rem(20px);
+      color: #929292;
+      line-height: 1.75;
+      margin-bottom: vh(4px);
+    }
+
+    .payMethodWrap {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 36px;
+      margin-bottom: 36px;
+    }
+
+    .payMethod {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.15s;
+      gap: 88px;
+      margin-top: vh(54px);
+    }
+
+    .payMethod:active,
+    .payMethod.selected {
+      transform: scale(1.06);
+    }
+
+    .payIcon {
+      width: vw(119px);
+      height: vw(119px);
+      border-radius: 50%;
+      background: #e3f2fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0;
+      box-shadow: 0 2px 8px rgba(33, 150, 243, 0.08);
+      border: 2.5px solid #2196f3;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .payMethod.selected .payIcon {
+      border: 3.5px solid #1976d2;
+      box-shadow: 0 4px 16px rgba(33, 150, 243, 0.18);
+    }
+
+    .payLabel {
+      font-size: 1.08rem;
+      color: #1976d2;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-top: 0;
+    }
+
+    .agreeWrap {
+      margin-top: 20px;
+      .agreeItem {
+        color: #888;
+        font-size: rem(20px);
+        margin-bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .agreeCheckbox {
+        accent-color: #2196f3;
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+      }
+
+      .agreeText {
+        font-size: 0.98rem;
+        color: #666;
+      }
+    }
+
+    .buttonContainer {
+      margin-top: vh(34px);
+      width: 100%;
+      @include flex(row, center, center, vw(45px));
+      .cancelButton,
+      .sendButton {
+        width: vw(222px);
+        padding: vh(16px) 0;
+        color: white;
+        border: none;
+        font-size: rem(16px);
+        cursor: pointer;
+        line-height: 1.75;
+      }
+      .cancelButton {
+        background: $color-sub-01;
+      }
+      .sendButton {
+        background: $color-main;
+      }
+    }
+  }
+}
