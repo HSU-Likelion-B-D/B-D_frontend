@@ -74,10 +74,43 @@ const sampleList = [
     statusColor: "#0c9ce9",
     dDay: undefined,
   },
+  {
+    id: 7,
+    imgSrc: payment_profile,
+    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
+    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
+    price: "110,000",
+    period: "25.10.01~25.12.31",
+    status: "결제 완료",
+    statusColor: "#43a047",
+    dDay: undefined,
+  },
+  {
+    id: 8,
+    imgSrc: payment_profile,
+    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
+    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
+    price: "110,000",
+    period: "25.10.01~25.12.31",
+    status: "정산 완료",
+    statusColor: "#bdbdbd",
+    dDay: undefined,
+  },
 ];
 
+const ITEMS_PER_PAGE = 6;
 const PaymentManagePage = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(sampleList.length / ITEMS_PER_PAGE);
+
+  // 현재 페이지에 보여줄 데이터만 추출
+  const pagedList = sampleList.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -105,7 +138,7 @@ const PaymentManagePage = () => {
       </div>
       <div className={styles.description}>사장님을 기다리고 있어요!</div>
       <div className={styles.listWrap}>
-        {sampleList.map((item) => (
+        {pagedList.map((item) => (
           <PaymentListItem
             key={item.id}
             imgSrc={item.imgSrc}
@@ -124,9 +157,9 @@ const PaymentManagePage = () => {
         ))}
       </div>
       <Pagination
-        currentPage={1}
-        totalPages={5}
-        onPageChange={(page) => console.log("Page changed to:", page)}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
       />
     </div>
   );
