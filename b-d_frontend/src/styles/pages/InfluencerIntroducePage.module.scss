@@ -37,10 +37,10 @@
 
 .description {
   font-size: 20px;
-  color: #666; // 서브 텍스트 색상
+  color: $color-sub-02; // 서브 텍스트 색상
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: vh(20px);
+  margin-bottom: vh(30px);
 }
 
 .highlight {
@@ -50,7 +50,7 @@
 
 .keyDescription {
   font-size: 20px;
-  color: #666; // 서브 텍스트 색상
+  color: $color-sub-02; // 서브 텍스트 색상
   text-align: center;
   margin-top: vh(67px);
   margin-bottom: vh(40px);
@@ -85,7 +85,7 @@
       color: $color-sub-03;
     }
     &::placeholder {
-      color: $color-sub-01;
+      color: $color-sub-02;
     }
   }
 }
@@ -172,7 +172,7 @@
 
 .submitBtn {
   display: block;
-  margin: 32px auto vh(52px) auto;
+  margin: 30px auto vh(52px) auto;
   width: 362px;
   height: 60px;
   background: $color-sub-01; // 비활성화(회색)
