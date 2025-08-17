@@ -1,0 +1,217 @@
+@use "../variables" as *;
+
+/* Input 컴포넌트의 xButton을 이 페이지에서만 더 오른쪽으로 이동 */
+.accountInputGroup .xButton {
+  right: 30px !important;
+}
+
+.whole {
+  height: 100vh; // 전체 높이를 100vh로 설정
+  .container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+    padding-bottom: 50px;
+
+    .whiteBox {
+      background-color: rgba(255, 255, 255, 0.8); // 투명도
+      width: vw(1187px);
+      height: auto;
+      border-radius: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+    }
+
+    .logo {
+      width: 60px;
+      margin: 10px auto 66px auto;
+      display: block;
+    }
+
+    .subtitle {
+      font-size: rem(46px);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: vh(20px);
+      color: $color-sub-03;
+    }
+
+    .highlight {
+      color: $color-red-01; // 강조 색상
+      font-weight: bold;
+    }
+
+    .description {
+      font-size: rem(20px);
+      color: $color-sub-02; // 서브 텍스트 색상
+      text-align: center;
+      margin-bottom: vh(52px);
+    }
+
+    .profileSection {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: vh(98px);
+
+      .profileImage {
+        width: vw(174px);
+        height: vw(174px);
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ddd;
+      }
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      text-align: left;
+      font-size: 1rem;
+    }
+    .label span {
+      color: red;
+    }
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      //  gap: 16px;
+
+      .accountInputGroup {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: vh(110px);
+        position: relative;
+        z-index: 10;
+      }
+      .bankSelect {
+        height: vw(69px);
+        min-width: vw(170px);
+        text-align: left;
+        border-radius: 12px;
+        border: 1px solid #eee;
+        font-size: rem(16px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        padding: 0 18px;
+        background: #fff;
+        margin-right: 8px;
+        outline: none;
+        transition: border 0.2s;
+        position: relative;
+        z-index: 20;
+      }
+      .bankSelect option:disabled,
+      .bankPlaceholder {
+        color: $color-sub-01;
+      }
+      .bankSelect:focus {
+        border: 1.5px solid $color-red-01;
+      }
+      .placeholder {
+        color: $color-sub-01;
+      }
+      .accountInput {
+        width: vw(430px);
+        height: vw(69px);
+        font-size: rem(16px);
+        border-radius: 12px;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        padding: 0 18px;
+        background: #fff;
+        outline: none;
+        transition: border 0.2s;
+      }
+      .accountInput:focus {
+        border: 1.5px solid $color-red-01;
+      }
+      .profileXButton {
+        //right: 40px; // 더 왼쪽으로 이동
+      }
+
+      .input {
+        width: vw(433px);
+        height: vh(69px);
+        padding: 10px 200px 10px 10px; // 오른쪽 패딩 넉넉히 확보
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        font-size: rem(20px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      .profileXButton {
+        right: 40px; // 더 왼쪽으로 이동
+      }
+      .errorInput {
+        border: 1px solid #f44336; // 오류 시 테두리 색상
+      }
+
+      .successInput {
+        border: 1px solid #4caf50; // 성공 시 테두리 색상
+      }
+
+      .errorMessage {
+        color: #f44336; // 오류 메시지 색상
+        font-size: 0.9rem;
+        margin-top: 4px;
+        text-align: left;
+        margin-left: 2px;
+      }
+
+      .successMessage {
+        color: #4caf50; // 성공 메시지 색상
+        font-size: 0.9rem;
+        margin-top: 4px;
+        margin-left: 2px;
+      }
+    }
+    .signupLink {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.95rem;
+      color: $color-sub-03;
+      margin: 53px 0 8px 0;
+      gap: 50px;
+      .findPwd,
+      .loginLink {
+        cursor: pointer;
+      }
+
+      .divider {
+        color: #bbb;
+      }
+    }
+
+    .submitBtn {
+      display: block;
+      margin: 32px auto vh(52px) auto;
+      width: 362px;
+      height: 60px;
+      background: $color-red-01;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      &.disabled {
+        background-color: #ddd; // 버튼 비활성화 시 색상
+        cursor: not-allowed;
+      }
+    }
+  }
+}

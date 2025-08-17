@@ -21,6 +21,7 @@ import InfluencerMainPage from "./pages/InfluencerMainPage";
 import BusinessMatchingPage from "./pages/BusinessMatchingPage";
 import InfluencerCreateProposalPage from "./pages/InfluencerCreateProposalPage";
 import InfluencerProfilePage from "./pages/InfluencerProfilePage";
+import InfluencerAccountPage from "./pages/InfluencerAccountPage";
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
           <Route
             path="/influencer-profile"
             element={<InfluencerProfilePage />}
+          />
+          <Route
+            path="/influencer-account"
+            element={<InfluencerAccountPage />}
           />
         </Route>
         <Route element={<SimpleLayout />}>
