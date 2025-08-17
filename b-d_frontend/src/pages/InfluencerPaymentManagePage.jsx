@@ -6,8 +6,8 @@ import { hamburger_icon, payment_profile } from "@/assets";
 import PaymentModal from "../components/PaymentManage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
 import Pagination from "../components/PaymentManage/Pagination";
-import PaymentProgressModal from "../components/PaymentManage/PaymentProgressModal";
-import PaymentCompleteModal from "../components/PaymentManage/PaymentCompleteModal";
+import InfluencerPaymentProgressModal from "../components/InfluencerPaymentManagePage/InfluencerPaymentProgressModal";
+import InfluencerPaymentStarModal from "../components/InfluencerPaymentManagePage/InfluencerPaymentStarModal";
 const sampleList = [
   {
     id: 1,
@@ -193,7 +193,7 @@ const InfluencerPaymentManagePage = () => {
       />
       {isPaymentProgressModalOpen && (
         <div className={styles.paymentProgressModal}>
-          <PaymentProgressModal
+          <InfluencerPaymentProgressModal
             setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
           />
@@ -202,7 +202,7 @@ const InfluencerPaymentManagePage = () => {
 
       {isPaymentCompleteModalOpen && (
         <div className={styles.paymentCompleteModal}>
-          <PaymentCompleteModal
+          <InfluencerPaymentStarModal
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
           />
         </div>

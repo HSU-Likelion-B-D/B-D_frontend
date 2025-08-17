@@ -29,6 +29,7 @@ import star_icon_red from "./star-icon-red.svg";
 import logo_red from "./logo-red.svg";
 import dilly_left from "./dilly-left.svg";
 import influencer_pay_progress from "./influencer-pay-progress.svg";
+
 export {
   logo,
   eye,
