@@ -20,3 +20,9 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.pagination button.redActive {
+  color: $color-red-01; // 빨간색 활성화된 버튼 색상
+  font-weight: bold;
+  cursor: pointer;
+}

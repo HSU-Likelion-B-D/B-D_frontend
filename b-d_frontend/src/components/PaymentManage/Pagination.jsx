@@ -1,14 +1,21 @@
 import React from "react";
 import styles from "../../styles/components/PaymentManagePage/Pagination.module.scss";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+  redCurrentPage,
+}) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   return (
     <div className={styles.pagination}>
       {pages.map((page) => (
         <button
           key={page}
-          className={page === currentPage ? styles.active : ""}
+          className={`${page === currentPage ? styles.active : ""} ${
+            page === redCurrentPage ? styles.redActive : ""
+          }`}
           onClick={() => onPageChange(page)}
         >
           {page}

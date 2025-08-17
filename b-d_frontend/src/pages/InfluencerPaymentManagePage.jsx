@@ -187,7 +187,7 @@ const InfluencerPaymentManagePage = () => {
         ))}
       </div>
       <Pagination
-        currentPage={currentPage}
+        redCurrentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
