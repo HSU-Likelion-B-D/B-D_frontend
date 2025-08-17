@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import styles from "../styles/pages/PaymentManagePage.module.scss";
+import styles from "../styles/pages/InfluencerPaymentManagePage.module.scss";
 import Header from "../components/InfluencerMainPage/Header";
 import { hamburger_icon, payment_profile } from "@/assets";
 import PaymentModal from "../components/PaymentManage/PaymentModal";
@@ -17,7 +17,7 @@ const sampleList = [
     price: "110,000",
     period: "25.10.01~25.12.31",
     status: "결제하기",
-    statusColor: "#0c9ce9",
+    statusColor: "#FF4242",
     dDay: "D-3",
   },
   {
@@ -50,7 +50,7 @@ const sampleList = [
     price: "110,000",
     period: "25.10.01~25.12.31",
     status: "결제하기",
-    statusColor: "#0c9ce9",
+    statusColor: "#FF4242",
     dDay: undefined,
   },
   {
@@ -61,7 +61,7 @@ const sampleList = [
     price: "110,000",
     period: "25.10.01~25.12.31",
     status: "결제하기",
-    statusColor: "#0c9ce9",
+    statusColor: "#FF4242",
     dDay: undefined,
   },
   {
@@ -72,7 +72,7 @@ const sampleList = [
     price: "110,000",
     period: "25.10.01~25.12.31",
     status: "결제하기",
-    statusColor: "#0c9ce9",
+    statusColor: "#FF4242",
     dDay: undefined,
   },
   {
@@ -174,7 +174,7 @@ const InfluencerPaymentManagePage = () => {
             title={item.title}
             desc={item.desc}
             price={
-              <span style={{ color: "#2196f3", fontWeight: 700 }}>
+              <span style={{ color: "#FF4242", fontWeight: 700 }}>
                 {item.price}
               </span>
             }
