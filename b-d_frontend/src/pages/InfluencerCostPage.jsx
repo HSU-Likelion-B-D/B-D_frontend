@@ -62,7 +62,7 @@ const InfluencerCostPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
-        <ProgressBar progress={65} />
+        <ProgressBar progress={100} />
         <img src={logo} className={styles.logo} alt="logo" />
         <h1 className={styles.subtitle}>#저는 이런걸 원해요</h1>
         <p className={styles.description}>거의 다 왔어요! 조금만 더 힘내요!</p>
