@@ -113,9 +113,42 @@
 .middleDivider {
   width: vw(416px);
   height: 1px;
-  background: #e0e0e0;
+  background: $color-sub-02;
   margin: 40px 0;
   border: none;
+}
+
+.followerGroup {
+  .label {
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+    font-size: 1rem;
+  }
+  .label span {
+    color: red;
+  }
+
+  width: vw(693px);
+  margin-bottom: 20px;
+  .radioGroup {
+    display: flex;
+    flex-direction: row;
+    gap: vw(50px);
+    margin-top: 10px;
+    .radioLabel {
+      display: flex;
+      align-items: center;
+      font-size: rem(13px);
+      color: $color-sub-03;
+      cursor: pointer;
+      input {
+        margin-right: 10px;
+        width: vw(18px); // 라디오 버튼 크기 조정
+        height: vw(18px); // 라디오 버튼 크기 조정
+      }
+    }
+  }
 }
 
 .signupLink {

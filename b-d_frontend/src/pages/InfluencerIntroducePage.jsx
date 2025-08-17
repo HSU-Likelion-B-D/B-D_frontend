@@ -107,24 +107,59 @@ const InfluencerIntroducePage = () => {
           </div>
         )}
         <div className={styles.middleDivider}></div>
-        <p className={styles.keyDescription}>#이런_분위기의_가게를_운영해요.</p>
-        <div className={styles.buttonGroup}>
-          {atmosphere.map((kw) => (
-            <SelectButton
-              key={kw}
-              selected={selected.includes(kw)}
-              onClick={() => handleClick(kw)}
-              error={showError}
-            >
-              #{kw}
-            </SelectButton>
-          ))}
-        </div>
-        {showError && (
-          <div className={styles.errorMsg}>
-            한개 이상의 항목을 선택하여주세요.
+
+        <div className={styles.followerGroup}>
+          <label className={styles.label} style={{ marginBottom: 12 }}>
+            팔로워수<span>*</span>
+          </label>
+          <div className={styles.radioGroup}>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="1000"
+                onChange={handleInputChange}
+              />
+              1천 미만
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="5000"
+                onChange={handleInputChange}
+              />
+              1천~5천
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="5000"
+                onChange={handleInputChange}
+              />
+              5천~1만
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="10000"
+                onChange={handleInputChange}
+              />
+              1만~10만
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="5000"
+                onChange={handleInputChange}
+              />
+              10만이상
+            </label>
           </div>
-        )}
+        </div>
 
         <div className={styles.signupLink}>
           <span
