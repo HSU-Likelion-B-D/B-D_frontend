@@ -16,21 +16,6 @@ const species = [
   "기타",
 ];
 
-const atmosphere = [
-  "감성적인",
-  "빈티지",
-  "러블리",
-  "힙한",
-  "직장인",
-  "자연친화적",
-  "조용한",
-  "활기찬",
-  "10대",
-  "20대",
-  "가족모임",
-  "단체",
-];
-
 const InfluencerIntroducePage = () => {
   const [formData, setFormData] = useState({
     infname: "",
@@ -159,6 +144,71 @@ const InfluencerIntroducePage = () => {
               10만이상
             </label>
           </div>
+        </div>
+
+        <div className={styles.followerGroup}>
+          <label className={styles.label} style={{ marginBottom: 12 }}>
+            주 업로드 횟수<span>*</span>
+          </label>
+          <div className={styles.radioGroup}>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="1000"
+                onChange={handleInputChange}
+              />
+              1회 미만
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="5000"
+                onChange={handleInputChange}
+              />
+              1회~2회
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="5000"
+                onChange={handleInputChange}
+              />
+              3회~4회
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="10000"
+                onChange={handleInputChange}
+              />
+              5회~6회
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="followers"
+                value="5000"
+                onChange={handleInputChange}
+              />
+              7회이상
+            </label>
+          </div>
+        </div>
+        <div className={styles.inputGroup}>
+          <Input
+            className={styles.input}
+            name="infname"
+            value={formData.ifname}
+            onChange={handleInputChange}
+            placeholder="플랫폼 URL 입력 (프로필 용도)"
+            required
+            showClearButton={true}
+            onClear={() => setFormData((prev) => ({ ...prev, ifname: "" }))}
+          />
         </div>
 
         <div className={styles.signupLink}>
