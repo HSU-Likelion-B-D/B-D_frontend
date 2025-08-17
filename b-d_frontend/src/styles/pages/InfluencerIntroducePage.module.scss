@@ -23,7 +23,7 @@
 
 .logo {
   width: 60px;
-  margin: 10px auto 66px auto;
+  margin: 10px auto 30px auto;
   display: block;
 }
 
@@ -31,7 +31,7 @@
   font-size: 2rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: vh(20px);
   color: $color-sub-03;
 }
 
@@ -39,8 +39,8 @@
   font-size: 20px;
   color: $color-sub-02; // 서브 텍스트 색상
   text-align: center;
-  margin-top: vh(20px);
-  margin-bottom: vh(30px);
+  //  margin-top: vh(20px);
+  //margin-bottom: vh(30px);
 }
 
 .highlight {
