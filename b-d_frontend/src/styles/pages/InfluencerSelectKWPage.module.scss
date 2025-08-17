@@ -39,7 +39,7 @@
   font-size: 20px;
   color: #666; // 서브 텍스트 색상
   text-align: center;
-  margin-top: 20px;
+  //margin-top: 20px;
   margin-bottom: 30px;
 }
 
@@ -61,7 +61,8 @@
   grid-template-columns: repeat(4, 1fr); // 한줄에 4개
   gap: vh(6px) vw(5px); // 행, 열 간격
   justify-items: center; // 버튼 가운데 정렬
-  margin: 24px 0;
+  //margin: 24px 0;
+  margin-bottom: vh(90px);
 }
 .errorMsg {
   color: red;
@@ -76,8 +77,9 @@
 .middleDivider {
   width: vw(416px);
   height: 1px;
-  background: #e0e0e0;
-  margin: 40px 0;
+  background: $color-sub-02;
+  //margin-bottom: vh(52px);
+  // margin: 40px 0;
   border: none;
 }
 
