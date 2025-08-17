@@ -62,12 +62,13 @@
   gap: vh(6px) vw(5px); // 행, 열 간격
   justify-items: center; // 버튼 가운데 정렬
   //margin: 24px 0;
-  margin-bottom: vh(90px);
+  margin-bottom: vh(29px);
 }
 .errorMsg {
   color: red;
   font-size: 0.875rem;
   margin-top: 8px;
+  margin-bottom: 36px;
 }
 
 .errorInput {
@@ -80,6 +81,7 @@
   background: $color-sub-02;
   //margin-bottom: vh(52px);
   // margin: 40px 0;
+  margin-top: 36px;
   border: none;
 }
 
