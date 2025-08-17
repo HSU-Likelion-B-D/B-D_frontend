@@ -26,6 +26,7 @@ import InfluencerIntroducePage from "./pages/InfluencerIntroducePage";
 import InfluencerSelectKWPage from "./pages/InfluencerSelectKWPage";
 import InfluencerCostPage from "./pages/InfluencerCostPage";
 import InfluencerCompletePage from "./pages/InfluencerCompletePage";
+import InfluencerPaymentManagePage from "./pages/InfluencerPaymentManagePage";
 
 function App() {
   return (
@@ -79,6 +80,10 @@ function App() {
             element={<InfluencerMatchingPage />}
           />
           <Route path="/business-matching" element={<BusinessMatchingPage />} />
+          <Route
+            path="/influencer-payment-manage"
+            element={<InfluencerPaymentManagePage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

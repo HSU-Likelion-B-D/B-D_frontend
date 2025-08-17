@@ -45,14 +45,7 @@ const PaymentListItem = ({
         <span
           className={styles.statusDot}
           style={{
-            background:
-              status === "결제하기"
-                ? "#0c9ce9"
-                : status === "결제 완료"
-                ? "#42bc54"
-                : status === "정산 완료"
-                ? "#929292"
-                : undefined,
+            background: statusColor,
           }}
         />
       </div>
