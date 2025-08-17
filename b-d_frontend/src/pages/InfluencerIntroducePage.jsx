@@ -6,13 +6,13 @@ import logo from "../assets/logo.svg";
 import SelectButton from "../components/SelectKWPage/SelectButton";
 import { useNavigate } from "react-router-dom";
 const species = [
-  "음식/음료",
-  "쇼핑/소매",
-  "반려동물",
-  "뷰티/서비스",
-  "운동/건강",
-  "문화/체험",
-  "콘텐츠",
+  "인스타그램",
+  "유튜브",
+  "블로그",
+  "틱톡",
+  "릴스",
+  "쇼츠",
+  "페이스북",
   "기타",
 ];
 
@@ -92,7 +92,7 @@ const InfluencerIntroducePage = () => {
           {species.map((sp) => (
             <SelectButton
               key={sp}
-              selected={selected.includes(sp)}
+              redSelected={selected.includes(sp)}
               onClick={() => handleClick(sp)}
               error={showError}
             >

@@ -99,6 +99,7 @@
   position: relative;
   z-index: 10;
 }
+
 .errorMsg {
   color: red;
   font-size: 0.875rem;
@@ -149,7 +150,7 @@
   cursor: pointer;
 
   &.active {
-    background: $color-main; // 활성화(파란색)
+    background: $color-red-01; // 활성화(빨간색)
     cursor: pointer;
   }
 }

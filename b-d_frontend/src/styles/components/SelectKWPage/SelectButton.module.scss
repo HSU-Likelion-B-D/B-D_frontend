@@ -22,6 +22,11 @@
   color: #fff;
   border-color: #009fe3;
 }
+.redSelected {
+  background-color: red; // 새로운 빨간색 선택 스타일
+  color: white; // 텍스트 색상 변경 (선택 사항)
+}
+
 .error {
   border: 1.5px solid #ffbcbc !important;
   box-shadow: 0 0 8px 0 #ffbcbc;
