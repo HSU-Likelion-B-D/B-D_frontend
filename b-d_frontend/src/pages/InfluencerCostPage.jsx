@@ -45,17 +45,12 @@ const InfluencerCostPage = () => {
         <h1 className={styles.subtitle}>
           #우리 가게를 <span className={styles.highlight}>소개</span>합니다.
         </h1>
-        <p className={styles.description}>
-          당신을 설명할 수 있는 키워드를 모두 골라주세요.
-        </p>
+        <p className={styles.description}>거의 다 왔어요! 조금만 더 힘내요!</p>
         <p className={styles.keyDescription}>
-          #이런_<span className={styles.highlight}>주제</span>를_다루고 있어요.
+          희망하는 홍보 요청 금액을 정해주세요!
         </p>
 
-        <p className={styles.keyDescription}>
-          #이런_<span className={styles.highlight}>컨텐츠</span>
-          를_다루고_있어요.
-        </p>
+        <p className={styles.keyDescription}>#이런_업종/분야를_원해요.</p>
         <div className={styles.buttonGroup}>
           {atmosphere.map((kw) => (
             <SelectButton
