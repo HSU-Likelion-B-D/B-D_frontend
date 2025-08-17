@@ -23,7 +23,7 @@ import InfluencerCreateProposalPage from "./pages/InfluencerCreateProposalPage";
 import InfluencerProfilePage from "./pages/InfluencerProfilePage";
 import InfluencerAccountPage from "./pages/InfluencerAccountPage";
 import InfluencerIntroducePage from "./pages/InfluencerIntroducePage";
-
+import InfluencerSelectKWPage from "./pages/InfluencerSelectKWPage";
 function App() {
   return (
     <BrowserRouter>
@@ -45,6 +45,10 @@ function App() {
           <Route
             path="/influencer-introduce"
             element={<InfluencerIntroducePage />}
+          />
+          <Route
+            path="/influencer-select-keyword"
+            element={<InfluencerSelectKWPage />}
           />
         </Route>
         <Route element={<SimpleLayout />}>
