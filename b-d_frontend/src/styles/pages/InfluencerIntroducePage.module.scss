@@ -95,7 +95,8 @@
   grid-template-columns: repeat(4, 1fr); // 한줄에 4개
   gap: vh(6px) vw(5px); // 행, 열 간격
   justify-items: center; // 버튼 가운데 정렬
-  margin: 24px 0;
+  margin-top: vh(24px);
+  margin-bottom: 0;
   position: relative;
   z-index: 10;
 }
@@ -114,7 +115,8 @@
   width: vw(416px);
   height: 1px;
   background: $color-sub-02;
-  margin: 40px 0;
+  margin-top: vh(36px);
+  margin-bottom: 52px;
   border: none;
 }
 
@@ -135,14 +137,14 @@
     display: flex;
     flex-direction: row;
     gap: vw(50px);
-    margin-top: 10px;
+    margin-top: vh(40px);
     .radioLabel {
       display: flex;
       align-items: center;
       font-size: rem(13px);
       color: $color-sub-03;
       cursor: pointer;
-      input {
+      input[type="radio"] {
         margin-right: 10px;
         width: vw(18px); // 라디오 버튼 크기 조정
         height: vw(18px); // 라디오 버튼 크기 조정
