@@ -109,8 +109,15 @@
         position: relative;
         z-index: 20;
       }
+      .bankSelect option:disabled,
+      .bankPlaceholder {
+        color: $color-sub-01;
+      }
       .bankSelect:focus {
         border: 1.5px solid $color-red-01;
+      }
+      .placeholder {
+        color: $color-sub-01;
       }
       .accountInput {
         width: vw(430px);
@@ -128,7 +135,7 @@
         border: 1.5px solid $color-red-01;
       }
       .profileXButton {
-        right: 40px; // 더 왼쪽으로 이동
+        //right: 40px; // 더 왼쪽으로 이동
       }
 
       .input {

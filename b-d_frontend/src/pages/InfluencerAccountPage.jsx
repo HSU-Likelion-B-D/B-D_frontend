@@ -38,15 +38,9 @@ const InfluencerAccountPage = () => {
   const [formData, setFormData] = useState({
     nickname: "",
     description: "",
-    bank: "카카오뱅크",
+    bank: "",
     account: "",
   });
-  const [nicknameMessage, setNicknameMessage] = useState("");
-  const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [profileImage, setProfileImage] = useState(profile);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -67,65 +61,14 @@ const InfluencerAccountPage = () => {
     }
   };
 
-  const handleNicknameCheck = () => {
-    const { nickname } = formData;
-    if (!nickname.trim()) {
-      setNicknameMessage("닉네임을 입력해주세요.");
-      setIsError(true);
-      setIsSuccess(false);
-      return;
-    }
-
-    // 닉네임 중복 확인 로직 (예: 서버 요청)
-    const isDuplicate = mockNicknames.includes(nickname); // 예시 중복 닉네임 리스트
-
-    setIsButtonDisabled(true); // 버튼을 회색으로 변경
-
-    if (isDuplicate) {
-      setNicknameMessage("이미 닉네임이 존재합니다.");
-      setIsError(true);
-      setIsSuccess(false);
-    } else {
-      setNicknameMessage("멋진 닉네임이군요!");
-      setIsError(false);
-      setIsSuccess(true);
-    }
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Form Data:", formData);
     // `formData` 백으로 보내기
   };
 
-  const toggleGallery = () => {
-    setIsGalleryOpen((prev) => !prev);
-  };
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfileImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const isFormValid =
     formData.bank.trim() !== "" && formData.account.trim() !== "";
-
-  const clearNickname = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      nickname: "",
-    }));
-    setNicknameMessage("");
-    setIsError(false);
-    setIsSuccess(false);
-    setIsButtonDisabled(false);
-  };
 
   return (
     <div className={styles.whole}>
@@ -156,7 +99,16 @@ const InfluencerAccountPage = () => {
                 name="bank"
                 value={formData.bank}
                 onChange={handleInputChange}
+                required
               >
+                <option
+                  value=""
+                  disabled
+                  hidden
+                  className={styles.bankPlaceholder}
+                >
+                  은행선택
+                </option>
                 {BANK_LIST.map((bank) => (
                   <option key={bank} value={bank}>
                     {bank}
