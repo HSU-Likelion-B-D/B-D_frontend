@@ -79,7 +79,9 @@ const InfluencerAccountPage = () => {
           <h1 className={styles.subtitle}>
             <span className={styles.highlight}>당신</span>을 알려주세요!
           </h1>
-          <p className={styles.description}>비디는 당신이 궁금해요.</p>
+          <p className={styles.description}>
+            정산할 때 사용할 계좌번호를 입력해주세요
+          </p>
 
           <div className={styles.profileSection}>
             <img
