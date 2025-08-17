@@ -10,7 +10,7 @@
   border: 1px solid #ddd;
   background: #fff;
   color: $color-sub-03;
-  font-size: rem(11px);
+  font-size: 1rem; // rem 단위로 변경
   font-weight: $font-weight-bold;
   margin: 8px;
   cursor: pointer;
