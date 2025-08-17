@@ -4,13 +4,13 @@
   @include flex(column, center, center);
   text-align: center;
   width: vw(156px);
-  height: vh(55px);
-  padding: 12px 24px;
+  height: vw(55px);
+  //padding: 12px 24px;
   border-radius: 12px;
   border: 1px solid #ddd;
   background: #fff;
   color: $color-sub-03;
-  font-size: rem(11px);
+  font-size: 1rem; // rem 단위로 변경
   font-weight: $font-weight-bold;
   margin: 8px;
   cursor: pointer;
