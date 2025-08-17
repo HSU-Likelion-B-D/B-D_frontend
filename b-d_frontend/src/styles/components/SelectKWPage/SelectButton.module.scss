@@ -4,8 +4,8 @@
   @include flex(column, center, center);
   text-align: center;
   width: vw(156px);
-  height: vh(55px);
-  padding: 12px 24px;
+  height: vw(55px);
+  //padding: 12px 24px;
   border-radius: 12px;
   border: 1px solid #ddd;
   background: #fff;

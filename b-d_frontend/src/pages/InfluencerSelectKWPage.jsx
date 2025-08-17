@@ -61,7 +61,7 @@ const InfluencerSelectKWPage = () => {
           당신의 사업장을 설명할 수 있는 키워드를 모두 골라주세요.
         </p>
         <p className={styles.keyDescription}>
-          #이런_<span className={styles.highlight}>일</span>을_하고있어요.
+          #이런_<span className={styles.highlight}>주제</span>를_다루고 있어요.
         </p>
         <div className={styles.buttonGroup}>
           {species.map((sp) => (
@@ -83,8 +83,8 @@ const InfluencerSelectKWPage = () => {
         )}
         <div className={styles.middleDivider}></div>
         <p className={styles.keyDescription}>
-          #이런_<span className={styles.highlight}>분위기의</span>
-          _가게를_운영해요.
+          #이런_<span className={styles.highlight}>컨텐츠</span>
+          를_다루고_있어요.
         </p>
         <div className={styles.buttonGroup}>
           {atmosphere.map((kw) => (
