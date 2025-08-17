@@ -19,6 +19,25 @@ const atmosphere = [
 ];
 
 const InfluencerCostPage = () => {
+  const [formData, setFormData] = useState({
+    minCost: "",
+    maxCost: "",
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    // 숫자만 입력받고, 000 단위마다 , 추가
+    const formattedValue = value
+      .replace(/\D/g, "")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: formattedValue,
+    }));
+  };
+
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
@@ -31,6 +50,9 @@ const InfluencerCostPage = () => {
     setShowError(false);
   };
 
+  const isFormComplete =
+    formData.minCost && formData.maxCost && selected.length > 0;
+
   const handleNext = () => {
     if (selected.length === 0) {
       setShowError(true);
@@ -42,13 +64,34 @@ const InfluencerCostPage = () => {
       <div className={styles.whiteBox}>
         <ProgressBar progress={65} />
         <img src={logo} className={styles.logo} alt="logo" />
-        <h1 className={styles.subtitle}>
-          #우리 가게를 <span className={styles.highlight}>소개</span>합니다.
-        </h1>
+        <h1 className={styles.subtitle}>#저는 이런걸 원해요</h1>
         <p className={styles.description}>거의 다 왔어요! 조금만 더 힘내요!</p>
         <p className={styles.keyDescription}>
           희망하는 홍보 요청 금액을 정해주세요!
         </p>
+        <div className={styles.costRange}>
+          <div className={styles.rangeInput}>
+            <input
+              type="text"
+              className={styles.input}
+              placeholder="100,000"
+              name="minCost"
+              value={formData.minCost}
+              onChange={handleInputChange}
+            />
+            <span className={styles.unit}>원</span>
+            <span className={styles.separator}>~</span>
+            <input
+              type="text"
+              className={styles.input}
+              placeholder="1,000,000"
+              name="maxCost"
+              value={formData.maxCost}
+              onChange={handleInputChange}
+            />
+            <span className={styles.unit}>원</span>
+          </div>
+        </div>
 
         <p className={styles.keyDescription}>#이런_업종/분야를_원해요.</p>
         <div className={styles.buttonGroup}>
@@ -92,9 +135,10 @@ const InfluencerCostPage = () => {
         <button
           type="submit"
           className={`${styles.submitBtn} ${
-            selected.length > 1 ? styles.active : ""
+            isFormComplete ? styles.active : ""
           }`}
           onClick={handleNext}
+          disabled={!isFormComplete}
         >
           다음으로
         </button>
