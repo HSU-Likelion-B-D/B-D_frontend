@@ -19,6 +19,9 @@ const species = [
 const InfluencerIntroducePage = () => {
   const [formData, setFormData] = useState({
     infname: "",
+    followers: "",
+    uploadFrequency: "",
+    platformUrl: "",
   });
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
@@ -38,14 +41,31 @@ const InfluencerIntroducePage = () => {
       prev.includes(sp) ? prev.filter((item) => item !== sp) : [...prev, sp]
     );
     setShowError(false);
+    // 다음 페이지로 이동
+    // navigate("/next-page");
   };
 
+  // 모든 필드에 입력을 해야지만 다음 버튼 활성화
   const handleNext = () => {
-    if (selected.length === 0) {
+    if (
+      !formData.ifname ||
+      !formData.followers ||
+      !formData.uploadFrequency ||
+      !formData.platformUrl ||
+      selected.length === 0
+    ) {
       setShowError(true);
       return;
     }
   };
+
+  const isFormComplete =
+    formData.infname &&
+    formData.followers &&
+    formData.uploadFrequency &&
+    formData.platformUrl &&
+    selected.length > 0;
+
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
@@ -154,8 +174,8 @@ const InfluencerIntroducePage = () => {
             <label className={styles.radioLabel}>
               <input
                 type="radio"
-                name="followers"
-                value="1000"
+                name="uploadFrequency"
+                value="1"
                 onChange={handleInputChange}
               />
               1회 미만
@@ -163,8 +183,8 @@ const InfluencerIntroducePage = () => {
             <label className={styles.radioLabel}>
               <input
                 type="radio"
-                name="followers"
-                value="5000"
+                name="uploadFrequency"
+                value="2"
                 onChange={handleInputChange}
               />
               1회~2회
@@ -172,8 +192,8 @@ const InfluencerIntroducePage = () => {
             <label className={styles.radioLabel}>
               <input
                 type="radio"
-                name="followers"
-                value="5000"
+                name="uploadFrequency"
+                value="3"
                 onChange={handleInputChange}
               />
               3회~4회
@@ -181,8 +201,8 @@ const InfluencerIntroducePage = () => {
             <label className={styles.radioLabel}>
               <input
                 type="radio"
-                name="followers"
-                value="10000"
+                name="uploadFrequency"
+                value="5"
                 onChange={handleInputChange}
               />
               5회~6회
@@ -190,8 +210,8 @@ const InfluencerIntroducePage = () => {
             <label className={styles.radioLabel}>
               <input
                 type="radio"
-                name="followers"
-                value="5000"
+                name="uploadFrequency"
+                value="7"
                 onChange={handleInputChange}
               />
               7회이상
@@ -201,13 +221,15 @@ const InfluencerIntroducePage = () => {
         <div className={styles.inputGroup}>
           <Input
             className={styles.input}
-            name="infname"
-            value={formData.ifname}
+            name="platformUrl"
+            value={formData.platformUrl}
             onChange={handleInputChange}
             placeholder="플랫폼 URL 입력 (프로필 용도)"
             required
             showClearButton={true}
-            onClear={() => setFormData((prev) => ({ ...prev, ifname: "" }))}
+            onClear={() =>
+              setFormData((prev) => ({ ...prev, platformUrl: "" }))
+            }
           />
         </div>
 
@@ -234,9 +256,10 @@ const InfluencerIntroducePage = () => {
         <button
           type="submit"
           className={`${styles.submitBtn} ${
-            selected.length > 1 ? styles.active : ""
+            isFormComplete ? styles.active : ""
           }`}
           onClick={handleNext}
+          disabled={!isFormComplete}
         >
           다음으로
         </button>
