@@ -67,34 +67,16 @@
         object-fit: cover;
         border: 2px solid #ddd;
       }
+    }
 
-      .cameraButton {
-        position: absolute;
-        bottom: 1px;
-        right: 3px;
-        background: $color-red-01;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 39px;
-        height: 39px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
-      .cameraIcon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 24px;
-        height: 24px;
-      }
-
-      .cameraButton:hover {
-        background: $color-red;
-      }
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      text-align: left;
+      font-size: 1rem;
+    }
+    .label span {
+      color: red;
     }
 
     .inputGroup {
@@ -103,20 +85,52 @@
       position: relative;
       //  gap: 16px;
 
-      .nicknameContainer {
+      .accountInputGroup {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        gap: 8px; // 닉네임 입력 필드와 버튼 간 간격
-      }
-      .label {
-        display: block;
+        gap: 16px;
         margin-bottom: 8px;
-        text-align: left;
-        font-size: 1rem;
+        position: relative;
+        z-index: 10;
       }
-      .label span {
-        color: red;
+      .bankSelect {
+        height: vw(69px);
+        min-width: px(149px);
+        border-radius: 12px;
+        border: 1px solid #eee;
+        font-size: 18px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        padding: 0 18px;
+        background: #fff;
+        margin-right: 8px;
+        outline: none;
+        transition: border 0.2s;
+        position: relative;
+        z-index: 20;
       }
+      .bankSelect:focus {
+        border: 1.5px solid $color-red-01;
+      }
+      .accountInput {
+        width: vw(430px);
+        height: vw(69px);
+        font-size: 18px;
+        border-radius: 12px;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        padding: 0 18px;
+        background: #fff;
+        outline: none;
+        transition: border 0.2s;
+      }
+      .accountInput:focus {
+        border: 1.5px solid $color-red-01;
+      }
+      .profileXButton {
+        right: 40px; // 더 왼쪽으로 이동
+      }
+
       .input {
         width: vw(433px);
         height: vh(69px);
@@ -150,47 +164,6 @@
         font-size: 0.9rem;
         margin-top: 4px;
         margin-left: 2px;
-      }
-
-      .checkButton {
-        width: vw(170px);
-        height: vh(71px);
-        padding: 8px 16px;
-        background-color: $color-red-01;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        color: #fff;
-        gap: 29px;
-
-        &:hover {
-          background-color: $color-red;
-        }
-
-        &.disabled {
-          background-color: #ddd; // 버튼 비활성화 시 색상
-          cursor: not-allowed;
-        }
-      }
-
-      .textarea {
-        width: vw(620px);
-        height: vh(178px);
-        border-radius: 12px;
-        margin-top: vh(52px);
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        font-size: rem(20px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        font-family: inherit;
-        text-align: left;
-        vertical-align: top;
-        padding: 10px;
-        line-height: 1.5;
-        resize: none;
-        &::placeholder {
-          color: $color-sub-01;
-        }
       }
     }
     .signupLink {
