@@ -1,0 +1,68 @@
+@use "../variables" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(column, center, flex-start);
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+  padding-bottom: 50px;
+}
+
+.whiteBox {
+  @include flex(column, center, center);
+  background-color: rgba(255, 255, 255, 0.8); // 투명도
+  width: vw(1187px);
+  height: auto;
+  border-radius: 22px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.logo {
+  width: 59px;
+  height: 46px;
+  margin: 70px auto 66px auto;
+  display: block;
+}
+
+.subtitle {
+  font-size: rem(46px);
+  font-weight: $font_weight_bold;
+  text-align: center;
+  margin-bottom: 16px;
+  color: $color-red-01;
+}
+
+.description {
+  font-size: 20px;
+  color: $color-sub-02; // 서브 텍스트 색상
+  text-align: center;
+  //margin-top: 20px;
+}
+
+.completeIcon {
+  margin-top: vh(81px);
+  margin-bottom: vh(88px);
+}
+
+.submitBtn {
+  display: block;
+  margin: 32px auto vh(52px) auto;
+  width: 362px;
+  height: 60px;
+  background: $color-sub-01; // 비활성화(회색)
+  color: $color-white;
+  border: none;
+  font-size: 16px;
+  font-weight: $font-weight-bold;
+  transition: background 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-red-01; // 활성화(빨간색)
+    cursor: pointer;
+  }
+}
