@@ -101,12 +101,7 @@ const InfluencerAccountPage = () => {
                 onChange={handleInputChange}
                 required
               >
-                <option
-                  value=""
-                  disabled
-                  hidden
-                  className={styles.bankPlaceholder}
-                >
+                <option value="" disabled hidden>
                   은행선택
                 </option>
                 {BANK_LIST.map((bank) => (

@@ -31,7 +31,7 @@
 
   .xButton {
     position: absolute;
-    right: 20px; // px로 고정
+    right: vw(20px); // vw로 고정
     top: 50%;
     transform: translateY(-50%);
     background: #b3b3b3;
