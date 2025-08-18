@@ -27,6 +27,8 @@ import InfluencerSelectKWPage from "./pages/InfluencerSelectKWPage";
 import InfluencerCostPage from "./pages/InfluencerCostPage";
 import InfluencerCompletePage from "./pages/InfluencerCompletePage";
 import InfluencerPaymentManagePage from "./pages/InfluencerPaymentManagePage";
+import StoreTimePage from "./pages/StoreTimePage";
+import StoreCostPage from "./pages/StoreCostPage";
 
 function App() {
   return (
@@ -59,6 +61,8 @@ function App() {
             path="/influencer-complete"
             element={<InfluencerCompletePage />}
           />
+          <Route path="/store-time" element={<StoreTimePage />} />
+          <Route path="/store-cost" element={<StoreCostPage />} />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />

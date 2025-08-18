@@ -1,0 +1,143 @@
+@use "../variables" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(column, center, flex-start);
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+  padding-bottom: 50px;
+  .whiteBox {
+    @include flex(column, center, center);
+    background-color: rgba(255, 255, 255, 0.8); // 투명도
+    width: vw(1187px);
+    height: auto;
+    border-radius: 22px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    .logo {
+      width: 60px;
+      margin: 10px auto 30px auto;
+      display: block;
+    }
+    .subtitle {
+      font-size: 2.5rem;
+      font-weight: $font-weight-bold;
+      text-align: center;
+      margin-bottom: 20px;
+      color: $color-sub-03;
+      .highlight {
+        color: $color-main; // 강조 색상
+      }
+    }
+    .description {
+      font-size: 20px;
+      color: $color-sub-02; // 서브 텍스트 색상
+      text-align: center;
+      //margin-top: 20px;
+      //margin-bottom: 30px;
+    }
+    .keyDescription {
+      font-size: 20px;
+      color: $color-sub-02; // 서브 텍스트 색상
+      text-align: center;
+      margin-top: vh(67px);
+      margin-bottom: vh(50px);
+    }
+    .costRange {
+      text-align: center;
+      margin-top: 20px;
+
+      .description {
+        font-size: 16px;
+        color: $color-sub-02;
+        margin-bottom: 16px;
+      }
+
+      .rangeInput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        .input {
+          width: 120px;
+          height: 40px;
+          border: none;
+          text-align: center;
+          font-size: 16px;
+          color: black;
+          font-weight: $font-weight-regular;
+          background-color: #eaf1ff;
+
+          &:focus {
+            outline: none;
+            border-color: $color-sub-01;
+          }
+        }
+
+        .unit {
+          font-size: 16px;
+          color: $color-sub-02;
+        }
+
+        .separator {
+          font-size: 16px;
+          color: $color-sub-02;
+          margin: 0 8px;
+        }
+      }
+    }
+    .buttonGroup {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); // 한줄에 개
+      gap: vh(6px) vw(5px); // 행, 열 간격
+      justify-items: center; // 버튼 가운데 정렬
+      //margin: 24px 0;
+      margin-top: vh(30px);
+      margin-bottom: vh(29px);
+    }
+
+    .signupLink {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.95rem;
+      color: $color-sub-03;
+      margin: 53px 0 8px 0;
+      gap: 50px;
+      .findPwd,
+      .loginLink {
+        cursor: pointer;
+      }
+
+      .divider {
+        color: #bbb;
+      }
+    }
+
+    .submitBtn {
+      display: block;
+      margin: 32px auto vh(52px) auto;
+      width: 362px;
+      height: 60px;
+      background: $color-sub-01; // 비활성화(회색)
+      color: $color-white;
+      border: none;
+      font-size: 16px;
+      font-weight: $font-weight-bold;
+      transition: background 0.2s;
+      cursor: pointer;
+
+      &.active {
+        background: $color-main; // 활성화(빨간색)
+        cursor: pointer;
+      }
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}

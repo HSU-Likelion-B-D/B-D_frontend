@@ -1,0 +1,33 @@
+@use "../../variables" as *;
+
+.button {
+  @include flex(column, center, center);
+  text-align: center;
+  width: vw(156px);
+  height: vw(55px);
+  //padding: 12px 24px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: $color-sub-03;
+  font-size: 1rem; // rem 단위로 변경
+  font-weight: $font-weight-bold;
+  margin: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0, 79, 255, 0.06);
+}
+.selected {
+  background: #009fe3;
+  color: #fff;
+  border-color: #009fe3;
+}
+.redSelected {
+  background-color: $color-main; // 새로운 빨간색 선택 스타일
+  color: white; // 텍스트 색상 변경 (선택 사항)
+}
+
+.error {
+  border: 1.5px solid #ffbcbc !important;
+  box-shadow: 0 0 8px 0 #ffbcbc;
+}
