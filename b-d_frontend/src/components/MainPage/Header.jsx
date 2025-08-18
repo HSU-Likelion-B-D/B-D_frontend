@@ -8,11 +8,13 @@ import {
 } from "@/assets";
 import ProfileModal from "./ProfileModal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Header({
   setIsNotificationModalOpen,
   isCreateProposalPage = false,
 }) {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className={styles.header}>
       <div
@@ -34,7 +36,12 @@ export default function Header({
         </div>
       </div>
       <div className={styles.logoContainer}>
-        <img className={styles.logo} src={logo} alt="logo" />
+        <img
+          className={styles.logo}
+          src={logo}
+          alt="logo"
+          onClick={() => navigate("/")}
+        />
       </div>
       <div className={styles.rightIconContainer}>
         <div className={styles.userInfoContainer}>
@@ -46,6 +53,7 @@ export default function Header({
               className={styles.profileIcon}
               src={profile_icon}
               alt="profile"
+              onClick={() => navigate("/mypage")}
             />
           </div>
         </div>
