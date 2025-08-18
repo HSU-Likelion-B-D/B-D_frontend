@@ -31,13 +31,14 @@ import StoreTimePage from "./pages/StoreTimePage";
 import StoreCostPage from "./pages/StoreCostPage";
 import InfoEditCompletePage from "./pages/InfoEditCompletePage";
 import InfluencerInfoEditCompletePage from "./pages/InfluencerInfoEditCompletePage";
-
+import BdStartPage from "./pages/BdStartPage";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<BubbleLayout />}>
-          <Route path="/" element={<StartPage />} />
+          <Route path="/" element={<BdStartPage />} />
+          <Route path="/start" element={<StartPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/address" element={<AddressPage />} />
           <Route path="/select-keyword" element={<SelectKWPage />} />
@@ -73,7 +74,6 @@ function App() {
             path="/influencer-info-edit-complete"
             element={<InfluencerInfoEditCompletePage />}
           />
-          "
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
