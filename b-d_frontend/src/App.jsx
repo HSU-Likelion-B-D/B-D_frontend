@@ -29,6 +29,7 @@ import InfluencerCompletePage from "./pages/InfluencerCompletePage";
 import InfluencerPaymentManagePage from "./pages/InfluencerPaymentManagePage";
 import StoreTimePage from "./pages/StoreTimePage";
 import StoreCostPage from "./pages/StoreCostPage";
+import InfoEditCompletePage from "./pages/InfoEditCompletePage";
 
 function App() {
   return (
@@ -63,6 +64,10 @@ function App() {
           />
           <Route path="/store-time" element={<StoreTimePage />} />
           <Route path="/store-cost" element={<StoreCostPage />} />
+          <Route
+            path="/info-edit-complete"
+            element={<InfoEditCompletePage />}
+          />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
