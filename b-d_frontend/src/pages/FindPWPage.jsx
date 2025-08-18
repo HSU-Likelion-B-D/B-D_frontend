@@ -111,7 +111,7 @@ export default function FindPWPage() {
             <div
               className={styles.link}
               onClick={() => {
-                navigate("/login");
+                navigate("/");
               }}
             >
               로그인

@@ -36,7 +36,7 @@ function App() {
       <Routes>
         <Route element={<BubbleLayout />}>
           <Route path="/start" element={<StartPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/business-profile" element={<ProfilePage />} />
           <Route path="/address" element={<AddressPage />} />
           <Route path="/select-keyword" element={<SelectKWPage />} />
           <Route path="/complete" element={<CompletePage />} />

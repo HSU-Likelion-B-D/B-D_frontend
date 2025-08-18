@@ -100,6 +100,7 @@ const SignupPage = () => {
   }, [verificationCode]);
 
   const onSubmit = (data) => {
+    navigate("/start");
     console.log("회원가입 데이터:", data);
   };
 
@@ -299,8 +300,9 @@ const SignupPage = () => {
           type="submit"
           disabled={isSubmitting || !allFilled}
           className={styles.submitButton}
+          onClick={handleSubmit(onSubmit)}
         >
-          로그인
+          다음
         </button>
       </form>
     </div>
