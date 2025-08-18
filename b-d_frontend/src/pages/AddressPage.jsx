@@ -53,7 +53,7 @@ const AddressPage = () => {
         </p>
         <div className={styles.addressPlaceGroup}>
           <label htmlFor="nickname" className={styles.label}>
-            사업장 주소<span>*</span>
+            사업장 주소<span style={{ color: "#FF0000" }}>*</span>
           </label>
           <div className={styles.addressInputGroup}>
             <div className={styles.addressContainer}>
@@ -130,7 +130,6 @@ const AddressPage = () => {
           다음으로
         </button>
       </div>
-      {/*whiteBox 닫는 div */}
     </div>
   );
 };
