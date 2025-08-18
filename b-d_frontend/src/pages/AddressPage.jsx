@@ -126,6 +126,9 @@ const AddressPage = () => {
             !isFormValid ? styles.disabled : ""
           }`}
           disabled={!isFormValid}
+          onClick={() => {
+            navigate("/select-keyword");
+          }}
         >
           다음으로
         </button>

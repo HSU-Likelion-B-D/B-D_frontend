@@ -47,6 +47,7 @@ const StoreCostPage = () => {
       setShowError(true);
       return;
     }
+    navigate("/complete");
   };
   return (
     <div className={styles.container}>

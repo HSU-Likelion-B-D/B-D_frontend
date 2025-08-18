@@ -71,7 +71,7 @@ function App() {
           <Route path="/new-password" element={<NewPWPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="/main" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/influencer-main" element={<InfluencerMainPage />} />
           <Route path="/create-proposal" element={<CreateProposalPage />} />
           <Route
