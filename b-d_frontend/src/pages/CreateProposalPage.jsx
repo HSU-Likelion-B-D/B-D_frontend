@@ -3,8 +3,10 @@ import styles from "@/styles/pages/CreateProposalPage.module.scss";
 import Header from "@/components/MainPage/Header";
 import { useForm } from "react-hook-form";
 import { main_busy } from "@/assets";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateProposalPage() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -257,8 +259,11 @@ export default function CreateProposalPage() {
               isFormValid ? styles.active : ""
             }`}
             disabled={!isFormValid}
+            onClick={() => {
+              navigate("/");
+            }}
           >
-            다음으로
+            저장하기
           </button>
         </form>
       </div>

@@ -65,8 +65,15 @@
       font-size: rem(16px);
       font-weight: $font_weight_semibold;
       cursor: pointer;
+      &:disabled {
+        background-color: $color-sub-01;
+        cursor: not-allowed;
+      }
       &:hover {
         background-color: #0c9ce9;
+      }
+      &.active {
+        background-color: $color-main;
       }
     }
   }

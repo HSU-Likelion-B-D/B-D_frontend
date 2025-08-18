@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "@/styles/components/StartPage/SelectBox.module.scss";
 
-function SelectBox({ title, content1, content2, style }) {
+function SelectBox({ title, content1, content2, style, onClick, selected }) {
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${selected ? styles.selected : ""}`}
+      onClick={onClick}
+    >
       <div className={styles.title}>
         <span>{title}</span>로 활동하고 싶어요.
       </div>

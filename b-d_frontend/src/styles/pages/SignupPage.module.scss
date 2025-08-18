@@ -1,11 +1,9 @@
 @use "../variables" as *;
 
 .container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
   position: relative;
   z-index: 1;
 
@@ -17,173 +15,174 @@
 
   .subtitle {
     font-size: rem(46px);
-    font-weight: 700;
+    font-weight: $font_weight_semibold;
     text-align: center;
     margin-bottom: vw(98px);
-  }
-
-  .highlight {
-    color: $color-main;
-    font-weight: bold;
+    color: $color-sub-03;
+    .highlight {
+      color: $color-main;
+      font-weight: $font_weight_bold;
+    }
   }
 
   .form {
-    width: 100%;
-    max-width: vw(659px);
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 0 auto;
+    width: max-content;
+    min-width: vw(603px);
+    @include flex(column, center, center, vh(33px));
+    .formItem {
+      width: 100%;
+      label {
+        font-size: rem(20px);
+        color: $color-sub-03;
+        margin-bottom: vh(6px);
+      }
+      .input {
+        &.error {
+          box-shadow: 0 0 10px 0 rgba(255, 0, 0, 0.5);
+        }
+
+        &.valid {
+          box-shadow: 0 0 10px 0 rgba(66, 188, 84, 0.7);
+        }
+      }
+      .errorMessage {
+        position: absolute;
+        color: $color-red;
+        font-size: rem(14px);
+        margin-top: vh(4px);
+        font-weight: $font_weight_regular;
+        line-height: 1.75;
+      }
+    }
+
+    .verificationBtnContainer {
+      width: 100%;
+      .verificationBtn {
+        width: 100%;
+        background: $color-main;
+        color: $color-white;
+        border: none;
+        border-radius: vw(12px);
+        font-size: rem(16px);
+        font-weight: $font_weight_semibold;
+        margin-bottom: vh(9px);
+        padding: vh(5px) 0;
+        cursor: pointer;
+        line-height: 1.75;
+      }
+      .disabled {
+        width: 100%;
+        background: $color-sub-01;
+        color: $color-white;
+        border: none;
+        border-radius: vw(12px);
+        font-size: rem(16px);
+        font-weight: $font_weight_semibold;
+        margin-bottom: vh(9px);
+        padding: vh(5px) 0;
+        cursor: pointer;
+        line-height: 1.75;
+      }
+    }
+
+    .verifyContainer {
+      @include flex(row, center, space-between, vw(29px));
+      width: 100%;
+      .confirmBtn {
+        padding: vh(21px) vw(56px);
+        min-width: max-content;
+        line-height: 1.75;
+        height: 100%;
+        background: $color-sub-01;
+        color: $color-white;
+        border: none;
+        border-radius: 8px;
+        font-size: rem(16px);
+        font-weight: $font_weight_semibold;
+        cursor: pointer;
+        align-items: center;
+        &.active {
+          background: $color-main;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+    .agreeSection {
+      width: 100%;
+      @include flex(column, start, center, vh(10px));
+      margin: vh(39px) 0 vh(55px) 0;
+      .checkbox {
+        @include flex(row, center, center, vw(10px));
+        font-size: rem(14px);
+        font-weight: $font_weight_regular;
+        color: $color-sub-03;
+        text-align: left;
+        align-self: flex-start;
+        line-height: 1.75;
+
+        .checkboxInput {
+          appearance: none;
+          width: vw(24px);
+          height: vw(24px);
+          border-radius: 50%;
+          background-color: #d9d9d9;
+          cursor: pointer;
+          position: relative;
+
+          &:checked {
+            border-color: $color-main;
+            border: 2px solid $color-main;
+            background-color: white;
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: vw(13px);
+              height: vw(13px);
+              background-color: $color-main;
+              border-radius: 50%;
+            }
+          }
+
+          &:hover {
+            border-color: $color-main;
+          }
+        }
+
+        .checkboxLabel {
+          cursor: pointer;
+        }
+      }
+    }
+    .links {
+      @include flex(row, center, center);
+      font-size: rem(14px);
+      line-height: 1.75;
+      margin-bottom: vh(78px);
+      gap: vw(50px);
+      .link {
+        cursor: pointer;
+      }
+    }
   }
 
-  .verifyContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 29px;
-  }
-  .verifyContainer .input {
-    width: 100%;
-    max-width: none;
-  }
-  .confirmBtn {
-    min-width: vw(141px);
-    height: vh(71px);
-    background: $color-sub-01;
-    color: $color-white;
+  .submitButton {
+    padding: vh(16px) vw(160px);
+    background: $color-main;
+    color: white;
     border: none;
-    border-radius: 8px;
     font-size: rem(16px);
     font-weight: $font_weight_semibold;
     cursor: pointer;
-    align-items: center;
-  }
-
-  .activeConfirmBtn {
-    background: $color-main;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .input {
-    width: vw(603px); //input 너비 조정
-    max-width: 100%; //input 너비 조정
-    height: vh(69px);
-    font-size: rem(20px);
-    padding: 14px 18px;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    background: $color-white;
-    margin-top: 6px;
-    margin-bottom: 2px;
-    box-shadow: 0 4px 12px 0 rgba(0, 79, 255, 0.06); // 그림자 스타일 수정
-    &::label {
-      font-size: rem(20px);
-      color: $color-sub-03;
-    }
-    &::placeholder {
-      color: $color-sub-01;
-    }
-  }
-
-  .input.error {
-    border-color: red;
-  }
-
-  .errorMessage {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 4px;
-  }
-
-  .form label {
-    font-size: rem(20px);
-    font-weight: 600;
-    color: $color-sub-03;
-    margin-bottom: 8px;
-    display: block;
-    margin-top: 12px;
-  }
-
-  .verificationBtn {
-    width: 100%;
-    height: 38px;
-    background: $color-main;
-    color: $color-white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: $font_weight_semibold;
-    margin-bottom: 12px;
-    margin-top: vh(30px);
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .disabledBtn {
-    background: $color-sub-01;
-    color: $color-white;
-  }
-
-  .agreeSection {
-    margin: 24px 0 16px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .agreeItem {
-    display: flex;
-    align-items: center;
-    font-size: rem(20px);
-    color: $color-sub-03;
-
-    input[type="radio"] {
-      margin-right: 8px;
-    }
-  }
-
-  .signupLink {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.95rem;
-    color: $color-sub-03;
-    margin: 53px 0 8px 0;
-    gap: 50px;
-    .findPwd,
-    .loginLink {
-      cursor: pointer;
-    }
-
-    .divider {
-      color: #bbb;
-    }
-  }
-
-  .submitBtn {
-    display: block;
-    margin: 32px auto 0 auto; // 위 여백, 좌우 자동, 아래 여백
-    width: vw(362px);
-    height: vw(60px);
-    background: $color-sub-01;
-    color: $color-white;
-    border: none;
-    font-size: rem(16px);
-    font-weight: $font_weight_semibold;
-    margin-top: 12px;
     margin-bottom: vh(139px);
-    cursor: pointer;
-  }
-
-  .activeSubmitBtn {
-    background: $color-main; // 파란색
-    color: #fff;
-    cursor: pointer;
-  }
-  .submitBtn:disabled {
-    background: #e0e0e0;
-    color: #fff;
-    cursor: not-allowed;
+    line-height: 1.75;
+    &:disabled {
+      background: $color-sub-01;
+      cursor: not-allowed;
+    }
   }
 }

@@ -48,6 +48,7 @@ const SelectKWPage = () => {
       setShowError(true);
       return;
     }
+    navigate("/store-time");
   };
   return (
     <div className={styles.container}>

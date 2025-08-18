@@ -37,9 +37,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<BubbleLayout />}>
-          <Route path="/" element={<BdStartPage />} />
+          <Route path="/business-profile" element={<ProfilePage />} />
+          <Route path="/bd-start" element={<BdStartPage />} />
           <Route path="/start" element={<StartPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/address" element={<AddressPage />} />
           <Route path="/select-keyword" element={<SelectKWPage />} />
           <Route path="/complete" element={<CompletePage />} />
@@ -82,7 +82,7 @@ function App() {
           <Route path="/new-password" element={<NewPWPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="/main" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/influencer-main" element={<InfluencerMainPage />} />
           <Route path="/create-proposal" element={<CreateProposalPage />} />
           <Route

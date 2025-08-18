@@ -14,7 +14,7 @@ const StoreTimePage = () => {
   });
 
   const handleNext = () => {
-    navigate("/influencer-complete");
+    navigate("/store-cost");
   };
 
   const handleInputChange = (event) => {

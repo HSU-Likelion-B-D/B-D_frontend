@@ -71,17 +71,60 @@ const SignupPage = () => {
 
   const [isVerifySent, setIsVerifySent] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
+
+  // 이메일 유효성 검사 함수
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // 이메일 입력값 변경 감지
+  const watchedEmail = watch("email");
+
+  // 이메일 값이 변경될 때마다 유효성 검사
+  React.useEffect(() => {
+    if (watchedEmail) {
+      setIsValidEmail(validateEmail(watchedEmail));
+    } else {
+      setIsValidEmail(false);
+    }
+  }, [watchedEmail]);
+
+  // verificationCode 변경 감지
+  const [isFilled, setIsFilled] = useState(false);
+
+  React.useEffect(() => {
+    const filled = verificationCode.trim() !== "";
+    setIsFilled(filled);
+  }, [verificationCode]);
 
   const onSubmit = (data) => {
+    navigate("/start");
     console.log("회원가입 데이터:", data);
   };
 
   const handleClear = (name) => {
     setValue(name, "");
+    // 이메일을 지울 때 유효성 상태도 초기화
+    if (name === "email") {
+      setIsValidEmail(false);
+    }
   };
 
   const handleVerifySend = () => {
-    setIsVerifySent(true);
+    if (isValidEmail) {
+      setIsVerifySent(true);
+      // TODO: 실제 인증번호 전송 API 호출
+      console.log("인증번호 전송:", watchedEmail);
+    }
+  };
+
+  const handleVerifyConfirm = () => {
+    if (isFilled) {
+      // TODO: 실제 인증번호 확인 API 호출
+      // 인증 성공 시 처리 로직
+    }
   };
 
   // 동의 버튼 눌렀을때
@@ -90,7 +133,6 @@ const SignupPage = () => {
     watch("agree2") === "yes" &&
     watch("agree3") === "yes";
 
-  const isFilled = verificationCode.trim() !== "";
   const allFilled =
     Object.keys(watch()).every((key) => watch(key)?.trim() !== "") && allAgreed;
 
@@ -105,7 +147,7 @@ const SignupPage = () => {
           <div key={field.name} className={styles.formItem}>
             <label>
               {field.label}
-              <span style={{ color: "red" }}>*</span>
+              <span style={{ color: "#FF0000" }}>*</span>
             </label>
             <Input
               type={field.type}
@@ -124,16 +166,21 @@ const SignupPage = () => {
           </div>
         ))}
 
-        <Button
-          type="button"
-          onClick={handleVerifySend}
-          disabled={isVerifySent}
-          className={`${styles.verificationBtn} ${
-            isVerifySent ? styles.disabledBtn : ""
-          }`}
-        >
-          인증번호 받기
-        </Button>
+        <div className={styles.verificationBtnContainer}>
+          <Button
+            type="button"
+            onClick={handleVerifySend}
+            disabled={isVerifySent || !isValidEmail || !watchedEmail}
+            className={`${styles.verificationBtn} ${
+              isVerifySent || !isValidEmail || !watchedEmail
+                ? styles.disabled
+                : ""
+            }`}
+          >
+            {isVerifySent ? "인증번호 전송 완료" : "인증번호 받기"}
+          </Button>
+        </div>
+
         <div className={styles.verifyContainer}>
           <Input
             type="text"
@@ -144,11 +191,16 @@ const SignupPage = () => {
             className={styles.input}
             onClear={() => setVerificationCode("")}
           />
+          {errors.verificationCode && (
+            <div className={styles.errorMessage}>
+              {errors.verificationCode.message}
+            </div>
+          )}
           <Button
             type="button"
-            className={`${styles.confirmBtn} ${
-              isFilled ? styles.activeConfirmBtn : ""
-            }`}
+            onClick={handleVerifyConfirm}
+            disabled={!isFilled}
+            className={`${styles.confirmBtn} ${isFilled ? styles.active : ""}`}
           >
             확인
           </Button>
@@ -180,64 +232,78 @@ const SignupPage = () => {
         ))}
 
         <div className={styles.agreeSection}>
-          <label className={styles.agreeItem}>
+          <div className={styles.checkbox}>
             <input
-              type="radio"
-              name="agree1"
-              value="yes"
-              {...register("agree1", { required: true })}
+              type="checkbox"
+              id="agree1"
+              checked={watch("agree1") === "yes"}
+              onChange={(e) =>
+                setValue("agree1", e.target.checked ? "yes" : "no")
+              }
+              className={styles.checkboxInput}
             />
-            <span>개인정보 수집 및 이용 동의</span>
-          </label>
-          <label className={styles.agreeItem}>
+            <label htmlFor="agree1" className={styles.checkboxLabel}>
+              개인정보 수집 및 이용 동의
+            </label>
+          </div>
+          <div className={styles.checkbox}>
             <input
-              type="radio"
-              name="agree2"
-              value="yes"
-              {...register("agree2", { required: true })}
+              type="checkbox"
+              id="agree2"
+              checked={watch("agree2") === "yes"}
+              onChange={(e) =>
+                setValue("agree2", e.target.checked ? "yes" : "no")
+              }
+              className={styles.checkboxInput}
             />
-            <span>위치 정보 수집 동의</span>
-          </label>
-          <label className={styles.agreeItem}>
+            <label htmlFor="agree2" className={styles.checkboxLabel}>
+              위치 정보 수집 동의
+            </label>
+          </div>
+          <div className={styles.checkbox}>
             <input
-              type="radio"
-              name="agree3"
-              value="yes"
-              {...register("agree3", { required: true })}
+              type="checkbox"
+              id="agree3"
+              checked={watch("agree3") === "yes"}
+              onChange={(e) =>
+                setValue("agree3", e.target.checked ? "yes" : "no")
+              }
+              className={styles.checkboxInput}
             />
-            <span>제3자 정보 제공 동의 (광고주와 매칭 위해 필요)</span>
-          </label>
+            <label htmlFor="agree3" className={styles.checkboxLabel}>
+              제 3자 정보 제공 동의(광고주와 매칭 위해 필요)
+            </label>
+          </div>
         </div>
 
-        <div className={styles.signupLink}>
-          <span
-            className={styles.findPwd}
+        <div className={styles.links}>
+          <div
+            className={styles.link}
             onClick={() => {
               navigate("/find-password");
             }}
           >
             비밀번호 찾기
-          </span>
-          <span className={styles.divider}> | </span>
-          <span
-            className={styles.loginLink}
+          </div>
+          |
+          <div
+            className={styles.link}
             onClick={() => {
               navigate("/login");
             }}
           >
             로그인
-          </span>
+          </div>
         </div>
 
-        <Button
+        <button
           type="submit"
-          className={`${styles.submitBtn} ${
-            allFilled ? styles.activeSubmitBtn : ""
-          }`}
           disabled={isSubmitting || !allFilled}
+          className={styles.submitButton}
+          onClick={handleSubmit(onSubmit)}
         >
-          {isSubmitting ? "회원가입 중..." : "회원가입"}
-        </Button>
+          다음
+        </button>
       </form>
     </div>
   );

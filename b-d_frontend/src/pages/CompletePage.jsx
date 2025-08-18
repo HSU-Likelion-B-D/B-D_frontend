@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "../styles/pages/CompletePage.module.scss";
 import { logo, complete_icon } from "@/assets";
+import { useNavigate } from "react-router-dom";
 const CompletePage = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
@@ -16,7 +18,13 @@ const CompletePage = () => {
           alt="complete icon"
         />
 
-        <button type="submit" className={styles.submitBtn}>
+        <button
+          type="submit"
+          className={styles.submitBtn}
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           다음으로
         </button>
       </div>

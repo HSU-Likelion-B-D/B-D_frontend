@@ -1,195 +1,141 @@
 @use "../variables" as *;
 .container {
-  min-height: 100vh;
   @include flex(column, center, flex-start);
-  overflow-y: auto;
   position: relative;
   z-index: 10;
-  padding-bottom: 50px;
-}
-.whiteBox {
-  background-color: rgba(255, 255, 255, 0.8); // 투명도
-  width: vw(1187px);
-  height: auto;
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-}
+  padding-bottom: vh(57px);
+  .whiteBox {
+    background-color: rgba(255, 255, 255, 0.8); // 투명도
+    width: vw(1187px);
+    border-radius: vw(22px);
+    @include flex(column, center, center);
+    margin-top: vh(52px);
+    margin-bottom: vh(52px);
+    .logo {
+      width: vw(59px);
+      margin: vh(26px) 0 vh(30px) 0;
+    }
+    .subtitle {
+      font-size: rem(46px);
+      font-weight: $font_weight_semibold;
+      text-align: center;
+      margin-bottom: vh(20px);
+      color: $color-sub-03;
+      line-height: 1.55;
+      .highlight {
+        color: $color-main;
+        font-weight: $font_weight_bold;
+      }
+    }
+    .description {
+      font-size: rem(20px);
+      color: $color-sub-02;
+      text-align: center;
+      margin-bottom: vh(87px);
+      line-height: 1.75;
+    }
+    .addressPlaceGroup {
+      width: vw(604px);
+      @include flex(column, center, center);
+      .label {
+        width: 100%;
+        color: $color-sub-03;
+        text-align: left;
+        font-size: rem(20px);
+        margin-bottom: vh(11px);
+      }
+      .addressInputGroup {
+        width: 100%;
+        .addressContainer {
+          @include flex(row, center, center, vw(29px));
+          .input {
+          }
+          .searchButton {
+            width: vw(141px);
+            height: vh(71px);
+            padding: vh(7px) vw(7px);
+            background-color: $color-main;
+            border: none;
+            border-radius: vw(12px);
+            cursor: pointer;
+            color: #fff;
+            font-size: rem(16px);
+            font-weight: $font_weight_semibold;
+            line-height: 1.75;
 
-.logo {
-  width: 60px;
-  margin: 10px auto 66px auto;
-  display: block;
-}
+            &:hover {
+              background-color: $color-main;
+            }
 
-.subtitle {
-  font-size: rem(40px);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 20px;
-  color: $color-sub-03;
-}
+            &.disabled {
+              background-color: #ddd; // 버튼 비활성화 시 색상
+              cursor: not-allowed;
+            }
+          }
+          .postModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
 
-.highlight {
-  color: #2196f3; // 강조 색상
-  font-weight: bold;
-}
+            > div {
+              background: $color-white; // 흰 배경
+              border-radius: 16px;
+              padding: 10px !important;
+              box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+              width: vw(1092px) !important;
+              height: vh(942px) !important;
+              max-width: 95vw !important;
+              min-width: 320px !important;
+              margin: 0 !important;
+            }
+          }
+        }
+        .detailInput {
+          margin-top: vh(34px);
+        }
+        .addressDescription {
+          text-align: left;
+          margin-top: vh(20px);
+          color: $color-sub-02;
+          font-size: rem(20px);
+          width: 100%;
+        }
+      }
+    }
+    .signupLink {
+      @include flex(row, center, center, vw(50px));
+      font-size: rem(14px);
+      color: $color-sub-03;
+      margin: vh(280px) 0 vh(30px) 0;
+      .findPwd,
+      .loginLink {
+        cursor: pointer;
+      }
 
-.description {
-  font-size: rem(15px);
-  color: $color-sub-02; // 서브 텍스트 색상
-  text-align: center;
-  margin-bottom: vh(87px);
-}
-.addressInputGroup {
-  text-align: left;
-}
-
-.addressContainer {
-  display: flex;
-  align-items: center;
-  gap: 29px; // 사업장 입력 필드와 버튼 간 간격
-}
-.label {
-  display: block;
-  margin-bottom: 8px;
-  text-align: left;
-  font-size: 1rem;
-  margin-top: vh(80px);
-}
-.label span {
-  color: red;
-}
-.input {
-  width: vw(603px);
-  height: vh(69px);
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  font-size: rem(20px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.detailInput {
-  width: vw(603px);
-  height: vh(69px);
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  font-size: rem(20px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-top: vh(34px);
-}
-.searchButton {
-  width: vw(150px);
-  height: vh(71px);
-  padding: 8px 16px;
-  background-color: #2196f3;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  color: #fff;
-  gap: 29px;
-
-  &:hover {
-    background-color: #1976d2;
-  }
-
-  &.disabled {
-    background-color: #ddd; // 버튼 비활성화 시 색상
-    cursor: not-allowed;
-  }
-}
-
-.addressDescription {
-  position: relative;
-  text-align: left;
-  //margin-left: 250px; // 왼쪽 여백
-  margin-top: 20px;
-  color: #999;
-  font-size: 18px;
-  width: vw(603px); // input과 동일한 너비
-  max-width: none;
-  padding-left: 0;
-  box-sizing: border-box;
-  margin-right: auto;
-}
-
-.address1 {
-  line-height: 1.7;
-}
-
-.address2 {
-  text-indent: 2em;
-}
-
-.address {
-  text-align: left;
-  margin-top: 20px;
-  color: $color-sub-02;
-  font-size: 20px;
-}
-
-.signupLink {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.95rem;
-  color: $color-sub-03;
-  margin: 281px 0 8px 0;
-  gap: 50px;
-  .findPwd,
-  .loginLink {
-    cursor: pointer;
-  }
-
-  .divider {
-    color: #bbb;
-  }
-}
-
-.submitBtn {
-  display: block;
-  margin: 32px auto vh(52px) auto;
-  width: 362px;
-  height: 60px;
-  background: $color-main;
-  color: #fff;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  &.disabled {
-    background-color: #ddd; // 버튼 비활성화 시 색상
-    cursor: not-allowed;
-  }
-}
-
-.postModal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-
-  > div {
-    background: $color-white; // 흰 배경
-    border-radius: 16px;
-    padding: 10px !important;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-    width: vw(1092px) !important;
-    height: vh(942px) !important;
-    max-width: 95vw !important;
-    min-width: 320px !important;
-    margin: 0 !important;
+      .divider {
+        color: $color-sub-03;
+      }
+    }
+    .submitBtn {
+      width: vw(362px);
+      height: vh(60px);
+      background: $color-main;
+      color: $color-white;
+      border: none;
+      font-size: rem(16px);
+      font-weight: $font_weight_semibold;
+      cursor: pointer;
+      &.disabled {
+        background-color: $color-sub-01; // 버튼 비활성화 시 색상
+        cursor: not-allowed;
+      }
+    }
   }
 }
