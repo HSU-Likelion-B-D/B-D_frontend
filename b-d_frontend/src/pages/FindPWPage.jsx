@@ -62,7 +62,7 @@ export default function FindPWPage() {
               type="email"
               placeholder="사용하시는 이메일을 입력해주세요."
               className={`${styles.input} ${
-                errors.email ? styles.error : styles.valid
+                errors.email ? styles.error : isValidEmail ? styles.valid : ""
               }`}
               {...register("email", {
                 required: "이메일을 입력해주세요",
