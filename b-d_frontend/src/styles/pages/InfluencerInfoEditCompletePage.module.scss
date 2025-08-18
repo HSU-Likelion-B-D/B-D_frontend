@@ -33,7 +33,7 @@
   font-weight: $font_weight_bold;
   text-align: center;
   margin-bottom: 16px;
-  color: $color-main;
+  color: $color-red-01;
 }
 
 .description {
@@ -62,7 +62,7 @@
   cursor: pointer;
 
   &:hover {
-    background: $color-main; // 활성화(파란색)
+    background: $color-red-01; // 활성화(빨간색)
     cursor: pointer;
   }
 }
