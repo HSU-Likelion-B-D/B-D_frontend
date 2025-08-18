@@ -289,7 +289,7 @@ const SignupPage = () => {
           <div
             className={styles.link}
             onClick={() => {
-              navigate("/");
+              navigate("/login");
             }}
           >
             로그인

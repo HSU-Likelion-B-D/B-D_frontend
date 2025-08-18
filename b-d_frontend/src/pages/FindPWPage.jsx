@@ -61,7 +61,9 @@ export default function FindPWPage() {
             <Input
               type="email"
               placeholder="사용하시는 이메일을 입력해주세요."
-              className={`${styles.input} ${errors.email ? styles.error : ""}`}
+              className={`${styles.input} ${
+                errors.email ? styles.error : styles.valid
+              }`}
               {...register("email", {
                 required: "이메일을 입력해주세요",
                 pattern: {
@@ -111,7 +113,7 @@ export default function FindPWPage() {
             <div
               className={styles.link}
               onClick={() => {
-                navigate("/");
+                navigate("/login");
               }}
             >
               로그인

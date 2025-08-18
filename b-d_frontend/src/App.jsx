@@ -65,7 +65,7 @@ function App() {
           <Route path="/store-cost" element={<StoreCostPage />} />
         </Route>
         <Route element={<SimpleLayout />}>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find-password" element={<FindPWPage />} />
           <Route path="/new-password" element={<NewPWPage />} />

@@ -48,7 +48,7 @@ const ProfilePage = () => {
     setIsButtonDisabled(true); // 버튼을 회색으로 변경
 
     if (isDuplicate) {
-      setNicknameMessage("이미 닉네임이 존재합니다.");
+      setNicknameMessage("이미 존재하는 닉네임입니다.");
       setIsError(true);
       setIsSuccess(false);
     } else {
@@ -127,7 +127,7 @@ const ProfilePage = () => {
           <div className={styles.inputGroup}>
             <div className={styles.nicknameGroup}>
               <label htmlFor="nickname" className={styles.label}>
-                닉네임<span>*</span>
+                닉네임<span style={{ color: "#FF0000" }}>*</span>
               </label>
               <div className={styles.nicknameContainer}>
                 <Input
@@ -138,11 +138,10 @@ const ProfilePage = () => {
                   onChange={handleInputChange}
                   placeholder="닉네임을 입력하세요"
                   showClearButton={true}
-                  xButtonClassName={styles.profileXButton}
                   onClear={clearNickname}
                   className={`${styles.input} ${
-                    isError ? styles.errorInput : ""
-                  } ${isSuccess ? styles.successInput : ""}`}
+                    isError ? styles.error : isSuccess ? styles.valid : ""
+                  }`}
                 />
 
                 <button
@@ -201,6 +200,9 @@ const ProfilePage = () => {
               !isFormValid ? styles.disabled : ""
             }`}
             disabled={!isFormValid}
+            onClick={() => {
+              navigate("/address");
+            }}
           >
             다음으로
           </button>
