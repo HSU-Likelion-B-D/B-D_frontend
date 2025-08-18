@@ -38,7 +38,7 @@ const Input = ({
           className={`${styles.xButton} ${props.xButtonClassName || ""}`}
           tabIndex={-1}
         >
-          x
+          ×
         </button>
       )}
     </div>

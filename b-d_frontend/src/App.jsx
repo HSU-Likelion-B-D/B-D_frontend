@@ -35,7 +35,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<BubbleLayout />}>
-          <Route path="/" element={<StartPage />} />
+          <Route path="/start" element={<StartPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/address" element={<AddressPage />} />
           <Route path="/select-keyword" element={<SelectKWPage />} />
@@ -65,7 +65,7 @@ function App() {
           <Route path="/store-cost" element={<StoreCostPage />} />
         </Route>
         <Route element={<SimpleLayout />}>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find-password" element={<FindPWPage />} />
           <Route path="/new-password" element={<NewPWPage />} />
