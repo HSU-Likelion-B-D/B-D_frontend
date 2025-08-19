@@ -32,6 +32,8 @@ import StoreCostPage from "./pages/StoreCostPage";
 import InfoEditCompletePage from "./pages/InfoEditCompletePage";
 import InfluencerInfoEditCompletePage from "./pages/InfluencerInfoEditCompletePage";
 import BdStartPage from "./pages/BdStartPage";
+import BusinessMyPage from "./pages/BusinessMyPage";
+import InfluencerMyPage from "./pages/InfluencerMyPage";
 function App() {
   return (
     <BrowserRouter>
@@ -99,6 +101,8 @@ function App() {
             path="/influencer-payment-manage"
             element={<InfluencerPaymentManagePage />}
           />
+          <Route path="/business-mypage" element={<BusinessMyPage />} />
+          <Route path="/influencer-mypage" element={<InfluencerMyPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

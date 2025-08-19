@@ -1,0 +1,105 @@
+@use "../variables" as *;
+.container {
+  min-height: 100vh;
+  @include flex(column, center, center);
+  margin: vh(40px) 0;
+
+  .content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    @include flex(column, center, center);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border-radius: 44px;
+    padding: vh(28px) vw(147px) vh(102px) vw(147px);
+    .topContainer {
+      @include flex(column, center, center);
+      margin-top: vh(72px);
+      width: 100%;
+      .profileContainer {
+        @include flex(column, center, center);
+        margin-bottom: vh(48px);
+      }
+      .infoContainer {
+        @include flex(column, center, center);
+        font-size: rem(20px);
+        color: #929292;
+        line-height: 1.75;
+        text-align: center;
+        margin-bottom: vh(24px);
+      }
+      .moneyContainer {
+        width: 100%;
+        padding: vh(10px) 0;
+        background-color: #eaf1ff;
+        font-size: rem(20px);
+        color: #929292;
+        line-height: 1.75;
+        text-align: center;
+        & > span {
+          color: $color-main;
+        }
+      }
+    }
+    .hr {
+      width: vw(796px);
+      height: vh(3px);
+      background-color: $color-sub-01;
+      margin: vh(52px) 0 vh(53px) 0;
+    }
+    .bottomContainer {
+      width: 100%;
+      @include flex(row, start, space-between, vw(43px));
+      .bottomContent {
+        .bottomTitle {
+          font-size: rem(20px);
+          color: $color-sub-02;
+          line-height: 1.75;
+          & > span {
+            color: $color-main;
+            font-weight: $font_weight_bold;
+          }
+        }
+        .buttonGroup {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: vh(6px) vw(5px);
+          justify-items: center;
+          margin-top: vh(20px);
+          margin-bottom: vh(56px);
+          &#atmosphere {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+      }
+    }
+    .mapContainer {
+      width: vw(891px);
+      @include flex(column, center, center, vh(27px));
+      .map {
+        width: 100%;
+        height: vh(268px);
+        background-color: #f0f0f0;
+      }
+      .mapInfo {
+        width: 100%;
+        @include flex(row, center, space-between);
+        font-size: rem(20px);
+        color: #929292;
+        line-height: 1.75;
+      }
+    }
+  }
+  .modalContainer {
+    position: absolute;
+    top: 0;
+
+    @include flex(column, center, center);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.24);
+    z-index: 1000;
+  }
+}

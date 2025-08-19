@@ -1,5 +1,5 @@
-import styles from "@/styles/components/MainPage/Profile.module.scss";
-import { influencer_profile, star_icon } from "@/assets";
+import styles from "@/styles/components/InfluencerMainPage/Profile.module.scss";
+import { influencer_profile, star_icon_red } from "@/assets";
 export default function Profile() {
   return (
     <div className={styles.container}>
@@ -12,7 +12,7 @@ export default function Profile() {
         <div className={styles.profileName}>멋사 TV</div>
         <div className={styles.profileDescription}>POSSIBILITY TO REALITY</div>
         <div className={styles.rating}>
-          <img className={styles.starIcon} src={star_icon} alt="star" />
+          <img className={styles.starIcon} src={star_icon_red} alt="star" />
           <div className={styles.ratingValue}>4.5</div>
           <div className={styles.ratingCount}>
             (<span>1793</span>)
