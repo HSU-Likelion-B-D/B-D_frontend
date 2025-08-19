@@ -41,12 +41,11 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route element={<BubbleLayout />}>
-            <Route path="/business-profile" element={<ProfilePage />} />
-            <Route path="/bd-start" element={<BdStartPage />} />
-            <Route path="/start" element={<StartPage />} />
             <Route path="/address" element={<AddressPage />} />
             <Route path="/select-keyword" element={<SelectKWPage />} />
             <Route path="/complete" element={<CompletePage />} />
+            <Route path="/business-profile" element={<ProfilePage />} />
+
             <Route
               path="/influencer-profile"
               element={<InfluencerProfilePage />}
@@ -109,6 +108,10 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find-password" element={<FindPWPage />} />
           <Route path="/new-password" element={<NewPWPage />} />
+        </Route>
+        <Route element={<BubbleLayout />}>
+          <Route path="/bd-start" element={<BdStartPage />} />
+          <Route path="/start" element={<StartPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -3,7 +3,7 @@ import styles from "@/styles/pages/LoginPage.module.scss";
 import { logo, eye, eye_color } from "@/assets";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import axiosInstance from "@/apis/axiosInstance";
 export default function LoginPage() {
   const [keepLogin, setKeepLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -20,17 +20,10 @@ export default function LoginPage() {
 
   const onSubmit = (data) => {
     console.log(data);
+    axiosInstance.post("/auth/login", data).then((res) => {
+      console.log(res);
+    });
   };
-  // const onSubmit = async (data) => {
-  //   try {
-  //     console.log("로그인 데이터:", data);
-  //     // TODO: 실제 로그인 API 호출
-  //     // const response = await loginAPI(data);
-  //     // 로그인 성공 처리
-  //   } catch (error) {
-  //     console.error("로그인 실패:", error);
-  //   }
-  // };
 
   const watchedEmail = watch("email");
   const watchedPassword = watch("password");
