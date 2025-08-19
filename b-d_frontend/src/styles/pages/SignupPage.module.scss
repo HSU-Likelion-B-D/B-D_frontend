@@ -84,30 +84,44 @@
         line-height: 1.75;
       }
     }
-
-    .verifyContainer {
-      @include flex(row, center, space-between, vw(29px));
+    .verificationContainer {
       width: 100%;
-      .confirmBtn {
-        padding: vh(21px) vw(56px);
-        min-width: max-content;
-        line-height: 1.75;
-        height: 100%;
-        background: $color-sub-01;
-        color: $color-white;
-        border: none;
-        border-radius: 8px;
-        font-size: rem(16px);
-        font-weight: $font_weight_semibold;
-        cursor: pointer;
-        align-items: center;
-        &.active {
-          background: $color-main;
-          color: #fff;
+      position: relative;
+      .verifyContainer {
+        @include flex(row, center, space-between, vw(29px));
+        width: 100%;
+        .confirmBtn {
+          padding: vh(21px) vw(56px);
+          min-width: max-content;
+          line-height: 1.75;
+          height: 100%;
+          background: $color-sub-01;
+          color: $color-white;
+          border: none;
+          border-radius: 8px;
+          font-size: rem(16px);
+          font-weight: $font_weight_semibold;
           cursor: pointer;
+          align-items: center;
+          &.active {
+            background: $color-main;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+      .message {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        font-size: rem(14px);
+        color: $color-red;
+        &.successMessage {
+          color: $color-green;
         }
       }
     }
+
     .agreeSection {
       width: 100%;
       @include flex(column, start, center, vh(10px));
