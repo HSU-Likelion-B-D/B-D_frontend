@@ -1,9 +1,9 @@
-import React from 'react';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import React from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 function getAccessToken() {
   try {
-    return localStorage.getItem('access_token');
+    return localStorage.getItem("accessToken");
   } catch (error) {
     console.error(error);
     return null;
@@ -15,9 +15,9 @@ export const ProtectedRoute = () => {
   const accessToken = getAccessToken();
 
   if (!accessToken) {
-    const redirectPath = `${location.pathname}${location.search || ''}`;
+    const redirectPath = `${location.pathname}${location.search || ""}`;
     try {
-      sessionStorage.setItem('post_login_redirect', redirectPath);
+      sessionStorage.setItem("post_login_redirect", redirectPath);
     } catch (error) {
       console.error(error);
     }

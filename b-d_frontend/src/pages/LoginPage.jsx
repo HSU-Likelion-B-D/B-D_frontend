@@ -20,8 +20,12 @@ export default function LoginPage() {
 
   const onSubmit = (data) => {
     console.log(data);
-    axiosInstance.post("/auth/login", data).then((res) => {
+    axiosInstance.post("/bd/user/signin", data).then((res) => {
       console.log(res);
+      if (res.data.isSuccess) {
+        localStorage.setItem("accessToken", res.data.data.token);
+        navigate("/");
+      }
     });
   };
 
@@ -86,7 +90,7 @@ export default function LoginPage() {
             <div className={styles.inputContainer}>
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="비밀번호를 입력해주세요. (영문, 숫자 포함 8자~12자)"
+                placeholder="비밀번호를 입력해주세요. (영문, 숫자, 특수문자 포함 4자~12자)"
                 className={`${styles.input} ${
                   errors.password
                     ? styles.error
@@ -97,8 +101,17 @@ export default function LoginPage() {
                 {...register("password", {
                   required: "비밀번호를 입력해주세요",
                   minLength: {
-                    value: 8,
-                    message: "비밀번호는 최소 8자 이상이어야 합니다",
+                    value: 4,
+                    message: "비밀번호는 최소 4자 이상이어야 합니다",
+                  },
+                  maxLength: {
+                    value: 12,
+                    message: "비밀번호는 최대 12자까지 입력 가능합니다",
+                  },
+                  pattern: {
+                    value:
+                      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{4,12}$/,
+                    message: "영문, 숫자, 특수문자 포함 4자~12자",
                   },
                 })}
               />
