@@ -41,34 +41,6 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route element={<BubbleLayout />}>
-            <Route path="/address" element={<AddressPage />} />
-            <Route path="/select-keyword" element={<SelectKWPage />} />
-            <Route path="/complete" element={<CompletePage />} />
-            <Route path="/business-profile" element={<ProfilePage />} />
-
-            <Route
-              path="/influencer-profile"
-              element={<InfluencerProfilePage />}
-            />
-            <Route
-              path="/influencer-account"
-              element={<InfluencerAccountPage />}
-            />
-            <Route
-              path="/influencer-introduce"
-              element={<InfluencerIntroducePage />}
-            />
-            <Route
-              path="/influencer-select-keyword"
-              element={<InfluencerSelectKWPage />}
-            />
-            <Route path="/influencer-cost" element={<InfluencerCostPage />} />
-            <Route
-              path="/influencer-complete"
-              element={<InfluencerCompletePage />}
-            />
-            <Route path="/store-time" element={<StoreTimePage />} />
-            <Route path="/store-cost" element={<StoreCostPage />} />
             <Route
               path="/info-edit-complete"
               element={<InfoEditCompletePage />}
@@ -112,6 +84,33 @@ function App() {
         <Route element={<BubbleLayout />}>
           <Route path="/bd-start" element={<BdStartPage />} />
           <Route path="/start" element={<StartPage />} />
+          <Route path="/business-profile" element={<ProfilePage />} />
+          <Route path="/address" element={<AddressPage />} />
+          <Route path="/select-keyword" element={<SelectKWPage />} />
+          <Route path="/complete" element={<CompletePage />} />
+          <Route path="/store-time" element={<StoreTimePage />} />
+          <Route path="/store-cost" element={<StoreCostPage />} />
+          <Route
+            path="/influencer-profile"
+            element={<InfluencerProfilePage />}
+          />
+          <Route
+            path="/influencer-account"
+            element={<InfluencerAccountPage />}
+          />
+          <Route
+            path="/influencer-introduce"
+            element={<InfluencerIntroducePage />}
+          />
+          <Route
+            path="/influencer-select-keyword"
+            element={<InfluencerSelectKWPage />}
+          />
+          <Route path="/influencer-cost" element={<InfluencerCostPage />} />
+          <Route
+            path="/influencer-complete"
+            element={<InfluencerCompletePage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
