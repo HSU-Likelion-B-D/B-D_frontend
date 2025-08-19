@@ -2,10 +2,36 @@
 .container {
   z-index: 10;
   @include flex(column, center, center);
-  .profileImg {
-    width: vw(174px);
-    height: vw(174px);
-    margin-bottom: vh(13px);
+  .profileSection {
+    position: relative;
+    margin-bottom: vh(52px);
+    @include flex(column, center, center);
+
+    .profileImage {
+      background-color: #80e6ff;
+      width: vw(174px);
+      height: vw(174px);
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .cameraButton {
+      position: absolute;
+      bottom: 0;
+      right: vw(7px);
+      background: $color-red-01;
+      border: none;
+      border-radius: 50%;
+      width: vw(39px);
+      height: vw(39px);
+      @include flex(row, center, center);
+      cursor: pointer;
+    }
+    .cameraIcon {
+      @include flex(row, center, center);
+      width: vw(24px);
+      height: vw(24px);
+    }
   }
   .profileInfo {
     @include flex(column, center, center);
@@ -30,7 +56,7 @@
       .ratingValue {
         font-size: rem(26px);
         line-height: 1.75;
-        color: $color-main;
+        color: $color-red-01;
         font-weight: $font_weight_bold;
         margin-right: 0.5rem;
       }
