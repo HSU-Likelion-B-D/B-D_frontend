@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/styles/pages/CreateProposalPage.module.scss";
 import Header from "@/components/MainPage/Header";
 import { useForm } from "react-hook-form";
 import { main_busy } from "@/assets";
 import { useNavigate } from "react-router-dom";
+import api from "@/apis/axiosInstance";
 
 export default function CreateProposalPage() {
   const navigate = useNavigate();
@@ -19,6 +20,12 @@ export default function CreateProposalPage() {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    api.get("/bd/api/proposal/write").then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   // 필수 필드들의 값을 모니터링
   const watchedFields = watch([
@@ -98,26 +105,12 @@ export default function CreateProposalPage() {
             <div className={styles.proposalMoneyLeft}>
               <input
                 type="number"
-                placeholder="최소 금액 제안"
+                placeholder="금액 제안"
                 {...register("minAmount", {
-                  required: "최소 금액을 입력해주세요",
+                  required: "금액을 입력해주세요",
                   min: {
                     value: 1,
-                    message: "최소 금액은 1원 이상이어야 합니다",
-                  },
-                })}
-              />
-            </div>
-            ~
-            <div className={styles.proposalMoneyRight}>
-              <input
-                type="number"
-                placeholder="최대 금액 제안"
-                {...register("maxAmount", {
-                  required: "최대 금액을 입력해주세요",
-                  min: {
-                    value: 1,
-                    message: "최대 금액은 1원 이상이어야 합니다",
+                    message: "금액은 1원 이상이어야 합니다",
                   },
                 })}
               />
