@@ -1,21 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/pages/InfluencerCreateProposalPage.module.scss";
 import Header from "@/components/InfluencerMainPage/Header";
 import { useForm } from "react-hook-form";
 import { dilly_left } from "@/assets";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/apis/axiosInstance";
 
 export default function InfluencerCreateProposalPage() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
+  const navigate = useNavigate();
+  const { register, handleSubmit, watch } = useForm({
     mode: "onChange",
+  });
+  const [proposalData, setProposalData] = useState({
+    activityName: "",
+    introduction: "",
+    name: "",
+    platforms: "",
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("Form 데이터:", data);
+
+    // form 데이터를 API 형식에 맞게 변환
+    const apiData = {
+      contentTopic: data.contentField || "",
+      title: data.proposalTitle,
+      offerBudget: parseInt(data.minAmount) || 0,
+      startDate: `${data.startYear}-${data.startMonth}-${data.startDay}`,
+      endDate: `${data.endYear}-${data.endMonth}-${data.endDay}`,
+      overView: data.proposalContent || "",
+      request: data.proposalRequest || "",
+    };
+
+    console.log("API로 전송할 데이터:", apiData);
+
+    axiosInstance
+      .post("/bd/api/proposal/write", apiData)
+      .then((res) => {
+        console.log("API 응답:", res);
+        if (res.data.isSuccess) {
+          navigate("/influencer-main");
+        }
+      })
+      .catch((err) => {
+        console.log("API 오류:", err);
+      });
   };
 
   // 필수 필드들의 값을 모니터링
@@ -24,14 +53,32 @@ export default function InfluencerCreateProposalPage() {
     "proposerName",
     "platform",
     "contentField",
+    "minAmount",
     "startYear",
     "startMonth",
     "startDay",
     "endYear",
     "endMonth",
     "endDay",
+    "proposalContent",
+    "proposalRequest",
     "agreement",
   ]);
+
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/proposal/write")
+      .then((res) => {
+        console.log("API 응답:", res);
+        if (res.data.isSuccess) {
+          setProposalData(res.data.data.defaultInfo);
+          console.log("설정된 proposalData:", res.data.data.defaultInfo);
+        }
+      })
+      .catch((err) => {
+        console.log("API 오류:", err);
+      });
+  }, []);
 
   // 모든 필수 필드가 채워졌는지 확인
   const isFormValid = watchedFields.every(
@@ -48,8 +95,12 @@ export default function InfluencerCreateProposalPage() {
       </div>
       <div className={styles.content}>
         <div className={styles.storeContainer}>
-          <div className={styles.storeName}>멋사 TV</div>
-          <div className={styles.storeDescription}>POSSIBILITY TO REALITY</div>
+          <div className={styles.storeName}>
+            {proposalData.activityName || "활동 이름"}
+          </div>
+          <div className={styles.storeDescription}>
+            {proposalData.introduction || "활동 소개"}
+          </div>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -73,6 +124,7 @@ export default function InfluencerCreateProposalPage() {
               <input
                 type="text"
                 placeholder="제안자 명"
+                value={proposalData.name || ""}
                 {...register("proposerName", {
                   required: "제안자 명을 입력해주세요",
                 })}
@@ -84,6 +136,7 @@ export default function InfluencerCreateProposalPage() {
               <input
                 type="text"
                 placeholder="활동 플랫폼"
+                value={proposalData.platforms || ""}
                 {...register("platform", {
                   required: "활동 플랫폼을 입력해주세요",
                 })}
@@ -103,26 +156,12 @@ export default function InfluencerCreateProposalPage() {
             <div className={styles.proposalMoneyLeft}>
               <input
                 type="number"
-                placeholder="최소 금액 제안"
+                placeholder="금액 제안"
                 {...register("minAmount", {
-                  required: "최소 금액을 입력해주세요",
+                  required: "금액을 입력해주세요",
                   min: {
                     value: 1,
-                    message: "최소 금액은 1원 이상이어야 합니다",
-                  },
-                })}
-              />
-            </div>
-            ~
-            <div className={styles.proposalMoneyRight}>
-              <input
-                type="number"
-                placeholder="최대 금액 제안"
-                {...register("maxAmount", {
-                  required: "최대 금액을 입력해주세요",
-                  min: {
-                    value: 1,
-                    message: "최대 금액은 1원 이상이어야 합니다",
+                    message: "금액은 1원 이상이어야 합니다",
                   },
                 })}
               />
@@ -201,10 +240,20 @@ export default function InfluencerCreateProposalPage() {
             일
           </div>
           <div className={styles.proposalContent}>
-            <textarea placeholder="제안 개요를 작성해주세요." />
+            <textarea
+              placeholder="제안 개요를 작성해주세요."
+              {...register("proposalContent", {
+                required: "제안 개요를 입력해주세요",
+              })}
+            />
           </div>
           <div className={styles.proposalRequest}>
-            <textarea placeholder="요청사항을 자유롭게 적어주세요." />
+            <textarea
+              placeholder="요청사항을 자유롭게 적어주세요."
+              {...register("proposalRequest", {
+                required: "요청사항을 입력해주세요",
+              })}
+            />
           </div>
           <div className={styles.proposalAgreement}>
             <span className={styles.red}>
@@ -265,7 +314,7 @@ export default function InfluencerCreateProposalPage() {
             }`}
             disabled={!isFormValid}
           >
-            다음으로
+            저장하기
           </button>
         </form>
       </div>

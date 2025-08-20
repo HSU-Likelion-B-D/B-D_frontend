@@ -92,11 +92,10 @@ export default function CreateProposalPage() {
       <div className={styles.content}>
         <div className={styles.storeContainer}>
           <div className={styles.storeName}>
-            {proposalData.workPlaceName || "호호식당 대학로점"}
+            {proposalData.workPlaceName || "가게 이름"}
           </div>
           <div className={styles.storeDescription}>
-            {proposalData.introduction ||
-              "따뜻한 분위기에서 즐기는 일본 가정식"}
+            {proposalData.introduction || "가게 소개"}
           </div>
         </div>
         <form
