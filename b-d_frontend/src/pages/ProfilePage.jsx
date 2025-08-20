@@ -6,6 +6,7 @@ import GalleryPopup from "../components/ProfilePage/GalleryPopup";
 import Input from "../components/SingupPage/Input";
 import { Form, useNavigate } from "react-router-dom";
 import axiosInstance from "../apis/axiosInstanceFormData";
+
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -43,20 +44,46 @@ const ProfilePage = () => {
       return;
     }
 
-    // 닉네임 중복 확인 로직 (예: 서버 요청)
-    const isDuplicate = mockNicknames.includes(nickname); // 예시 중복 닉네임 리스트
+    setIsButtonDisabled(true); // 버튼 비활성화
 
-    setIsButtonDisabled(true); // 버튼을 회색으로 변경
-
-    if (isDuplicate) {
-      setNicknameMessage("이미 존재하는 닉네임입니다.");
-      setIsError(true);
-      setIsSuccess(false);
-    } else {
-      setNicknameMessage("멋진 닉네임이군요!");
-      setIsError(false);
-      setIsSuccess(true);
-    }
+    // 서버로 닉네임 중복 확인 요청
+    axiosInstance
+      .post(
+        "/bd/user/check-nickname",
+        { nickname }, // JSON 요청 데이터
+        {
+          headers: {
+            "Content-Type": "application/json", // 요청별로 Content-Type 설정
+          },
+        }
+      )
+      .then((res) => {
+        console.log("닉네임 중복 확인 응답:", res);
+        if (res.data.isSuccess) {
+          setNicknameMessage(res.data.message || "사용 가능한 닉네임입니다.");
+          setIsError(false);
+          setIsSuccess(true);
+        } else {
+          setNicknameMessage(res.data.message || "이미 존재하는 닉네임입니다.");
+          setIsError(true);
+          setIsSuccess(false);
+        }
+      })
+      .catch((error) => {
+        console.error("닉네임 중복 확인 오류:", error);
+        if (error.response) {
+          setNicknameMessage(
+            error.response.data.message || "닉네임 확인 중 오류가 발생했습니다."
+          );
+        } else {
+          setNicknameMessage("서버와 통신할 수 없습니다. 다시 시도해주세요.");
+        }
+        setIsError(true);
+        setIsSuccess(false);
+      })
+      .finally(() => {
+        setIsButtonDisabled(false); // 요청 완료 후 버튼 상태 복구
+      });
   };
 
   const handleSubmit = (event) => {
@@ -94,14 +121,14 @@ const ProfilePage = () => {
     setIsButtonDisabled(false);
   };
 
-  const handleNext = () => {
+  const handleNext = (data, image) => {
     console.log("handleNext 실행:", { formData, profileImage });
 
     const userId = sessionStorage.getItem("userId"); // 세션 스토리지에서 userId 가져오기
 
     // FormData 객체 생성
     const formDataToSend = new FormData();
-    formDataToSend.append("userId", userId); // 예시 userId, 실제로는 회원가입 후 반환된 값 사용
+    formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
     formDataToSend.append("nickname", formData.nickname); // 닉네임
     formDataToSend.append("profileImage", profileImage); // 프로필 이미지 파일
     formDataToSend.append("introduction", formData.description); // 설명글
@@ -121,6 +148,20 @@ const ProfilePage = () => {
       })
       .catch((error) => {
         console.error("프로필 설정 오류:", error);
+        if (error.response) {
+          // 서버 응답이 있는 경우
+          console.log(
+            `오류 발생: ${error.response.status} - ${
+              error.response.data.message || "서버 오류"
+            }`
+          );
+        } else if (error.request) {
+          // 요청이 이루어졌으나 응답이 없는 경우
+          console.log("서버로부터 응답이 없습니다. 네트워크를 확인해주세요.");
+        } else {
+          // 요청 설정 중 오류 발생
+          console.log("요청 설정 중 오류가 발생했습니다.");
+        }
       });
   };
 
@@ -232,7 +273,7 @@ const ProfilePage = () => {
             }`}
             disabled={!isFormValid}
             onClick={() => {
-              handleNext();
+              handleNext(formData, profileImage);
             }}
           >
             다음으로
