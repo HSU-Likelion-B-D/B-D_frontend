@@ -11,8 +11,10 @@ const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    userId: "",
     nickname: "",
     description: "",
+    profileImage: "",
   });
   const [nicknameMessage, setNicknameMessage] = useState("");
   const [isError, setIsError] = useState(false);
@@ -20,6 +22,7 @@ const ProfilePage = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(profile);
+  const [profileImageFile, setProfileImageFile] = useState(""); // 파일 객체 저장용
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -99,6 +102,9 @@ const ProfilePage = () => {
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
+      // 파일 객체 저장 (FormData 전송용)
+      setProfileImageFile(file);
+
       const reader = new FileReader();
       reader.onload = (e) => {
         setProfileImage(e.target.result);
@@ -130,9 +136,13 @@ const ProfilePage = () => {
     const formDataToSend = new FormData();
     formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
     formDataToSend.append("nickname", formData.nickname); // 닉네임
-    formDataToSend.append("profileImage", profileImage); // 프로필 이미지 파일
+    formDataToSend.append("profileImage", profileImageFile); // 파일 객체 전송
     formDataToSend.append("introduction", formData.description); // 설명글
-
+    // FormData 내용 확인하기
+    console.log("FormData 내용:");
+    for (let [key, value] of formDataToSend.entries()) {
+      console.log(`${key}:`, value);
+    }
     // 서버로 데이터 전송
     axiosInstance
       .post("/bd/user/profile", formDataToSend, {
