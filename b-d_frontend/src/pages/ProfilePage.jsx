@@ -4,7 +4,8 @@ import { logo, camera, profile } from "@/assets";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import GalleryPopup from "../components/ProfilePage/GalleryPopup";
 import Input from "../components/SingupPage/Input";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
+import axiosInstance from "../apis/axiosInstanceFormData";
 const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -91,6 +92,36 @@ const ProfilePage = () => {
     setIsError(false);
     setIsSuccess(false);
     setIsButtonDisabled(false);
+  };
+
+  const handleNext = () => {
+    console.log("handleNext 실행:", { formData, profileImage });
+
+    const userId = sessionStorage.getItem("userId"); // 세션 스토리지에서 userId 가져오기
+
+    // FormData 객체 생성
+    const formDataToSend = new FormData();
+    formDataToSend.append("userId", userId); // 예시 userId, 실제로는 회원가입 후 반환된 값 사용
+    formDataToSend.append("nickname", formData.nickname); // 닉네임
+    formDataToSend.append("profileImage", profileImage); // 프로필 이미지 파일
+    formDataToSend.append("introduction", formData.description); // 설명글
+
+    // 서버로 데이터 전송
+    axiosInstance
+      .post("/bd/user/profile", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data", //요청 헤더 설정
+        },
+      })
+      .then((res) => {
+        console.log("프로필 저장 응답:", res);
+        if (res.data.isSuccess) {
+          navigate("/address"); // 성공시 다음 페이지로 이동
+        }
+      })
+      .catch((error) => {
+        console.error("프로필 설정 오류:", error);
+      });
   };
 
   return (
@@ -201,7 +232,7 @@ const ProfilePage = () => {
             }`}
             disabled={!isFormValid}
             onClick={() => {
-              navigate("/address");
+              handleNext();
             }}
           >
             다음으로
