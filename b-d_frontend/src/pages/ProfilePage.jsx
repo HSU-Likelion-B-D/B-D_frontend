@@ -137,16 +137,20 @@ const ProfilePage = () => {
     formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
     formDataToSend.append("nickname", formData.nickname); // 닉네임
 
-    // profileImageFile이 존재할 경우에만 추가 null 값이면 전송X
+    // profileImageFile이 존재할 경우에만 추가
     if (profileImageFile) {
       formDataToSend.append("profileImage", profileImageFile); // 파일 객체 전송
+    } else {
+      console.log("프로필 사진이 없으므로 전송하지 않습니다.");
     }
     formDataToSend.append("introduction", formData.description); // 설명글
+
     // FormData 내용 확인하기
     console.log("FormData 내용:");
     for (let [key, value] of formDataToSend.entries()) {
       console.log(`${key}:`, value);
     }
+
     // 서버로 데이터 전송
     axiosInstance
       .post("/bd/user/profile", formDataToSend, {
