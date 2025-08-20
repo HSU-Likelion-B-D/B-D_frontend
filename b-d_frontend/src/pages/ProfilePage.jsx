@@ -136,7 +136,11 @@ const ProfilePage = () => {
     const formDataToSend = new FormData();
     formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
     formDataToSend.append("nickname", formData.nickname); // 닉네임
-    formDataToSend.append("profileImage", profileImageFile); // 파일 객체 전송
+
+    // profileImageFile이 존재할 경우에만 추가 null 값이면 전송X
+    if (profileImageFile) {
+      formDataToSend.append("profileImage", profileImageFile); // 파일 객체 전송
+    }
     formDataToSend.append("introduction", formData.description); // 설명글
     // FormData 내용 확인하기
     console.log("FormData 내용:");
