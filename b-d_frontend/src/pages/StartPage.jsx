@@ -51,8 +51,8 @@ function StartPage() {
         sessionStorage.removeItem("signupData");
 
         // 서버 응답에서 userId와 userRoleType 추출하여 세션스토리지에 저장
-        const userId = res.data.userId;
-        const userRoleType = res.data.userRoleType;
+        const userId = res.data.data.userId;
+        const userRoleType = res.data.data.userRoleType;
 
         sessionStorage.setItem("userId", userId);
         sessionStorage.setItem("userRoleType", userRoleType);
