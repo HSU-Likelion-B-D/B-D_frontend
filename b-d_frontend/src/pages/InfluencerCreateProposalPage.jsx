@@ -8,19 +8,24 @@ import axiosInstance from "@/apis/axiosInstance";
 
 export default function InfluencerCreateProposalPage() {
   const navigate = useNavigate();
-  const { register, handleSubmit, watch } = useForm({
+  const { register, handleSubmit, watch, setValue } = useForm({
     mode: "onChange",
   });
   const [proposalData, setProposalData] = useState({
     activityName: "",
     introduction: "",
     name: "",
-    platforms: "",
+    platforms: [],
+    title: "",
+    offerBudget: "",
+    startDate: "",
+    endDate: "",
+    overView: "",
+    request: "",
+    contentTopic: "",
   });
 
   const onSubmit = (data) => {
-    console.log("Form 데이터:", data);
-
     // form 데이터를 API 형식에 맞게 변환
     const apiData = {
       contentTopic: data.contentField || "",
@@ -32,12 +37,9 @@ export default function InfluencerCreateProposalPage() {
       request: data.proposalRequest || "",
     };
 
-    console.log("API로 전송할 데이터:", apiData);
-
     axiosInstance
       .post("/bd/api/proposal/write", apiData)
       .then((res) => {
-        console.log("API 응답:", res);
         if (res.data.isSuccess) {
           navigate("/influencer-main");
         }
@@ -69,21 +71,98 @@ export default function InfluencerCreateProposalPage() {
     axiosInstance
       .get("/bd/api/proposal/write")
       .then((res) => {
-        console.log("API 응답:", res);
         if (res.data.isSuccess) {
-          setProposalData(res.data.data.defaultInfo);
-          console.log("설정된 proposalData:", res.data.data.defaultInfo);
+          // existInfo와 defaultInfo를 올바르게 병합
+          const existInfo = res.data.data.existInfo || {};
+          const defaultInfo = res.data.data.defaultInfo || {};
+
+          // 두 객체를 병합 (defaultInfo가 우선)
+          const mergedData = { ...existInfo, ...defaultInfo };
+
+          // form 필드에 값 설정
+          if (mergedData.title) setValue("proposalTitle", mergedData.title);
+          if (mergedData.name) setValue("proposerName", mergedData.name);
+          if (mergedData.platforms)
+            setValue(
+              "platform",
+              Array.isArray(mergedData.platforms)
+                ? mergedData.platforms.join(", ")
+                : mergedData.platforms
+            );
+          if (mergedData.contentTopic)
+            setValue("contentField", mergedData.contentTopic);
+          if (mergedData.offerBudget)
+            setValue("minAmount", mergedData.offerBudget);
+          if (mergedData.startDate) {
+            const [year, month, day] = mergedData.startDate.split("-");
+            setValue("startYear", parseInt(year));
+            setValue("startMonth", parseInt(month));
+            setValue("startDay", parseInt(day));
+          }
+          if (mergedData.endDate) {
+            const [year, month, day] = mergedData.endDate.split("-");
+            setValue("endYear", parseInt(year));
+            setValue("endMonth", parseInt(month));
+            setValue("endDay", parseInt(day));
+          }
+          if (mergedData.overView)
+            setValue("proposalContent", mergedData.overView);
+          if (mergedData.request)
+            setValue("proposalRequest", mergedData.request);
+
+          setProposalData(mergedData);
         }
       })
       .catch((err) => {
         console.log("API 오류:", err);
       });
-  }, []);
+  }, [setValue]);
 
   // 모든 필수 필드가 채워졌는지 확인
-  const isFormValid = watchedFields.every(
-    (field) => field && field.toString().trim() !== ""
-  );
+  const isFormValid = watchedFields.every((field, index) => {
+    const fieldNames = [
+      "proposalTitle",
+      "proposerName",
+      "platform",
+      "contentField",
+      "minAmount",
+      "startYear",
+      "startMonth",
+      "startDay",
+      "endYear",
+      "endMonth",
+      "endDay",
+      "proposalContent",
+      "proposalRequest",
+      "agreement",
+    ];
+
+    // agreement는 체크박스이므로 boolean 값 확인
+    if (fieldNames[index] === "agreement") {
+      return field === true;
+    }
+
+    // 숫자 필드들은 0이 아닌 값 확인
+    if (
+      [
+        "startYear",
+        "startMonth",
+        "startDay",
+        "endYear",
+        "endMonth",
+        "endDay",
+        "minAmount",
+      ].includes(fieldNames[index])
+    ) {
+      const isValid = field !== undefined && field !== null && field !== "";
+      return isValid;
+    }
+
+    // 문자열 필드들은 빈 문자열이 아닌지 확인
+    const isValid = field && field.toString().trim() !== "";
+    return isValid;
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -111,6 +190,7 @@ export default function InfluencerCreateProposalPage() {
               <input
                 type="text"
                 placeholder="제안서 제목을 입력해주세요."
+                defaultValue={proposalData.title || ""}
                 maxLength={20}
                 {...register("proposalTitle", {
                   required: "제안서 제목을 입력해주세요",
@@ -124,7 +204,7 @@ export default function InfluencerCreateProposalPage() {
               <input
                 type="text"
                 placeholder="제안자 명"
-                value={proposalData.name || ""}
+                defaultValue={proposalData.name || ""}
                 {...register("proposerName", {
                   required: "제안자 명을 입력해주세요",
                 })}
@@ -136,7 +216,11 @@ export default function InfluencerCreateProposalPage() {
               <input
                 type="text"
                 placeholder="활동 플랫폼"
-                value={proposalData.platforms || ""}
+                defaultValue={
+                  Array.isArray(proposalData.platforms)
+                    ? proposalData.platforms.join(", ")
+                    : ""
+                }
                 {...register("platform", {
                   required: "활동 플랫폼을 입력해주세요",
                 })}
@@ -146,6 +230,7 @@ export default function InfluencerCreateProposalPage() {
               <input
                 type="text"
                 placeholder="콘텐츠 분야"
+                defaultValue={proposalData.contentTopic || ""}
                 {...register("contentField", {
                   required: "콘텐츠 분야를 입력해주세요",
                 })}
@@ -157,6 +242,7 @@ export default function InfluencerCreateProposalPage() {
               <input
                 type="number"
                 placeholder="금액 제안"
+                defaultValue={proposalData.offerBudget || ""}
                 {...register("minAmount", {
                   required: "금액을 입력해주세요",
                   min: {
@@ -172,6 +258,11 @@ export default function InfluencerCreateProposalPage() {
               type="number"
               placeholder=""
               className={styles.proposalDateYear}
+              defaultValue={
+                proposalData.startDate
+                  ? proposalData.startDate.split("-")[0] || ""
+                  : ""
+              }
               {...register("startYear", {
                 required: "시작 연도를 입력해주세요",
                 min: {
@@ -185,6 +276,11 @@ export default function InfluencerCreateProposalPage() {
               type="number"
               placeholder=""
               className={styles.proposalDateMonth}
+              defaultValue={
+                proposalData.startDate
+                  ? proposalData.startDate.split("-")[1] || ""
+                  : ""
+              }
               {...register("startMonth", {
                 required: "시작 월을 입력해주세요",
                 min: { value: 1, message: "1월 이상 입력해주세요" },
@@ -196,6 +292,11 @@ export default function InfluencerCreateProposalPage() {
               type="number"
               placeholder=""
               className={styles.proposalDateDay}
+              defaultValue={
+                proposalData.startDate
+                  ? proposalData.startDate.split("-")[2] || ""
+                  : ""
+              }
               {...register("startDay", {
                 required: "시작 일을 입력해주세요",
                 min: { value: 1, message: "1일 이상 입력해주세요" },
@@ -207,6 +308,11 @@ export default function InfluencerCreateProposalPage() {
               type="number"
               placeholder=""
               className={styles.proposalDateYear}
+              defaultValue={
+                proposalData.endDate
+                  ? proposalData.endDate.split("-")[0] || ""
+                  : ""
+              }
               {...register("endYear", {
                 required: "종료 연도를 입력해주세요",
                 min: {
@@ -220,6 +326,11 @@ export default function InfluencerCreateProposalPage() {
               type="number"
               placeholder=""
               className={styles.proposalDateMonth}
+              defaultValue={
+                proposalData.endDate
+                  ? proposalData.endDate.split("-")[1] || ""
+                  : ""
+              }
               {...register("endMonth", {
                 required: "종료 월을 입력해주세요",
                 min: { value: 1, message: "1월 이상 입력해주세요" },
@@ -231,6 +342,11 @@ export default function InfluencerCreateProposalPage() {
               type="number"
               placeholder=""
               className={styles.proposalDateDay}
+              defaultValue={
+                proposalData.endDate
+                  ? proposalData.endDate.split("-")[2] || ""
+                  : ""
+              }
               {...register("endDay", {
                 required: "종료 일을 입력해주세요",
                 min: { value: 1, message: "1일 이상 입력해주세요" },
@@ -242,6 +358,7 @@ export default function InfluencerCreateProposalPage() {
           <div className={styles.proposalContent}>
             <textarea
               placeholder="제안 개요를 작성해주세요."
+              defaultValue={proposalData.overView || ""}
               {...register("proposalContent", {
                 required: "제안 개요를 입력해주세요",
               })}
@@ -250,6 +367,7 @@ export default function InfluencerCreateProposalPage() {
           <div className={styles.proposalRequest}>
             <textarea
               placeholder="요청사항을 자유롭게 적어주세요."
+              defaultValue={proposalData.request || ""}
               {...register("proposalRequest", {
                 required: "요청사항을 입력해주세요",
               })}

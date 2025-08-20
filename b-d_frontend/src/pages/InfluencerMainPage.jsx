@@ -29,7 +29,7 @@ export default function InfluencerMainPage() {
             <div className={styles.buttonContainer}>
               <button
                 className={styles.Button}
-                onClick={() => navigate("/create-proposal")}
+                onClick={() => navigate("/influencer-create-proposal")}
               >
                 <div className={styles.ButtonTitle}>
                   <span>제안서</span> 만들기

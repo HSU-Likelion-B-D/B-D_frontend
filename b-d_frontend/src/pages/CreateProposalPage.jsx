@@ -15,6 +15,13 @@ export default function CreateProposalPage() {
     workPlaceName: "",
     introduction: "",
     name: "",
+    title: "",
+    offerBudget: 0,
+    startDate: "",
+    endDate: "",
+    overView: "",
+    request: "",
+    contentTopic: "",
   });
 
   const onSubmit = (data) => {
@@ -66,7 +73,10 @@ export default function CreateProposalPage() {
       .get("/bd/api/proposal/write")
       .then((res) => {
         console.log("API 응답:", res);
-        if (res.data.isSuccess) {
+        if (res.data.isSuccess && res.data.data.existInfo) {
+          setProposalData(res.data.data.existInfo);
+          console.log("설정된 proposalData:", res.data.data.existInfo);
+        } else if (res.data.isSuccess && !res.data.data.defaultInfo) {
           setProposalData(res.data.data.defaultInfo);
           console.log("설정된 proposalData:", res.data.data.defaultInfo);
         }
