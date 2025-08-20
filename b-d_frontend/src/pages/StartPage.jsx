@@ -49,6 +49,13 @@ function StartPage() {
         console.log("회원가입 응답:", res);
         navigate(`/${selectedType}-profile`);
         sessionStorage.removeItem("signupData");
+
+        // 서버 응답에서 userId와 userRoleType 추출하여 세션스토리지에 저장
+        const userId = res.data.data.userId;
+        const userRoleType = res.data.data.userRoleType;
+
+        sessionStorage.setItem("userId", userId);
+        sessionStorage.setItem("userRoleType", userRoleType);
       })
       .catch((error) => {
         console.error("회원가입 오류:", error);
