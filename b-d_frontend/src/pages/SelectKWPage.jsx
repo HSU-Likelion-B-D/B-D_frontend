@@ -5,29 +5,29 @@ import logo from "../assets/logo.svg";
 import SelectButton from "../components/SelectKWPage/SelectButton";
 import { useNavigate } from "react-router-dom";
 const species = [
-  "음식/음료",
-  "쇼핑/소매",
-  "반려동물",
-  "뷰티/서비스",
-  "운동/건강",
-  "문화/체험",
-  "콘텐츠",
-  "기타",
+  { id: 1, name: "음식/음료" },
+  { id: 2, name: "쇼핑/소매" },
+  { id: 3, name: "반려동물" },
+  { id: 4, name: "뷰티/서비스" },
+  { id: 5, name: "운동/건강" },
+  { id: 6, name: "문화/체험" },
+  { id: 7, name: "콘텐츠" },
+  { id: 8, name: "기타" },
 ];
 
 const atmosphere = [
-  "감성적인",
-  "빈티지",
-  "러블리",
-  "힙한",
-  "직장인",
-  "자연친화적",
-  "조용한",
-  "활기찬",
-  "10대",
-  "20대",
-  "가족모임",
-  "단체",
+  { id: 1, name: "감성적인" },
+  { id: 2, name: "빈티지" },
+  { id: 3, name: "러블리" },
+  { id: 4, name: "힙한" },
+  { id: 5, name: "직장인" },
+  { id: 6, name: "자연친화적" },
+  { id: 7, name: "조용한" },
+  { id: 8, name: "활기찬" },
+  { id: 9, name: "10대" },
+  { id: 10, name: "20대" },
+  { id: 11, name: "가족모임" },
+  { id: 12, name: "단체" },
 ];
 
 const SelectKWPage = () => {
@@ -39,7 +39,9 @@ const SelectKWPage = () => {
   const handleSpeciesClick = (sp) => {
     // 버튼 중복 선택 로직
     setSelectedSpecies((prev) =>
-      prev.includes(sp) ? prev.filter((item) => item !== sp) : [...prev, sp]
+      prev.some((item) => item.id === sp.id)
+        ? prev.filter((item) => item.id !== sp.id)
+        : [...prev, sp]
     );
     setShowError(false);
   };
@@ -47,7 +49,9 @@ const SelectKWPage = () => {
   const handleAtmosphereClick = (kw) => {
     // 아래 그룹 버튼 중복 선택 로직
     setSelectedAtmosphere((prev) =>
-      prev.includes(kw) ? prev.filter((item) => item !== kw) : [...prev, kw]
+      prev.some((item) => item.id === kw.id)
+        ? prev.filter((item) => item.id !== kw.id)
+        : [...prev, kw]
     );
     setShowError(false);
   };
@@ -61,20 +65,22 @@ const SelectKWPage = () => {
     }
     console.log("handleNext 실행:", selectedSpecies, selectedAtmosphere);
     if (isFormComplete) {
-      const storeKeywordsDataToStore = {
-        categoryIds: selectedSpecies.join(", "),
-        moodIds: selectedAtmosphere.join(", "),
-      };
-
-      console.log("세션 스토리지에 저장할 데이터 : ", storeKeywordsDataToStore);
       sessionStorage.setItem(
-        "storeKeywordsData",
-        JSON.stringify(storeKeywordsDataToStore)
+        "storeSpeciesData",
+        JSON.stringify({ categoryIds: selectedSpecies.map((item) => item.id) })
+      );
+      sessionStorage.setItem(
+        "storeAtmosphereData",
+        JSON.stringify({ moodIds: selectedAtmosphere.map((item) => item.id) })
       );
 
       // 저장확인
-      const stored = sessionStorage.getItem("storeKeywordsData");
-      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
+      const storedSpecies = sessionStorage.getItem("storeSpeciesData");
+      const storedAtmosphere = sessionStorage.getItem("storeAtmosphereData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", {
+        storedSpecies,
+        storedAtmosphere,
+      });
     }
     navigate("/store-time");
   };
@@ -95,12 +101,12 @@ const SelectKWPage = () => {
         <div className={styles.buttonGroup}>
           {species.map((sp) => (
             <SelectButton
-              key={sp}
-              selected={selectedSpecies.includes(sp)}
+              key={sp.id}
+              selected={selectedSpecies.some((item) => item.id === sp.id)}
               onClick={() => handleSpeciesClick(sp)}
               error={showError}
             >
-              #{sp}
+              #{sp.name}
             </SelectButton>
           ))}
         </div>
@@ -118,12 +124,12 @@ const SelectKWPage = () => {
         <div className={styles.buttonGroup}>
           {atmosphere.map((kw) => (
             <SelectButton
-              key={kw}
-              selected={selectedAtmosphere.includes(kw)}
+              key={kw.id}
+              selected={selectedAtmosphere.some((item) => item.id === kw.id)}
               onClick={() => handleAtmosphereClick(kw)}
               error={showError}
             >
-              #{kw}
+              #{kw.name}
             </SelectButton>
           ))}
         </div>

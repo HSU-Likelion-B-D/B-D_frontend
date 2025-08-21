@@ -134,11 +134,15 @@ const ProfilePage = () => {
     console.log("handleNext 실행:", { formData, profileImage });
 
     const userId = sessionStorage.getItem("userId"); // 세션 스토리지에서 userId 가져오기
+    const nickname = formData.nickname; // formData에서 닉네임 가져오기
+
+    // 닉네임을 세션 스토리지에 저장
+    sessionStorage.setItem("nickname", nickname);
 
     // FormData 객체 생성
     const formDataToSend = new FormData();
     formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
-    formDataToSend.append("nickname", formData.nickname); // 닉네임
+    formDataToSend.append("nickname", nickname); // 닉네임
 
     // profileImageFile이 존재할 경우에만 추가
     if (profileImageFile) {
