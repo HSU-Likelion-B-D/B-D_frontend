@@ -55,8 +55,7 @@
     }
     .banner {
       width: 100%;
-      height: vh(176px);
-      background-color: #dfdfdf;
+      object-fit: cover;
     }
     .bottomContainer {
       margin-top: vh(59px);

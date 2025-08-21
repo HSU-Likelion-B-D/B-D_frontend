@@ -8,21 +8,21 @@ import NotificationModal from "@/components/MainPage/NotificationModal";
 import RateModal from "@/components/MainPage/RateModal";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@/apis/axiosInstance";
+import { banner } from "@/assets";
+
 export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [isRateModalOpen, setIsRateModalOpen] = useState(true);
   const navigate = useNavigate();
   const [businessInfo, setBusinessInfo] = useState(null);
+  const [influencerList, setInfluencerList] = useState([]);
 
   useEffect(() => {
     axiosInstance
       .get("/bd/api/businessman/mypage")
       .then((res) => {
-        console.log("API 응답:", res);
-        console.log("API 응답 데이터 구조:", res.data);
         if (res.data.isSuccess) {
           setBusinessInfo(res.data.data);
-          console.log("businessInfo 설정됨:", res.data.data);
         }
       })
       .catch((err) => {
@@ -39,6 +39,19 @@ export default function MainPage() {
       window.scrollTo({ top: 0 });
     }
   }, [isNotificationModalOpen, isRateModalOpen]);
+
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/businessman/home")
+      .then((res) => {
+        if (res.data.isSuccess) {
+          setInfluencerList(res.data.data.Influencers);
+        }
+      })
+      .catch((err) => {
+        console.error("API 에러:", err);
+      });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -70,9 +83,9 @@ export default function MainPage() {
               </button>
             </div>
           </div>
-          <MatchingList />
+          <MatchingList influencerList={influencerList} />
         </div>
-        <div className={styles.banner}></div>
+        <img src={banner} className={styles.banner} />
         <div className={styles.bottomContainer}>
           <CampaignManagement />
         </div>

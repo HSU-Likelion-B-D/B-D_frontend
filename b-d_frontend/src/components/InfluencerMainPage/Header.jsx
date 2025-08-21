@@ -36,20 +36,35 @@ export default function Header({
         </div>
       </div>
       <div className={styles.logoContainer}>
-        <img className={styles.logo} src={logo_red} alt="logo" />
+        <img
+          className={styles.logo}
+          src={logo_red}
+          alt="logo"
+          onClick={() => navigate("/influencer-main")}
+        />
       </div>
       <div className={styles.rightIconContainer}>
         <div className={styles.userInfoContainer}>
           <div className={styles.userNameContainer}>
-            <span className={styles.userName}>화이팅</span> 님
+            <span className={styles.userName}>
+              {localStorage.getItem("nickName")}
+            </span>{" "}
+            님
           </div>
           <div className={styles.profileContainer}>
-            <img
-              className={styles.profileIcon}
-              src={influencer_profile_right}
-              alt="profile"
-              onClick={() => navigate("/influencer-mypage")}
-            />
+            {localStorage.getItem("imgUrl") !== "null" ? (
+              <img
+                className={styles.profileIcon}
+                src={localStorage.getItem("imgUrl")}
+                onClick={() => navigate("/influencer-mypage")}
+              />
+            ) : (
+              <img
+                className={styles.profileIcon}
+                src={influencer_profile_right}
+                onClick={() => navigate("/influencer-mypage")}
+              />
+            )}
           </div>
         </div>
         <div className={styles.hamburgerContainer}>
