@@ -224,7 +224,7 @@ const ProfilePage = () => {
           <div className={styles.inputGroup}>
             <div className={styles.nicknameGroup}>
               <label htmlFor="nickname" className={styles.label}>
-                닉네임<span style={{ color: "#FF0000" }}>*</span>
+                가게 이름<span style={{ color: "#FF0000" }}>*</span>
               </label>
               <div className={styles.nicknameContainer}>
                 <Input
