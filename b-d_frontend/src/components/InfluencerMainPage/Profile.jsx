@@ -1,7 +1,7 @@
 import styles from "@/styles/components/InfluencerMainPage/Profile.module.scss";
 import { influencer_profile, star_icon_red, pencil_icon } from "@/assets";
 import { useState } from "react";
-export default function Profile({ isMainPage = false }) {
+export default function Profile({ isMainPage = false, influencerInfo }) {
   const [profileImage, setProfileImage] = useState(influencer_profile);
 
   const handleFileUpload = (event) => {
@@ -38,13 +38,17 @@ export default function Profile({ isMainPage = false }) {
         />
       </div>
       <div className={styles.profileInfo}>
-        <div className={styles.profileName}>멋사 TV</div>
-        <div className={styles.profileDescription}>POSSIBILITY TO REALITY</div>
+        <div className={styles.profileName}>{influencerInfo?.activityName}</div>
+        <div className={styles.profileDescription}>
+          {influencerInfo?.introduce}
+        </div>
         <div className={styles.rating}>
           <img className={styles.starIcon} src={star_icon_red} alt="star" />
-          <div className={styles.ratingValue}>4.5</div>
+          <div className={styles.ratingValue}>
+            {influencerInfo?.avgScore || "0.0"}
+          </div>
           <div className={styles.ratingCount}>
-            (<span>1793</span>)
+            (<span>{influencerInfo?.reviewCount || "0"}</span>)
           </div>
         </div>
       </div>

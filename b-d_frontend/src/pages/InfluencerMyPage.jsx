@@ -4,11 +4,13 @@ import Profile from "@/components/InfluencerMainPage/Profile";
 import Header from "@/components/InfluencerMainPage/Header";
 import SelectButton from "@/components/SelectKWPage/SelectButton";
 import NotificationModal from "@/components/InfluencerMainPage/NotificationModal";
+import axiosInstance from "@/apis/axiosInstance";
 const species = ["음식/음료", "콘텐츠"];
 
 const atmosphere = ["감성적인", "빈티지", "러블리"];
 export default function BusinessMyPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+  const [influencerInfo, setInfluencerInfo] = useState(null);
 
   // 페이지 마운트 시 스크롤을 상단으로 이동
   useEffect(() => {
@@ -21,21 +23,42 @@ export default function BusinessMyPage() {
     }
   }, [isNotificationModalOpen]);
 
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/influencer/mypage")
+      .then((res) => {
+        console.log("API 응답:", res);
+        console.log("API 응답 데이터 구조:", res.data);
+        if (res.data.isSuccess) {
+          setInfluencerInfo(res.data.data);
+          console.log("influencerInfo 설정됨:", res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.error("API 에러:", err);
+      });
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <Header setIsNotificationModalOpen={setIsNotificationModalOpen} />
         <div className={styles.topContainer}>
           <div className={styles.profileContainer}>
-            <Profile />
+            <Profile isMainPage={false} influencerInfo={influencerInfo} />
           </div>
           <div className={styles.infoContainer}>
-            @https://www.instagram.com/younghotyellow94/
+            {influencerInfo?.snsUrl || "없음"}
           </div>
           <div className={styles.moneyContainer}>
-            요청 금액 <span>100,000</span>
+            요청 금액 <span>{influencerInfo?.minAmount || "0"}</span>
             <br />
-            <span>블로그, 인스타그램</span> 선호
+            <span>
+              {Array.isArray(influencerInfo?.platforms)
+                ? influencerInfo.platforms.join(", ")
+                : influencerInfo?.platforms || "블로그, 인스타그램"}
+            </span>{" "}
+            선호
           </div>
         </div>
         <hr className={styles.hr} />
@@ -45,7 +68,7 @@ export default function BusinessMyPage() {
               #저를_<span>소개</span>합니다.
             </div>
             <div className={styles.buttonGroup}>
-              {species.map((sp) => (
+              {influencerInfo?.contentStyles.map((sp) => (
                 <SelectButton key={sp}>#{sp}</SelectButton>
               ))}
             </div>
@@ -55,7 +78,7 @@ export default function BusinessMyPage() {
               #제가_<span>선호</span>하는_부분은요?
             </div>
             <div className={styles.buttonGroup} id={styles.atmosphere}>
-              {atmosphere.map((at) => (
+              {influencerInfo?.contentTopics.map((at) => (
                 <SelectButton key={at}>#{at}</SelectButton>
               ))}
             </div>
@@ -66,9 +89,14 @@ export default function BusinessMyPage() {
             #선호_<span>지역</span>
           </div>
           <div className={styles.locationButtonGroup}>
-            {atmosphere.map((at) => (
-              <SelectButton key={at}>#{at}</SelectButton>
-            ))}
+            {influencerInfo?.locationList &&
+            influencerInfo.locationList.length > 0 ? (
+              influencerInfo.locationList.map((at) => (
+                <SelectButton key={at}>#{at}</SelectButton>
+              ))
+            ) : (
+              <SelectButton>없음</SelectButton>
+            )}
           </div>
         </div>
       </div>
