@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { BubbleLayout } from "./components/BubbleLayout";
 import { SimpleLayout } from "./components/SimpleLayout";
 import { MainLayout } from "./components/MainLayout";
+import { InfluencerMainLayout } from "./components/InfluencerMainLayout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 // Pages
 import LoginPage from "./pages/LoginPage";
@@ -52,16 +53,21 @@ function App() {
           </Route>
           <Route element={<MainLayout />}>
             <Route path="/" element={<MainPage />} />
-            <Route path="/influencer-main" element={<InfluencerMainPage />} />
             <Route path="/create-proposal" element={<CreateProposalPage />} />
-            <Route
-              path="/influencer-create-proposal"
-              element={<InfluencerCreateProposalPage />}
-            />
+
             <Route path="/payment-manage" element={<PaymentManagePage />} />
             <Route
               path="/influencer-matching"
               element={<InfluencerMatchingPage />}
+            />
+
+            <Route path="/business-mypage" element={<BusinessMyPage />} />
+          </Route>
+          <Route element={<InfluencerMainLayout />}>
+            <Route path="/influencer-main" element={<InfluencerMainPage />} />
+            <Route
+              path="/influencer-create-proposal"
+              element={<InfluencerCreateProposalPage />}
             />
             <Route
               path="/business-matching"
@@ -71,7 +77,6 @@ function App() {
               path="/influencer-payment-manage"
               element={<InfluencerPaymentManagePage />}
             />
-            <Route path="/business-mypage" element={<BusinessMyPage />} />
             <Route path="/influencer-mypage" element={<InfluencerMyPage />} />
           </Route>
         </Route>
