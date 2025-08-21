@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { main_busy } from "@/assets";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@/apis/axiosInstance";
+import KakaoMap from "@/components/BusinessMyPage/KakaoMap";
 
 export default function CreateProposalPage() {
   const navigate = useNavigate();
@@ -205,7 +206,9 @@ export default function CreateProposalPage() {
               })}
             />
           </div>
-          <div className={styles.mapContainer}></div>
+          <div className={styles.mapContainer}>
+            <KakaoMap address={proposalData.workPlaceAddress} />
+          </div>
           <div className={styles.proposalMoney}>
             <div className={styles.proposalMoneyLeft}>
               <input

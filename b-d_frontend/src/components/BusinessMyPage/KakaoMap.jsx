@@ -191,21 +191,16 @@ const KakaoMap = ({ address = "" }) => {
       marker.setMap(map);
       markerRef.current = marker;
 
-      // 정보창 생성
+      // 정보창 생성 (표시하지 않음)
       const infowindow = new window.kakao.maps.InfoWindow({
         content: `
             <div style="padding:10px;text-align:center;">
-              <h3 style="margin:0 0 5px 0;font-size:16px;">호호식당 대학로점</h3>
+              <h3 style="margin:0 0 5px 0;font-size:16px;">${address}</h3>
               <p style="margin:0;font-size:14px;color:#666;">${coordinates?.address}</p>
             </div>
           `,
       });
       infowindowRef.current = infowindow;
-
-      // 마커 클릭 시 정보창 표시
-      window.kakao.maps.event.addListener(marker, "click", function () {
-        infowindow.open(map, marker);
-      });
 
       // 지도 클릭 시 정보창 닫기
       window.kakao.maps.event.addListener(map, "click", function () {
