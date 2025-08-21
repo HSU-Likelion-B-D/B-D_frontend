@@ -14,9 +14,9 @@ export default function MatchingList({ influencerList }) {
         {influencerList && influencerList.length > 0 ? (
           influencerList
             .slice(0, 4)
-            .map((influencer) => (
+            .map((influencer, index) => (
               <MatchingItem
-                key={influencer.influencerId}
+                key={influencer.influencerId || `influencer-${index}`}
                 influencer={influencer}
               />
             ))

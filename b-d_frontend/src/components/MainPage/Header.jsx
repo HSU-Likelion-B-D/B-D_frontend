@@ -46,15 +46,25 @@ export default function Header({
       <div className={styles.rightIconContainer}>
         <div className={styles.userInfoContainer}>
           <div className={styles.userNameContainer}>
-            <span className={styles.userName}>화이팅</span> 님
+            <span className={styles.userName}>
+              {localStorage.getItem("nickName")}
+            </span>{" "}
+            님
           </div>
           <div className={styles.profileContainer}>
-            <img
-              className={styles.profileIcon}
-              src={profile_icon}
-              alt="profile"
-              onClick={() => navigate("/business-mypage")}
-            />
+            {localStorage.getItem("imgUrl") !== "null" ? (
+              <img
+                className={styles.profileIcon}
+                src={localStorage.getItem("imgUrl")}
+                onClick={() => navigate("/business-mypage")}
+              />
+            ) : (
+              <img
+                className={styles.profileIcon}
+                src={profile_icon}
+                onClick={() => navigate("/business-mypage")}
+              />
+            )}
           </div>
         </div>
         <div className={styles.hamburgerContainer}>

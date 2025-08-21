@@ -25,6 +25,8 @@ export default function LoginPage() {
       if (res.data.isSuccess) {
         localStorage.setItem("accessToken", res.data.data.token);
         localStorage.setItem("userType", res.data.data.userRoleType);
+        localStorage.setItem("nickName", res.data.data.nickName);
+        localStorage.setItem("imgUrl", res.data.data.imgUrl);
         if (res.data.data.userRoleType === "BUSINESS") {
           navigate("/");
         } else {

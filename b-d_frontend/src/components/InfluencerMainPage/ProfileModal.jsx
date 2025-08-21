@@ -10,6 +10,9 @@ export default function ProfileModal() {
           className={styles.logout}
           onClick={() => {
             localStorage.removeItem("accessToken");
+            localStorage.removeItem("userType");
+            localStorage.removeItem("nickName");
+            localStorage.removeItem("imgUrl");
             navigate("/login");
           }}
         >
