@@ -1,6 +1,6 @@
 import { useState } from "react";
-import styles from "@/styles/components/MainPage/CampaignManagement.module.scss";
-import { hamburger_icon, star_icon, busy_dilly_together } from "@/assets";
+import styles from "@/styles/components/InfluencerMainPage/CampaignManagement.module.scss";
+import { hamburger_icon, star_icon_red, busy_dilly_together } from "@/assets";
 import CampaignItem from "./CampaignItem";
 import CampaignModal from "./CampaignModal";
 
@@ -45,7 +45,7 @@ export default function CampaignManagement() {
         <div className={styles.headerLeft}>
           <div className={styles.headerLeftTitle}>
             <span>캠페인 </span>관리
-            <img src={star_icon} alt="star_icon" />
+            <img src={star_icon_red} alt="star_icon" />
           </div>
           <div className={styles.headerLeftSubtitle}>
             현재 캠페인{" "}

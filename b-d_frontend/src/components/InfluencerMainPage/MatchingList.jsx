@@ -1,4 +1,4 @@
-import styles from "@/styles/components/MainPage/MatchingList.module.scss";
+import styles from "@/styles/components/InfluencerMainPage/MatchingList.module.scss";
 import MatchingItem from "./MatchingItem";
 import { dilly_right } from "@/assets";
 export default function MatchingList() {

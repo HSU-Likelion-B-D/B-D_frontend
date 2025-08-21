@@ -7,7 +7,7 @@
   height: vw(55px);
   //padding: 12px 24px;
   border-radius: 12px;
-  border: 1px solid #ddd;
+  border: none;
   background: #fff;
   color: $color-sub-03;
   font-size: 1rem; // rem 단위로 변경
@@ -15,7 +15,7 @@
   margin: 8px;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(0, 79, 255, 0.06);
+  box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.25);
 }
 .selected {
   background: #009fe3;
