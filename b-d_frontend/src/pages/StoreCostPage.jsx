@@ -50,8 +50,8 @@ const StoreCostPage = () => {
     if (isFormComplete) {
       console.log("handleNext 실행:", formData, selected);
       const storeCostDataToStore = {
-        minCost: formData.minCost,
-        maxCost: formData.maxCost,
+        minBudget: formData.minCost,
+        maxBudget: formData.maxCost,
         promotionIds: selected,
       };
 

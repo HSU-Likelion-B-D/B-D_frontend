@@ -67,7 +67,7 @@ const ProfilePage = () => {
           setIsError(false);
           setIsSuccess(true);
           // 서버 응답에서 nickname 추출하여 세션스토리지에 저장
-          const nickname = res.data.data.nickname;
+          const nickname = res.data.nickname;
           sessionStorage.setItem("nickname", nickname);
         } else {
           setNicknameMessage(res.data.message || "이미 존재하는 닉네임입니다.");
