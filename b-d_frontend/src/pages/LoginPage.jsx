@@ -24,7 +24,12 @@ export default function LoginPage() {
       console.log(res);
       if (res.data.isSuccess) {
         localStorage.setItem("accessToken", res.data.data.token);
-        navigate("/");
+        localStorage.setItem("userType", res.data.data.userRoleType);
+        if (res.data.data.userRoleType === "BUSINESSMAN") {
+          navigate("/");
+        } else {
+          navigate("/influencer-main");
+        }
       }
     });
   };
