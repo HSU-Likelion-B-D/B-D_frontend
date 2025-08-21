@@ -5,6 +5,7 @@ import { SimpleLayout } from "./components/SimpleLayout";
 import { MainLayout } from "./components/MainLayout";
 import { InfluencerMainLayout } from "./components/InfluencerMainLayout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { InfluencerBubbleLayout } from "./components/InfluencerBubbleLayout";
 // Pages
 import LoginPage from "./pages/LoginPage";
 import StartPage from "./pages/StartPage";
@@ -46,6 +47,8 @@ function App() {
               path="/info-edit-complete"
               element={<InfoEditCompletePage />}
             />
+          </Route>
+          <Route element={<InfluencerBubbleLayout />}>
             <Route
               path="/influencer-info-edit-complete"
               element={<InfluencerInfoEditCompletePage />}
@@ -60,7 +63,6 @@ function App() {
               path="/influencer-matching"
               element={<InfluencerMatchingPage />}
             />
-
             <Route path="/business-mypage" element={<BusinessMyPage />} />
           </Route>
           <Route element={<InfluencerMainLayout />}>
@@ -95,6 +97,8 @@ function App() {
           <Route path="/complete" element={<CompletePage />} />
           <Route path="/store-time" element={<StoreTimePage />} />
           <Route path="/store-cost" element={<StoreCostPage />} />
+        </Route>
+        <Route element={<InfluencerBubbleLayout />}>
           <Route
             path="/influencer-profile"
             element={<InfluencerProfilePage />}
