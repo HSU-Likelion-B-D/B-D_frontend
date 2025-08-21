@@ -25,7 +25,7 @@ export default function InfluencerMainPage() {
         <Header setIsNotificationModalOpen={setIsNotificationModalOpen} />
         <div className={styles.topContainer}>
           <div className={styles.profileContainer}>
-            <Profile />
+            <Profile isMainPage={true} />
             <div className={styles.buttonContainer}>
               <button
                 className={styles.Button}

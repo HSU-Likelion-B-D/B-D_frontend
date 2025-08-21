@@ -4,6 +4,7 @@ import Profile from "@/components/MainPage/Profile";
 import Header from "@/components/MainPage/Header";
 import SelectButton from "@/components/SelectKWPage/SelectButton";
 import NotificationModal from "@/components/MainPage/NotificationModal";
+import axiosInstance from "@/apis/axiosInstance";
 const species = ["음식/음료", "콘텐츠"];
 
 const atmosphere = ["감성적인", "빈티지", "러블리"];
@@ -20,6 +21,12 @@ export default function BusinessMyPage() {
       window.scrollTo({ top: 0 });
     }
   }, [isNotificationModalOpen]);
+
+  useEffect(() => {
+    axiosInstance.get("/bd/api/businessman/mypage").then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   return (
     <div className={styles.container}>

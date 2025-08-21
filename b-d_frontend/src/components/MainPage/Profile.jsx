@@ -1,7 +1,7 @@
 import styles from "@/styles/components/MainPage/Profile.module.scss";
 import { star_icon, pencil_icon, profile } from "@/assets";
 import { useState } from "react";
-export default function Profile() {
+export default function Profile({ isMainPage = false }) {
   const [profileImage, setProfileImage] = useState(profile);
 
   const handleFileUpload = (event) => {
@@ -18,17 +18,23 @@ export default function Profile() {
     <div className={styles.container}>
       <div className={styles.profileSection}>
         <img src={profileImage} alt="Profile" className={styles.profileImage} />
-        <label htmlFor="fileUpload" className={styles.cameraButton}>
-          <span role="img" aria-label="camera">
-            <img src={pencil_icon} className={styles.cameraIcon} alt="camera" />
-          </span>
-        </label>
+        {!isMainPage && (
+          <label htmlFor="fileUpload" className={styles.cameraButton}>
+            <span role="img" aria-label="camera">
+              <img
+                src={pencil_icon}
+                className={styles.cameraIcon}
+                alt="camera"
+              />
+            </span>
+          </label>
+        )}
         <input
           id="fileUpload"
           type="file"
           accept="image/*"
-          style={{ display: "none" }}
-          onChange={handleFileUpload}
+          style={{ display: isMainPage ? "none" : "none" }}
+          onChange={(event) => handleFileUpload(event)}
         />
       </div>
       <div className={styles.profileInfo}>

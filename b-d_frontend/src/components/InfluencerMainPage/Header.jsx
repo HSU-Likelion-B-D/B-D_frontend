@@ -8,11 +8,13 @@ import {
 } from "@/assets";
 import ProfileModal from "./ProfileModal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Header({
   setIsNotificationModalOpen,
   isCreateProposalPage = false,
 }) {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className={styles.header}>
       <div
@@ -46,6 +48,7 @@ export default function Header({
               className={styles.profileIcon}
               src={influencer_profile_right}
               alt="profile"
+              onClick={() => navigate("/influencer-mypage")}
             />
           </div>
         </div>
