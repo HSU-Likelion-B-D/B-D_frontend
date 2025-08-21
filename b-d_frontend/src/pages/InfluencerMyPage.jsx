@@ -5,10 +5,8 @@ import Header from "@/components/InfluencerMainPage/Header";
 import SelectButton from "@/components/SelectKWPage/SelectButton";
 import NotificationModal from "@/components/InfluencerMainPage/NotificationModal";
 import axiosInstance from "@/apis/axiosInstance";
-const species = ["음식/음료", "콘텐츠"];
 
-const atmosphere = ["감성적인", "빈티지", "러블리"];
-export default function BusinessMyPage() {
+export default function InfluencerMyPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [influencerInfo, setInfluencerInfo] = useState(null);
 
@@ -78,7 +76,7 @@ export default function BusinessMyPage() {
               #제가_<span>선호</span>하는_부분은요?
             </div>
             <div className={styles.buttonGroup} id={styles.atmosphere}>
-              {influencerInfo?.contentTopics.map((at) => (
+              {influencerInfo?.preferTopics.map((at) => (
                 <SelectButton key={at}>#{at}</SelectButton>
               ))}
             </div>
@@ -86,12 +84,12 @@ export default function BusinessMyPage() {
         </div>
         <div className={styles.locationContainer}>
           <div className={styles.locationTitle}>
-            #선호_<span>지역</span>
+            #주_<span>콘텐츠</span>
           </div>
           <div className={styles.locationButtonGroup}>
-            {influencerInfo?.locationList &&
-            influencerInfo.locationList.length > 0 ? (
-              influencerInfo.locationList.map((at) => (
+            {influencerInfo?.contentTopics &&
+            influencerInfo.contentTopics.length > 0 ? (
+              influencerInfo.contentTopics.map((at) => (
                 <SelectButton key={at}>#{at}</SelectButton>
               ))
             ) : (

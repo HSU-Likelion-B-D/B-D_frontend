@@ -1,4 +1,4 @@
-import styles from "@/styles/components/MainPage/Header.module.scss";
+import styles from "@/styles/components/InfluencerMainPage/Header.module.scss";
 import {
   logo_red,
   alarm_icon,
