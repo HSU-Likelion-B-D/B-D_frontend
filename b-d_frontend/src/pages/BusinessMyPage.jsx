@@ -24,9 +24,14 @@ export default function BusinessMyPage() {
   }, [isNotificationModalOpen]);
 
   // useEffect(() => {
-  //   axiosInstance.get("/bd/api/businessman/mypage").then((res) => {
-  //     console.log(res);
-  //   });
+  //   axiosInstance
+  //     .get("/bd/api/businessman/mypage")
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
   // }, []);
 
   return (
