@@ -10,7 +10,7 @@ export default function MatchingItem({ business }) {
       )}
       <div className={styles.name}>{business.nickName}</div>
       <div className={styles.followCount}>
-        {business.avgScore}({business.reviewCount})
+        {business.avgScore} ({business.reviewCount})
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import NotificationModal from "@/components/MainPage/NotificationModal";
 import RateModal from "@/components/MainPage/RateModal";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@/apis/axiosInstance";
+import { banner } from "@/assets";
+
 export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [isRateModalOpen, setIsRateModalOpen] = useState(true);
@@ -83,7 +85,7 @@ export default function MainPage() {
           </div>
           <MatchingList influencerList={influencerList} />
         </div>
-        <div className={styles.banner}></div>
+        <img src={banner} className={styles.banner} />
         <div className={styles.bottomContainer}>
           <CampaignManagement />
         </div>
