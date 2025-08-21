@@ -53,7 +53,7 @@ export default function Header({
               className={styles.profileIcon}
               src={profile_icon}
               alt="profile"
-              onClick={() => navigate("/mypage")}
+              onClick={() => navigate("/business-mypage")}
             />
           </div>
         </div>
