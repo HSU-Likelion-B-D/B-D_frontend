@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import styles from "../styles/pages/InfluencerCostPage.module.scss";
-import ProgressBar from "../components/ProfilePage/ProgressBar";
-import logo from "../assets/logo.svg";
+import ProgressBar from "../components/InfluencerProfilePage/ProgressBar";
+import { logo_red } from "../assets";
 import SelectButton from "../components/SelectKWPage/SelectButton";
 import { useNavigate } from "react-router-dom";
 
 const atmosphere = [
-  "음식/음료",
-  "인스타그램",
-  "쇼핑/소매",
-  "반려동물",
-  "뷰티/서비스",
-  "운동/건강",
-  "숏폼",
-  "문화/체험",
-  "콘텐츠",
-  "기타",
+  { id: 1, name: "음식/음료" },
+  { id: 2, name: "인스타그램" },
+  { id: 3, name: "쇼핑/소매" },
+  { id: 4, name: "반려동물" },
+  { id: 5, name: "뷰티/서비스" },
+  { id: 6, name: "운동/건강" },
+  { id: 7, name: "숏폼" },
+  { id: 8, name: "문화/체험" },
+  { id: 9, name: "콘텐츠" },
+  { id: 10, name: "기타" },
 ];
 
 const InfluencerCostPage = () => {
@@ -42,10 +42,12 @@ const InfluencerCostPage = () => {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = (sp) => {
+  const handleClick = (kw) => {
     // 버튼 중복 선택 로직
     setSelected((prev) =>
-      prev.includes(sp) ? prev.filter((item) => item !== sp) : [...prev, sp]
+      prev.some((item) => item.id === kw.id)
+        ? prev.filter((item) => item.id !== kw.id)
+        : [...prev, kw]
     );
     setShowError(false);
   };
@@ -58,12 +60,25 @@ const InfluencerCostPage = () => {
       setShowError(true);
       return;
     }
+
+    // 선택한 업종/분야 ID 저장
+    sessionStorage.setItem(
+      "preferTopicIds",
+      JSON.stringify(selected.map((item) => item.id))
+    );
+
+    // 비용 정보 저장
+    sessionStorage.setItem("minAmount", formData.minCost);
+    sessionStorage.setItem("maxAmount", formData.maxCost);
+
+    // 다음 페이지로 이동
+    navigate("/influencer-complete");
   };
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
         <ProgressBar progress={100} />
-        <img src={logo} className={styles.logo} alt="logo" />
+        <img src={logo_red} className={styles.logo} alt="logo" />
         <h1 className={styles.subtitle}>#저는 이런걸 원해요</h1>
         <p className={styles.description}>거의 다 왔어요! 조금만 더 힘내요!</p>
         <p className={styles.keyDescription}>
@@ -97,12 +112,12 @@ const InfluencerCostPage = () => {
         <div className={styles.buttonGroup}>
           {atmosphere.map((kw) => (
             <SelectButton
-              key={kw}
-              redSelected={selected.includes(kw)}
+              key={kw.id}
+              redSelected={selected.some((item) => item.id === kw.id)}
               onClick={() => handleClick(kw)}
               error={showError}
             >
-              #{kw}
+              #{kw.name}
             </SelectButton>
           ))}
         </div>

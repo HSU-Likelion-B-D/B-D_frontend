@@ -27,7 +27,9 @@ api.interceptors.request.use((config) => {
     url.includes("/bd/user/check-nickname") ||
     url.includes("/bd/user/verifycode") ||
     url.includes("/bd/user/sendcode") ||
-    url.includes("/bd/user/signin");
+    url.includes("/bd/user/signin") ||
+    url.includes("/bd/api/businessman/workplaces") ||
+    url.includes("/bd/api/influencer/activities");
 
   if (!config.headers) config.headers = {};
 
