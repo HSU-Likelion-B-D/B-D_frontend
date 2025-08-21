@@ -30,14 +30,11 @@ export default function BusinessMyPage() {
             <Profile />
           </div>
           <div className={styles.infoContainer}>
-            매주 월요일 휴무
-            <br />
-            11:00 ~ 21:50 / 14:00 ~ 17:00 브레이크타임 / 21:00 라스트오더
-            <br />
-            *점심 라스트오더 14:40 / 저녁 라스트오더 21:00
+            @https://www.instagram.com/younghotyellow94/
           </div>
           <div className={styles.moneyContainer}>
-            <span>100,000~1,000,000</span> 지급 예정 <br />
+            요청 금액 <span>100,000</span>
+            <br />
             <span>블로그, 인스타그램</span> 선호
           </div>
         </div>
@@ -45,7 +42,7 @@ export default function BusinessMyPage() {
         <div className={styles.bottomContainer}>
           <div className={styles.bottomContent}>
             <div className={styles.bottomTitle}>
-              #이런_<span>일</span>을_하고있어요.
+              #저를_<span>소개</span>합니다.
             </div>
             <div className={styles.buttonGroup}>
               {species.map((sp) => (
@@ -55,7 +52,7 @@ export default function BusinessMyPage() {
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.bottomTitle}>
-              #이런_<span>분위기</span>의_가게를_운영해요
+              #제가_<span>선호</span>하는_부분은요?
             </div>
             <div className={styles.buttonGroup} id={styles.atmosphere}>
               {atmosphere.map((at) => (
@@ -64,13 +61,14 @@ export default function BusinessMyPage() {
             </div>
           </div>
         </div>
-        <div className={styles.mapContainer}>
-          <div className={styles.map}></div>
-          <div className={styles.mapInfo}>
-            <div className={styles.mapInfoTitle}>서울 종로구 대학로9길 35</div>
-            <div className={styles.mapInfoContent}>
-              온라인 매장 / linktr.ee/hohosikdang
-            </div>
+        <div className={styles.locationContainer}>
+          <div className={styles.locationTitle}>
+            #선호_<span>지역</span>
+          </div>
+          <div className={styles.locationButtonGroup}>
+            {atmosphere.map((at) => (
+              <SelectButton key={at}>#{at}</SelectButton>
+            ))}
           </div>
         </div>
       </div>

@@ -75,20 +75,24 @@
         }
       }
     }
-    .mapContainer {
-      width: vw(891px);
-      @include flex(column, center, center, vh(27px));
-      .map {
-        width: 100%;
-        height: vh(268px);
-        background-color: #f0f0f0;
-      }
-      .mapInfo {
-        width: 100%;
-        @include flex(row, center, space-between);
+    .locationContainer {
+      width: 100%;
+      .locationTitle {
         font-size: rem(20px);
-        color: #929292;
+        color: $color-sub-02;
         line-height: 1.75;
+        & > span {
+          color: $color-red-01;
+          font-weight: $font_weight_bold;
+        }
+      }
+      .locationButtonGroup {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: vh(6px) vw(5px);
+        justify-items: start;
+        margin-top: vh(20px);
+        margin-bottom: vh(56px);
       }
     }
   }
