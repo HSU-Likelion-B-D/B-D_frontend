@@ -2,7 +2,7 @@ import styles from "@/styles/components/MainPage/MatchingList.module.scss";
 import MatchingItem from "./MatchingItem";
 import { busy_left } from "@/assets";
 import { useNavigate } from "react-router-dom";
-export default function MatchingList() {
+export default function MatchingList({ influencerList }) {
   const navigate = useNavigate();
   return (
     <div className={styles.container}>
@@ -11,10 +11,18 @@ export default function MatchingList() {
       </div>
       <div className={styles.subTitle}>사장님을 기다리고 있어요!</div>
       <div className={styles.matchingListContainer}>
-        <MatchingItem />
-        <MatchingItem />
-        <MatchingItem />
-        <MatchingItem />
+        {influencerList && influencerList.length > 0 ? (
+          influencerList.map((influencer) => (
+            <MatchingItem
+              key={influencer.influencerId}
+              influencer={influencer}
+            />
+          ))
+        ) : (
+          <div className={styles.emptyMessage}>
+            현재 매칭 가능한 인플루언서가 없습니다.
+          </div>
+        )}
       </div>
       <div className={styles.buttonContainer}>
         <img src={busy_left} className={styles.busyLeft} />
