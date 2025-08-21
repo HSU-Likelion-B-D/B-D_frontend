@@ -5,6 +5,8 @@ import logo from "../assets/logo.svg";
 import Input from "../components/SingupPage/Input";
 import { useNavigate } from "react-router-dom";
 import DaumPostcode from "react-daum-postcode";
+import axiosInstance from "../apis/axiosInstanceFormData";
+
 const AddressPage = () => {
   // 주소 검색 모달 상태
   const [isPostOpen, setIsPostOpen] = useState(false);
@@ -39,6 +41,24 @@ const AddressPage = () => {
     }));
   };
 
+  const handleNext = () => {
+    console.log("handleNext 실행:", formData);
+    if (isFormValid) {
+      const addressDataToStore = {
+        address: formData.address,
+        detailAddress: formData.detailAddress,
+      };
+
+      console.log("세션 스토리지에 저장할 데이터 : ", addressDataToStore);
+      sessionStorage.setItem("addressData", JSON.stringify(addressDataToStore));
+
+      // 저장확인
+      const stored = sessionStorage.getItem("addressData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
+
+      navigate("/select-keyword");
+    }
+  };
   const isFormValid = formData.address.trim() !== "";
   return (
     <div className={styles.container}>
@@ -127,7 +147,7 @@ const AddressPage = () => {
           }`}
           disabled={!isFormValid}
           onClick={() => {
-            navigate("/select-keyword");
+            handleNext();
           }}
         >
           다음으로

@@ -66,6 +66,9 @@ const ProfilePage = () => {
           setNicknameMessage(res.data.message || "사용 가능한 닉네임입니다.");
           setIsError(false);
           setIsSuccess(true);
+          // 서버 응답에서 nickname 추출하여 세션스토리지에 저장
+          const nickname = res.data.nickname;
+          sessionStorage.setItem("nickname", nickname);
         } else {
           setNicknameMessage(res.data.message || "이미 존재하는 닉네임입니다.");
           setIsError(true);
@@ -131,11 +134,15 @@ const ProfilePage = () => {
     console.log("handleNext 실행:", { formData, profileImage });
 
     const userId = sessionStorage.getItem("userId"); // 세션 스토리지에서 userId 가져오기
+    const nickname = formData.nickname; // formData에서 닉네임 가져오기
+
+    // 닉네임을 세션 스토리지에 저장
+    sessionStorage.setItem("nickname", nickname);
 
     // FormData 객체 생성
     const formDataToSend = new FormData();
     formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
-    formDataToSend.append("nickname", formData.nickname); // 닉네임
+    formDataToSend.append("nickname", nickname); // 닉네임
 
     // profileImageFile이 존재할 경우에만 추가
     if (profileImageFile) {
@@ -217,7 +224,7 @@ const ProfilePage = () => {
           <div className={styles.inputGroup}>
             <div className={styles.nicknameGroup}>
               <label htmlFor="nickname" className={styles.label}>
-                닉네임<span style={{ color: "#FF0000" }}>*</span>
+                가게 이름<span style={{ color: "#FF0000" }}>*</span>
               </label>
               <div className={styles.nicknameContainer}>
                 <Input

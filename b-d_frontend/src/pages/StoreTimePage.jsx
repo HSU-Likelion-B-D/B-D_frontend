@@ -14,9 +14,27 @@ const StoreTimePage = () => {
   });
 
   const handleNext = () => {
-    navigate("/store-cost");
-  };
+    console.log("handleNext 실행:", formData);
+    if (isFormComplete) {
+      const storeTimeDataToStore = {
+        openTime: `${formData.minHour}:${formData.minMinute}`,
+        closeTime: `${formData.maxHour}:${formData.maxMinute}`,
+        isOnline: formData.isOnlineStore,
+      };
 
+      console.log("세션 스토리지에 저장할 데이터 : ", storeTimeDataToStore);
+      sessionStorage.setItem(
+        "storeTimeData",
+        JSON.stringify(storeTimeDataToStore)
+      );
+
+      // 저장확인
+      const stored = sessionStorage.getItem("storeTimeData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
+
+      navigate("/store-cost");
+    }
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
