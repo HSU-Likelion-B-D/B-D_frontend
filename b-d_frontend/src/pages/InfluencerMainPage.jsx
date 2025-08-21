@@ -7,12 +7,29 @@ import CampaignManagement from "@/components/InfluencerMainPage/CampaignManageme
 import NotificationModal from "@/components/InfluencerMainPage/NotificationModal";
 import CompleteModal from "@/components/InfluencerMainPage/CompleteModal";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/apis/axiosInstance";
 
 export default function InfluencerMainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(true);
   const navigate = useNavigate();
+  const [influencerInfo, setInfluencerInfo] = useState(null);
 
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/influencer/mypage")
+      .then((res) => {
+        console.log("API 응답:", res);
+        console.log("API 응답 데이터 구조:", res.data);
+        if (res.data.isSuccess) {
+          setInfluencerInfo(res.data.data);
+          console.log("influencerInfo 설정됨:", res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.error("API 에러:", err);
+      });
+  }, []);
   useEffect(() => {
     if (isNotificationModalOpen || isCompleteModalOpen) {
       window.scrollTo({ top: 0 });
@@ -25,7 +42,7 @@ export default function InfluencerMainPage() {
         <Header setIsNotificationModalOpen={setIsNotificationModalOpen} />
         <div className={styles.topContainer}>
           <div className={styles.profileContainer}>
-            <Profile isMainPage={true} />
+            <Profile isMainPage={true} influencerInfo={influencerInfo} />
             <div className={styles.buttonContainer}>
               <button
                 className={styles.Button}

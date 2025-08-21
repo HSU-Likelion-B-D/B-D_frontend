@@ -7,12 +7,28 @@ import CampaignManagement from "@/components/MainPage/CampaignManagement";
 import NotificationModal from "@/components/MainPage/NotificationModal";
 import RateModal from "@/components/MainPage/RateModal";
 import { useNavigate } from "react-router-dom";
-
+import axiosInstance from "@/apis/axiosInstance";
 export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [isRateModalOpen, setIsRateModalOpen] = useState(true);
   const navigate = useNavigate();
+  const [businessInfo, setBusinessInfo] = useState(null);
 
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/businessman/mypage")
+      .then((res) => {
+        console.log("API 응답:", res);
+        console.log("API 응답 데이터 구조:", res.data);
+        if (res.data.isSuccess) {
+          setBusinessInfo(res.data.data);
+          console.log("businessInfo 설정됨:", res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.error("API 에러:", err);
+      });
+  }, []);
   // 페이지 마운트 시 스크롤을 상단으로 이동
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -30,7 +46,7 @@ export default function MainPage() {
         <Header setIsNotificationModalOpen={setIsNotificationModalOpen} />
         <div className={styles.topContainer}>
           <div className={styles.profileContainer}>
-            <Profile isMainPage={true} />
+            <Profile isMainPage={true} businessInfo={businessInfo} />
             <div className={styles.buttonContainer}>
               <button
                 className={styles.Button}
