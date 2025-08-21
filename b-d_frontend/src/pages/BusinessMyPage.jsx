@@ -5,6 +5,7 @@ import Header from "@/components/MainPage/Header";
 import SelectButton from "@/components/SelectKWPage/SelectButton";
 import NotificationModal from "@/components/MainPage/NotificationModal";
 import axiosInstance from "@/apis/axiosInstance";
+import KakaoMap from "@/components/BusinessMyPage/KakaoMap";
 const species = ["음식/음료", "콘텐츠"];
 
 const atmosphere = ["감성적인", "빈티지", "러블리"];
@@ -22,11 +23,11 @@ export default function BusinessMyPage() {
     }
   }, [isNotificationModalOpen]);
 
-  useEffect(() => {
-    axiosInstance.get("/bd/api/businessman/mypage").then((res) => {
-      console.log(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axiosInstance.get("/bd/api/businessman/mypage").then((res) => {
+  //     console.log(res);
+  //   });
+  // }, []);
 
   return (
     <div className={styles.container}>
@@ -72,7 +73,9 @@ export default function BusinessMyPage() {
           </div>
         </div>
         <div className={styles.mapContainer}>
-          <div className={styles.map}></div>
+          <div className={styles.map}>
+            <KakaoMap address="서울 성북구 삼선교로16길 116" />
+          </div>
           <div className={styles.mapInfo}>
             <div className={styles.mapInfoTitle}>서울 종로구 대학로9길 35</div>
             <div className={styles.mapInfoContent}>
