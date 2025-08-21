@@ -47,7 +47,26 @@ const StoreCostPage = () => {
       setShowError(true);
       return;
     }
-    navigate("/complete");
+    if (isFormComplete) {
+      console.log("handleNext 실행:", formData, selected);
+      const storeCostDataToStore = {
+        minCost: formData.minCost,
+        maxCost: formData.maxCost,
+        promotionIds: selected,
+      };
+
+      console.log("세션 스토리지에 저장할 데이터 : ", storeCostDataToStore);
+      sessionStorage.setItem(
+        "storeCostData",
+        JSON.stringify(storeCostDataToStore)
+      );
+
+      // 저장확인
+      const stored = sessionStorage.getItem("storeCostData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
+
+      navigate("/complete");
+    }
   };
   return (
     <div className={styles.container}>

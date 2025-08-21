@@ -31,22 +31,50 @@ const atmosphere = [
 ];
 
 const SelectKWPage = () => {
-  const [selected, setSelected] = useState([]);
+  const [selectedSpecies, setSelectedSpecies] = useState([]); // 위 그룹 선택 상태
+  const [selectedAtmosphere, setSelectedAtmosphere] = useState([]); // 아래 그룹 선택 상태
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = (sp) => {
+  const handleSpeciesClick = (sp) => {
     // 버튼 중복 선택 로직
-    setSelected((prev) =>
+    setSelectedSpecies((prev) =>
       prev.includes(sp) ? prev.filter((item) => item !== sp) : [...prev, sp]
     );
     setShowError(false);
   };
 
+  const handleAtmosphereClick = (kw) => {
+    // 아래 그룹 버튼 중복 선택 로직
+    setSelectedAtmosphere((prev) =>
+      prev.includes(kw) ? prev.filter((item) => item !== kw) : [...prev, kw]
+    );
+    setShowError(false);
+  };
+  const isFormComplete =
+    selectedSpecies.length > 0 && selectedAtmosphere.length > 0;
+
   const handleNext = () => {
-    if (selected.length === 0) {
+    if (!isFormComplete) {
       setShowError(true);
       return;
+    }
+    console.log("handleNext 실행:", selectedSpecies, selectedAtmosphere);
+    if (isFormComplete) {
+      const storeKeywordsDataToStore = {
+        categoryIds: selectedSpecies.join(", "),
+        moodIds: selectedAtmosphere.join(", "),
+      };
+
+      console.log("세션 스토리지에 저장할 데이터 : ", storeKeywordsDataToStore);
+      sessionStorage.setItem(
+        "storeKeywordsData",
+        JSON.stringify(storeKeywordsDataToStore)
+      );
+
+      // 저장확인
+      const stored = sessionStorage.getItem("storeKeywordsData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
     }
     navigate("/store-time");
   };
@@ -68,8 +96,8 @@ const SelectKWPage = () => {
           {species.map((sp) => (
             <SelectButton
               key={sp}
-              selected={selected.includes(sp)}
-              onClick={() => handleClick(sp)}
+              selected={selectedSpecies.includes(sp)}
+              onClick={() => handleSpeciesClick(sp)}
               error={showError}
             >
               #{sp}
@@ -91,8 +119,8 @@ const SelectKWPage = () => {
           {atmosphere.map((kw) => (
             <SelectButton
               key={kw}
-              selected={selected.includes(kw)}
-              onClick={() => handleClick(kw)}
+              selected={selectedAtmosphere.includes(kw)}
+              onClick={() => handleAtmosphereClick(kw)}
               error={showError}
             >
               #{kw}
@@ -128,7 +156,7 @@ const SelectKWPage = () => {
         <button
           type="submit"
           className={`${styles.submitBtn} ${
-            selected.length > 1 ? styles.active : ""
+            isFormComplete ? styles.active : ""
           }`}
           onClick={handleNext}
         >
