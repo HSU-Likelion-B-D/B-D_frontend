@@ -1,7 +1,7 @@
 import styles from "@/styles/components/MainPage/Profile.module.scss";
 import { star_icon, pencil_icon, profile } from "@/assets";
 import { useState } from "react";
-export default function Profile({ isMainPage = false }) {
+export default function Profile({ isMainPage = false, businessInfo }) {
   const [profileImage, setProfileImage] = useState(profile);
 
   const handleFileUpload = (event) => {
@@ -38,15 +38,17 @@ export default function Profile({ isMainPage = false }) {
         />
       </div>
       <div className={styles.profileInfo}>
-        <div className={styles.profileName}>호호식당 대학로점</div>
+        <div className={styles.profileName}>{businessInfo?.workPlaceName}</div>
         <div className={styles.profileDescription}>
-          따뜻한 분위기에서 즐기는 일본 가정식
+          {businessInfo?.introduce}
         </div>
         <div className={styles.rating}>
           <img className={styles.starIcon} src={star_icon} alt="star" />
-          <div className={styles.ratingValue}>4.5</div>
+          <div className={styles.ratingValue}>
+            {businessInfo?.avgScore || "0.0"}
+          </div>
           <div className={styles.ratingCount}>
-            (<span>1793</span>)
+            (<span>{businessInfo?.reviewCount || "0"}</span>)
           </div>
         </div>
       </div>

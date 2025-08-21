@@ -6,12 +6,9 @@ import SelectButton from "@/components/SelectKWPage/SelectButton";
 import NotificationModal from "@/components/MainPage/NotificationModal";
 import axiosInstance from "@/apis/axiosInstance";
 import KakaoMap from "@/components/BusinessMyPage/KakaoMap";
-const species = ["음식/음료", "콘텐츠"];
-
-const atmosphere = ["감성적인", "빈티지", "러블리"];
 export default function BusinessMyPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
-
+  const [businessInfo, setBusinessInfo] = useState(null);
   // 페이지 마운트 시 스크롤을 상단으로 이동
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -23,16 +20,21 @@ export default function BusinessMyPage() {
     }
   }, [isNotificationModalOpen]);
 
-  // useEffect(() => {
-  //   axiosInstance
-  //     .get("/bd/api/businessman/mypage")
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/businessman/mypage")
+      .then((res) => {
+        console.log("API 응답:", res);
+        console.log("API 응답 데이터 구조:", res.data);
+        if (res.data.isSuccess) {
+          setBusinessInfo(res.data.data);
+          console.log("businessInfo 설정됨:", res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.error("API 에러:", err);
+      });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -40,18 +42,29 @@ export default function BusinessMyPage() {
         <Header setIsNotificationModalOpen={setIsNotificationModalOpen} />
         <div className={styles.topContainer}>
           <div className={styles.profileContainer}>
-            <Profile />
+            <Profile isMainPage={false} businessInfo={businessInfo} />
           </div>
           <div className={styles.infoContainer}>
             매주 월요일 휴무
             <br />
-            11:00 ~ 21:50 / 14:00 ~ 17:00 브레이크타임 / 21:00 라스트오더
+            {businessInfo?.openTime} ~ {businessInfo?.closeTime} / 브레이크타임{" "}
+            {businessInfo?.breakTime || "없음"} / 라스트오더{" "}
+            {businessInfo?.lastOrderTime || "없음"}
             <br />
-            *점심 라스트오더 14:40 / 저녁 라스트오더 21:00
+            점심 라스트오더 {businessInfo?.lunchLastOrderTime || "없음"} / 저녁
+            라스트오더 {businessInfo?.dinnerLastOrderTime || "없음"}
           </div>
           <div className={styles.moneyContainer}>
-            <span>100,000~1,000,000</span> 지급 예정 <br />
-            <span>블로그, 인스타그램</span> 선호
+            <span>
+              {businessInfo?.minBudget || "0"}~{businessInfo?.maxBudget || "0"}
+            </span>{" "}
+            지급 예정 <br />
+            <span>
+              {Array.isArray(businessInfo?.promotionList)
+                ? businessInfo.promotionList.join(", ")
+                : businessInfo?.promotionList || "블로그, 인스타그램"}
+            </span>{" "}
+            선호
           </div>
         </div>
         <hr className={styles.hr} />
@@ -61,7 +74,7 @@ export default function BusinessMyPage() {
               #이런_<span>일</span>을_하고있어요.
             </div>
             <div className={styles.buttonGroup}>
-              {species.map((sp) => (
+              {businessInfo?.categoryList.map((sp) => (
                 <SelectButton key={sp}>#{sp}</SelectButton>
               ))}
             </div>
@@ -71,7 +84,7 @@ export default function BusinessMyPage() {
               #이런_<span>분위기</span>의_가게를_운영해요
             </div>
             <div className={styles.buttonGroup} id={styles.atmosphere}>
-              {atmosphere.map((at) => (
+              {businessInfo?.moodList?.map((at) => (
                 <SelectButton key={at}>#{at}</SelectButton>
               ))}
             </div>
@@ -79,12 +92,14 @@ export default function BusinessMyPage() {
         </div>
         <div className={styles.mapContainer}>
           <div className={styles.map}>
-            <KakaoMap address="서울 성북구 삼선교로16길 116" />
+            <KakaoMap address={businessInfo?.address || ""} />
           </div>
           <div className={styles.mapInfo}>
-            <div className={styles.mapInfoTitle}>서울 종로구 대학로9길 35</div>
+            <div className={styles.mapInfoTitle}>
+              {businessInfo?.address || ""} {businessInfo?.detailAddress || ""}
+            </div>
             <div className={styles.mapInfoContent}>
-              온라인 매장 / linktr.ee/hohosikdang
+              온라인 매장 {businessInfo?.onlineLink || "없음"}
             </div>
           </div>
         </div>
