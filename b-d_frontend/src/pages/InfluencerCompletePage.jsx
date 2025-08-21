@@ -15,8 +15,8 @@ const InfluencerCompletePage = () => {
       snsUrl: sessionStorage.getItem("snsUrl"),
       platformIds: JSON.parse(sessionStorage.getItem("platformIds")),
       contentTopicIds: JSON.parse(sessionStorage.getItem("contentTopicIds")),
-      minAmount: parseInt(sessionStorage.getItem("minAmount")),
-      maxAmount: parseInt(sessionStorage.getItem("maxAmount")),
+      minAmount: sessionStorage.getItem("minAmount"),
+      maxAmount: sessionStorage.getItem("maxAmount"),
       bankName: sessionStorage.getItem("bankName"),
       accountNumber: sessionStorage.getItem("accountNumber"),
       contentStyleIds: JSON.parse(sessionStorage.getItem("contentStyleIds")),
@@ -26,6 +26,19 @@ const InfluencerCompletePage = () => {
       .post("/bd/api/influencer/activities", requestData)
       .then((res) => {
         console.log(res);
+        sessionStorage.removeItem("userId");
+        sessionStorage.removeItem("activityName");
+        sessionStorage.removeItem("followerCount");
+        sessionStorage.removeItem("uploadFrequency");
+        sessionStorage.removeItem("snsUrl");
+        sessionStorage.removeItem("platformIds");
+        sessionStorage.removeItem("contentTopicIds");
+        sessionStorage.removeItem("minAmount");
+        sessionStorage.removeItem("maxAmount");
+        sessionStorage.removeItem("bankName");
+        sessionStorage.removeItem("accountNumber");
+        sessionStorage.removeItem("contentStyleIds");
+        sessionStorage.removeItem("preferTopicIds");
         navigate("/influencer-main");
       });
   };
