@@ -57,8 +57,8 @@ const CompletePage = () => {
       openTime: storeTimeData.openTime,
       closeTime: storeTimeData.closeTime,
       isOnline: Boolean(storeTimeData.isOnline), // 불리언으로 변환
-      minBudget: parseInt(storeCostData.minBudget, 10), // 숫자로 변환
-      maxBudget: parseInt(storeCostData.maxBudget, 10), // 숫자로 변환
+      minBudget: parseInt(storeCostData.minBudget, 10) || 0, // 숫자로 변환
+      maxBudget: parseInt(storeCostData.maxBudget, 10) || 0, // 숫자로 변환
       categoryIds: storeSpeciesData.categoryIds.map((id) => parseInt(id, 10)), // 숫자 배열로 변환
       moodIds: storeAtmosphereData.moodIds.map((id) => parseInt(id, 10)), // 숫자 배열로 변환
       promotionIds: storeCostData.promotionIds.map((id) => parseInt(id, 10)), // 숫자 배열로 변환
@@ -75,10 +75,10 @@ const CompletePage = () => {
       })
       .then((res) => {
         console.log("서버 응답: ", res);
-        if (res.status === 200) {
+        if (res.data.isSuccess) {
           console.log("가게 등록 성공");
-          navigate("/");
           sessionStorage.clear(); // 모든 세션 스토리지 데이터 제거
+          navigate("/");
         } else {
           console.error("가게 등록 실패: ", res.data.message);
         }
