@@ -1,8 +1,8 @@
 import styles from "@/styles/components/InfluencerMainPage/Profile.module.scss";
-import { profile, star_icon_red, pencil_icon } from "@/assets";
+import { influencer_profile, star_icon_red, pencil_icon } from "@/assets";
 import { useState } from "react";
 export default function Profile({ isMainPage = false }) {
-  const [profileImage, setProfileImage] = useState(profile);
+  const [profileImage, setProfileImage] = useState(influencer_profile);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
