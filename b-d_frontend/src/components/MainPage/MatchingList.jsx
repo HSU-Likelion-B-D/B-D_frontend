@@ -12,12 +12,14 @@ export default function MatchingList({ influencerList }) {
       <div className={styles.subTitle}>사장님을 기다리고 있어요!</div>
       <div className={styles.matchingListContainer}>
         {influencerList && influencerList.length > 0 ? (
-          influencerList.map((influencer) => (
-            <MatchingItem
-              key={influencer.influencerId}
-              influencer={influencer}
-            />
-          ))
+          influencerList
+            .slice(0, 4)
+            .map((influencer) => (
+              <MatchingItem
+                key={influencer.influencerId}
+                influencer={influencer}
+              />
+            ))
         ) : (
           <div className={styles.emptyMessage}>
             현재 매칭 가능한 인플루언서가 없습니다.

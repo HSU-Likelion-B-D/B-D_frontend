@@ -14,16 +14,13 @@ export default function InfluencerMainPage() {
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(true);
   const navigate = useNavigate();
   const [influencerInfo, setInfluencerInfo] = useState(null);
-
+  const [businessList, setBusinessList] = useState([]);
   useEffect(() => {
     axiosInstance
       .get("/bd/api/influencer/mypage")
       .then((res) => {
-        console.log("API 응답:", res);
-        console.log("API 응답 데이터 구조:", res.data);
         if (res.data.isSuccess) {
           setInfluencerInfo(res.data.data);
-          console.log("influencerInfo 설정됨:", res.data.data);
         }
       })
       .catch((err) => {
@@ -35,6 +32,19 @@ export default function InfluencerMainPage() {
       window.scrollTo({ top: 0 });
     }
   }, [isNotificationModalOpen, isCompleteModalOpen]);
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/influencer/home")
+      .then((res) => {
+        if (res.data.isSuccess) {
+          setBusinessList(res.data.data.businessMans);
+          console.log(res);
+        }
+      })
+      .catch((err) => {
+        console.error("API 에러:", err);
+      });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -63,7 +73,7 @@ export default function InfluencerMainPage() {
               </button>
             </div>
           </div>
-          <MatchingList />
+          <MatchingList businessList={businessList} />
         </div>
         <div className={styles.banner}></div>
         <div className={styles.bottomContainer}>
