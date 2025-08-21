@@ -106,10 +106,7 @@
         width: 100%;
         @include flex(row, center, start, vw(20px));
         .proposalMoneyLeft {
-          width: vw(242px);
-        }
-        .proposalMoneyRight {
-          width: vw(242px);
+          width: vw(500px);
         }
       }
       .proposalDate {
