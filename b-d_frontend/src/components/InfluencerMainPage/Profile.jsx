@@ -40,7 +40,7 @@ export default function Profile({ isMainPage = false, influencerInfo }) {
       <div className={styles.profileInfo}>
         <div className={styles.profileName}>{influencerInfo?.activityName}</div>
         <div className={styles.profileDescription}>
-          {influencerInfo?.introduce}
+          {influencerInfo?.introduction}
         </div>
         <div className={styles.rating}>
           <img className={styles.starIcon} src={star_icon_red} alt="star" />
