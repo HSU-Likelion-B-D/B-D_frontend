@@ -21,6 +21,7 @@ const InfluencerPaymentManagePage = () => {
     useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [paymentList, setPaymentList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템 상태 추가
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
     if (isPaymentProgressModalOpen || isPaymentCompleteModalOpen) {
@@ -106,6 +107,7 @@ const InfluencerPaymentManagePage = () => {
               key={item.paymentId}
               item={item}
               setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
+              setSelectedItem={setSelectedItem}
             />
           ))}
         </div>
@@ -122,6 +124,7 @@ const InfluencerPaymentManagePage = () => {
           <InfluencerPaymentProgressModal
             setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+            selectedItem={selectedItem}
           />
         </div>
       )}

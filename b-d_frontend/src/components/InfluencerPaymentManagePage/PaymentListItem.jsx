@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "../../styles/components/PaymentManagePage/PaymentListItem.module.scss";
 import { main_busy } from "@/assets";
+import { formatNumber } from "@/hooks/formatNumber";
 
-const PaymentListItem = ({ item, setIsPaymentProgressModalOpen }) => {
+const PaymentListItem = ({
+  item,
+  setIsPaymentProgressModalOpen,
+  setSelectedItem,
+}) => {
   const statusColor =
     item.status === "대기중"
       ? "#0C9CE9"
@@ -12,17 +17,13 @@ const PaymentListItem = ({ item, setIsPaymentProgressModalOpen }) => {
       ? "#42BC54"
       : "#000";
 
-  // 금액에 3자리마다 쉼표 추가하는 함수
-  const formatNumber = (num) => {
-    if (!num) return "0";
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const handleItemClick = () => {
+    setSelectedItem(item); // 클릭된 아이템을 selectedItem으로 설정
+    setIsPaymentProgressModalOpen(true); // 모달 열기
   };
 
   return (
-    <div
-      className={styles.listItem}
-      onClick={() => setIsPaymentProgressModalOpen(true)}
-    >
+    <div className={styles.listItem} onClick={handleItemClick}>
       <div className={styles.itemContent}>
         <div className={styles.itemInfo}>
           <img
