@@ -42,6 +42,9 @@ export default function InfluencerCreateProposalPage() {
       .then((res) => {
         if (res.data.isSuccess) {
           navigate("/influencer-main");
+          // 서버 응답에서 proposalId 추출하여 세션스토리지에 저장
+          const proposalId = res.data.data.proposalId;
+          sessionStorage.setItem("proposalId", proposalId);
         }
       })
       .catch((err) => {

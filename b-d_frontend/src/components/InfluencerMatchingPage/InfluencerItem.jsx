@@ -5,8 +5,8 @@ import { useState } from "react";
 
 export default function InfluencerItem({
   setIsProposalModalOpen,
-  proposalId, // 부모에서 전달
-  recipientId, // 부모에서 전달(인플루언서 ID)
+  proposalId, // InfluencerMatchingPage에서 전달
+  recipientId, // InfluencerMatchingPage에서 전달
 }) {
   const [loading, setLoading] = useState(false);
 
