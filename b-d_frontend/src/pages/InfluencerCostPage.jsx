@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/InfluencerCostPage.module.scss";
 import ProgressBar from "../components/InfluencerProfilePage/ProgressBar";
 import { logo_red } from "../assets";
@@ -41,6 +41,20 @@ const InfluencerCostPage = () => {
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // 세션스토리지에서 저장된 예산 정보 가져오기
+    const storedMinBudget = sessionStorage.getItem("minBudget");
+    const storedMaxBudget = sessionStorage.getItem("maxBudget");
+
+    if (storedMinBudget || storedMaxBudget) {
+      setFormData((prevData) => ({
+        ...prevData,
+        minCost: storedMinBudget || "",
+        maxCost: storedMaxBudget || "",
+      }));
+    }
+  }, []);
 
   const handleClick = (kw) => {
     // 버튼 중복 선택 로직

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/InfluencerIntroducePage.module.scss";
 import ProgressBar from "../components/InfluencerProfilePage/ProgressBar";
 import Input from "../components/SingupPage/Input";
@@ -26,6 +26,45 @@ const InfluencerIntroducePage = () => {
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // 세션스토리지에서 저장된 활동 정보 가져오기
+    const storedActivityName = sessionStorage.getItem("activityName");
+    const storedSnsUrl = sessionStorage.getItem("snsUrl");
+    const storedFollowerCount = sessionStorage.getItem("followerCount");
+    const storedUploadFrequency = sessionStorage.getItem("uploadFrequency");
+    const storedPlatformIds = sessionStorage.getItem("platformIds");
+
+    if (
+      storedActivityName ||
+      storedSnsUrl ||
+      storedFollowerCount ||
+      storedUploadFrequency ||
+      storedPlatformIds
+    ) {
+      setFormData((prevData) => ({
+        ...prevData,
+        infname: storedActivityName !== undefined ? storedActivityName : "",
+        platformUrl: storedSnsUrl !== "undefined" ? storedSnsUrl : "",
+        followers: storedFollowerCount !== undefined ? storedFollowerCount : "",
+        uploadFrequency:
+          storedUploadFrequency !== undefined ? storedUploadFrequency : "",
+      }));
+
+      // 플랫폼 ID가 있으면 selected 상태에 설정
+      if (storedPlatformIds) {
+        try {
+          const platformIds = JSON.parse(storedPlatformIds);
+          const selectedPlatforms = species.filter((sp) =>
+            platformIds.includes(sp.id)
+          );
+          setSelected(selectedPlatforms);
+        } catch (error) {
+          console.error("플랫폼 ID 파싱 오류:", error);
+        }
+      }
+    }
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
