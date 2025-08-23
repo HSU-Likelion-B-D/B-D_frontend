@@ -2,102 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styles from "../styles/pages/InfluencerPaymentManagePage.module.scss";
 import Header from "../components/InfluencerMainPage/Header";
-import { hamburger_icon, payment_profile } from "@/assets";
-import PaymentModal from "../components/PaymentManage/PaymentModal";
+import { hamburger_icon } from "@/assets";
+import PaymentModal from "../components/InfluencerPaymentManagePage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
 import Pagination from "../components/PaymentManage/Pagination";
 import InfluencerPaymentProgressModal from "../components/InfluencerPaymentManagePage/InfluencerPaymentProgressModal";
 import InfluencerPaymentStarModal from "../components/InfluencerPaymentManagePage/InfluencerPaymentStarModal";
-const sampleList = [
-  {
-    id: 1,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#FF4242",
-    dDay: "D-3",
-  },
-  {
-    id: 2,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제 완료",
-    statusColor: "#43a047",
-    dDay: undefined,
-  },
-  {
-    id: 3,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "정산 완료",
-    statusColor: "#bdbdbd",
-    dDay: undefined,
-  },
-  {
-    id: 4,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#FF4242",
-    dDay: undefined,
-  },
-  {
-    id: 5,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#FF4242",
-    dDay: undefined,
-  },
-  {
-    id: 6,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#FF4242",
-    dDay: undefined,
-  },
-  {
-    id: 7,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제 완료",
-    statusColor: "#43a047",
-    dDay: undefined,
-  },
-  {
-    id: 8,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "정산 완료",
-    statusColor: "#bdbdbd",
-    dDay: undefined,
-  },
-];
+import axiosInstance from "@/apis/axiosInstance";
 
 const ITEMS_PER_PAGE = 6;
 const InfluencerPaymentManagePage = () => {
@@ -108,7 +19,8 @@ const InfluencerPaymentManagePage = () => {
     useState(false);
   const [isPaymentCompleteModalOpen, setIsPaymentCompleteModalOpen] =
     useState(false);
-
+  const [totalPages, setTotalPages] = useState(0);
+  const [paymentList, setPaymentList] = useState([]);
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
     if (isPaymentProgressModalOpen || isPaymentCompleteModalOpen) {
@@ -117,7 +29,7 @@ const InfluencerPaymentManagePage = () => {
   }, [isPaymentProgressModalOpen, isPaymentCompleteModalOpen]);
 
   // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
-  const pagedList = sampleList.slice(
+  const pagedList = paymentList.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -131,66 +43,80 @@ const InfluencerPaymentManagePage = () => {
     return true;
   });
 
-  // 페이지 수는 전체 데이터 기준으로 - 전체 / 6개의 데이터
-  const totalPages = Math.ceil(sampleList.length / ITEMS_PER_PAGE);
+  useEffect(() => {
+    if (filter === "all") {
+      axiosInstance
+        .get("/bd/api/payments?all=true")
+        .then((res) => {
+          console.log(res.data);
+          setPaymentList(res.data.data.content);
+          setCurrentPage(1);
+          setTotalPages(res.data.data.totalPages);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosInstance
+        .get(`/bd/api/payments?state=${filter}`)
+        .then((res) => {
+          console.log(res.data);
+          setPaymentList(res.data.data.content);
+          setCurrentPage(1);
+          setTotalPages(res.data.data.totalPages);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [filter]);
 
   return (
     <div className={styles.container}>
-      <div className={styles.headerContainer}>
+      <div className={styles.contentContainer}>
         <Header />
-      </div>
-      <div className={styles.titleContainer}>
-        <div className={styles.subhamContainer}>
+        <div className={styles.titleContainer}>
           <h1 className={styles.subtitle}>
             <span className={styles.highlight}>결제 및 정산</span> 관리하기
           </h1>
+          <div className={styles.hamburgerContainer}>
+            <img
+              className={styles.hamburgerIcon}
+              src={hamburger_icon}
+              alt="hamburger"
+              onClick={() => setIsPaymentModalOpen(!isPaymentModalOpen)}
+            />
+            {isPaymentModalOpen && (
+              <div className={styles.paymentModal}>
+                <PaymentModal
+                  filter={filter}
+                  setFilter={(value) => {
+                    setFilter(value);
+                    setIsPaymentModalOpen(false); // 모달 닫기
+                  }}
+                />
+              </div>
+            )}
+          </div>
+          <div className={styles.description}>사장님을 기다리고 있어요!</div>
         </div>
-        <div className={styles.hamburgerContainer}>
-          <img
-            className={styles.hamburgerIcon}
-            src={hamburger_icon}
-            alt="hamburger"
-            onClick={() => setIsPaymentModalOpen(!isPaymentModalOpen)}
+        <div className={styles.listWrap}>
+          {filteredList.map((item) => (
+            <PaymentListItem
+              key={item.paymentId}
+              item={item}
+              setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
+            />
+          ))}
+        </div>
+        <div className={styles.paginationContainer}>
+          <Pagination
+            redCurrentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
           />
-          {isPaymentModalOpen && (
-            <div className={styles.paymentModal}>
-              <PaymentModal
-                filter={filter}
-                setFilter={(value) => {
-                  setFilter(value);
-                  setIsPaymentModalOpen(false); // 모달 닫기
-                }}
-              />
-            </div>
-          )}
         </div>
       </div>
-      <div className={styles.description}>사장님을 기다리고 있어요!</div>
-      <div className={styles.listWrap}>
-        {filteredList.map((item) => (
-          <PaymentListItem
-            key={item.id}
-            imgSrc={item.imgSrc}
-            title={item.title}
-            desc={item.desc}
-            price={
-              <span style={{ color: "#FF4242", fontWeight: 700 }}>
-                {item.price}
-              </span>
-            }
-            period={item.period}
-            status={item.status}
-            statusColor={item.statusColor}
-            dDay={item.dDay}
-            setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
-          />
-        ))}
-      </div>
-      <Pagination
-        redCurrentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
       {isPaymentProgressModalOpen && (
         <div className={styles.paymentProgressModal}>
           <InfluencerPaymentProgressModal

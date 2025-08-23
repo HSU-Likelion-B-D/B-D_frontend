@@ -34,14 +34,14 @@
       .hamburgerContainer {
         position: absolute;
         top: 0;
-        right: vw(75px); //오른쪽에 위치
+        right: 0;
         z-index: 2;
 
         .hamburgerIcon {
           width: vw(29px);
           height: vw(29px);
           cursor: pointer;
-          margin-top: 10px;
+          margin-top: vh(10px);
         }
         .paymentModal {
           z-index: 1000;
