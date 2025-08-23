@@ -1,5 +1,5 @@
 import styles from "@/styles/components/InfluencerMatchingPage/InfluencerItem.module.scss";
-import { store_img, star_icon } from "@/assets";
+import { main_dilly, star_icon } from "@/assets";
 import axiosInstance from "@/apis/axiosInstance";
 import { useState } from "react";
 
@@ -7,6 +7,7 @@ export default function InfluencerItem({
   setIsProposalModalOpen,
   proposalId, // InfluencerMatchingPage에서 전달
   recipientId, // InfluencerMatchingPage에서 전달
+  recommendation, // InfluencerMatchingPage에서 전달
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -74,17 +75,25 @@ export default function InfluencerItem({
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <img src={store_img} className={styles.profileImage} />
+        <img
+          src={recommendation.imgUrl || main_dilly}
+          className={styles.profileImage}
+        />
         <div className={styles.title}>
           <div className={styles.nameContainer}>
-            <div className={styles.name}>아기사자</div>
+            <div className={styles.name}>{recommendation.nickname}</div>
             <img src={star_icon} className={styles.starIcon} />
             <div className={styles.starNumber}>
-              3.0 <span className={styles.starCount}>(332)</span>
+              {recommendation.avgScore}{" "}
+              <span className={styles.starCount}>
+                ({recommendation.recommendScore})
+              </span>
             </div>
           </div>
           <div className={styles.description}>
-            유튜브 블로그 / 20k / 300,000 / 음식,음료
+            {recommendation.platform.map((platform) => platform).join(",")} /{" "}
+            {recommendation.followerCount} / {recommendation.minBudget} /{" "}
+            {recommendation.contentTopic.map((topic) => topic).join(",")}
           </div>
         </div>
       </div>

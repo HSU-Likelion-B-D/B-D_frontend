@@ -3,10 +3,11 @@ import Header from "@/components/MainPage/Header";
 import InfluencerItem from "@/components/InfluencerMatchingPage/InfluencerItem";
 import ProposalModal from "@/components/InfluencerMatchingPage/ProposalModal";
 import { useState, useEffect } from "react";
+import axiosInstance from "@/apis/axiosInstance";
 
 export default function InfluencerMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
-
+  const [recommendations, setRecommendations] = useState([]);
   //const proposalId = 3;
 
   const proposalId = sessionStorage.getItem("proposalId"); // createproposal 할때 저장함
@@ -18,6 +19,13 @@ export default function InfluencerMatchingPage() {
       window.scrollTo({ top: 0 });
     }
   }, [isProposalModalOpen]);
+
+  useEffect(() => {
+    axiosInstance.get("/bd/api/businessman/me/recommendations").then((res) => {
+      setRecommendations(res.data.data);
+      console.log(res.data);
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -43,34 +51,17 @@ export default function InfluencerMatchingPage() {
 
         {/* ✅ 각 아이템에 recipientId와 proposalId 전달 */}
         <div className={styles.influencerList}>
-          <InfluencerItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <InfluencerItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <InfluencerItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <InfluencerItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <InfluencerItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
+          {recommendations.map((recommendation, index) => (
+            <InfluencerItem
+              key={recommendation.id || index}
+              setIsProposalModalOpen={setIsProposalModalOpen}
+              proposalId={proposalId}
+              recipientId={recipientId}
+              recommendation={recommendation}
+            />
+          ))}
         </div>
       </div>
-
       {isProposalModalOpen && (
         <div className={styles.proposalModal}>
           <ProposalModal setIsProposalModalOpen={setIsProposalModalOpen} />
