@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/components/PaymentManagePage/PaymentListItem.module.scss";
-import { main_busy } from "@/assets";
+import { main_dilly } from "@/assets";
 
 const PaymentListItem = ({
   item,
@@ -8,15 +8,16 @@ const PaymentListItem = ({
   setSelectedItem,
 }) => {
   const statusColor =
-    item.status === "대기중"
+    item.status === "결제 완료"
       ? "#0C9CE9"
-      : item.status === "결제 받기"
+      : item.status === "결제하기"
       ? "#FF4242"
       : item.status === "정산 완료"
       ? "#42BC54"
       : "#000";
 
   const handleItemClick = () => {
+    if (item.status === "정산 완료") return;
     setSelectedItem(item);
     setIsPaymentProgressModalOpen(true);
   };
@@ -26,7 +27,7 @@ const PaymentListItem = ({
       <div className={styles.itemContent}>
         <div className={styles.itemInfo}>
           <img
-            src={item.imgUrl || main_busy}
+            src={item.imgUrl || main_dilly}
             alt="프로필"
             className={styles.profileImg}
           />

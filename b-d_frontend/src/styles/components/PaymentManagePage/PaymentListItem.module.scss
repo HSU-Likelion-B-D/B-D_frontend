@@ -18,7 +18,7 @@
         height: vw(96px);
         border-radius: 50%;
         object-fit: cover;
-        background: #eaf1ff;
+        background: #ffeaea;
       }
 
       .itemTitleContainer {
@@ -33,7 +33,6 @@
           word-break: break-all;
           white-space: normal;
           overflow-wrap: break-word;
-          max-width: vw(600px);
         }
 
         .itemDesc {
@@ -45,7 +44,6 @@
           word-break: break-all;
           white-space: normal;
           overflow-wrap: break-word;
-          max-width: vw(600px);
 
           .itemPrice {
             color: $color-red-01;
