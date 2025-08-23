@@ -4,12 +4,13 @@ import BusinessItem from "@/components/BusinessMatchingPage/BusinessItem";
 import ProposalModal from "@/components/BusinessMatchingPage/ProposalModal";
 import { useState, useEffect } from "react";
 import axiosInstance from "@/apis/axiosInstance";
+import { useNavigate } from "react-router-dom";
 export default function BusinessMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const proposalId = sessionStorage.getItem("proposalId");
   const recipientId = 1; // recommend에서 추천 리스트 받고 거기서 userId 받아야 함
-
+  const navigate = useNavigate();
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
     if (isProposalModalOpen) {
@@ -28,7 +29,10 @@ export default function BusinessMatchingPage() {
       <div className={styles.content}>
         <Header />
         <div className={styles.topContainer}>
-          <button className={styles.myProposalButton}>
+          <button
+            className={styles.myProposalButton}
+            onClick={() => navigate("/influencer-create-proposal")}
+          >
             내 제안서 확인하기
           </button>
           <div className={styles.titleContainer}>
