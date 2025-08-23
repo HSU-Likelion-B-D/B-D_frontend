@@ -2,102 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styles from "../styles/pages/PaymentManagePage.module.scss";
 import Header from "../components/MainPage/Header";
-import { hamburger_icon, payment_profile } from "@/assets";
+import { hamburger_icon } from "@/assets";
 import PaymentModal from "../components/PaymentManage/PaymentModal";
 import PaymentListItem from "../components/PaymentManage/PaymentListItem";
 import Pagination from "../components/PaymentManage/Pagination";
 import PaymentProgressModal from "../components/PaymentManage/PaymentProgressModal";
 import PaymentCompleteModal from "../components/PaymentManage/PaymentCompleteModal";
-const sampleList = [
-  {
-    id: 1,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#0c9ce9",
-    dDay: "D-3",
-  },
-  {
-    id: 2,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제 완료",
-    statusColor: "#43a047",
-    dDay: undefined,
-  },
-  {
-    id: 3,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "정산 완료",
-    statusColor: "#bdbdbd",
-    dDay: undefined,
-  },
-  {
-    id: 4,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#0c9ce9",
-    dDay: undefined,
-  },
-  {
-    id: 5,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#0c9ce9",
-    dDay: undefined,
-  },
-  {
-    id: 6,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제하기",
-    statusColor: "#0c9ce9",
-    dDay: undefined,
-  },
-  {
-    id: 7,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "결제 완료",
-    statusColor: "#43a047",
-    dDay: undefined,
-  },
-  {
-    id: 8,
-    imgSrc: payment_profile,
-    title: "#성북구 카페 신메뉴 런칭, 인플루언서 협업 제안 캠페인",
-    desc: "요청 금액 : 100,000 / 수수료 10% / 실 납부금액",
-    price: "110,000",
-    period: "25.10.01~25.12.31",
-    status: "정산 완료",
-    statusColor: "#bdbdbd",
-    dDay: undefined,
-  },
-];
+import axiosInstance from "@/apis/axiosInstance";
 
 const ITEMS_PER_PAGE = 6;
 const PaymentManagePage = () => {
@@ -108,6 +19,10 @@ const PaymentManagePage = () => {
     useState(false);
   const [isPaymentCompleteModalOpen, setIsPaymentCompleteModalOpen] =
     useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [paymentList, setPaymentList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템 상태 추가
+  const [prevModalState, setPrevModalState] = useState(false); // 이전 모달 상태 추적
 
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
@@ -116,11 +31,21 @@ const PaymentManagePage = () => {
     }
   }, [isPaymentProgressModalOpen, isPaymentCompleteModalOpen]);
 
+  // 정산 완료 모달이 닫힐 때 새로고침
+  useEffect(() => {
+    if (prevModalState && !isPaymentCompleteModalOpen) {
+      // 이전에 모달이 열려있었고, 지금 닫혔을 때만 새로고침
+      window.location.reload();
+    }
+    setPrevModalState(isPaymentCompleteModalOpen);
+  }, [isPaymentCompleteModalOpen, prevModalState]);
+
   // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
-  const pagedList = sampleList.slice(
+  const pagedList = paymentList.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+
   // 필터링된 리스트
   const filteredList = pagedList.filter((item) => {
     //해당 페이지마다 필터링 가능
@@ -131,8 +56,33 @@ const PaymentManagePage = () => {
     return true;
   });
 
-  // 페이지 수는 전체 데이터 기준으로 - 전체 / 6개의 데이터
-  const totalPages = Math.ceil(sampleList.length / ITEMS_PER_PAGE);
+  useEffect(() => {
+    if (filter === "all") {
+      axiosInstance
+        .get("/bd/api/payments?all=true")
+        .then((res) => {
+          console.log(res.data);
+          setPaymentList(res.data.data.content);
+          setCurrentPage(1);
+          setTotalPages(res.data.data.totalPages);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosInstance
+        .get(`/bd/api/payments?state=${filter}`)
+        .then((res) => {
+          console.log(res.data);
+          setPaymentList(res.data.data.content);
+          setCurrentPage(1);
+          setTotalPages(res.data.data.totalPages);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [filter]);
 
   return (
     <div className={styles.container}>
@@ -169,33 +119,26 @@ const PaymentManagePage = () => {
       <div className={styles.listWrap}>
         {filteredList.map((item) => (
           <PaymentListItem
-            key={item.id}
-            imgSrc={item.imgSrc}
-            title={item.title}
-            desc={item.desc}
-            price={
-              <span style={{ color: "#2196f3", fontWeight: 700 }}>
-                {item.price}
-              </span>
-            }
-            period={item.period}
-            status={item.status}
-            statusColor={item.statusColor}
-            dDay={item.dDay}
+            key={item.paymentId}
+            item={item}
             setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
+            setSelectedItem={setSelectedItem}
           />
         ))}
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className={styles.paginationContainer}>
+        <Pagination
+          redCurrentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
       {isPaymentProgressModalOpen && (
         <div className={styles.paymentProgressModal}>
           <PaymentProgressModal
             setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+            selectedItem={selectedItem}
           />
         </div>
       )}

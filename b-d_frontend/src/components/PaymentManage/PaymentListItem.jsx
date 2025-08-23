@@ -2,7 +2,11 @@ import React from "react";
 import styles from "../../styles/components/PaymentManagePage/PaymentListItem.module.scss";
 import { main_busy } from "@/assets";
 
-const PaymentListItem = ({ item, setIsPaymentProgressModalOpen }) => {
+const PaymentListItem = ({
+  item,
+  setIsPaymentProgressModalOpen,
+  setSelectedItem,
+}) => {
   const statusColor =
     item.status === "대기중"
       ? "#0C9CE9"
@@ -12,11 +16,13 @@ const PaymentListItem = ({ item, setIsPaymentProgressModalOpen }) => {
       ? "#42BC54"
       : "#000";
 
+  const handleItemClick = () => {
+    setSelectedItem(item);
+    setIsPaymentProgressModalOpen(true);
+  };
+
   return (
-    <div
-      className={styles.listItem}
-      onClick={() => setIsPaymentProgressModalOpen(true)}
-    >
+    <div className={styles.listItem} onClick={handleItemClick}>
       <div className={styles.itemContent}>
         <div className={styles.itemInfo}>
           <img
