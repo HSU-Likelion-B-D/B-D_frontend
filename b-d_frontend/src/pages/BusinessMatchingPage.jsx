@@ -3,10 +3,10 @@ import Header from "@/components/InfluencerMainPage/Header";
 import BusinessItem from "@/components/BusinessMatchingPage/BusinessItem";
 import ProposalModal from "@/components/BusinessMatchingPage/ProposalModal";
 import { useState, useEffect } from "react";
-
+import axiosInstance from "@/apis/axiosInstance";
 export default function BusinessMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
-
+  const [recommendations, setRecommendations] = useState([]);
   const proposalId = sessionStorage.getItem("proposalId");
   const recipientId = 1; // recommend에서 추천 리스트 받고 거기서 userId 받아야 함
 
@@ -16,6 +16,12 @@ export default function BusinessMatchingPage() {
       window.scrollTo({ top: 0 });
     }
   }, [isProposalModalOpen]);
+  useEffect(() => {
+    axiosInstance.get("/bd/api/influencer/me/recommendations").then((res) => {
+      setRecommendations(res.data.data);
+      console.log(res.data.data);
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -38,31 +44,15 @@ export default function BusinessMatchingPage() {
           *블로그는 투데이 수치로 기록됩니다.
         </div>
         <div className={styles.influencerList}>
-          <BusinessItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <BusinessItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <BusinessItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <BusinessItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
-          <BusinessItem
-            setIsProposalModalOpen={setIsProposalModalOpen}
-            proposalId={proposalId}
-            recipientId={recipientId}
-          />
+          {recommendations.map((recommendation, index) => (
+            <BusinessItem
+              key={recommendation.id || index}
+              setIsProposalModalOpen={setIsProposalModalOpen}
+              proposalId={proposalId}
+              recipientId={recipientId}
+              recommendation={recommendation}
+            />
+          ))}
         </div>
       </div>
       {isProposalModalOpen && (

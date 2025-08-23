@@ -1,5 +1,5 @@
 import styles from "@/styles/components/BusinessMatchingPage/BusinessItem.module.scss";
-import { store_img, star_icon_red } from "@/assets";
+import { main_busy, star_icon_red } from "@/assets";
 import axiosInstance from "@/apis/axiosInstance";
 import { useState } from "react";
 
@@ -7,6 +7,7 @@ export default function BusinessItem({
   setIsProposalModalOpen,
   proposalId, // BusinessMatchingPage에서 전달
   recipientId, // BusinessMatchingPage에서 전달
+  recommendation, // BusinessMatchingPage에서 전달
 }) {
   const [loading, setLoading] = useState(false);
   const handleSendProposal = () => {
@@ -73,17 +74,25 @@ export default function BusinessItem({
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <img src={store_img} className={styles.profileImage} />
+        <img src={main_busy} className={styles.profileImage} />
         <div className={styles.title}>
           <div className={styles.nameContainer}>
-            <div className={styles.name}>아기사자</div>
+            <div className={styles.name}>{recommendation.nickname}</div>
             <img src={star_icon_red} className={styles.starIcon} />
             <div className={styles.starNumber}>
-              3.0 <span className={styles.starCount}>(332)</span>
+              {recommendation.avgScore}{" "}
+              <span className={styles.starCount}>
+                ({recommendation.finalScore})
+              </span>
             </div>
           </div>
           <div className={styles.description}>
-            음식,음료 / 10대,힙한,단체 / 300,000 / 부산
+            {recommendation.categoryList.map((topic) => topic).join(",")} /{" "}
+            {recommendation.moodList.map((mood) => mood).join(",")} /{" "}
+            {recommendation.minBudget} /{" "}
+            {recommendation.region
+              ?.split(" ")
+              .find((part) => part.endsWith("구")) || recommendation.region}
           </div>
         </div>
       </div>
