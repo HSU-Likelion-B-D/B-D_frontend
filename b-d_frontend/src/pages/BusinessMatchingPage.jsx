@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 export default function BusinessMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
 
+  const proposalId = sessionStorage.getItem("proposalId");
+  const recipientId = 1; // recommend에서 추천 리스트 받고 거기서 userId 받아야 함
+
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
     if (isProposalModalOpen) {
@@ -35,12 +38,31 @@ export default function BusinessMatchingPage() {
           *블로그는 투데이 수치로 기록됩니다.
         </div>
         <div className={styles.influencerList}>
-          <BusinessItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <BusinessItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <BusinessItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <BusinessItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <BusinessItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <BusinessItem setIsProposalModalOpen={setIsProposalModalOpen} />
+          <BusinessItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <BusinessItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <BusinessItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <BusinessItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <BusinessItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
         </div>
       </div>
       {isProposalModalOpen && (

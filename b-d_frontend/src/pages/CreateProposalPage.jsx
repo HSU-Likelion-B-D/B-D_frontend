@@ -29,7 +29,7 @@ export default function CreateProposalPage() {
     // form 데이터를 API 형식에 맞게 변환
     const apiData = {
       title: data.proposalTitle,
-      offerBudget: parseInt(data.minAmount),
+      offerBudget: data.minAmount,
       startDate: `${data.startYear}-${data.startMonth}-${data.startDay}`,
       endDate: `${data.endYear}-${data.endMonth}-${data.endDay}`,
       overView: data.proposalContent || "",
@@ -41,6 +41,9 @@ export default function CreateProposalPage() {
       .then((res) => {
         if (res.data.isSuccess) {
           navigate("/");
+          // 서버 응답에서 proposalId 추출하여 세션스토리지에 저장
+          const proposalId = res.data.data.proposalId;
+          sessionStorage.setItem("proposalId", proposalId);
         }
       })
       .catch((err) => {

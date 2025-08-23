@@ -1,7 +1,10 @@
 import styles from "@/styles/components/InfluencerMainPage/MatchingList.module.scss";
 import MatchingItem from "./MatchingItem";
 import { dilly_right } from "@/assets";
+import { useNavigate } from "react-router-dom";
 export default function MatchingList({ businessList }) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -23,7 +26,14 @@ export default function MatchingList({ businessList }) {
       </div>
       <div className={styles.buttonContainer}>
         <img src={dilly_right} className={styles.busyLeft} />
-        <button className={styles.seemoreButton}>자세히 보러가기</button>
+        <button
+          className={styles.seemoreButton}
+          onClick={() => {
+            navigate("/business-matching");
+          }}
+        >
+          자세히 보러가기
+        </button>
       </div>
     </div>
   );

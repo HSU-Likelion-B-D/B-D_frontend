@@ -7,6 +7,11 @@ import { useState, useEffect } from "react";
 export default function InfluencerMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
 
+  //const proposalId = 3;
+
+  const proposalId = sessionStorage.getItem("proposalId"); // createproposal 할때 저장함
+  const recipientId = 1; // recommend에서 추천 리스트 받고 거기서 userId 받아야 함
+
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
     if (isProposalModalOpen) {
@@ -31,17 +36,41 @@ export default function InfluencerMatchingPage() {
 
           <button className={styles.refreshButton}>새로고침</button>
         </div>
+
         <div className={styles.description}>
           *블로그는 투데이 수치로 기록됩니다.
         </div>
+
+        {/* ✅ 각 아이템에 recipientId와 proposalId 전달 */}
         <div className={styles.influencerList}>
-          <InfluencerItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <InfluencerItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <InfluencerItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <InfluencerItem setIsProposalModalOpen={setIsProposalModalOpen} />
-          <InfluencerItem setIsProposalModalOpen={setIsProposalModalOpen} />
+          <InfluencerItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <InfluencerItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <InfluencerItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <InfluencerItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
+          <InfluencerItem
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            proposalId={proposalId}
+            recipientId={recipientId}
+          />
         </div>
       </div>
+
       {isProposalModalOpen && (
         <div className={styles.proposalModal}>
           <ProposalModal setIsProposalModalOpen={setIsProposalModalOpen} />
