@@ -4,7 +4,7 @@ import styles from "../styles/pages/InfluencerPaymentManagePage.module.scss";
 import Header from "../components/InfluencerMainPage/Header";
 import { hamburger_icon } from "@/assets";
 import PaymentModal from "../components/InfluencerPaymentManagePage/PaymentModal";
-import PaymentListItem from "../components/PaymentManage/PaymentListItem";
+import PaymentListItem from "../components/InfluencerPaymentManagePage/PaymentListItem";
 import Pagination from "../components/PaymentManage/Pagination";
 import InfluencerPaymentProgressModal from "../components/InfluencerPaymentManagePage/InfluencerPaymentProgressModal";
 import InfluencerPaymentStarModal from "../components/InfluencerPaymentManagePage/InfluencerPaymentStarModal";
