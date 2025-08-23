@@ -60,11 +60,11 @@ const InfluencerSelectKWPage = () => {
       return;
     }
     sessionStorage.setItem(
-      "contentTopicIds",
+      "contentStyleIds",
       JSON.stringify(selectedSpecies.map((item) => item.id))
     );
     sessionStorage.setItem(
-      "contentStyleIds",
+      "contentTopicIds",
       JSON.stringify(selectedAtmosphere.map((item) => item.id))
     );
     navigate("/influencer-cost");
