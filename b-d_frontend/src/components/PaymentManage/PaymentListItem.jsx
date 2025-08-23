@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/components/PaymentManagePage/PaymentListItem.module.scss";
 import { main_dilly } from "@/assets";
+import { formatNumber } from "@/hooks/formatNumber";
 
 const PaymentListItem = ({
   item,
@@ -17,7 +18,7 @@ const PaymentListItem = ({
       : "#000";
 
   const handleItemClick = () => {
-    if (item.status === "정산 완료") return;
+    if (item.status === "정산 완료" || item.status === "결제 완료") return;
     setSelectedItem(item);
     setIsPaymentProgressModalOpen(true);
   };
@@ -34,9 +35,12 @@ const PaymentListItem = ({
           <div className={styles.itemTitleContainer}>
             <div className={styles.itemTitle}>{item.title}</div>
             <div className={styles.itemDesc}>
-              요청금액: {item.offerBudget || ""} / 수수료 10% / 실 납부금액{" "}
-              <span className={styles.itemPrice}>{item.totalPaid || ""}</span> /{" "}
-              {item.startDate || ""}~{item.endDate || ""}
+              요청금액: {formatNumber(item.offerBudget || 0)} / 수수료 10% / 실
+              납부금액{" "}
+              <span className={styles.itemPrice}>
+                {formatNumber(item.totalPaid || 0)}
+              </span>{" "}
+              / {item.startDate || ""}~{item.endDate || ""}
             </div>
           </div>
         </div>
