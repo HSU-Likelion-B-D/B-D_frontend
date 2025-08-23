@@ -9,7 +9,6 @@ export default function BusinessMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const proposalId = sessionStorage.getItem("proposalId");
-  const recipientId = 1; // recommend에서 추천 리스트 받고 거기서 userId 받아야 함
   const navigate = useNavigate();
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
@@ -53,7 +52,6 @@ export default function BusinessMatchingPage() {
               key={recommendation.id || index}
               setIsProposalModalOpen={setIsProposalModalOpen}
               proposalId={proposalId}
-              recipientId={recipientId}
               recommendation={recommendation}
             />
           ))}
