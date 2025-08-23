@@ -18,6 +18,7 @@ const PaymentListItem = ({
       : "#000";
 
   const handleItemClick = () => {
+    if (item.status === "정산 완료") return;
     setSelectedItem(item); // 클릭된 아이템을 selectedItem으로 설정
     setIsPaymentProgressModalOpen(true); // 모달 열기
   };
