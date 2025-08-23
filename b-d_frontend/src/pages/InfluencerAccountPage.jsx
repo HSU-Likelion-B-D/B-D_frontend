@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/InfluencerAccountPage.module.scss";
 import { logo_red, influencer_profile } from "@/assets";
 import ProgressBar from "../components/InfluencerProfilePage/ProgressBar";
 import Input from "../components/SingupPage/Input";
-
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../apis/axiosInstanceGET";
 
 const InfluencerAccountPage = () => {
   // 은행 리스트 직접 선언
@@ -60,6 +60,22 @@ const InfluencerAccountPage = () => {
     navigate("/influencer-introduce");
     // `formData` 백으로 보내기
   };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      axiosInstance
+        .get("/bd/api/influencer/activities")
+        .then((res) => {
+          if (res.data.isSuccess) {
+            console.log(res.data.data);
+          }
+        })
+        .catch((error) => {
+          console.error("프로필 정보 가져오기 오류:", error);
+        });
+    }
+  }, []);
 
   const isFormValid =
     formData.bank.trim() !== "" && formData.account.trim() !== "";

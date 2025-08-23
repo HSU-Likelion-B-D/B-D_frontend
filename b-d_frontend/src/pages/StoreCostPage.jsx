@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/StoreCostPage.module.scss";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import logo from "../assets/logo.svg";
@@ -15,10 +15,25 @@ const atmosphere = [
 ];
 
 const StoreCostPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     minCost: "",
     maxCost: "",
   });
+
+  useEffect(() => {
+    // 세션스토리지에서 저장된 예산 정보 가져오기
+    const storedMinBudget = sessionStorage.getItem("minBudget");
+    const storedMaxBudget = sessionStorage.getItem("maxBudget");
+
+    if (storedMinBudget || storedMaxBudget) {
+      setFormData((prevData) => ({
+        ...prevData,
+        minCost: storedMinBudget || "",
+        maxCost: storedMaxBudget || "",
+      }));
+    }
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,7 +51,6 @@ const StoreCostPage = () => {
 
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
-  const navigate = useNavigate();
 
   const handleClick = (sp) => {
     // 버튼 중복 선택 로직

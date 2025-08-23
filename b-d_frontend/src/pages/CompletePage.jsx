@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles/pages/CompletePage.module.scss";
 import { logo, complete_icon } from "@/assets";
 import { useNavigate } from "react-router-dom";
+import axiosInstanceGET from "@/apis/axiosInstanceGET";
 import axiosInstance from "@/apis/axiosInstance";
 
 const CompletePage = () => {
@@ -9,7 +10,8 @@ const CompletePage = () => {
   const handleNext = () => {
     // 세션 스토리지에서 데이터 가져오기
     const userId = parseInt(sessionStorage.getItem("userId"), 10); // 숫자로 변환
-    const nickname = sessionStorage.getItem("nickname");
+    const nickname =
+      sessionStorage.getItem("nickname") || localStorage.getItem("nickName");
     const addressData = JSON.parse(
       sessionStorage.getItem("addressData") || "{}"
     );
@@ -26,61 +28,78 @@ const CompletePage = () => {
       sessionStorage.getItem("storeAtmosphereData") || "{}"
     );
 
-    // 데이터 유효성 검사
-    if (
-      !userId ||
-      !nickname ||
-      !addressData.address ||
-      !storeTimeData.openTime ||
-      !storeSpeciesData.categoryIds ||
-      !storeAtmosphereData.moodIds
-    ) {
-      console.error("필수 데이터가 누락되었습니다:", {
-        userId,
-        nickname,
-        addressData,
-        storeSpeciesData,
-        storeAtmosphereData,
-      });
-      alert(
-        "필수 데이터가 누락되었습니다. 이전 페이지로 돌아가 다시 입력해주세요."
-      );
-      return;
-    }
-
     // 서버로 전송할 데이터 구성
-    const requestData = {
-      userId,
-      name: nickname,
-      address: addressData.address,
-      detailAddress: addressData.detailAddress,
-      openTime: storeTimeData.openTime,
-      closeTime: storeTimeData.closeTime,
-      isOnline: Boolean(storeTimeData.isOnline), // 불리언으로 변환
-      minBudget: parseInt(storeCostData.minBudget, 10) || 0, // 숫자로 변환
-      maxBudget: parseInt(storeCostData.maxBudget, 10) || 0, // 숫자로 변환
-      categoryIds: storeSpeciesData.categoryIds.map((id) => parseInt(id, 10)), // 숫자 배열로 변환
-      moodIds: storeAtmosphereData.moodIds.map((id) => parseInt(id, 10)), // 숫자 배열로 변환
-      promotionIds: storeCostData.promotionIds.map((id) => parseInt(id, 10)), // 숫자 배열로 변환
-    };
+    const accessToken = localStorage.getItem("accessToken");
+
+    const requestData = accessToken
+      ? {
+          // PUT 요청 (수정) - userId 제외
+          name: nickname,
+          address: addressData.address,
+          detailAddress: addressData.detailAddress,
+          openTime: storeTimeData.openTime,
+          closeTime: storeTimeData.closeTime,
+          isOnline: Boolean(storeTimeData.isOnline),
+          minBudget: storeCostData.minBudget,
+          maxBudget: storeCostData.maxBudget,
+          categoryIds: storeSpeciesData.categoryIds.map((id) =>
+            parseInt(id, 10)
+          ),
+          moodIds: storeAtmosphereData.moodIds.map((id) => parseInt(id, 10)),
+          promotionIds: storeCostData.promotionIds.map((id) =>
+            parseInt(id, 10)
+          ),
+        }
+      : {
+          // POST 요청 (등록) - userId 포함
+          userId,
+          name: nickname,
+          address: addressData.address,
+          detailAddress: addressData.detailAddress,
+          openTime: storeTimeData.openTime,
+          closeTime: storeTimeData.closeTime,
+          isOnline: Boolean(storeTimeData.isOnline),
+          minBudget: storeCostData.minBudget,
+          maxBudget: storeCostData.maxBudget,
+          categoryIds: storeSpeciesData.categoryIds.map((id) =>
+            parseInt(id, 10)
+          ),
+          moodIds: storeAtmosphereData.moodIds.map((id) => parseInt(id, 10)),
+          promotionIds: storeCostData.promotionIds.map((id) =>
+            parseInt(id, 10)
+          ),
+        };
 
     // 요청 데이터 출력
     console.log("전송 데이터:", requestData);
 
-    axiosInstance
-      .post(`/bd/api/businessman/workplaces`, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    // 토큰 존재 여부에 따라 POST/PUT 선택
+    const method = accessToken ? "put" : "post";
+    const url = accessToken
+      ? "/bd/api/businessman/workplaces"
+      : "/bd/api/businessman/workplaces";
+    const selectedAxiosInstance = accessToken
+      ? axiosInstanceGET
+      : axiosInstance;
+
+    console.log(`가게 ${accessToken ? "수정" : "등록"} 요청:`, method, url);
+
+    selectedAxiosInstance[method](url, requestData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         console.log("서버 응답: ", res);
         if (res.data.isSuccess) {
-          console.log("가게 등록 성공");
+          console.log(`가게 ${accessToken ? "수정" : "등록"} 성공`);
           sessionStorage.clear(); // 모든 세션 스토리지 데이터 제거
           navigate("/");
         } else {
-          console.error("가게 등록 실패: ", res.data.message);
+          console.error(
+            `가게 ${accessToken ? "수정" : "등록"} 실패: `,
+            res.data.message
+          );
         }
       })
       .catch((error) => {
