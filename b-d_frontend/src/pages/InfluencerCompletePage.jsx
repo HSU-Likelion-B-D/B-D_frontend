@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles/pages/InfluencerCompletePage.module.scss";
 import { logo_red, complete_icon } from "@/assets";
 import axiosInstance from "@/apis/axiosInstance";
+import axiosInstanceGET from "@/apis/axiosInstanceGET";
 import { useNavigate } from "react-router-dom";
 
 const InfluencerCompletePage = () => {
@@ -15,32 +16,49 @@ const InfluencerCompletePage = () => {
       snsUrl: sessionStorage.getItem("snsUrl"),
       platformIds: JSON.parse(sessionStorage.getItem("platformIds")),
       contentTopicIds: JSON.parse(sessionStorage.getItem("contentTopicIds")),
-      minAmount: sessionStorage.getItem("minAmount"),
-      maxAmount: sessionStorage.getItem("maxAmount"),
+      minBudget: sessionStorage.getItem("minAmount"),
+      maxBudget: sessionStorage.getItem("maxAmount"),
       bankName: sessionStorage.getItem("bankName"),
       accountNumber: sessionStorage.getItem("accountNumber"),
       contentStyleIds: JSON.parse(sessionStorage.getItem("contentStyleIds")),
       preferTopicIds: JSON.parse(sessionStorage.getItem("preferTopicIds")),
     };
-    axiosInstance
-      .post("/bd/api/influencer/activities", requestData)
-      .then((res) => {
-        console.log(res);
-        sessionStorage.removeItem("userId");
-        sessionStorage.removeItem("activityName");
-        sessionStorage.removeItem("followerCount");
-        sessionStorage.removeItem("uploadFrequency");
-        sessionStorage.removeItem("snsUrl");
-        sessionStorage.removeItem("platformIds");
-        sessionStorage.removeItem("contentTopicIds");
-        sessionStorage.removeItem("minAmount");
-        sessionStorage.removeItem("maxAmount");
-        sessionStorage.removeItem("bankName");
-        sessionStorage.removeItem("accountNumber");
-        sessionStorage.removeItem("contentStyleIds");
-        sessionStorage.removeItem("preferTopicIds");
-        navigate("/influencer-main");
-      });
+
+    console.log(requestData);
+
+    // 토큰 존재 여부에 따라 POST/PUT 선택
+    const accessToken = localStorage.getItem("accessToken");
+    const method = accessToken ? "put" : "post";
+    const url = accessToken
+      ? "/bd/api/influencer/activities"
+      : "/bd/api/influencer/activities";
+    const selectedAxiosInstance = accessToken
+      ? axiosInstanceGET
+      : axiosInstance;
+
+    console.log(
+      `인플루언서 활동 ${accessToken ? "수정" : "등록"} 요청:`,
+      method,
+      url
+    );
+
+    selectedAxiosInstance[method](url, requestData).then((res) => {
+      console.log(res);
+      sessionStorage.removeItem("userId");
+      sessionStorage.removeItem("activityName");
+      sessionStorage.removeItem("followerCount");
+      sessionStorage.removeItem("uploadFrequency");
+      sessionStorage.removeItem("snsUrl");
+      sessionStorage.removeItem("platformIds");
+      sessionStorage.removeItem("contentTopicIds");
+      sessionStorage.removeItem("minAmount");
+      sessionStorage.removeItem("maxAmount");
+      sessionStorage.removeItem("bankName");
+      sessionStorage.removeItem("accountNumber");
+      sessionStorage.removeItem("contentStyleIds");
+      sessionStorage.removeItem("preferTopicIds");
+      navigate("/influencer-main");
+    });
   };
   return (
     <div className={styles.container}>

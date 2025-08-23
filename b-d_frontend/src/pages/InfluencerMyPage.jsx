@@ -49,7 +49,7 @@ export default function InfluencerMyPage() {
             {influencerInfo?.snsUrl || "없음"}
           </div>
           <div className={styles.moneyContainer}>
-            요청 금액 <span>{influencerInfo?.minAmount || "0"}</span>
+            요청 금액 <span>{influencerInfo?.minBudget || "0"}</span>
             <br />
             <span>
               {Array.isArray(influencerInfo?.platforms)

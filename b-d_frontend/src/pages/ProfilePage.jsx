@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/ProfilePage.module.scss";
 import { logo, camera, profile } from "@/assets";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
@@ -7,7 +7,6 @@ import Input from "../components/SingupPage/Input";
 import { Form, useNavigate } from "react-router-dom";
 import axiosInstance from "../apis/axiosInstanceFormData";
 
-const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -23,6 +22,64 @@ const ProfilePage = () => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(profile);
   const [profileImageFile, setProfileImageFile] = useState(""); // 파일 객체 저장용
+  const [hasExistingProfile, setHasExistingProfile] = useState(false); // 기존 프로필 존재 여부
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    // localStorage에서 저장된 프로필 이미지 가져오기
+    const storedImgUrl = localStorage.getItem("imgUrl");
+    if (storedImgUrl && storedImgUrl !== "null") {
+      setProfileImage(storedImgUrl);
+    }
+
+    if (accessToken) {
+      axiosInstance
+        .get("/bd/user/profile", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          console.log("API 응답 전체:", res);
+          console.log("API 응답 데이터:", res.data);
+
+          // API 응답 구조에 따라 데이터 추출 (여러 가능한 구조 시도)
+          const responseData = res.data.data || res.data.result || res.data;
+          console.log("추출된 데이터:", responseData);
+
+          // 각 필드별로 값 확인
+          console.log("nickname 값:", responseData.nickname);
+          console.log("introduction 값:", responseData.introduction);
+          console.log("profileImage 값:", responseData.profileImage);
+
+          // 기존 프로필 정보가 있는지 확인
+          const hasProfile =
+            responseData.nickname ||
+            responseData.introduction ||
+            responseData.profileImage;
+          setHasExistingProfile(!!hasProfile);
+
+          setFormData((prevData) => {
+            const newData = {
+              ...prevData,
+              nickname: responseData.nickname || "",
+              description: responseData.introduction || "",
+            };
+            console.log("새로 설정된 formData:", newData);
+            return newData;
+          });
+
+          if (responseData.profileImage) {
+            setProfileImage(responseData.profileImage);
+          }
+        })
+        .catch((error) => {
+          console.error("프로필 정보 가져오기 오류:", error);
+          // 오류 발생 시 기본값 유지
+        });
+    }
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -40,7 +97,7 @@ const ProfilePage = () => {
 
   const handleNicknameCheck = () => {
     const { nickname } = formData;
-    if (!nickname.trim()) {
+    if (!(nickname || "").trim()) {
       setNicknameMessage("닉네임을 입력해주세요.");
       setIsError(true);
       setIsSuccess(false);
@@ -117,7 +174,8 @@ const ProfilePage = () => {
   };
 
   const isFormValid =
-    formData.nickname.trim() !== "" && formData.description.trim() !== "";
+    (formData.nickname || "").trim() !== "" &&
+    (formData.description || "").trim() !== "";
 
   const clearNickname = () => {
     setFormData((prevData) => ({
@@ -130,18 +188,24 @@ const ProfilePage = () => {
     setIsButtonDisabled(false);
   };
 
-  const handleNext = (data, image) => {
+  const handleNext = () => {
     console.log("handleNext 실행:", { formData, profileImage });
 
     const userId = sessionStorage.getItem("userId"); // 세션 스토리지에서 userId 가져오기
     const nickname = formData.nickname; // formData에서 닉네임 가져오기
 
     // 닉네임을 세션 스토리지에 저장
-    sessionStorage.setItem("nickname", nickname);
+    localStorage.setItem("nickName", nickname);
+    localStorage.setItem("imgUrl", profileImage);
 
     // FormData 객체 생성
     const formDataToSend = new FormData();
-    formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
+
+    if (!hasExistingProfile) {
+      // POST 요청 (새 프로필 생성) - userId 포함
+      formDataToSend.append("userId", userId);
+    }
+
     formDataToSend.append("nickname", nickname); // 닉네임
 
     // profileImageFile이 존재할 경우에만 추가
@@ -150,7 +214,14 @@ const ProfilePage = () => {
     } else {
       console.log("프로필 사진이 없으므로 전송하지 않습니다.");
     }
+
     formDataToSend.append("introduction", formData.description); // 설명글
+
+    // PUT 요청 시 추가 필드
+    if (hasExistingProfile) {
+      formDataToSend.append("imageDelete", "false"); // 기존 프로필 이미지 유지
+      formDataToSend.append("introductionDelete", "false"); // 기존 설명글 유지
+    }
 
     // FormData 내용 확인하기
     console.log("FormData 내용:");
@@ -158,21 +229,45 @@ const ProfilePage = () => {
       console.log(`${key}:`, value);
     }
 
-    // 서버로 데이터 전송
-    axiosInstance
-      .post("/bd/user/profile", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data", //요청 헤더 설정
-        },
-      })
+    // 서버로 데이터 전송 (기존 프로필이 있으면 PUT, 없으면 POST)
+    const method = hasExistingProfile ? "put" : "post";
+    const url = hasExistingProfile ? "/bd/user/update" : "/bd/user/profile";
+
+    console.log(
+      `프로필 ${hasExistingProfile ? "수정" : "생성"} 요청:`,
+      method,
+      url
+    );
+
+    // 헤더 설정 (PUT 요청 시 토큰 포함)
+    const headers = {
+      "Content-Type": "multipart/form-data",
+    };
+
+    if (hasExistingProfile) {
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        headers.Authorization = `Bearer ${accessToken}`;
+      }
+    }
+
+    axiosInstance[method](url, formDataToSend, {
+      headers,
+    })
       .then((res) => {
-        console.log("프로필 저장 응답:", res);
+        console.log(
+          `프로필 ${hasExistingProfile ? "수정" : "생성"} 응답:`,
+          res
+        );
         if (res.data.isSuccess) {
           navigate("/address"); // 성공시 다음 페이지로 이동
         }
       })
       .catch((error) => {
-        console.error("프로필 설정 오류:", error);
+        console.error(
+          `프로필 ${hasExistingProfile ? "수정" : "생성"} 오류:`,
+          error
+        );
         if (error.response) {
           // 서버 응답이 있는 경우
           console.log(
@@ -298,10 +393,10 @@ const ProfilePage = () => {
             }`}
             disabled={!isFormValid}
             onClick={() => {
-              handleNext(formData, profileImage);
+              handleNext();
             }}
           >
-            다음으로
+            {hasExistingProfile ? "수정하기" : "다음으로"}
           </button>
         </div>
       </form>
