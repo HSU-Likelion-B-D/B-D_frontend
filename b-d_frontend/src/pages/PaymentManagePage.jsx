@@ -10,7 +10,6 @@ import PaymentProgressModal from "../components/PaymentManage/PaymentProgressMod
 import PaymentCompleteModal from "../components/PaymentManage/PaymentCompleteModal";
 import axiosInstance from "@/apis/axiosInstance";
 
-const ITEMS_PER_PAGE = 6;
 const PaymentManagePage = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,22 +38,6 @@ const PaymentManagePage = () => {
     }
     setPrevModalState(isPaymentCompleteModalOpen);
   }, [isPaymentCompleteModalOpen, prevModalState]);
-
-  // 현재 페이지에 보여줄 데이터만 추출 - 6개의 데이터만
-  const pagedList = paymentList.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
-
-  // 필터링된 리스트
-  const filteredList = pagedList.filter((item) => {
-    //해당 페이지마다 필터링 가능
-    if (filter === "all") return true;
-    if (filter === "결제 대기") return item.status === "결제하기";
-    if (filter === "결제 완료") return item.status === "결제 완료";
-    if (filter === "정산 완료") return item.status === "정산 완료";
-    return true;
-  });
 
   useEffect(() => {
     if (filter === "all") {
@@ -117,7 +100,7 @@ const PaymentManagePage = () => {
       </div>
       <div className={styles.description}>사장님을 기다리고 있어요!</div>
       <div className={styles.listWrap}>
-        {filteredList.map((item) => (
+        {paymentList.map((item) => (
           <PaymentListItem
             key={item.paymentId}
             item={item}
