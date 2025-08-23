@@ -10,6 +10,7 @@
       height: vw(96px);
       border-radius: 50%;
       margin-right: vw(20px);
+      background-color: #eaf1ff;
     }
     .title {
       @include flex(column, start, center);
@@ -42,6 +43,10 @@
         font-size: rem(20px);
         color: #929292;
         line-height: 1.75;
+        word-wrap: break-word;
+        white-space: normal;
+        max-width: vw(600px);
+        overflow-wrap: break-word;
       }
     }
   }
