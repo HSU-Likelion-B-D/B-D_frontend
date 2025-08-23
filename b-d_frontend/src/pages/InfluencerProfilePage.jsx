@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/pages/InfluencerProfilePage.module.scss";
 import { logo_red, camera, influencer_profile } from "@/assets";
 import ProgressBar from "../components/InfluencerProfilePage/ProgressBar";
@@ -19,6 +19,57 @@ const InfluencerProfilePage = () => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(influencer_profile);
   const [profileImageFile, setProfileImageFile] = useState(""); // 파일 객체 저장용
+  const [hasExistingProfile, setHasExistingProfile] = useState(false); // 기존 프로필 존재 여부
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      axiosInstance
+        .get("/bd/user/profile", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          console.log("API 응답 전체:", res);
+          console.log("API 응답 데이터:", res.data);
+
+          // API 응답 구조에 따라 데이터 추출 (여러 가능한 구조 시도)
+          const responseData = res.data.data || res.data.result || res.data;
+          console.log("추출된 데이터:", responseData);
+
+          // 각 필드별로 값 확인
+          console.log("nickname 값:", responseData.nickname);
+          console.log("introduction 값:", responseData.introduction);
+          console.log("profileImage 값:", responseData.profileImage);
+
+          // 기존 프로필 정보가 있는지 확인
+          const hasProfile =
+            responseData.nickname ||
+            responseData.introduction ||
+            responseData.profileImage;
+          setHasExistingProfile(!!hasProfile);
+
+          setFormData((prevData) => {
+            const newData = {
+              ...prevData,
+              nickname: responseData.nickname || "",
+              description: responseData.introduction || "",
+            };
+            console.log("새로 설정된 formData:", newData);
+            return newData;
+          });
+
+          if (responseData.profileImage) {
+            setProfileImage(responseData.profileImage);
+          }
+        })
+        .catch((error) => {
+          console.error("프로필 정보 가져오기 오류:", error);
+          // 오류 발생 시 기본값 유지
+        });
+    }
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,7 +87,7 @@ const InfluencerProfilePage = () => {
 
   const handleNicknameCheck = () => {
     const { nickname } = formData;
-    if (!nickname.trim()) {
+    if (!(nickname || "").trim()) {
       setNicknameMessage("닉네임을 입력해주세요.");
       setIsError(true);
       setIsSuccess(false);
@@ -92,8 +143,13 @@ const InfluencerProfilePage = () => {
 
     // FormData 객체 생성
     const formDataToSend = new FormData();
-    formDataToSend.append("userId", userId); // 회원가입 후 반환된 값 사용
-    formDataToSend.append("nickname", formData.nickname); // 닉네임
+
+    if (!hasExistingProfile) {
+      // POST 요청 (새 프로필 생성) - userId 포함
+      formDataToSend.append("userId", userId);
+    }
+
+    formDataToSend.append("nickname", formData.nickname || ""); // 닉네임
 
     // profileImageFile이 존재할 경우에만 추가
     if (profileImageFile) {
@@ -101,7 +157,14 @@ const InfluencerProfilePage = () => {
     } else {
       console.log("프로필 사진이 없으므로 전송하지 않습니다.");
     }
-    formDataToSend.append("introduction", formData.description); // 설명글
+
+    formDataToSend.append("introduction", formData.description || ""); // 설명글
+
+    // PUT 요청 시 추가 필드
+    if (hasExistingProfile) {
+      formDataToSend.append("imageDelete", "false"); // 기존 프로필 이미지 유지
+      formDataToSend.append("introductionDelete", "false"); // 기존 설명글 유지
+    }
 
     // FormData 내용 확인하기
     console.log("FormData 내용:");
@@ -109,21 +172,45 @@ const InfluencerProfilePage = () => {
       console.log(`${key}:`, value);
     }
 
-    // 서버로 데이터 전송
-    axiosInstance
-      .post("/bd/user/profile", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data", //요청 헤더 설정
-        },
-      })
+    // 서버로 데이터 전송 (기존 프로필이 있으면 PUT, 없으면 POST)
+    const method = hasExistingProfile ? "put" : "post";
+    const url = hasExistingProfile ? "/bd/user/update" : "/bd/user/profile";
+
+    console.log(
+      `프로필 ${hasExistingProfile ? "수정" : "생성"} 요청:`,
+      method,
+      url
+    );
+
+    // 헤더 설정 (PUT 요청 시 토큰 포함)
+    const headers = {
+      "Content-Type": "multipart/form-data",
+    };
+
+    if (hasExistingProfile) {
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        headers.Authorization = `Bearer ${accessToken}`;
+      }
+    }
+
+    axiosInstance[method](url, formDataToSend, {
+      headers,
+    })
       .then((res) => {
-        console.log("프로필 저장 응답:", res);
+        console.log(
+          `프로필 ${hasExistingProfile ? "수정" : "생성"} 응답:`,
+          res
+        );
         if (res.data.isSuccess) {
           navigate("/influencer-account"); // 성공시 다음 페이지로 이동
         }
       })
       .catch((error) => {
-        console.error("프로필 설정 오류:", error);
+        console.error(
+          `프로필 ${hasExistingProfile ? "수정" : "생성"} 오류:`,
+          error
+        );
         if (error.response) {
           // 서버 응답이 있는 경우
           console.log(
@@ -166,7 +253,8 @@ const InfluencerProfilePage = () => {
   };
 
   const isFormValid =
-    formData.nickname.trim() !== "" && formData.description.trim() !== "";
+    (formData.nickname || "").trim() !== "" &&
+    (formData.description || "").trim() !== "";
 
   const clearNickname = () => {
     setFormData((prevData) => ({
@@ -220,7 +308,7 @@ const InfluencerProfilePage = () => {
                   id="nickname"
                   name="nickname"
                   type="text"
-                  value={formData.nickname}
+                  value={formData.nickname || ""}
                   onChange={handleInputChange}
                   placeholder="닉네임을 입력하세요"
                   showClearButton={true}
@@ -290,7 +378,7 @@ const InfluencerProfilePage = () => {
               handleNext(formData, profileImage);
             }}
           >
-            다음으로
+            {hasExistingProfile ? "수정하기" : "다음으로"}
           </button>
         </div>
       </form>
