@@ -18,7 +18,7 @@ export default function Profile({ isMainPage = false, businessInfo }) {
           <img src={profileImage} className={styles.profileImage} />
         )}
         {!isMainPage && (
-          <label htmlFor="fileUpload" className={styles.cameraButton}>
+          <div className={styles.cameraButton}>
             <span role="img" aria-label="camera">
               <img
                 src={pencil_icon}
@@ -27,18 +27,18 @@ export default function Profile({ isMainPage = false, businessInfo }) {
                 onClick={() => navigate("/business-profile")}
               />
             </span>
-          </label>
+          </div>
         )}
         <input
           id="fileUpload"
           type="file"
           accept="image/*"
-          style={{ display: isMainPage ? "none" : "none" }}
+          style={{ display: "none" }}
           onClick={() => navigate("/business-profile")}
         />
       </div>
       <div className={styles.profileInfo}>
-        <div className={styles.profileName}>{businessInfo?.workPlaceName}</div>
+        <div className={styles.profileName}>{businessInfo?.nickname}</div>
         <div className={styles.profileDescription}>
           {businessInfo?.introduce}
         </div>
