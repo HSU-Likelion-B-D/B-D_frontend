@@ -16,13 +16,15 @@ const InfluencerCompletePage = () => {
       snsUrl: sessionStorage.getItem("snsUrl"),
       platformIds: JSON.parse(sessionStorage.getItem("platformIds")),
       contentTopicIds: JSON.parse(sessionStorage.getItem("contentTopicIds")),
-      minAmount: sessionStorage.getItem("minAmount"),
-      maxAmount: sessionStorage.getItem("maxAmount"),
+      minBudget: sessionStorage.getItem("minAmount"),
+      maxBudget: sessionStorage.getItem("maxAmount"),
       bankName: sessionStorage.getItem("bankName"),
       accountNumber: sessionStorage.getItem("accountNumber"),
       contentStyleIds: JSON.parse(sessionStorage.getItem("contentStyleIds")),
       preferTopicIds: JSON.parse(sessionStorage.getItem("preferTopicIds")),
     };
+
+    console.log(requestData);
 
     // 토큰 존재 여부에 따라 POST/PUT 선택
     const accessToken = localStorage.getItem("accessToken");

@@ -50,8 +50,8 @@ const InfluencerCostPage = () => {
     if (storedMinBudget || storedMaxBudget) {
       setFormData((prevData) => ({
         ...prevData,
-        minCost: storedMinBudget || "",
-        maxCost: storedMaxBudget || "",
+        minAmount: storedMinBudget || "",
+        maxAmount: storedMaxBudget || "",
       }));
     }
   }, []);
