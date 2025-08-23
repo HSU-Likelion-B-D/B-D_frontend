@@ -26,6 +26,13 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
+
+    // localStorage에서 저장된 프로필 이미지 가져오기
+    const storedImgUrl = localStorage.getItem("imgUrl");
+    if (storedImgUrl && storedImgUrl !== "null") {
+      setProfileImage(storedImgUrl);
+    }
+
     if (accessToken) {
       axiosInstance
         .get("/bd/user/profile", {
