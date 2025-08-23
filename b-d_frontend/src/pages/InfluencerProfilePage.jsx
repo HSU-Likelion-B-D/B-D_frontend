@@ -141,6 +141,10 @@ const InfluencerProfilePage = () => {
 
     const userId = sessionStorage.getItem("userId"); // 세션 스토리지에서 userId 가져오기
 
+    // 닉네임과 이미지 URL을 로컬스토리지에 저장
+    localStorage.setItem("nickName", formData.nickname);
+    localStorage.setItem("imgUrl", profileImage);
+
     // FormData 객체 생성
     const formDataToSend = new FormData();
 
