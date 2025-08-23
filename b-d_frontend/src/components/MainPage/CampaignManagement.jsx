@@ -72,7 +72,8 @@ export default function CampaignManagement() {
     }
     return campaignList.map((campaign) => (
       <CampaignItem
-        key={campaign.id}
+        key={campaign.campaignId}
+        campaignId={campaign.campaignId}
         title={campaign.title}
         money={`${campaign.offerBudget}원`}
         date={`${campaign.startDate}~${campaign.endDate}`}

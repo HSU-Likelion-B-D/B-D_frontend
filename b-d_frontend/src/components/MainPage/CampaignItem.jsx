@@ -1,6 +1,43 @@
 import styles from "@/styles/components/MainPage/CampaignItem.module.scss";
 import { profile_img } from "@/assets";
-export default function CampaignItem({ title, money, date, status }) {
+import axiosInstance from "@/apis/axiosInstance";
+export default function CampaignItem({
+  campaignId,
+  title,
+  money,
+  date,
+  status,
+}) {
+  const handleResponse = (response) => {
+    console.log("캠페인 Id", campaignId);
+    axiosInstance
+      .patch(
+        "/bd/api/campaigns",
+        {
+          campaignId: campaignId,
+          response: response, // "yes" 또는 "no"
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // 토큰을 Authorization 헤더에 추가
+          },
+        }
+      )
+      .then((result) => {
+        if (result.data.isSuccess) {
+          console.log("캠페인 상태 변경 성공:", result.data);
+          console.log(`캠페인 ${response === "yes" ? "수락" : "거절"} 완료`);
+        } else {
+          console.error("캠페인 상태 변경 실패:", result.data);
+          console.log("캠페인 상태 변경에 실패했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("API 요청 중 오류 발생:", error);
+        console.log("캠페인 상태 변경 중 오류가 발생했습니다.");
+      });
+  };
+
   return (
     <div className={styles.container}>
       <img src={profile_img} className={styles.profileImg} />
@@ -13,8 +50,31 @@ export default function CampaignItem({ title, money, date, status }) {
           </div>
         </div>
         <div className={styles.status}>
-          {status}
-          <div className={styles.circle} />
+          {status === "대기중" ? (
+            <div className={styles.buttonsWithCircle}>
+              <div className={styles.buttons}>
+                <button
+                  className={styles.acceptButton}
+                  onClick={() => handleResponse("yes")}
+                >
+                  수락
+                </button>
+                <button
+                  className={styles.rejectButton}
+                  onClick={() => handleResponse("no")}
+                >
+                  거절
+                </button>
+              </div>
+
+              <div className={styles.circle} />
+            </div>
+          ) : (
+            <>
+              {status}
+              <div className={styles.circle} />
+            </>
+          )}
         </div>
       </div>
     </div>

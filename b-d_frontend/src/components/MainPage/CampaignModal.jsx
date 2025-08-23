@@ -1,7 +1,7 @@
 import styles from "@/styles/components/MainPage/CampaignModal.module.scss";
 import { useState } from "react";
 
-export default function ProfileModal({ onStateChange }) {
+export default function CampaignModal({ onStateChange }) {
   const menuItems = [
     { label: "모두보기", value: "all" },
     { label: "대기중", value: "WAITING" },
@@ -11,7 +11,8 @@ export default function ProfileModal({ onStateChange }) {
     { label: "취소", value: "CANCELED" },
     { label: "입금 대기", value: "PAYMENT_PENDING" },
   ];
-  const [selectedItem, setSelectedItem] = useState(menuItems[0]);
+
+  const [selectedItem, setSelectedItem] = useState(menuItems[0].value);
 
   return (
     <div className={styles.container}>
