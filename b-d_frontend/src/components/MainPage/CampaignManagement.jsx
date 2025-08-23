@@ -71,9 +71,8 @@ export default function CampaignManagement() {
       );
     }
     return campaignList.map((campaign) => (
-      // campaign.id와 같이 고유한 값을 key로 사용하는 것을 권장
       <CampaignItem
-        key={campaign.id} // 혹은 campaign.id 같은 고유 ID
+        key={campaign.id}
         title={campaign.title}
         money={`${campaign.offerBudget}원`}
         date={`${campaign.startDate}~${campaign.endDate}`}
