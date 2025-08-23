@@ -9,7 +9,7 @@ export default function InfluencerMatchingPage() {
 
   //const proposalId = 3;
 
-  const proposalId = sessionStorage.getItem("proposalId");
+  const proposalId = sessionStorage.getItem("proposalId"); // createproposal 할때 저장함
   const recipientId = 1; // recommend에서 추천 리스트 받고 거기서 userId 받아야 함
 
   // 모달이 열릴 때 스크롤을 최상단으로 이동
