@@ -10,8 +10,6 @@ const CompletePage = () => {
   const handleNext = () => {
     // 세션 스토리지에서 데이터 가져오기
     const userId = parseInt(sessionStorage.getItem("userId"), 10); // 숫자로 변환
-    const nickname =
-      sessionStorage.getItem("nickname") || localStorage.getItem("nickName");
     const addressData = JSON.parse(
       sessionStorage.getItem("addressData") || "{}"
     );
@@ -27,14 +25,13 @@ const CompletePage = () => {
     const storeAtmosphereData = JSON.parse(
       sessionStorage.getItem("storeAtmosphereData") || "{}"
     );
-
     // 서버로 전송할 데이터 구성
     const accessToken = localStorage.getItem("accessToken");
 
     const requestData = accessToken
       ? {
           // PUT 요청 (수정) - userId 제외
-          name: nickname,
+          name: addressData.workPlaceName,
           address: addressData.address,
           detailAddress: addressData.detailAddress,
           openTime: storeTimeData.openTime,
@@ -53,7 +50,7 @@ const CompletePage = () => {
       : {
           // POST 요청 (등록) - userId 포함
           userId,
-          name: nickname,
+          name: addressData.workPlaceName,
           address: addressData.address,
           detailAddress: addressData.detailAddress,
           openTime: storeTimeData.openTime,

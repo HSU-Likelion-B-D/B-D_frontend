@@ -35,6 +35,7 @@ const AddressPage = () => {
               ...prevData,
               address: res.data.data.address || "",
               detailAddress: res.data.data.detailAddress || "",
+              workPlaceName: res.data.data.workPlaceName || "",
             }));
           }
         })
@@ -61,6 +62,7 @@ const AddressPage = () => {
   const [formData, setFormData] = useState({
     address: "",
     detailAddress: "",
+    workPlaceName: "",
   });
   //주소 검색 모달
   const handleComplete = (data) => {
@@ -87,13 +89,19 @@ const AddressPage = () => {
       address: "",
     }));
   };
-
+  const clearWorkPlaceName = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      workPlaceName: "",
+    }));
+  };
   const handleNext = () => {
     console.log("handleNext 실행:", formData);
     if (isFormValid) {
       const addressDataToStore = {
         address: formData.address,
         detailAddress: formData.detailAddress,
+        workPlaceName: formData.workPlaceName,
       };
 
       console.log("세션 스토리지에 저장할 데이터 : ", addressDataToStore);
@@ -106,7 +114,8 @@ const AddressPage = () => {
       navigate("/select-keyword");
     }
   };
-  const isFormValid = formData.address.trim() !== "";
+  const isFormValid =
+    formData.address.trim() !== "" && formData.workPlaceName.trim() !== "";
   return (
     <div className={styles.container}>
       <div className={styles.whiteBox}>
@@ -119,7 +128,24 @@ const AddressPage = () => {
           거의 다왔어요! 비디가 당신을 분석하고 있어요.
         </p>
         <div className={styles.addressPlaceGroup}>
-          <label htmlFor="nickname" className={styles.label}>
+          <label htmlFor="workPlaceName" className={styles.label}>
+            사업장 이름<span style={{ color: "#FF0000" }}>*</span>
+          </label>
+          <Input
+            id="workPlaceName"
+            name="workPlaceName"
+            type="text"
+            placeholder="사업장 이름을 입력하세요"
+            value={formData.workPlaceName}
+            onChange={handleInputChange}
+            showClearButton={true}
+            onClear={clearWorkPlaceName}
+          />
+          <label
+            htmlFor="nickname"
+            className={styles.label}
+            style={{ marginTop: "34px" }}
+          >
             사업장 주소<span style={{ color: "#FF0000" }}>*</span>
           </label>
           <div className={styles.addressInputGroup}>

@@ -15,9 +15,10 @@
 
       .profileImg {
         width: vw(96px);
-        height: vw(96px);
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         object-fit: cover;
+        object-position: center;
         background: #ffeaea;
       }
 

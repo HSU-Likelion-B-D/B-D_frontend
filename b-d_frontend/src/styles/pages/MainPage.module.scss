@@ -21,15 +21,16 @@
       width: 100%;
       .profileContainer {
         @include flex(column, center, center);
+        width: 100%;
         .buttonContainer {
           margin-top: vh(33px);
           @include flex(column, center, center, 19px);
           .Button {
             @include flex(column, start, center);
             cursor: pointer;
-            min-width: vw(452px);
-            width: max-content;
-            padding: vh(13px) vw(36px) vh(8px) vw(36px);
+            width: vw(452px);
+            min-width: max-content;
+            padding: vh(13px) vw(154px) vh(8px) vw(36px);
             border: none;
             border-radius: 44px;
             background-color: #fff;
@@ -58,6 +59,7 @@
       object-fit: cover;
     }
     .bottomContainer {
+      width: 100%;
       margin-top: vh(59px);
     }
   }

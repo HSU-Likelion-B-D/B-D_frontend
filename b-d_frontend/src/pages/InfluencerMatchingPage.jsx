@@ -33,12 +33,7 @@ export default function InfluencerMatchingPage() {
       <div className={styles.content}>
         <Header />
         <div className={styles.topContainer}>
-          <button
-            className={styles.myProposalButton}
-            onClick={() => navigate("/create-proposal")}
-          >
-            내 제안서 확인하기
-          </button>
+          <button className={styles.myProposalButton}>제안서 확인</button>
           <div className={styles.titleContainer}>
             <div className={styles.title}>
               <span>인플루언서 </span>매칭하기
@@ -52,8 +47,6 @@ export default function InfluencerMatchingPage() {
         <div className={styles.description}>
           *블로그는 투데이 수치로 기록됩니다.
         </div>
-
-        {/* ✅ 각 아이템에 recipientId와 proposalId 전달 */}
         <div className={styles.influencerList}>
           {recommendations.map((recommendation, index) => (
             <InfluencerItem

@@ -12,7 +12,7 @@ import { banner } from "@/assets";
 
 export default function InfluencerMainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
-  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(true);
+  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
   const navigate = useNavigate();
   const [influencerInfo, setInfluencerInfo] = useState(null);
   const [businessList, setBusinessList] = useState([]);
@@ -21,6 +21,7 @@ export default function InfluencerMainPage() {
       .get("/bd/api/influencer/mypage")
       .then((res) => {
         if (res.data.isSuccess) {
+          console.log(res.data.data);
           setInfluencerInfo(res.data.data);
         }
       })

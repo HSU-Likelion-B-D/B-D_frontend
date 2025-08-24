@@ -1,5 +1,6 @@
 @use "../../variables" as *;
 .container {
+  width: 100%;
   @include flex(column, start, center);
   background-color: #fff;
   z-index: 10;
@@ -44,14 +45,14 @@
     }
   }
   .buttonContainer {
+    width: 100%;
     position: relative;
     .busyLeft {
       position: absolute;
       z-index: 10;
-      top: vh(-143px);
+      bottom: vh(40px);
       right: vw(-2px);
       width: vw(159px);
-      height: vh(168px);
     }
     .seemoreButton {
       width: 100%;

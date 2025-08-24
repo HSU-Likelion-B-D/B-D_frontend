@@ -70,7 +70,7 @@ const InfluencerPaymentManagePage = () => {
         });
     } else {
       axiosInstance
-        .get(`/bd/api/payments?state=${filter}`)
+        .get(`/bd/api/payments?status=${filter}`)
         .then((res) => {
           console.log(res.data);
           setPaymentList(res.data.data.content);
@@ -85,7 +85,6 @@ const InfluencerPaymentManagePage = () => {
 
   useEffect(() => {
     axiosInstance.get("/bd/api/influencer/bank").then((res) => {
-      console.log(res.data);
       setBankInfo(res.data.data);
     });
   }, []);
@@ -152,6 +151,7 @@ const InfluencerPaymentManagePage = () => {
         <div className={styles.paymentCompleteModal}>
           <InfluencerPaymentStarModal
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+            selectedItem={selectedItem}
           />
         </div>
       )}

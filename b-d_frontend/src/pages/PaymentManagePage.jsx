@@ -54,7 +54,7 @@ const PaymentManagePage = () => {
         });
     } else {
       axiosInstance
-        .get(`/bd/api/payments?state=${filter}`)
+        .get(`/bd/api/payments?status=${filter}`)
         .then((res) => {
           console.log(res.data);
           setPaymentList(res.data.data.content);
@@ -69,53 +69,52 @@ const PaymentManagePage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.headerContainer}>
+      <div className={styles.contentContainer}>
         <Header />
-      </div>
-      <div className={styles.titleContainer}>
-        <div className={styles.subhamContainer}>
+        <div className={styles.titleContainer}>
           <h1 className={styles.subtitle}>
             <span className={styles.highlight}>결제 및 정산</span> 관리하기
           </h1>
+          <div className={styles.hamburgerContainer}>
+            <img
+              className={styles.hamburgerIcon}
+              src={hamburger_icon}
+              alt="hamburger"
+              onClick={() => setIsPaymentModalOpen(!isPaymentModalOpen)}
+            />
+            {isPaymentModalOpen && (
+              <div className={styles.paymentModal}>
+                <PaymentModal
+                  filter={filter}
+                  setFilter={(value) => {
+                    setFilter(value);
+                    setIsPaymentModalOpen(false); // 모달 닫기
+                  }}
+                />
+              </div>
+            )}
+          </div>
+          <div className={styles.description}>비디가 기다리고 있어요!</div>
         </div>
-        <div className={styles.hamburgerContainer}>
-          <img
-            className={styles.hamburgerIcon}
-            src={hamburger_icon}
-            alt="hamburger"
-            onClick={() => setIsPaymentModalOpen(!isPaymentModalOpen)}
+        <div className={styles.listWrap}>
+          {paymentList.map((item) => (
+            <PaymentListItem
+              key={item.paymentId}
+              item={item}
+              setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
+              setSelectedItem={setSelectedItem}
+            />
+          ))}
+        </div>
+        <div className={styles.paginationContainer}>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
           />
-          {isPaymentModalOpen && (
-            <div className={styles.paymentModal}>
-              <PaymentModal
-                filter={filter}
-                setFilter={(value) => {
-                  setFilter(value);
-                  setIsPaymentModalOpen(false); // 모달 닫기
-                }}
-              />
-            </div>
-          )}
         </div>
       </div>
-      <div className={styles.description}>사장님을 기다리고 있어요!</div>
-      <div className={styles.listWrap}>
-        {paymentList.map((item) => (
-          <PaymentListItem
-            key={item.paymentId}
-            item={item}
-            setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
-            setSelectedItem={setSelectedItem}
-          />
-        ))}
-      </div>
-      <div className={styles.paginationContainer}>
-        <Pagination
-          redCurrentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
-      </div>
+
       {isPaymentProgressModalOpen && (
         <div className={styles.paymentProgressModal}>
           <PaymentProgressModal
@@ -130,6 +129,7 @@ const PaymentManagePage = () => {
         <div className={styles.paymentCompleteModal}>
           <PaymentCompleteModal
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+            selectedItem={selectedItem}
           />
         </div>
       )}
