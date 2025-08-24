@@ -15,19 +15,19 @@ const PaymentModal = ({ filter, setFilter }) => {
         </div>
         <div
           className={`${styles.menuItem} ${
-            filter === "PAYMENT_PENDING" ? styles.active : ""
+            filter === "WAITING" ? styles.active : ""
           }`}
-          onClick={() => setFilter("PAYMENT_PENDING")}
+          onClick={() => setFilter("WAITING")}
         >
-          결제하기
+          대기중
         </div>
         <div
           className={`${styles.menuItem} ${
-            filter === "PAYMENT_COMPLETED" ? styles.active : ""
+            filter === "PAYMENT_DUE" ? styles.active : ""
           }`}
-          onClick={() => setFilter("PAYMENT_COMPLETED")}
+          onClick={() => setFilter("PAYMENT_DUE")}
         >
-          결제 완료
+          결제 받기
         </div>
         <div
           className={`${styles.lastItem} ${
@@ -35,7 +35,7 @@ const PaymentModal = ({ filter, setFilter }) => {
           }`}
           onClick={() => setFilter("COMPLETED")}
         >
-          정산 완료
+          결제 완료
         </div>
       </div>
     </div>

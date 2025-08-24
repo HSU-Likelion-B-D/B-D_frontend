@@ -6,10 +6,10 @@ import { useState } from "react";
 export default function BusinessItem({
   setIsProposalModalOpen,
   proposalId, // BusinessMatchingPage에서 전달
-  recipientId, // BusinessMatchingPage에서 전달
   recommendation, // BusinessMatchingPage에서 전달
 }) {
   const [loading, setLoading] = useState(false);
+  const recipientId = recommendation.userId;
   const handleSendProposal = () => {
     if (loading) return;
 

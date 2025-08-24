@@ -31,8 +31,14 @@ export default function InfluencerCreateProposalPage() {
       contentTopic: data.contentField || "",
       title: data.proposalTitle,
       offerBudget: parseInt(data.minAmount) || 0,
-      startDate: `${data.startYear}-${data.startMonth}-${data.startDay}`,
-      endDate: `${data.endYear}-${data.endMonth}-${data.endDay}`,
+      startDate: `${data.startYear}-${String(data.startMonth).padStart(
+        2,
+        "0"
+      )}-${String(data.startDay).padStart(2, "0")}`,
+      endDate: `${data.endYear}-${String(data.endMonth).padStart(
+        2,
+        "0"
+      )}-${String(data.endDay).padStart(2, "0")}`,
       overView: data.proposalContent || "",
       request: data.proposalRequest || "",
     };

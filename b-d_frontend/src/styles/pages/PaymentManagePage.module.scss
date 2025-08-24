@@ -16,6 +16,7 @@
     width: 100%;
     padding: 0 vw(76px);
   }
+
   .titleContainer {
     display: flex;
     align-items: flex-start;
@@ -23,22 +24,26 @@
     position: relative;
     width: 100%;
     margin-top: vh(94px);
+
     .subhamContainer {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
     }
+
     .subtitle {
       font-size: rem(36px);
       font-weight: $font_weight_semibold;
       color: $color-sub-03;
       margin: 0 auto;
       text-align: center;
+
       .highlight {
         color: $color-main;
       }
     }
+
     .hamburgerContainer {
       position: absolute;
       top: 0;
@@ -51,6 +56,7 @@
         cursor: pointer;
         margin-top: 10px;
       }
+
       .paymentModal {
         z-index: 1000;
         position: absolute;
@@ -60,6 +66,7 @@
         z-index: 10;
       }
     }
+
     .description {
       font-size: rem(20px);
       color: $color-sub-01 !important;
@@ -73,20 +80,34 @@
       top: 100%;
     }
   }
+
+  .listWrap {
+    width: 100%;
+    @include flex(column, start, center, vh(20px));
+    margin-top: vh(40px);
+    margin-bottom: vh(40px);
+  }
+
+  .paginationContainer {
+    width: 100%;
+    @include flex(row, center, center);
+    margin-top: vh(20px);
+    margin-bottom: vh(40px);
+  }
+
   .paymentProgressModal {
     position: fixed;
     top: 0;
-
     @include flex(column, center, center);
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.24);
     z-index: 1000;
   }
+
   .paymentCompleteModal {
     position: fixed;
     top: 0;
-
     @include flex(column, center, center);
     width: 100vw;
     height: 100dvh;

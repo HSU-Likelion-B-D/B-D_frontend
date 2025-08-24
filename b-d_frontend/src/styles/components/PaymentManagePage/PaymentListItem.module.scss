@@ -1,85 +1,70 @@
 @use "../../variables" as *;
 
 .listItem {
-  width: vw(1000px);
-  height: vh(96px);
-  display: flex;
-  align-items: center;
+  width: 100%;
+  @include flex(row, center, space-between, vw(30px));
   background: none;
-  border-radius: 18px;
-  padding: 18px 24px;
-  transition: background 0.15s;
   cursor: pointer;
-  margin-top: 39px;
-  margin-bottom: vh(50px);
-  &:hover {
-    background: rgba(33, 150, 243, 0.07);
-  }
-
-  .profileImg {
-    width: vw(96px);
-    height: vw(96px);
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 18px;
-    background: #f3f3f3;
-  }
 
   .itemContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    @include flex(row, start, space-between, vw(12px));
+    width: 100%;
 
-    .itemTitle {
-      font-size: rem(18px);
-      font-weight: 600;
-      color: $color-sub-03;
-      margin-bottom: 2px;
-      text-align: left;
-    }
-    .itemDesc {
-      font-size: rem(15px);
-      color: #888;
-      text-align: left;
-      .itemPrice {
-        color: #2196f3;
-        font-weight: 700;
+    .itemInfo {
+      @include flex(row, start, center, vw(30px));
+
+      .profileImg {
+        width: vw(96px);
+        height: vw(96px);
+        border-radius: 50%;
+        object-fit: cover;
+        background: #ffeaea;
+      }
+
+      .itemTitleContainer {
+        width: 100%;
+        @include flex(column, start, space-between, vw(8px));
+
+        .itemTitle {
+          font-size: rem(20px);
+          font-weight: $font-weight-bold;
+          color: $color-sub-03;
+          word-wrap: break-word;
+          word-break: break-all;
+          white-space: normal;
+          overflow-wrap: break-word;
+        }
+
+        .itemDesc {
+          font-size: rem(16px);
+          color: #929292;
+          text-align: left;
+          line-height: 1.4;
+          word-wrap: break-word;
+          word-break: break-all;
+          white-space: normal;
+          overflow-wrap: break-word;
+
+          .itemPrice {
+            color: $color-red-01;
+            font-weight: $font-weight-bold;
+          }
+        }
       }
     }
-  }
 
-  .itemStatusWrap {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    min-width: vw(90px);
-    gap: 4px;
-    align-self: flex-start; // status wrap flex container의 탑으로
-    margin-top: -10px;
     .itemStatus {
-      min-width: vw(80px);
-      text-align: right;
-      font-size: rem(15px);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      font-size: rem(20px);
+      font-weight: $font-weight-bold;
+      @include flex(row, center, center, vw(14px));
+      min-width: vw(120px);
+
       .statusDot {
-        display: inline-block;
-        width: 13px;
-        height: 13px;
+        width: vw(13px);
+        height: vw(13px);
         border-radius: 50%;
         background: #bdbdbd;
-        margin-left: 4px;
       }
-    }
-    .dDay {
-      font-size: 15px;
-      font-weight: 600;
-      margin-top: 2px;
-      text-align: right;
-      margin-right: vw(8px); // 오른쪽 정렬을 위해 추가
     }
   }
 }

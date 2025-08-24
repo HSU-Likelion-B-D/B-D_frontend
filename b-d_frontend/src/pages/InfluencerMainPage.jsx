@@ -66,7 +66,10 @@ export default function InfluencerMainPage() {
                   이러한 부분은 맞춰주면 좋겠어요.
                 </div>
               </button>
-              <button className={styles.Button}>
+              <button
+                className={styles.Button}
+                onClick={() => navigate("/influencer-payment-manage")}
+              >
                 <div className={styles.ButtonTitle}>결제 및 정산 관리</div>
                 <div className={styles.ButtonSubtitle}>
                   비디가 안전한 거래를 도와줄게요!
