@@ -23,32 +23,30 @@ export default function CampaignManagement() {
       selectedState === "all"
         ? "/bd/api/campaigns?all=true"
         : `/bd/api/campaigns?status=${selectedState}`;
-    console.log("API 요청 시작, endpoint:", endpoint);
 
     axiosInstance
       .get(endpoint)
       .then((response) => {
         if (response.data.isSuccess && response.data.data) {
           setCampaignList(response.data.data.content);
-          console.log("캠페인 데이터:", response.data.data.content);
         } else {
           // isSuccess가 false이거나 data가 없는 경우 에러 처리
           setError(
             response.data.message || "캠페인 데이터를 가져오지 못했습니다."
           );
-          setCampaignList([]); // 데이터를 비워줌
+          setCampaignList([]);
         }
       })
       .catch((err) => {
         // 네트워크 에러 등 axios 요청 자체가 실패한 경우
         console.error("API 요청 중 오류 발생:", err);
         setError("데이터를 불러오는 중 오류가 발생했습니다.");
-        setCampaignList([]); // 데이터를 비워줌
+        setCampaignList([]);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [selectedState]); // selectedState가 변경될 때마다 재호출
+  }, [selectedState]);
 
   const handleStateChange = (state) => {
     setSelectedState(state);
@@ -117,7 +115,10 @@ export default function CampaignManagement() {
           />
           {isCampaignModalOpen && (
             <div className={styles.campaignModal}>
-              <CampaignModal onStateChange={handleStateChange} />
+              <CampaignModal
+                onStateChange={handleStateChange}
+                selectedState={selectedState}
+              />
             </div>
           )}
         </div>

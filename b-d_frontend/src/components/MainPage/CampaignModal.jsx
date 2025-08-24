@@ -1,7 +1,7 @@
 import styles from "@/styles/components/MainPage/CampaignModal.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function CampaignModal({ onStateChange }) {
+export default function CampaignModal({ onStateChange, selectedState }) {
   const menuItems = [
     { label: "모두보기", value: "all" },
     { label: "대기중", value: "WAITING" },
@@ -11,7 +11,15 @@ export default function CampaignModal({ onStateChange }) {
     { label: "취소", value: "CANCELED" },
   ];
 
-  const [selectedItem, setSelectedItem] = useState(menuItems[0].value);
+  const [selectedItem, setSelectedItem] = useState(
+    selectedState || menuItems[0].value
+  );
+
+  useEffect(() => {
+    if (selectedState && selectedState !== selectedItem) {
+      setSelectedItem(selectedState);
+    }
+  }, [selectedState, selectedItem]);
 
   return (
     <div className={styles.container}>
@@ -22,9 +30,11 @@ export default function CampaignModal({ onStateChange }) {
             className={`${styles.item} ${
               selectedItem === item.value ? styles.active : ""
             }`}
+            data-selected={selectedItem === item.value}
+            data-value={item.value}
             onClick={() => {
               setSelectedItem(item.value);
-              onStateChange(item.value); // 상태 변경 트리거
+              onStateChange(item.value);
             }}
           >
             {item.label}

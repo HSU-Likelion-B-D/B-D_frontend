@@ -116,7 +116,10 @@ export default function CampaignManagement() {
           />
           {isCampaignModalOpen && (
             <div className={styles.campaignModal}>
-              <CampaignModal onStateChange={handleStateChange} />
+              <CampaignModal
+                onStateChange={handleStateChange}
+                selectedState={selectedState}
+              />
             </div>
           )}
         </div>
