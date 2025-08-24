@@ -67,7 +67,7 @@ export default function CampaignItem({
                 </button>
               </div>
 
-              <div className={styles.circle} />
+              <div className={styles.yellowCircle} />
             </div>
           ) : (
             <>

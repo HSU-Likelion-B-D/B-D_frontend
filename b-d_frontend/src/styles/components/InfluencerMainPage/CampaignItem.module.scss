@@ -60,15 +60,19 @@
           cursor: pointer;
         }
 
+        .yellowCircle {
+          margin-left: vw(14px);
+          width: vw(13px);
+          height: vw(13px);
+          border-radius: 50%;
+          background-color: #ffcc00; /* 노란색 동그라미 */
+        }
         .circle {
           margin-left: vw(14px);
           width: vw(13px);
           height: vw(13px);
           border-radius: 50%;
           background-color: $color-main;
-          .yellowCircle {
-            background-color: #ffcc00; /* 노란색 동그라미 */
-          }
         }
       }
     }

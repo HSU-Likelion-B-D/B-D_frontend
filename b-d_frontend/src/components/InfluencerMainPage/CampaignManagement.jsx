@@ -20,7 +20,7 @@ export default function CampaignManagement() {
     const endpoint =
       selectedState === "all"
         ? "/bd/api/campaigns?all=true"
-        : `/bd/api/campaigns?state=${selectedState}`;
+        : `/bd/api/campaigns?status=${selectedState}`;
 
     axiosInstance
       .get(endpoint)
