@@ -1,6 +1,7 @@
 import styles from "@/styles/components/MainPage/CampaignItem.module.scss";
 import { profile_img } from "@/assets";
 import axiosInstance from "@/apis/axiosInstance";
+import { formatNumber } from "@/hooks/formatNumber";
 
 export default function CampaignItem({
   campaignId,
@@ -47,7 +48,7 @@ export default function CampaignItem({
         <div className={styles.content}>
           <div className={styles.title}>{title}</div>
           <div className={styles.subTitle}>
-            <span className={styles.money}>{money}</span> /{" "}
+            <span className={styles.money}>{formatNumber(money)}</span> /{" "}
             <span className={styles.date}>{date}</span>
           </div>
         </div>
