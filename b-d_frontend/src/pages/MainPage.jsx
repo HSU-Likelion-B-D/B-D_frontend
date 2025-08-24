@@ -12,11 +12,12 @@ import { banner } from "@/assets";
 
 export default function MainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
-  const [isRateModalOpen, setIsRateModalOpen] = useState(true);
+  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
   const navigate = useNavigate();
   const [businessInfo, setBusinessInfo] = useState(null);
   const [influencerList, setInfluencerList] = useState([]);
-
+  const [paymentList, setPaymentList] = useState([]);
+  const [review, setReview] = useState(null);
   useEffect(() => {
     axiosInstance
       .get("/bd/api/businessman/mypage")
@@ -47,6 +48,28 @@ export default function MainPage() {
       .then((res) => {
         if (res.data.isSuccess) {
           setInfluencerList(res.data.data.Influencers);
+        }
+      })
+      .catch((err) => {
+        console.error("API 에러:", err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/payments?status=COMPLETED")
+      .then((res) => {
+        if (res.data.isSuccess) {
+          console.log(res.data.data.content);
+          if (res.data.data.content.length > 0) {
+            const foundReview = res.data.data.content.find(
+              (item) => item.tf === false
+            );
+            if (foundReview) {
+              setReview(foundReview);
+              setIsRateModalOpen(true); // 여기 수정
+            }
+          }
         }
       })
       .catch((err) => {
@@ -100,7 +123,7 @@ export default function MainPage() {
       )}
       {isRateModalOpen && (
         <div className={styles.modalContainer}>
-          <RateModal setIsRateModalOpen={setIsRateModalOpen} />
+          <RateModal setIsRateModalOpen={setIsRateModalOpen} review={review} />
         </div>
       )}
     </div>

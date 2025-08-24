@@ -1,7 +1,7 @@
 @use "../variables" as *;
 
 .container {
-  min-height: 100vh;
+  height: 100vh;
   @include flex(column, center, start);
   margin: vh(40px) 0;
   z-index: 1;
