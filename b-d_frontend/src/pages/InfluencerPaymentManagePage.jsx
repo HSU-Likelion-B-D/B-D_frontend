@@ -18,7 +18,7 @@ const InfluencerPaymentManagePage = () => {
   const [isPaymentProgressModalOpen, setIsPaymentProgressModalOpen] =
     useState(false);
   const [isPaymentCompleteModalOpen, setIsPaymentCompleteModalOpen] =
-    useState(true);
+    useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [paymentList, setPaymentList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템 상태 추가
