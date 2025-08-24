@@ -42,6 +42,7 @@ export default function InfluencerItem({
 
         if (isSuccess) {
           console.log(message || "제안서 전송에 성공했습니다.");
+
           // 필요 시 모달 닫기
           if (setIsProposalModalOpen) setIsProposalModalOpen(true);
         } else {

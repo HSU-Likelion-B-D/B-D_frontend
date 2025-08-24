@@ -4,10 +4,12 @@ import InfluencerItem from "@/components/InfluencerMatchingPage/InfluencerItem";
 import ProposalModal from "@/components/InfluencerMatchingPage/ProposalModal";
 import { useState, useEffect } from "react";
 import axiosInstance from "@/apis/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 export default function InfluencerMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
+  const navigate = useNavigate();
   //const proposalId = 3;
 
   const proposalId = sessionStorage.getItem("proposalId"); // createproposal 할때 저장함
@@ -31,7 +33,10 @@ export default function InfluencerMatchingPage() {
       <div className={styles.content}>
         <Header />
         <div className={styles.topContainer}>
-          <button className={styles.myProposalButton}>
+          <button
+            className={styles.myProposalButton}
+            onClick={() => navigate("/create-proposal")}
+          >
             내 제안서 확인하기
           </button>
           <div className={styles.titleContainer}>
