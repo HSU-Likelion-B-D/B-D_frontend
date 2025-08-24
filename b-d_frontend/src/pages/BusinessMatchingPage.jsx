@@ -32,7 +32,7 @@ export default function BusinessMatchingPage() {
             className={styles.myProposalButton}
             onClick={() => navigate("/influencer-create-proposal")}
           >
-            내 제안서 확인하기
+            제안서 확인
           </button>
           <div className={styles.titleContainer}>
             <div className={styles.title}>

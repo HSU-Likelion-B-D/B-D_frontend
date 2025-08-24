@@ -31,9 +31,7 @@ export default function InfluencerMatchingPage() {
       <div className={styles.content}>
         <Header />
         <div className={styles.topContainer}>
-          <button className={styles.myProposalButton}>
-            내 제안서 확인하기
-          </button>
+          <button className={styles.myProposalButton}>제안서 확인</button>
           <div className={styles.titleContainer}>
             <div className={styles.title}>
               <span>인플루언서 </span>매칭하기

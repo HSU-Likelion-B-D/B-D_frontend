@@ -45,7 +45,7 @@ export default function BusinessMyPage() {
             <Profile isMainPage={false} businessInfo={businessInfo} />
           </div>
           <div className={styles.infoContainer}>
-            매주 월요일 휴무
+            휴무일 없음
             <br />
             {businessInfo?.openTime} ~ {businessInfo?.closeTime} / 브레이크타임{" "}
             {businessInfo?.breakTime || "없음"} / 라스트오더{" "}
