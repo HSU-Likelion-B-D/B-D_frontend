@@ -62,6 +62,10 @@ export default function RateModal({ setIsRateModalOpen }) {
             />
           ))}
         </div>
+        <textarea
+          className={styles.reviewTextarea}
+          placeholder="평가를 남겨주세요."
+        />
         <div className={styles.buttonContainer}>
           <button
             className={styles.sendButton}
