@@ -12,7 +12,7 @@ import { banner } from "@/assets";
 
 export default function InfluencerMainPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
-  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(true);
+  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
   const navigate = useNavigate();
   const [influencerInfo, setInfluencerInfo] = useState(null);
   const [businessList, setBusinessList] = useState([]);

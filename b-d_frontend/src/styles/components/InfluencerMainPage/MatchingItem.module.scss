@@ -5,11 +5,14 @@
   width: 100%;
   .leftContainer {
     @include flex(row, center, center);
-    width: 100%;
     .profileImg {
       width: vw(49px);
       height: vw(49px);
       margin-right: vw(22px);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background-color: #80e6ff;
     }
     .name {
       font-size: rem(14px);
@@ -19,6 +22,7 @@
       margin-right: vw(147px);
     }
   }
+
   .followCount {
     font-size: rem(14px);
     font-weight: $font_weight_bold;

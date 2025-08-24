@@ -10,6 +10,9 @@
       height: vw(49px);
       margin-right: vw(22px);
       border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background-color: #ffeaea;
     }
     .name {
       font-size: rem(14px);
