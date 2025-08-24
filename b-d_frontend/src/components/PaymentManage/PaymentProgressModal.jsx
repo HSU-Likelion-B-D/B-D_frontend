@@ -47,7 +47,7 @@ export default function PaymentProgressModal({
               onChange={(e) => setAgree1(e.target.checked)}
               className={styles.checkboxInput}
             />
-            수수료 정책 및 제안서 약관에 동의합니다
+            수수료 정책 및 제안서 약관에 동의합니다.
           </label>
           <label htmlFor="agree2" className={styles.agreeItem}>
             <input
@@ -57,7 +57,7 @@ export default function PaymentProgressModal({
               onChange={(e) => setAgree2(e.target.checked)}
               className={styles.checkboxInput}
             />
-            결제 후에는 캠페인 취소 시 위약금이 발생할 수 있음에 동의합니다
+            결제 후에는 캠페인 취소 시 위약금이 발생할 수 있음에 동의합니다.
           </label>
         </div>
 

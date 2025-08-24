@@ -15,7 +15,7 @@ const PaymentManagePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState("all");
   const [isPaymentProgressModalOpen, setIsPaymentProgressModalOpen] =
-    useState(true);
+    useState(false);
   const [isPaymentCompleteModalOpen, setIsPaymentCompleteModalOpen] =
     useState(false);
   const [totalPages, setTotalPages] = useState(0);
@@ -129,6 +129,7 @@ const PaymentManagePage = () => {
         <div className={styles.paymentCompleteModal}>
           <PaymentCompleteModal
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
+            selectedItem={selectedItem}
           />
         </div>
       )}
