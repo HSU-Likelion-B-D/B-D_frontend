@@ -1,44 +1,54 @@
 import styles from "@/styles/components/InfluencerMainPage/Profile.module.scss";
-import { profile, star_icon_red, pencil_icon } from "@/assets";
+import { influencer_profile, star_icon_red, pencil_icon } from "@/assets";
 import { useState } from "react";
-export default function Profile() {
-  const [profileImage, setProfileImage] = useState(profile);
+import { useNavigate } from "react-router-dom";
+export default function Profile({ isMainPage = false, influencerInfo }) {
+  const [profileImage] = useState(influencer_profile);
+  const navigate = useNavigate();
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfileImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
   return (
     <div className={styles.container}>
       <div className={styles.profileSection}>
-        <img src={profileImage} alt="Profile" className={styles.profileImage} />
-        <label htmlFor="fileUpload" className={styles.cameraButton}>
-          <span role="img" aria-label="camera">
-            <img src={pencil_icon} className={styles.cameraIcon} alt="camera" />
-          </span>
-        </label>
+        {localStorage.getItem("imgUrl") !== "null" ? (
+          <img
+            src={localStorage.getItem("imgUrl")}
+            className={styles.profileImage}
+          />
+        ) : (
+          <img src={profileImage} className={styles.profileImage} />
+        )}
+        {!isMainPage && (
+          <div className={styles.cameraButton}>
+            <span role="img" aria-label="camera">
+              <img
+                src={pencil_icon}
+                className={styles.cameraIcon}
+                alt="camera"
+                onClick={() => navigate("/influencer-profile")}
+              />
+            </span>
+          </div>
+        )}
         <input
           id="fileUpload"
           type="file"
           accept="image/*"
-          style={{ display: "none" }}
-          onChange={handleFileUpload}
+          style={{ display: isMainPage ? "none" : "none" }}
+          onClick={() => navigate("/influencer-introduce")}
         />
       </div>
       <div className={styles.profileInfo}>
-        <div className={styles.profileName}>멋사 TV</div>
-        <div className={styles.profileDescription}>POSSIBILITY TO REALITY</div>
+        <div className={styles.profileName}>{influencerInfo?.activityName}</div>
+        <div className={styles.profileDescription}>
+          {influencerInfo?.introduction}
+        </div>
         <div className={styles.rating}>
           <img className={styles.starIcon} src={star_icon_red} alt="star" />
-          <div className={styles.ratingValue}>4.5</div>
+          <div className={styles.ratingValue}>
+            {influencerInfo?.avgScore || "0.0"}
+          </div>
           <div className={styles.ratingCount}>
-            (<span>1793</span>)
+            (<span>{influencerInfo?.reviewCount || "0"}</span>)
           </div>
         </div>
       </div>

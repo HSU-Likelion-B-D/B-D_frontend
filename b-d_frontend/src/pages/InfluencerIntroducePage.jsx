@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/InfluencerIntroducePage.module.scss";
-import ProgressBar from "../components/ProfilePage/ProgressBar";
+import ProgressBar from "../components/InfluencerProfilePage/ProgressBar";
 import Input from "../components/SingupPage/Input";
-import logo from "../assets/logo.svg";
+import { logo_red } from "../assets";
 import SelectButton from "../components/SelectKWPage/SelectButton";
 import { useNavigate } from "react-router-dom";
 const species = [
-  "인스타그램",
-  "유튜브",
-  "블로그",
-  "틱톡",
-  "릴스",
-  "쇼츠",
-  "페이스북",
-  "기타",
+  { id: 1, name: "인스타그램" },
+  { id: 2, name: "유튜브" },
+  { id: 3, name: "블로그" },
+  { id: 4, name: "틱톡" },
+  { id: 5, name: "릴스" },
+  { id: 6, name: "쇼츠" },
+  { id: 7, name: "페이스북" },
+  { id: 8, name: "기타" },
 ];
 
 const InfluencerIntroducePage = () => {
@@ -27,6 +27,45 @@ const InfluencerIntroducePage = () => {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // 세션스토리지에서 저장된 활동 정보 가져오기
+    const storedActivityName = sessionStorage.getItem("activityName");
+    const storedSnsUrl = sessionStorage.getItem("snsUrl");
+    const storedFollowerCount = sessionStorage.getItem("followerCount");
+    const storedUploadFrequency = sessionStorage.getItem("uploadFrequency");
+    const storedPlatformIds = sessionStorage.getItem("platformIds");
+
+    if (
+      storedActivityName ||
+      storedSnsUrl ||
+      storedFollowerCount ||
+      storedUploadFrequency ||
+      storedPlatformIds
+    ) {
+      setFormData((prevData) => ({
+        ...prevData,
+        infname: storedActivityName !== undefined ? storedActivityName : "",
+        platformUrl: storedSnsUrl !== "undefined" ? storedSnsUrl : "",
+        followers: storedFollowerCount !== undefined ? storedFollowerCount : "",
+        uploadFrequency:
+          storedUploadFrequency !== undefined ? storedUploadFrequency : "",
+      }));
+
+      // 플랫폼 ID가 있으면 selected 상태에 설정
+      if (storedPlatformIds) {
+        try {
+          const platformIds = JSON.parse(storedPlatformIds);
+          const selectedPlatforms = species.filter((sp) =>
+            platformIds.includes(sp.id)
+          );
+          setSelected(selectedPlatforms);
+        } catch (error) {
+          console.error("플랫폼 ID 파싱 오류:", error);
+        }
+      }
+    }
+  }, []);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -38,17 +77,17 @@ const InfluencerIntroducePage = () => {
   const handleClick = (sp) => {
     // 버튼 중복 선택 로직
     setSelected((prev) =>
-      prev.includes(sp) ? prev.filter((item) => item !== sp) : [...prev, sp]
+      prev.some((item) => item.id === sp.id)
+        ? prev.filter((item) => item.id !== sp.id)
+        : [...prev, sp]
     );
     setShowError(false);
-    // 다음 페이지로 이동
-    // navigate("/next-page");
   };
 
   // 모든 필드에 입력을 해야지만 다음 버튼 활성화
   const handleNext = () => {
     if (
-      !formData.ifname ||
+      !formData.infname ||
       !formData.followers ||
       !formData.uploadFrequency ||
       !formData.platformUrl ||
@@ -56,6 +95,16 @@ const InfluencerIntroducePage = () => {
     ) {
       setShowError(true);
       return;
+    } else {
+      sessionStorage.setItem("activityName", formData.infname);
+      sessionStorage.setItem("followerCount", formData.followers);
+      sessionStorage.setItem("uploadFrequency", formData.uploadFrequency);
+      sessionStorage.setItem("snsUrl", formData.platformUrl);
+      sessionStorage.setItem(
+        "platformIds",
+        JSON.stringify(selected.map((item) => item.id))
+      );
+      navigate("/influencer-select-keyword");
     }
   };
 
@@ -70,7 +119,7 @@ const InfluencerIntroducePage = () => {
     <div className={styles.container}>
       <div className={styles.whiteBox}>
         <ProgressBar progress={65} />
-        <img src={logo} className={styles.logo} alt="logo" />
+        <img src={logo_red} className={styles.logo} alt="logo" />
         <h1 className={styles.subtitle}>
           #저를 <span className={styles.highlight}>소개</span>합니다.
         </h1>
@@ -85,23 +134,23 @@ const InfluencerIntroducePage = () => {
           <Input
             className={styles.input}
             name="infname"
-            value={formData.ifname}
+            value={formData.infname}
             onChange={handleInputChange}
             placeholder="활동명을 입력해주세요"
             required
             showClearButton={true}
-            onClear={() => setFormData((prev) => ({ ...prev, ifname: "" }))}
+            onClear={() => setFormData((prev) => ({ ...prev, infname: "" }))}
           />
         </div>
         <div className={styles.buttonGroup}>
           {species.map((sp) => (
             <SelectButton
-              key={sp}
-              redSelected={selected.includes(sp)}
+              key={sp.id}
+              redSelected={selected.some((item) => item.id === sp.id)}
               onClick={() => handleClick(sp)}
               error={showError}
             >
-              #{sp}
+              #{sp.name}
             </SelectButton>
           ))}
         </div>
@@ -202,7 +251,7 @@ const InfluencerIntroducePage = () => {
               <input
                 type="radio"
                 name="uploadFrequency"
-                value="5"
+                value="4"
                 onChange={handleInputChange}
               />
               5회~6회
@@ -211,7 +260,7 @@ const InfluencerIntroducePage = () => {
               <input
                 type="radio"
                 name="uploadFrequency"
-                value="7"
+                value="5"
                 onChange={handleInputChange}
               />
               7회이상

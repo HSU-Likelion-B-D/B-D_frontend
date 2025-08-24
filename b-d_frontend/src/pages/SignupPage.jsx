@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { logo } from "@/assets";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
 import styles from "../styles/pages/SignupPage.module.scss";
 import { useNavigate } from "react-router-dom";
-
+import axiosInstance from "@/apis/axiosInstance";
 const inputFields = [
   {
     label: "이름 / 성함",
@@ -34,20 +34,29 @@ const passwordFields = [
     label: "비밀번호",
     name: "password",
     type: "password",
-    placeholder: "비밀번호를 입력해주세요.",
+    placeholder: "비밀번호를 입력해주세요. (영문, 숫자 포함 4자~12자)",
     required: true,
     validation: {
       required: "비밀번호를 입력해주세요",
       minLength: {
-        value: 6,
-        message: "비밀번호는 최소 6자 이상이어야 합니다",
+        value: 4,
+        message: "비밀번호는 최소 4자 이상이어야 합니다",
+      },
+      maxLength: {
+        value: 12,
+        message: "비밀번호는 최대 12자까지 입력 가능합니다",
+      },
+      pattern: {
+        value:
+          /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{4,12}$/,
+        message: "영문, 숫자, 특수문자 포함 4자~12자",
       },
     },
   },
   {
     name: "confirmPassword",
     type: "password",
-    placeholder: "비밀번호를 재입력해주세요.",
+    placeholder: "비밀번호를 재입력해주세요. (영문, 숫자 포함 4자~12자)",
     required: false,
     validation: {
       required: "비밀번호를 다시 입력해주세요",
@@ -61,10 +70,10 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const {
     register,
-    handleSubmit,
     formState: { errors, isSubmitting },
     watch,
     setValue,
+    setError,
   } = useForm({
     mode: "onChange",
   });
@@ -72,6 +81,7 @@ const SignupPage = () => {
   const [isVerifySent, setIsVerifySent] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isVerifySuccess, setIsVerifySuccess] = useState(false);
 
   // 이메일 유효성 검사 함수
   const validateEmail = (email) => {
@@ -83,7 +93,7 @@ const SignupPage = () => {
   const watchedEmail = watch("email");
 
   // 이메일 값이 변경될 때마다 유효성 검사
-  React.useEffect(() => {
+  useEffect(() => {
     if (watchedEmail) {
       setIsValidEmail(validateEmail(watchedEmail));
     } else {
@@ -93,15 +103,34 @@ const SignupPage = () => {
 
   // verificationCode 변경 감지
   const [isFilled, setIsFilled] = useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
     const filled = verificationCode.trim() !== "";
     setIsFilled(filled);
   }, [verificationCode]);
 
   const onSubmit = (data) => {
-    navigate("/start");
-    console.log("회원가입 데이터:", data);
+    console.log("onSubmit 실행, 데이터:", data);
+    console.log("인증 상태:", { isVerifySuccess, isFilled });
+
+    if (isVerifySuccess && isFilled) {
+      // 세션스토리지에 사용자 정보 저장
+      const signupDataToStore = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      };
+
+      console.log("세션스토리지에 저장할 데이터:", signupDataToStore);
+      sessionStorage.setItem("signupData", JSON.stringify(signupDataToStore));
+
+      // 저장 확인
+      const stored = sessionStorage.getItem("signupData");
+      console.log("세션스토리지 저장 확인:", stored);
+
+      navigate("/bd-start");
+    } else {
+      console.log("인증 조건 미충족:", { isVerifySuccess, isFilled });
+    }
   };
 
   const handleClear = (name) => {
@@ -115,15 +144,50 @@ const SignupPage = () => {
   const handleVerifySend = () => {
     if (isValidEmail) {
       setIsVerifySent(true);
-      // TODO: 실제 인증번호 전송 API 호출
-      console.log("인증번호 전송:", watchedEmail);
+      axiosInstance
+        .post("/bd/user/sendcode", {
+          email: watchedEmail,
+          purpose: "SIGNUP",
+        })
+        .then((res) => {
+          console.log(res);
+        });
     }
   };
 
   const handleVerifyConfirm = () => {
     if (isFilled) {
-      // TODO: 실제 인증번호 확인 API 호출
-      // 인증 성공 시 처리 로직
+      axiosInstance
+        .post("/bd/user/verifycode", {
+          email: watchedEmail,
+          code: verificationCode,
+        })
+        .then((res) => {
+          if (res.data.isSuccess) {
+            // 인증 성공
+            setIsVerifySuccess(true);
+            setError("verificationCode", {
+              type: "success",
+              message: "인증번호가 확인되었습니다.",
+            });
+          }
+        })
+        .catch((error) => {
+          // API 호출 실패
+          setIsVerifySuccess(false);
+          if (error.response.data.httpStatus === 400) {
+            setError("verificationCode", {
+              type: "manual",
+              message: "인증번호가 일치하지 않습니다.",
+            });
+          } else {
+            setError("verificationCode", {
+              type: "manual",
+              message: "인증번호가 존재하지 않거나 만료되었습니다.",
+            });
+          }
+          console.error("인증번호 확인 오류:", error);
+        });
     }
   };
 
@@ -136,13 +200,34 @@ const SignupPage = () => {
   const allFilled =
     Object.keys(watch()).every((key) => watch(key)?.trim() !== "") && allAgreed;
 
+  // 디버깅을 위한 콘솔 로그
+  useEffect(() => {
+    console.log("디버깅 정보:", {
+      isSubmitting,
+      allFilled,
+      isVerifySuccess,
+      allAgreed,
+      watchedValues: watch(),
+      verificationCode,
+      isFilled,
+    });
+  }, [
+    isSubmitting,
+    allFilled,
+    isVerifySuccess,
+    allAgreed,
+    watch(),
+    verificationCode,
+    isFilled,
+  ]);
+
   return (
     <div className={styles.container}>
       <img src={logo} className={styles.logo} alt="logo" />
       <p className={styles.subtitle}>
         <span className={styles.highlight}>비디</span>는 당신을 알고 싶어요.
       </p>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <form className={styles.form}>
         {inputFields.map((field) => (
           <div key={field.name} className={styles.formItem}>
             <label>
@@ -170,9 +255,11 @@ const SignupPage = () => {
           <Button
             type="button"
             onClick={handleVerifySend}
-            disabled={isVerifySent || !isValidEmail || !watchedEmail}
+            disabled={
+              isVerifySent || !isValidEmail || !watchedEmail || isVerifySuccess
+            }
             className={`${styles.verificationBtn} ${
-              isVerifySent || !isValidEmail || !watchedEmail
+              isVerifySent || !isValidEmail || !watchedEmail || isVerifySuccess
                 ? styles.disabled
                 : ""
             }`}
@@ -180,30 +267,41 @@ const SignupPage = () => {
             {isVerifySent ? "인증번호 전송 완료" : "인증번호 받기"}
           </Button>
         </div>
+        <div className={styles.verificationContainer}>
+          <div className={styles.verifyContainer}>
+            <Input
+              type="text"
+              name="verificationCode"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+              placeholder="인증번호를 입력해주세요."
+              className={styles.input}
+              onClear={() => setVerificationCode("")}
+            />
+            <Button
+              type="button"
+              onClick={handleVerifyConfirm}
+              disabled={!isFilled}
+              className={`${styles.confirmBtn} ${
+                isFilled ? styles.active : ""
+              }`}
+            >
+              확인
+            </Button>
+          </div>
 
-        <div className={styles.verifyContainer}>
-          <Input
-            type="text"
-            name="verificationCode"
-            value={verificationCode}
-            onChange={(e) => setVerificationCode(e.target.value)}
-            placeholder="인증번호를 입력해주세요."
-            className={styles.input}
-            onClear={() => setVerificationCode("")}
-          />
-          {errors.verificationCode && (
-            <div className={styles.errorMessage}>
+          {/* 인증번호 에러/성공 메시지 */}
+          {errors.verificationCode && errors.verificationCode.message && (
+            <div
+              className={`${styles.message} ${
+                errors.verificationCode.type === "success"
+                  ? styles.successMessage
+                  : styles.errorMessage
+              }`}
+            >
               {errors.verificationCode.message}
             </div>
           )}
-          <Button
-            type="button"
-            onClick={handleVerifyConfirm}
-            disabled={!isFilled}
-            className={`${styles.confirmBtn} ${isFilled ? styles.active : ""}`}
-          >
-            확인
-          </Button>
         </div>
 
         {passwordFields.map((field) => (
@@ -297,10 +395,13 @@ const SignupPage = () => {
         </div>
 
         <button
-          type="submit"
-          disabled={isSubmitting || !allFilled}
+          type="button"
+          disabled={isSubmitting || !allFilled || !isVerifySuccess}
           className={styles.submitButton}
-          onClick={handleSubmit(onSubmit)}
+          onClick={() => {
+            const formData = watch();
+            onSubmit(formData);
+          }}
         >
           다음
         </button>

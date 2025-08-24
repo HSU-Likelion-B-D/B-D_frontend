@@ -3,7 +3,7 @@ import styles from "@/styles/pages/LoginPage.module.scss";
 import { logo, eye, eye_color } from "@/assets";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import axiosInstance from "@/apis/axiosInstance";
 export default function LoginPage() {
   const [keepLogin, setKeepLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -20,17 +20,21 @@ export default function LoginPage() {
 
   const onSubmit = (data) => {
     console.log(data);
+    axiosInstance.post("/bd/user/signin", data).then((res) => {
+      console.log(res);
+      if (res.data.isSuccess) {
+        localStorage.setItem("accessToken", res.data.data.token);
+        localStorage.setItem("userType", res.data.data.userRoleType);
+        localStorage.setItem("nickName", res.data.data.nickname);
+        localStorage.setItem("imgUrl", res.data.data.imgUrl);
+        if (res.data.data.userRoleType === "BUSINESS") {
+          navigate("/");
+        } else {
+          navigate("/influencer-main");
+        }
+      }
+    });
   };
-  // const onSubmit = async (data) => {
-  //   try {
-  //     console.log("로그인 데이터:", data);
-  //     // TODO: 실제 로그인 API 호출
-  //     // const response = await loginAPI(data);
-  //     // 로그인 성공 처리
-  //   } catch (error) {
-  //     console.error("로그인 실패:", error);
-  //   }
-  // };
 
   const watchedEmail = watch("email");
   const watchedPassword = watch("password");
@@ -93,7 +97,7 @@ export default function LoginPage() {
             <div className={styles.inputContainer}>
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="비밀번호를 입력해주세요. (영문, 숫자 포함 8자~12자)"
+                placeholder="비밀번호를 입력해주세요. (영문, 숫자, 특수문자 포함 4자~12자)"
                 className={`${styles.input} ${
                   errors.password
                     ? styles.error
@@ -104,8 +108,17 @@ export default function LoginPage() {
                 {...register("password", {
                   required: "비밀번호를 입력해주세요",
                   minLength: {
-                    value: 8,
-                    message: "비밀번호는 최소 8자 이상이어야 합니다",
+                    value: 4,
+                    message: "비밀번호는 최소 4자 이상이어야 합니다",
+                  },
+                  maxLength: {
+                    value: 12,
+                    message: "비밀번호는 최대 12자까지 입력 가능합니다",
+                  },
+                  pattern: {
+                    value:
+                      /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{4,12}$/,
+                    message: "영문, 특수문자 포함 4자~12자",
                   },
                 })}
               />

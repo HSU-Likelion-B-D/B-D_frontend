@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/StoreCostPage.module.scss";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import logo from "../assets/logo.svg";
 import SelectButton from "../components/StoreCostPage/SelectButton";
 import { useNavigate } from "react-router-dom";
 
-const atmosphere = ["인스타그램", "유튜브", "블로그", "숏폼", "VLOG", "기타"];
+const atmosphere = [
+  { id: 1, name: "인스타그램" },
+  { id: 2, name: "유튜브" },
+  { id: 3, name: "블로그" },
+  { id: 4, name: "숏폼" },
+  { id: 5, name: "VLOG" },
+  { id: 6, name: "기타" },
+];
 
 const StoreCostPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     minCost: "",
     maxCost: "",
   });
+
+  useEffect(() => {
+    // 세션스토리지에서 저장된 예산 정보 가져오기
+    const storedMinBudget = sessionStorage.getItem("minBudget");
+    const storedMaxBudget = sessionStorage.getItem("maxBudget");
+
+    if (storedMinBudget || storedMaxBudget) {
+      setFormData((prevData) => ({
+        ...prevData,
+        minCost: storedMinBudget || "",
+        maxCost: storedMaxBudget || "",
+      }));
+    }
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -29,12 +51,13 @@ const StoreCostPage = () => {
 
   const [selected, setSelected] = useState([]);
   const [showError, setShowError] = useState(false);
-  const navigate = useNavigate();
 
   const handleClick = (sp) => {
     // 버튼 중복 선택 로직
     setSelected((prev) =>
-      prev.includes(sp) ? prev.filter((item) => item !== sp) : [...prev, sp]
+      prev.some((item) => item.id === sp.id)
+        ? prev.filter((item) => item.id !== sp.id)
+        : [...prev, sp]
     );
     setShowError(false);
   };
@@ -47,7 +70,29 @@ const StoreCostPage = () => {
       setShowError(true);
       return;
     }
-    navigate("/complete");
+    if (isFormComplete) {
+      console.log("handleNext 실행:", formData, selected);
+      // 선택된 항목에서 id 값만 추출하여 저장
+      const promotionIds = selected.map((item) => item.id);
+
+      const storeCostDataToStore = {
+        minBudget: formData.minCost,
+        maxBudget: formData.maxCost,
+        promotionIds,
+      };
+
+      console.log("세션 스토리지에 저장할 데이터 : ", storeCostDataToStore);
+      sessionStorage.setItem(
+        "storeCostData",
+        JSON.stringify(storeCostDataToStore)
+      );
+
+      // 저장확인
+      const stored = sessionStorage.getItem("storeCostData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
+
+      navigate("/complete");
+    }
   };
   return (
     <div className={styles.container}>
@@ -87,12 +132,12 @@ const StoreCostPage = () => {
         <div className={styles.buttonGroup}>
           {atmosphere.map((kw) => (
             <SelectButton
-              key={kw}
+              key={kw.id}
               redSelected={selected.includes(kw)}
               onClick={() => handleClick(kw)}
               error={showError}
             >
-              #{kw}
+              #{kw.name}
             </SelectButton>
           ))}
         </div>

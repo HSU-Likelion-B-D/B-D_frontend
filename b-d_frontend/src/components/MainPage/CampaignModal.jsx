@@ -1,17 +1,17 @@
 import styles from "@/styles/components/MainPage/CampaignModal.module.scss";
 import { useState } from "react";
 
-export default function ProfileModal() {
+export default function CampaignModal({ onStateChange }) {
   const menuItems = [
-    "모두보기",
-    "대기중",
-    "제안 받은",
-    "확정 및 진행중",
-    "완료",
-    "취소",
-    "입금 대기",
+    { label: "모두보기", value: "all" },
+    { label: "대기중", value: "WAITING" },
+    { label: "제안 받은", value: "PROPOSED" },
+    { label: "진행중", value: "CONFIRMED_IN_PROGRESS" },
+    { label: "완료", value: "COMPLETED" },
+    { label: "취소", value: "CANCELED" },
   ];
-  const [selectedItem, setSelectedItem] = useState(menuItems[0]);
+
+  const [selectedItem, setSelectedItem] = useState(menuItems[0].value);
 
   return (
     <div className={styles.container}>
@@ -20,11 +20,14 @@ export default function ProfileModal() {
           <div
             key={index}
             className={`${styles.item} ${
-              selectedItem === item ? styles.active : ""
+              selectedItem === item.value ? styles.active : ""
             }`}
-            onClick={() => setSelectedItem(item)}
+            onClick={() => {
+              setSelectedItem(item.value);
+              onStateChange(item.value); // 상태 변경 트리거
+            }}
           >
-            {item}
+            {item.label}
           </div>
         ))}
       </div>

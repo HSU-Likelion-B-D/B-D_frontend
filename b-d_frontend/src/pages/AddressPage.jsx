@@ -1,11 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
 import styles from "../styles/pages/AddressPage.module.scss";
 import logo from "../assets/logo.svg";
 import Input from "../components/SingupPage/Input";
 import { useNavigate } from "react-router-dom";
 import DaumPostcode from "react-daum-postcode";
+import axiosInstance from "../apis/axiosInstanceGET";
+
 const AddressPage = () => {
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      axiosInstance
+        .get("/bd/api/businessman/workplaces")
+        .then((res) => {
+          if (res.data.isSuccess) {
+            console.log(res.data.data);
+            sessionStorage.setItem("address", res.data.data.address);
+            sessionStorage.setItem(
+              "detailAddress",
+              res.data.data.detailAddress
+            );
+            sessionStorage.setItem("openTime", res.data.data.openTime);
+            sessionStorage.setItem("closeTime", res.data.data.closeTime);
+            sessionStorage.setItem("maxBudget", res.data.data.maxBudget);
+            sessionStorage.setItem("minBudget", res.data.data.minBudget);
+            sessionStorage.setItem(
+              "workPlaceName",
+              res.data.data.workPlaceName
+            );
+
+            // API 응답에서 받은 주소 정보를 폼에 설정
+            setFormData((prevData) => ({
+              ...prevData,
+              address: res.data.data.address || "",
+              detailAddress: res.data.data.detailAddress || "",
+            }));
+          }
+        })
+        .catch((error) => {
+          console.error("프로필 정보 가져오기 오류:", error);
+        });
+    }
+
+    // 세션스토리지에 저장된 주소 정보가 있으면 폼에 설정
+    const storedAddress = sessionStorage.getItem("address");
+    const storedDetailAddress = sessionStorage.getItem("detailAddress");
+
+    if (storedAddress || storedDetailAddress) {
+      setFormData((prevData) => ({
+        ...prevData,
+        address: storedAddress || "",
+        detailAddress: storedDetailAddress || "",
+      }));
+    }
+  }, []);
   // 주소 검색 모달 상태
   const [isPostOpen, setIsPostOpen] = useState(false);
   const navigate = useNavigate();
@@ -39,6 +88,24 @@ const AddressPage = () => {
     }));
   };
 
+  const handleNext = () => {
+    console.log("handleNext 실행:", formData);
+    if (isFormValid) {
+      const addressDataToStore = {
+        address: formData.address,
+        detailAddress: formData.detailAddress,
+      };
+
+      console.log("세션 스토리지에 저장할 데이터 : ", addressDataToStore);
+      sessionStorage.setItem("addressData", JSON.stringify(addressDataToStore));
+
+      // 저장확인
+      const stored = sessionStorage.getItem("addressData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
+
+      navigate("/select-keyword");
+    }
+  };
   const isFormValid = formData.address.trim() !== "";
   return (
     <div className={styles.container}>
@@ -127,7 +194,7 @@ const AddressPage = () => {
           }`}
           disabled={!isFormValid}
           onClick={() => {
-            navigate("/select-keyword");
+            handleNext();
           }}
         >
           다음으로

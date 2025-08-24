@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/InfluencerAccountPage.module.scss";
-import { logo, camera, profile, influencer_profile } from "@/assets";
-import ProgressBar from "../components/ProfilePage/ProgressBar";
+import { logo_red, influencer_profile } from "@/assets";
+import ProgressBar from "../components/InfluencerProfilePage/ProgressBar";
 import Input from "../components/SingupPage/Input";
-
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../apis/axiosInstanceGET";
 
-const mockNicknames = ["사자보이즈", "사자", "사자보이즈앤걸스"];
 const InfluencerAccountPage = () => {
   // 은행 리스트 직접 선언
   const BANK_LIST = [
@@ -36,8 +35,6 @@ const InfluencerAccountPage = () => {
   ];
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    nickname: "",
-    description: "",
     bank: "",
     account: "",
   });
@@ -48,12 +45,6 @@ const InfluencerAccountPage = () => {
       ...prevData,
       [name]: value,
     }));
-    if (name === "nickname") {
-      setNicknameMessage("");
-      setIsError(false);
-      setIsSuccess(false);
-      setIsButtonDisabled(false); // 버튼 reset
-    }
     // 계좌번호 입력 시 숫자와 -만 허용
     if (name === "account") {
       const onlyNumDash = value.replace(/[^0-9-]/g, "");
@@ -64,8 +55,55 @@ const InfluencerAccountPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Form Data:", formData);
+    sessionStorage.setItem("bankName", formData.bank);
+    sessionStorage.setItem("accountNumber", formData.account);
+    navigate("/influencer-introduce");
     // `formData` 백으로 보내기
   };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      axiosInstance
+        .get("/bd/api/influencer/activities")
+        .then((res) => {
+          if (res.data.isSuccess) {
+            console.log(res.data.data);
+            sessionStorage.setItem("bankName", res.data.data.bankName);
+            sessionStorage.setItem(
+              "accountNumber",
+              res.data.data.accountNumber
+            );
+            sessionStorage.setItem("activityName", res.data.data.activityName);
+            sessionStorage.setItem("snsUrl", res.data.data.snsUrl);
+            sessionStorage.setItem("minBudget", res.data.data.minBudget);
+            sessionStorage.setItem("maxBudget", res.data.data.maxBudget);
+
+            // API 응답에서 받은 계좌 정보를 폼에 설정
+            setFormData((prevData) => ({
+              ...prevData,
+              bank: res.data.data.bankName || "",
+              account: res.data.data.accountNumber || "",
+            }));
+          }
+        })
+        .catch((error) => {
+          console.error("프로필 정보 가져오기 오류:", error);
+        });
+    }
+
+    // 세션스토리지에 저장된 계좌 정보가 있으면 폼에 설정
+    const storedBankName = sessionStorage.getItem("bankName");
+    const storedAccountNumber = sessionStorage.getItem("accountNumber");
+
+    if (storedBankName || storedAccountNumber) {
+      setFormData((prevData) => ({
+        ...prevData,
+        bank: storedBankName || "",
+        account: storedAccountNumber || "",
+      }));
+    }
+  }, []);
 
   const isFormValid =
     formData.bank.trim() !== "" && formData.account.trim() !== "";
@@ -75,7 +113,7 @@ const InfluencerAccountPage = () => {
       <form className={styles.container} onSubmit={handleSubmit}>
         <div className={styles.whiteBox}>
           <ProgressBar progress={25} />
-          <img src={logo} className={styles.logo} alt="logo" />
+          <img src={logo_red} className={styles.logo} alt="logo" />
           <h1 className={styles.subtitle}>
             <span className={styles.highlight}>당신</span>을 알려주세요!
           </h1>

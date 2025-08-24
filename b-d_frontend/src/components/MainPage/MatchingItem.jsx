@@ -1,11 +1,15 @@
 import styles from "@/styles/components/MainPage/MatchingItem.module.scss";
-import { profile_img } from "@/assets";
-export default function MatchingItem() {
+import { influencer_profile } from "@/assets";
+export default function MatchingItem({ influencer }) {
   return (
     <div className={styles.container}>
-      <img src={profile_img} className={styles.profileImg} />
-      <div className={styles.name}>아기사자</div>
-      <div className={styles.followCount}>20k</div>
+      {influencer.imgUrl ? (
+        <img src={influencer.imgUrl} className={styles.profileImg} />
+      ) : (
+        <img src={influencer_profile} className={styles.profileImg} />
+      )}
+      <div className={styles.name}>{influencer.nickName}</div>
+      <div className={styles.followCount}>{influencer.follower}</div>
     </div>
   );
 }

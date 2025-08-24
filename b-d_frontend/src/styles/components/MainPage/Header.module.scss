@@ -57,6 +57,8 @@
       }
       .profileContainer {
         .profileIcon {
+          border-radius: 50%;
+          cursor: pointer;
           width: vw(49px);
           height: vw(49px);
         }

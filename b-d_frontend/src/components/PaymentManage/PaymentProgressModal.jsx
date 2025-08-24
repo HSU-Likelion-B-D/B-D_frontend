@@ -1,10 +1,11 @@
 import styles from "../../styles/components/PaymentManagePage/PaymentProgressModal.module.scss";
 import { useEffect, useState } from "react";
 import { pay_card, pay_transfer, pay_easy } from "@/assets";
-
+import axiosInstance from "@/apis/axiosInstance";
 export default function PaymentProgressModal({
   setIsPaymentProgressModalOpen,
   setIsPaymentCompleteModalOpen,
+  selectedItem,
 }) {
   useEffect(() => {
     // 모달이 열릴 때 body 스크롤 차단
@@ -17,6 +18,14 @@ export default function PaymentProgressModal({
   }, []);
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
+
+  const handlePayment = () => {
+    axiosInstance.patch(`/bd/api/payments`, {
+      paymentId: selectedItem.paymentId,
+    });
+    setIsPaymentProgressModalOpen(false);
+    setIsPaymentCompleteModalOpen(true);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -59,13 +68,7 @@ export default function PaymentProgressModal({
           >
             취소
           </button>
-          <button
-            className={styles.sendButton}
-            onClick={() => {
-              setIsPaymentProgressModalOpen(false);
-              setIsPaymentCompleteModalOpen(true);
-            }}
-          >
+          <button className={styles.sendButton} onClick={handlePayment}>
             보내기
           </button>
         </div>

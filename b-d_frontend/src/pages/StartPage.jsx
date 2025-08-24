@@ -1,14 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/pages/StartPage.module.scss";
 import SelectBox from "@/components/StartPage/SelectBox";
 import { logo, main_dilly, main_busy } from "@/assets";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/apis/axiosInstance";
 function StartPage() {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState(null);
-
+  const [signupData, setSignupData] = useState(null);
   const handleSelectType = (type) => {
     setSelectedType(type);
+  };
+
+  useEffect(() => {
+    const storedSignupData = sessionStorage.getItem("signupData");
+
+    if (storedSignupData) {
+      try {
+        const parsedData = JSON.parse(storedSignupData);
+        setSignupData(parsedData);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.log("세션스토리지에 signupData가 없습니다.");
+    }
+  }, []);
+
+  const handleNext = () => {
+    console.log("handleNext 실행:", { signupData, selectedType });
+
+    if (!signupData || !selectedType) {
+      console.error("필수 데이터가 누락되었습니다:", {
+        signupData,
+        selectedType,
+      });
+      return;
+    }
+
+    axiosInstance
+      .post("/bd/user/signup", {
+        name: signupData.name,
+        email: signupData.email,
+        password: signupData.password,
+        role: selectedType,
+      })
+      .then((res) => {
+        console.log("회원가입 응답:", res);
+        navigate(`/${selectedType}-profile`);
+        sessionStorage.removeItem("signupData");
+
+        // 서버 응답에서 userId와 userRoleType 추출하여 세션스토리지에 저장
+        const userId = res.data.data.userId;
+        const userRoleType = res.data.data.userRoleType;
+
+        sessionStorage.setItem("userId", userId);
+        sessionStorage.setItem("userRoleType", userRoleType);
+      })
+      .catch((error) => {
+        console.error("회원가입 오류:", error);
+      });
   };
 
   return (
@@ -21,7 +72,7 @@ function StartPage() {
           <span>당신의 유형</span>을 선택해주세요.
         </div>
         <div className={styles.description}>
-          비디가 당신의 활동을 도와드릴게요.{" "}
+          비디가 당신의 활동을 도와드릴게요.
         </div>
         <div className={styles.selectBoxContainer}>
           <SelectBox
@@ -53,7 +104,7 @@ function StartPage() {
           }`}
           disabled={!selectedType}
           onClick={() => {
-            navigate(`/${selectedType}-profile`);
+            handleNext();
           }}
         >
           다음으로

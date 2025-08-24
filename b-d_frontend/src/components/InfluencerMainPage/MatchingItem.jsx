@@ -1,11 +1,17 @@
 import styles from "@/styles/components/MainPage/MatchingItem.module.scss";
 import { profile_img } from "@/assets";
-export default function MatchingItem() {
+export default function MatchingItem({ business }) {
   return (
     <div className={styles.container}>
-      <img src={profile_img} className={styles.profileImg} />
-      <div className={styles.name}>아기사자</div>
-      <div className={styles.followCount}>4.0 (33)</div>
+      {business.imgUrl ? (
+        <img src={business.imgUrl} className={styles.profileImg} />
+      ) : (
+        <img src={profile_img} className={styles.profileImg} />
+      )}
+      <div className={styles.name}>{business.nickName}</div>
+      <div className={styles.followCount}>
+        {business.avgScore} ({business.reviewCount})
+      </div>
     </div>
   );
 }

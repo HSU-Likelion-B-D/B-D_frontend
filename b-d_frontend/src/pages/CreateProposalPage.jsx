@@ -1,23 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/pages/CreateProposalPage.module.scss";
 import Header from "@/components/MainPage/Header";
 import { useForm } from "react-hook-form";
 import { main_busy } from "@/assets";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/apis/axiosInstance";
+import KakaoMap from "@/components/BusinessMyPage/KakaoMap";
 
 export default function CreateProposalPage() {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, watch, setValue } = useForm({
     mode: "onChange",
+  });
+  const [proposalData, setProposalData] = useState({
+    workPlaceName: "",
+    introduction: "",
+    name: "",
+    title: "",
+    offerBudget: 0,
+    startDate: "",
+    endDate: "",
+    overView: "",
+    request: "",
+    contentTopic: "",
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    // form 데이터를 API 형식에 맞게 변환
+    const apiData = {
+      title: data.proposalTitle,
+      offerBudget: data.minAmount,
+      startDate: `${data.startYear}-${data.startMonth.padStart(
+        2,
+        "0"
+      )}-${data.startDay.padStart(2, "0")}`,
+      endDate: `${data.endYear}-${data.endMonth.padStart(
+        2,
+        "0"
+      )}-${data.endDay.padStart(2, "0")}`,
+      overView: data.proposalContent || "",
+      request: data.proposalRequest || "",
+    };
+
+    axiosInstance
+      .post("/bd/api/proposal/write", apiData)
+      .then((res) => {
+        if (res.data.isSuccess) {
+          navigate("/");
+          // 서버 응답에서 proposalId 추출하여 세션스토리지에 저장
+          const proposalId = res.data.data.proposalId;
+          sessionStorage.setItem("proposalId", proposalId);
+        }
+      })
+      .catch((err) => {
+        console.log("API 오류:", err);
+      });
   };
 
   // 필수 필드들의 값을 모니터링
@@ -26,20 +63,101 @@ export default function CreateProposalPage() {
     "proposerName",
     "storeLocation",
     "minAmount",
-    "maxAmount",
     "startYear",
     "startMonth",
     "startDay",
     "endYear",
     "endMonth",
     "endDay",
+    "proposalContent",
+    "proposalRequest",
     "agreement",
   ]);
+  useEffect(() => {
+    axiosInstance
+      .get("/bd/api/proposal/write")
+      .then((res) => {
+        if (res.data.isSuccess) {
+          // existInfo와 defaultInfo를 올바르게 병합
+          const existInfo = res.data.data.existInfo || {};
+          const defaultInfo = res.data.data.defaultInfo || {};
+
+          // 두 객체를 병합 (defaultInfo가 우선)
+          const mergedData = { ...existInfo, ...defaultInfo };
+
+          // form 필드에 값 설정
+          if (mergedData.title) setValue("proposalTitle", mergedData.title);
+          if (mergedData.name) setValue("proposerName", mergedData.name);
+          if (mergedData.workPlaceAddress)
+            setValue("storeLocation", mergedData.workPlaceAddress);
+          if (mergedData.offerBudget)
+            setValue("minAmount", mergedData.offerBudget);
+          if (mergedData.startDate) {
+            const [year, month, day] = mergedData.startDate.split("-");
+            setValue("startYear", parseInt(year));
+            setValue("startMonth", parseInt(month));
+            setValue("startDay", parseInt(day));
+          }
+          if (mergedData.endDate) {
+            const [year, month, day] = mergedData.endDate.split("-");
+            setValue("endYear", parseInt(year));
+            setValue("endMonth", parseInt(month));
+            setValue("endDay", parseInt(day));
+          }
+          if (mergedData.overView)
+            setValue("proposalContent", mergedData.overView);
+          if (mergedData.request)
+            setValue("proposalRequest", mergedData.request);
+
+          setProposalData(mergedData);
+        }
+      })
+      .catch((err) => {
+        console.log("API 오류:", err);
+      });
+  }, [setValue]);
 
   // 모든 필수 필드가 채워졌는지 확인
-  const isFormValid = watchedFields.every(
-    (field) => field && field.toString().trim() !== ""
-  );
+  const isFormValid = watchedFields.every((field, index) => {
+    const fieldNames = [
+      "proposalTitle",
+      "proposerName",
+      "storeLocation",
+      "minAmount",
+      "startYear",
+      "startMonth",
+      "startDay",
+      "endYear",
+      "endMonth",
+      "endDay",
+      "proposalContent",
+      "proposalRequest",
+      "agreement",
+    ];
+
+    // agreement는 체크박스이므로 boolean 값 확인
+    if (fieldNames[index] === "agreement") {
+      return field === true;
+    }
+
+    // 숫자 필드들은 0이 아닌 값 확인
+    if (
+      [
+        "startYear",
+        "startMonth",
+        "startDay",
+        "endYear",
+        "endMonth",
+        "endDay",
+        "minAmount",
+      ].includes(fieldNames[index])
+    ) {
+      return field !== undefined && field !== null && field !== "";
+    }
+
+    // 문자열 필드들은 빈 문자열이 아닌지 확인
+    return field && field.toString().trim() !== "";
+  });
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -51,9 +169,11 @@ export default function CreateProposalPage() {
       </div>
       <div className={styles.content}>
         <div className={styles.storeContainer}>
-          <div className={styles.storeName}>호호식당 대학로점</div>
+          <div className={styles.storeName}>
+            {proposalData.workPlaceName || "가게 이름"}
+          </div>
           <div className={styles.storeDescription}>
-            따뜻한 분위기에서 즐기는 일본 가정식
+            {proposalData.introduction || "가게 소개"}
           </div>
         </div>
         <form
@@ -78,6 +198,7 @@ export default function CreateProposalPage() {
               <input
                 type="text"
                 placeholder="제안자 명"
+                value={proposalData.name || ""}
                 {...register("proposerName", {
                   required: "제안자 명을 입력해주세요",
                 })}
@@ -88,36 +209,25 @@ export default function CreateProposalPage() {
             <input
               type="text"
               placeholder="가게의 위치를 입력해주세요."
+              value={proposalData.workPlaceAddress || ""}
               {...register("storeLocation", {
                 required: "가게의 위치를 입력해주세요",
               })}
             />
           </div>
-          <div className={styles.mapContainer}></div>
+          <div className={styles.mapContainer}>
+            <KakaoMap address={proposalData.workPlaceAddress} />
+          </div>
           <div className={styles.proposalMoney}>
             <div className={styles.proposalMoneyLeft}>
               <input
                 type="number"
-                placeholder="최소 금액 제안"
+                placeholder="금액 제안"
                 {...register("minAmount", {
-                  required: "최소 금액을 입력해주세요",
+                  required: "금액을 입력해주세요",
                   min: {
                     value: 1,
-                    message: "최소 금액은 1원 이상이어야 합니다",
-                  },
-                })}
-              />
-            </div>
-            ~
-            <div className={styles.proposalMoneyRight}>
-              <input
-                type="number"
-                placeholder="최대 금액 제안"
-                {...register("maxAmount", {
-                  required: "최대 금액을 입력해주세요",
-                  min: {
-                    value: 1,
-                    message: "최대 금액은 1원 이상이어야 합니다",
+                    message: "금액은 1원 이상이어야 합니다",
                   },
                 })}
               />
@@ -196,10 +306,20 @@ export default function CreateProposalPage() {
             일
           </div>
           <div className={styles.proposalContent}>
-            <textarea placeholder="제안 개요를 작성해주세요." />
+            <textarea
+              placeholder="제안 개요를 작성해주세요."
+              {...register("proposalContent", {
+                required: "제안 개요를 입력해주세요",
+              })}
+            />
           </div>
           <div className={styles.proposalRequest}>
-            <textarea placeholder="요청사항을 자유롭게 적어주세요." />
+            <textarea
+              placeholder="요청사항을 자유롭게 적어주세요."
+              {...register("proposalRequest", {
+                required: "요청사항을 입력해주세요",
+              })}
+            />
           </div>
           <div className={styles.proposalAgreement}>
             <span className={styles.red}>
@@ -259,9 +379,6 @@ export default function CreateProposalPage() {
               isFormValid ? styles.active : ""
             }`}
             disabled={!isFormValid}
-            onClick={() => {
-              navigate("/");
-            }}
           >
             저장하기
           </button>

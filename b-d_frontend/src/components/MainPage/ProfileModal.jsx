@@ -6,7 +6,16 @@ export default function ProfileModal() {
     <div className={styles.container}>
       <div className={styles.contents}>
         <div className={styles.customerService}>고객센터</div>
-        <div className={styles.logout} onClick={() => navigate("/login")}>
+        <div
+          className={styles.logout}
+          onClick={() => {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("userType");
+            localStorage.removeItem("nickName");
+            localStorage.removeItem("imgUrl");
+            navigate("/login");
+          }}
+        >
           로그아웃
         </div>
       </div>

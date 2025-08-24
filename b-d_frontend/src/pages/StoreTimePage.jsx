@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/StoreTimePage.module.scss";
+import { logo } from "@/assets";
 import ProgressBar from "../components/ProfilePage/ProgressBar";
-import logo from "../assets/logo.svg";
 import { useNavigate } from "react-router-dom";
 
 const StoreTimePage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     minHour: "",
     minMinute: "",
@@ -13,10 +14,54 @@ const StoreTimePage = () => {
     isOnlineStore: null,
   });
 
-  const handleNext = () => {
-    navigate("/store-cost");
-  };
+  useEffect(() => {
+    // 세션스토리지에서 저장된 시간 정보 가져오기
+    const storedOpenTime = sessionStorage.getItem("openTime");
+    const storedCloseTime = sessionStorage.getItem("closeTime");
 
+    if (storedOpenTime || storedCloseTime) {
+      // 시간 문자열을 시와 분으로 분리
+      const parseTime = (timeString) => {
+        if (!timeString) return { hour: "", minute: "" };
+        const [hour, minute] = timeString.split(":");
+        return { hour: hour || "", minute: minute || "" };
+      };
+
+      const openTime = parseTime(storedOpenTime);
+      const closeTime = parseTime(storedCloseTime);
+
+      setFormData((prevData) => ({
+        ...prevData,
+        minHour: openTime.hour,
+        minMinute: openTime.minute,
+        maxHour: closeTime.hour,
+        maxMinute: closeTime.minute,
+      }));
+    }
+  }, []);
+
+  const handleNext = () => {
+    console.log("handleNext 실행:", formData);
+    if (isFormComplete) {
+      const storeTimeDataToStore = {
+        openTime: `${formData.minHour}:${formData.minMinute}`,
+        closeTime: `${formData.maxHour}:${formData.maxMinute}`,
+        isOnline: formData.isOnlineStore,
+      };
+
+      console.log("세션 스토리지에 저장할 데이터 : ", storeTimeDataToStore);
+      sessionStorage.setItem(
+        "storeTimeData",
+        JSON.stringify(storeTimeDataToStore)
+      );
+
+      // 저장확인
+      const stored = sessionStorage.getItem("storeTimeData");
+      console.log("세션 스토리지에 저장된 데이터 확인:", stored);
+
+      navigate("/store-cost");
+    }
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -30,8 +75,6 @@ const StoreTimePage = () => {
       [name]: formattedValue,
     }));
   };
-
-  const navigate = useNavigate();
 
   const isFormComplete =
     formData.minHour &&

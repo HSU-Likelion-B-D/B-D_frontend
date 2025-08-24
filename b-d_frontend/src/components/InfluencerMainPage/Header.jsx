@@ -1,4 +1,4 @@
-import styles from "@/styles/components/MainPage/Header.module.scss";
+import styles from "@/styles/components/InfluencerMainPage/Header.module.scss";
 import {
   logo_red,
   alarm_icon,
@@ -8,11 +8,13 @@ import {
 } from "@/assets";
 import ProfileModal from "./ProfileModal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Header({
   setIsNotificationModalOpen,
   isCreateProposalPage = false,
 }) {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className={styles.header}>
       <div
@@ -34,19 +36,35 @@ export default function Header({
         </div>
       </div>
       <div className={styles.logoContainer}>
-        <img className={styles.logo} src={logo_red} alt="logo" />
+        <img
+          className={styles.logo}
+          src={logo_red}
+          alt="logo"
+          onClick={() => navigate("/influencer-main")}
+        />
       </div>
       <div className={styles.rightIconContainer}>
         <div className={styles.userInfoContainer}>
           <div className={styles.userNameContainer}>
-            <span className={styles.userName}>화이팅</span> 님
+            <span className={styles.userName}>
+              {localStorage.getItem("nickName")}
+            </span>{" "}
+            님
           </div>
           <div className={styles.profileContainer}>
-            <img
-              className={styles.profileIcon}
-              src={influencer_profile_right}
-              alt="profile"
-            />
+            {localStorage.getItem("imgUrl") !== "null" ? (
+              <img
+                className={styles.profileIcon}
+                src={localStorage.getItem("imgUrl")}
+                onClick={() => navigate("/influencer-mypage")}
+              />
+            ) : (
+              <img
+                className={styles.profileIcon}
+                src={influencer_profile_right}
+                onClick={() => navigate("/influencer-mypage")}
+              />
+            )}
           </div>
         </div>
         <div className={styles.hamburgerContainer}>

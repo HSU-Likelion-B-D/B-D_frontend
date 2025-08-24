@@ -1,10 +1,14 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { influencer_pay_progress } from "@/assets";
 import styles from "../../styles/components/InfluencerPaymentManagePage/InfluencerPaymentProgressModal.module.scss";
+import { formatNumber } from "@/hooks/formatNumber";
+import axiosInstance from "@/apis/axiosInstance";
 const InfluencerPaymentProgressModal = ({
   setIsPaymentProgressModalOpen,
   setIsPaymentCompleteModalOpen,
+  selectedItem,
+  bankInfo,
 }) => {
   useEffect(() => {
     // 모달이 열릴 때 body 스크롤 차단
@@ -15,6 +19,21 @@ const InfluencerPaymentProgressModal = ({
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  const handlePayment = () => {
+    axiosInstance
+      .patch(`/bd/api/payments`, {
+        paymentId: selectedItem.paymentId,
+      })
+      .then((res) => {
+        console.log(res);
+        setIsPaymentProgressModalOpen(false);
+        setIsPaymentCompleteModalOpen(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -26,13 +45,15 @@ const InfluencerPaymentProgressModal = ({
 
         <p className={styles.description2}>
           <span className={styles.highlight}>
-            부산은행 / 7777-7777-7777-7777 화이팅
+            {bankInfo.bankName} / {bankInfo.accountNumber} {bankInfo.name}
           </span>
           으로
         </p>
         <p className={styles.description2}>
-          <span className={styles.highlight}>정산금액 110,000원</span>이
-          지급됩니다.
+          <span className={styles.highlight}>
+            정산금액 {formatNumber(selectedItem.totalPaid)}원
+          </span>
+          이 지급됩니다.
         </p>
         <div className={styles.buttonContainer}>
           <button
@@ -41,14 +62,8 @@ const InfluencerPaymentProgressModal = ({
           >
             취소
           </button>
-          <button
-            className={styles.sendButton}
-            onClick={() => {
-              setIsPaymentProgressModalOpen(false);
-              setIsPaymentCompleteModalOpen(true);
-            }}
-          >
-            보내기
+          <button className={styles.sendButton} onClick={handlePayment}>
+            받기
           </button>
         </div>
       </div>
