@@ -97,7 +97,7 @@ const InfluencerPaymentStarModal = ({
           <button
             className={styles.sendButton}
             onClick={handleSendReview}
-            disabled={!starStates.some((star) => star)}
+            disabled={!starStates.some((star) => star) || review.length === 0}
           >
             평가하기
           </button>
