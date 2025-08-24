@@ -25,6 +25,8 @@
       height: vw(174px);
       margin-bottom: vh(9px);
       border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
     }
     .name {
       font-size: rem(20px);
