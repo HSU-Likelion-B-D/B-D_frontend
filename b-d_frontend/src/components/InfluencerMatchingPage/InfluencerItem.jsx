@@ -6,10 +6,10 @@ import { useState } from "react";
 export default function InfluencerItem({
   setIsProposalModalOpen,
   proposalId, // InfluencerMatchingPage에서 전달
-  recipientId, // InfluencerMatchingPage에서 전달
   recommendation, // InfluencerMatchingPage에서 전달
 }) {
   const [loading, setLoading] = useState(false);
+  const recipientId = recommendation.userId;
 
   const handleSendProposal = () => {
     if (loading) return;
