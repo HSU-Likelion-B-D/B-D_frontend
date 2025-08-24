@@ -38,7 +38,7 @@ export default function Profile({ isMainPage = false, businessInfo }) {
         />
       </div>
       <div className={styles.profileInfo}>
-        <div className={styles.profileName}>{businessInfo?.nickname}</div>
+        <div className={styles.profileName}>{businessInfo?.workPlaceName}</div>
         <div className={styles.profileDescription}>
           {businessInfo?.introduce}
         </div>

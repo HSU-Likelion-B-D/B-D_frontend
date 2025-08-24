@@ -27,7 +27,6 @@ const CompletePage = () => {
     const storeAtmosphereData = JSON.parse(
       sessionStorage.getItem("storeAtmosphereData") || "{}"
     );
-
     // 서버로 전송할 데이터 구성
     const accessToken = localStorage.getItem("accessToken");
 
@@ -37,6 +36,7 @@ const CompletePage = () => {
           name: nickname,
           address: addressData.address,
           detailAddress: addressData.detailAddress,
+          workPlaceName: addressData.workPlaceName,
           openTime: storeTimeData.openTime,
           closeTime: storeTimeData.closeTime,
           isOnline: Boolean(storeTimeData.isOnline),
@@ -56,6 +56,7 @@ const CompletePage = () => {
           name: nickname,
           address: addressData.address,
           detailAddress: addressData.detailAddress,
+          workPlaceName: addressData.workPlaceName,
           openTime: storeTimeData.openTime,
           closeTime: storeTimeData.closeTime,
           isOnline: Boolean(storeTimeData.isOnline),
