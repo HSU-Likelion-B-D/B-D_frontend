@@ -70,7 +70,7 @@ const InfluencerPaymentManagePage = () => {
         });
     } else {
       axiosInstance
-        .get(`/bd/api/payments?state=${filter}`)
+        .get(`/bd/api/payments?status=${filter}`)
         .then((res) => {
           console.log(res.data);
           setPaymentList(res.data.data.content);

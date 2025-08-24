@@ -8,7 +8,7 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
     false,
     false,
     false,
-  ]); // 초기 상태: 3개 별이 활성화
+  ]);
 
   useEffect(() => {
     // 모달이 열릴 때 body 스크롤 차단
@@ -41,6 +41,7 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
       return newStates;
     });
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -61,6 +62,10 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
             />
           ))}
         </div>
+        <textarea
+          className={styles.description}
+          placeholder="평가를 남겨주세요."
+        />
         <div className={styles.buttonContainer}>
           <button
             className={styles.sendButton}
