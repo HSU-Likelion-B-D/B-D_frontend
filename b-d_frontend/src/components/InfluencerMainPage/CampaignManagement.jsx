@@ -115,7 +115,9 @@ export default function CampaignManagement() {
             onClick={() => setIsCampaignModalOpen(!isCampaignModalOpen)}
           />
           {isCampaignModalOpen && (
-            <CampaignModal onStateChange={handleStateChange} />
+            <div className={styles.campaignModal}>
+              <CampaignModal onStateChange={handleStateChange} />
+            </div>
           )}
         </div>
       </div>
