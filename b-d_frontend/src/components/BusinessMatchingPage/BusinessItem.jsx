@@ -8,6 +8,7 @@ export default function BusinessItem({
   setIsProposalModalOpen,
   proposalId, // BusinessMatchingPage에서 전달
   recommendation, // BusinessMatchingPage에서 전달
+  imgUrl,
 }) {
   const [loading, setLoading] = useState(false);
   const recipientId = recommendation.userId;
@@ -66,7 +67,7 @@ export default function BusinessItem({
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <img src={main_busy} className={styles.profileImage} />
+        <img src={imgUrl || main_busy} className={styles.profileImage} />
         <div className={styles.title}>
           <div className={styles.nameContainer}>
             <div className={styles.name}>{recommendation.nickname}</div>

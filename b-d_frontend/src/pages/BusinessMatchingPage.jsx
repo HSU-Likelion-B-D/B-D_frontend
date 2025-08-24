@@ -53,6 +53,7 @@ export default function BusinessMatchingPage() {
               setIsProposalModalOpen={setIsProposalModalOpen}
               proposalId={proposalId}
               recommendation={recommendation}
+              imgUrl={recommendation.imgUrl}
             />
           ))}
         </div>
