@@ -80,6 +80,7 @@ export default function CampaignManagement() {
     }
     return paginatedData.map((campaign) => (
       <CampaignItem
+        imgUrl={campaign.imgUrl}
         key={campaign.campaignId}
         campaignId={campaign.campaignId}
         title={campaign.title}

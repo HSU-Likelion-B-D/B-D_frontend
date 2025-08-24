@@ -21,7 +21,6 @@ export default function InfluencerMainPage() {
       .get("/bd/api/influencer/mypage")
       .then((res) => {
         if (res.data.isSuccess) {
-          console.log(res.data.data);
           setInfluencerInfo(res.data.data);
         }
       })

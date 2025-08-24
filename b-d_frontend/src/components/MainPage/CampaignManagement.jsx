@@ -4,6 +4,7 @@ import styles from "@/styles/components/MainPage/CampaignManagement.module.scss"
 import { hamburger_icon, star_icon, busy_dilly_together } from "@/assets";
 import CampaignItem from "./CampaignItem";
 import CampaignModal from "./CampaignModal";
+import { formatNumber } from "@/hooks/formatNumber";
 
 export default function CampaignManagement() {
   const [isCampaignModalOpen, setIsCampaignModalOpen] = useState(false);
@@ -29,6 +30,7 @@ export default function CampaignManagement() {
       .then((response) => {
         if (response.data.isSuccess && response.data.data) {
           setCampaignList(response.data.data.content);
+          console.log(response.data.data.content);
         } else {
           // isSuccess가 false이거나 data가 없는 경우 에러 처리
           setError(
@@ -80,9 +82,10 @@ export default function CampaignManagement() {
     return paginatedData.map((campaign) => (
       <CampaignItem
         key={campaign.campaignId}
+        imgUrl={campaign.imgUrl}
         campaignId={campaign.campaignId}
         title={campaign.title}
-        money={`${campaign.offerBudget}원`}
+        money={`${formatNumber(campaign.offerBudget)}원`}
         date={`${campaign.startDate}~${campaign.endDate}`}
         status={campaign.status}
       />

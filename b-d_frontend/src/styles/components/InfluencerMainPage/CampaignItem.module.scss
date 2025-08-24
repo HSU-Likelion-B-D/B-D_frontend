@@ -7,6 +7,10 @@
     width: vw(60px);
     height: vw(60px);
     margin-right: vw(25px);
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 1/1;
   }
   .contentContainer {
     @include flex(row, center, space-between);

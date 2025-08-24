@@ -23,7 +23,6 @@ export default function MainPage() {
       .then((res) => {
         if (res.data.isSuccess) {
           setBusinessInfo(res.data.data);
-          console.log(res.data.data);
         }
       })
       .catch((err) => {
