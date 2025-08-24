@@ -5,7 +5,14 @@ export default function ProfileModal() {
   return (
     <div className={styles.container}>
       <div className={styles.contents}>
-        <div className={styles.customerService}>고객센터</div>
+        <div
+          className={styles.customerService}
+          onClick={() => {
+            window.open("mailto:busydilly1004@gmail.com", "_blank");
+          }}
+        >
+          고객센터
+        </div>
         <div
           className={styles.logout}
           onClick={() => {
