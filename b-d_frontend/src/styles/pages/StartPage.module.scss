@@ -44,17 +44,15 @@
       position: relative;
       .nemo {
         position: absolute;
-        top: vh(120px);
+        bottom: vh(-20px);
         right: vw(-39px);
         width: vw(170px);
-        height: vh(164px);
       }
       .seaAnemone {
         position: absolute;
-        top: vh(92px);
+        bottom: vh(-20px);
         left: vw(-39px);
         width: vw(185px);
-        height: vh(195px);
       }
     }
     .button {
