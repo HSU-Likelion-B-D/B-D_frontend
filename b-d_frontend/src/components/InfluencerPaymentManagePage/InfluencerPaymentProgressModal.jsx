@@ -8,6 +8,7 @@ const InfluencerPaymentProgressModal = ({
   setIsPaymentProgressModalOpen,
   setIsPaymentCompleteModalOpen,
   selectedItem,
+  bankInfo,
 }) => {
   useEffect(() => {
     // 모달이 열릴 때 body 스크롤 차단
@@ -44,7 +45,7 @@ const InfluencerPaymentProgressModal = ({
 
         <p className={styles.description2}>
           <span className={styles.highlight}>
-            부산은행 / 7777-7777-7777-7777 {localStorage.getItem("nickName")}
+            {bankInfo.bankName} / {bankInfo.accountNumber} {bankInfo.name}
           </span>
           으로
         </p>
@@ -62,7 +63,7 @@ const InfluencerPaymentProgressModal = ({
             취소
           </button>
           <button className={styles.sendButton} onClick={handlePayment}>
-            보내기
+            받기
           </button>
         </div>
       </div>

@@ -23,6 +23,7 @@ const InfluencerPaymentManagePage = () => {
   const [paymentList, setPaymentList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템 상태 추가
   const [prevModalState, setPrevModalState] = useState(false); // 이전 모달 상태 추적
+  const [bankInfo, setBankInfo] = useState(null);
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
     if (isPaymentProgressModalOpen || isPaymentCompleteModalOpen) {
@@ -82,6 +83,13 @@ const InfluencerPaymentManagePage = () => {
     }
   }, [filter]);
 
+  useEffect(() => {
+    axiosInstance.get("/bd/api/influencer/bank").then((res) => {
+      console.log(res.data);
+      setBankInfo(res.data.data);
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.contentContainer}>
@@ -135,6 +143,7 @@ const InfluencerPaymentManagePage = () => {
             setIsPaymentProgressModalOpen={setIsPaymentProgressModalOpen}
             setIsPaymentCompleteModalOpen={setIsPaymentCompleteModalOpen}
             selectedItem={selectedItem}
+            bankInfo={bankInfo}
           />
         </div>
       )}
