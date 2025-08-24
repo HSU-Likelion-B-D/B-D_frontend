@@ -63,7 +63,7 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
           ))}
         </div>
         <textarea
-          className={styles.description}
+          className={styles.reviewTextarea}
           placeholder="평가를 남겨주세요."
         />
         <div className={styles.buttonContainer}>
