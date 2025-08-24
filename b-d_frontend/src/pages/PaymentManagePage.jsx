@@ -108,7 +108,7 @@ const PaymentManagePage = () => {
         </div>
         <div className={styles.paginationContainer}>
           <Pagination
-            redCurrentPage={currentPage}
+            currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
