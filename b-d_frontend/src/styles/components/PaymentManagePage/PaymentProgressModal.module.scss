@@ -90,6 +90,9 @@
       }
       .sendButton {
         background: $color-main;
+        &:disabled {
+          cursor: not-allowed;
+        }
       }
     }
   }

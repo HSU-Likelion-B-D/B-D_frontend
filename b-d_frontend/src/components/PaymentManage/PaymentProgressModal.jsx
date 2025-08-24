@@ -68,7 +68,11 @@ export default function PaymentProgressModal({
           >
             취소
           </button>
-          <button className={styles.sendButton} onClick={handlePayment}>
+          <button
+            className={styles.sendButton}
+            onClick={handlePayment}
+            disabled={!agree1 || !agree2}
+          >
             보내기
           </button>
         </div>
