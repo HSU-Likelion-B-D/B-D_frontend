@@ -8,6 +8,9 @@
     .profileImage {
       width: vw(96px);
       height: vw(96px);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
       border-radius: 50%;
       margin-right: vw(20px);
       background-color: #eaf1ff;
