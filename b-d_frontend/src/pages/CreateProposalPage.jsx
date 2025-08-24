@@ -30,14 +30,14 @@ export default function CreateProposalPage() {
     const apiData = {
       title: data.proposalTitle,
       offerBudget: data.minAmount,
-      startDate: `${data.startYear}-${data.startMonth.padStart(
+      startDate: `${data.startYear}-${String(data.startMonth).padStart(
         2,
         "0"
-      )}-${data.startDay.padStart(2, "0")}`,
-      endDate: `${data.endYear}-${data.endMonth.padStart(
+      )}-${String(data.startDay).padStart(2, "0")}`,
+      endDate: `${data.endYear}-${String(data.endMonth).padStart(
         2,
         "0"
-      )}-${data.endDay.padStart(2, "0")}`,
+      )}-${String(data.endDay).padStart(2, "0")}`,
       overView: data.proposalContent || "",
       request: data.proposalRequest || "",
     };
