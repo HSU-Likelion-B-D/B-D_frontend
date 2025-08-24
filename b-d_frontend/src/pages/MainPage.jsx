@@ -16,7 +16,6 @@ export default function MainPage() {
   const navigate = useNavigate();
   const [businessInfo, setBusinessInfo] = useState(null);
   const [influencerList, setInfluencerList] = useState([]);
-  const [paymentList, setPaymentList] = useState([]);
   const [review, setReview] = useState(null);
   useEffect(() => {
     axiosInstance
