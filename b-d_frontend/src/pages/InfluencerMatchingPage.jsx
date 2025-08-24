@@ -10,7 +10,6 @@ export default function InfluencerMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const navigate = useNavigate();
-  //const proposalId = 3;
 
   const proposalId = sessionStorage.getItem("proposalId"); // createproposal 할때 저장함
 

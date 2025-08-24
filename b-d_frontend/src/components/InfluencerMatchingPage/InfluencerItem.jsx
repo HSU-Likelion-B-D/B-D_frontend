@@ -2,6 +2,7 @@ import styles from "@/styles/components/InfluencerMatchingPage/InfluencerItem.mo
 import { main_dilly, star_icon } from "@/assets";
 import axiosInstance from "@/apis/axiosInstance";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function InfluencerItem({
   setIsProposalModalOpen,
@@ -10,19 +11,21 @@ export default function InfluencerItem({
 }) {
   const [loading, setLoading] = useState(false);
   const recipientId = recommendation.userId;
-
+  const navigate = useNavigate();
   const handleSendProposal = () => {
     if (loading) return;
 
     // 필수값 체크
     if (!proposalId || !recipientId) {
-      console.log("proposalId 또는 recipientId가 없습니다.");
+      alert("제안서를 작성해주세요.");
+      navigate("/create-proposal");
       return;
     }
 
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      console.log("로그인이 필요합니다. 다시 로그인해주세요.");
+      alert("로그인이 필요합니다. 다시 로그인해주세요.");
+      navigate("/login");
       return;
     }
 

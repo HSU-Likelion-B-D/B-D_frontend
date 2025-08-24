@@ -2,6 +2,7 @@ import styles from "@/styles/components/BusinessMatchingPage/BusinessItem.module
 import { main_busy, star_icon_red } from "@/assets";
 import axiosInstance from "@/apis/axiosInstance";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function BusinessItem({
   setIsProposalModalOpen,
@@ -10,18 +11,21 @@ export default function BusinessItem({
 }) {
   const [loading, setLoading] = useState(false);
   const recipientId = recommendation.userId;
+  const navigate = useNavigate();
   const handleSendProposal = () => {
     if (loading) return;
 
     // 필수값 체크
     if (!proposalId || !recipientId) {
-      alert("proposalId 또는 recipientId가 없습니다.");
+      alert("제안서를 작성해주세요.");
+      navigate("/influencer-create-proposal");
       return;
     }
 
     const token = localStorage.getItem("accessToken");
     if (!token) {
       alert("로그인이 필요합니다. 다시 로그인해주세요.");
+      navigate("/login");
       return;
     }
 
