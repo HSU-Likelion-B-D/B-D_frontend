@@ -21,6 +21,7 @@
       width: 100%;
       .profileContainer {
         @include flex(column, center, center);
+        width: 100%;
         .buttonContainer {
           margin-top: vh(33px);
           @include flex(column, center, center, 19px);
@@ -58,6 +59,7 @@
       object-fit: cover;
     }
     .bottomContainer {
+      width: 100%;
       margin-top: vh(59px);
     }
   }
