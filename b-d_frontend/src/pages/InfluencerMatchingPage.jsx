@@ -4,10 +4,12 @@ import InfluencerItem from "@/components/InfluencerMatchingPage/InfluencerItem";
 import ProposalModal from "@/components/InfluencerMatchingPage/ProposalModal";
 import { useState, useEffect } from "react";
 import axiosInstance from "@/apis/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 export default function InfluencerMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
+  const navigate = useNavigate();
   //const proposalId = 3;
 
   const proposalId = sessionStorage.getItem("proposalId"); // createproposal 할때 저장함
@@ -45,8 +47,6 @@ export default function InfluencerMatchingPage() {
         <div className={styles.description}>
           *블로그는 투데이 수치로 기록됩니다.
         </div>
-
-        {/* ✅ 각 아이템에 recipientId와 proposalId 전달 */}
         <div className={styles.influencerList}>
           {recommendations.map((recommendation, index) => (
             <InfluencerItem
