@@ -21,7 +21,8 @@
       left: 50%;
       top: vh(-374px);
       width: vw(915px);
-      height: vh(915px);
+      height: vw(915px);
+      aspect-ratio: 1 / 1;
       transform: translateX(-50%);
       background: linear-gradient(180deg, #ffffff 0%, #d9efff 100%);
       border-radius: 50%;
