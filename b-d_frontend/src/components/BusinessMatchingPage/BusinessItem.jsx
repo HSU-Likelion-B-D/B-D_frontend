@@ -57,7 +57,7 @@ export default function BusinessItem({
         if (error.response.status === 409) {
           alert(error.response.data.message);
         } else {
-          alert("제안서가 필요합니다. 제안서를 작성/수정해주세요.");
+          alert("제안서가 필요합니다. 제안서를 저장해주세요.");
           navigate("/influencer-create-proposal");
         }
       })
