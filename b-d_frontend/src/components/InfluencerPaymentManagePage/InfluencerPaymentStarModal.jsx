@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { store_img, star_icon_red, star_icon_gray } from "@/assets";
+import { main_busy, star_icon_red, star_icon_gray } from "@/assets";
 import styles from "../../styles/components/InfluencerPaymentManagePage/InfluencerPaymentStarModal.module.scss";
-const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
+import axiosInstance from "@/apis/axiosInstance";
+
+const InfluencerPaymentStarModal = ({
+  setIsPaymentCompleteModalOpen,
+  selectedItem,
+}) => {
   const [starStates, setStarStates] = useState([
     false,
     false,
@@ -9,7 +14,7 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
     false,
     false,
   ]);
-
+  const [review, setReview] = useState("");
   useEffect(() => {
     // 모달이 열릴 때 body 스크롤 차단
     document.body.style.overflow = "hidden";
@@ -19,6 +24,19 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  const handleSendReview = () => {
+    axiosInstance
+      .post("/bd/api/review/write", {
+        reviewedId: selectedItem.reviewedId,
+        score: starStates.filter(Boolean).length,
+        content: review,
+      })
+      .then((res) => {
+        console.log(res);
+        setIsPaymentCompleteModalOpen(false);
+      });
+  };
 
   const handleRate = (index) => {
     setStarStates((prevStates) => {
@@ -49,9 +67,16 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
         <div className={styles.subTitle}>
           평가 결과는 상대 프로필에 반영됩니다.
         </div>
-        <img src={store_img} className={styles.influencerImg} />
-        <div className={styles.name}>호호식당( 대학로점 )</div>
-        <div className={styles.description}>유튜브 30초 숏폼 구합니다.</div>
+        <img
+          src={selectedItem.imgUrl || main_busy}
+          className={styles.influencerImg}
+        />
+        <div className={styles.name}>
+          {selectedItem.reviewInfo.workplaceName}
+        </div>
+        <div className={styles.description}>
+          {selectedItem.reviewInfo.introduction}
+        </div>
         <div className={styles.rateContainer}>
           {[...Array(5)].map((_, index) => (
             <img
@@ -65,11 +90,13 @@ const InfluencerPaymentStarModal = ({ setIsPaymentCompleteModalOpen }) => {
         <textarea
           className={styles.reviewTextarea}
           placeholder="평가를 남겨주세요."
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
         />
         <div className={styles.buttonContainer}>
           <button
             className={styles.sendButton}
-            onClick={() => setIsPaymentCompleteModalOpen(false)}
+            onClick={handleSendReview}
             disabled={!starStates.some((star) => star)}
           >
             평가하기
