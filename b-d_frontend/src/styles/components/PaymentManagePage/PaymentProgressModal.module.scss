@@ -1,10 +1,9 @@
 @use "../../variables" as *;
 
 .container {
-  width: vw(857px);
   background-color: white;
   border-radius: vw(22px);
-  padding: vh(57px) 0;
+  padding: vh(57px) vw(162px);
   @include flex(column, center, center);
   .content {
     width: 100%;
@@ -18,82 +17,57 @@
       font-size: rem(20px);
       color: #929292;
       line-height: 1.75;
-      margin-bottom: vh(4px);
     }
 
     .payMethodWrap {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 36px;
-      margin-bottom: 36px;
-    }
-
-    .payMethod {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      cursor: pointer;
-      transition: transform 0.15s;
-      gap: 88px;
+      @include flex(row, center, center, vw(88px));
       margin-top: vh(54px);
-    }
 
-    .payMethod:active,
-    .payMethod.selected {
-      transform: scale(1.06);
-    }
-
-    .payIcon {
-      width: vw(119px);
-      height: vw(119px);
-      border-radius: 50%;
-      background: #e3f2fd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0;
-      box-shadow: 0 2px 8px rgba(33, 150, 243, 0.08);
-      border: 2.5px solid #2196f3;
-      transition: border 0.2s, box-shadow 0.2s;
-    }
-
-    .payMethod.selected .payIcon {
-      border: 3.5px solid #1976d2;
-      box-shadow: 0 4px 16px rgba(33, 150, 243, 0.18);
-    }
-
-    .payLabel {
-      font-size: 1.08rem;
-      color: #1976d2;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      margin-top: 0;
+      .payIcon {
+        width: vw(119px);
+        height: vw(119px);
+        border-radius: 50%;
+      }
     }
 
     .agreeWrap {
-      margin-top: 20px;
+      @include flex(column, start, center, vh(10px));
+      margin-top: vh(64px);
       .agreeItem {
-        color: #888;
+        color: $color-sub-02;
         font-size: rem(20px);
-        margin-bottom: 8px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 8px;
-      }
+        @include flex(row, center, center, vw(8px));
+        .checkboxInput {
+          appearance: none;
+          width: vw(24px);
+          height: vw(24px);
+          border-radius: 50%;
+          background-color: #d9d9d9;
+          cursor: pointer;
+          position: relative;
 
-      .agreeCheckbox {
-        accent-color: #2196f3;
-        width: 18px;
-        height: 18px;
-        margin-right: 8px;
-      }
+          &:checked {
+            border-color: $color-main;
+            border: 2px solid $color-main;
+            background-color: white;
 
-      .agreeText {
-        font-size: 0.98rem;
-        color: #666;
+            &::after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: vw(13px);
+              height: vw(13px);
+              background-color: $color-main;
+              border-radius: 50%;
+            }
+          }
+
+          &:hover {
+            border-color: $color-main;
+          }
+        }
       }
     }
 

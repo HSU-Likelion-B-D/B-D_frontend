@@ -33,29 +33,29 @@ export default function PaymentProgressModal({
         <div className={styles.subTitle}>멋진 결과물을 기대하고 있을게요!</div>
 
         <div className={styles.payMethodWrap}>
-          <div className={styles.payMethod}>
-            <img src={pay_card} alt="카드결제" className={styles.payIcon} />
-
-            <img src={pay_transfer} alt="계좌이체" className={styles.payIcon} />
-
-            <img src={pay_easy} alt="간편결제" className={styles.payIcon} />
-          </div>
+          <img src={pay_card} alt="카드결제" className={styles.payIcon} />
+          <img src={pay_transfer} alt="계좌이체" className={styles.payIcon} />
+          <img src={pay_easy} alt="간편결제" className={styles.payIcon} />
         </div>
 
         <div className={styles.agreeWrap}>
-          <label className={styles.agreeItem}>
+          <label htmlFor="agree1" className={styles.agreeItem}>
             <input
-              type="radio"
+              type="checkbox"
+              id="agree1"
               checked={agree1}
               onChange={(e) => setAgree1(e.target.checked)}
+              className={styles.checkboxInput}
             />
             수수료 정책 및 제안서 약관에 동의합니다
           </label>
-          <label className={styles.agreeItem}>
+          <label htmlFor="agree2" className={styles.agreeItem}>
             <input
-              type="radio"
+              type="checkbox"
+              id="agree2"
               checked={agree2}
               onChange={(e) => setAgree2(e.target.checked)}
+              className={styles.checkboxInput}
             />
             결제 후에는 캠페인 취소 시 위약금이 발생할 수 있음에 동의합니다
           </label>
