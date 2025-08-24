@@ -11,6 +11,8 @@ export default function CampaignManagement() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); // 에러 상태 추가
   const [selectedState, setSelectedState] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const itemsPerPage = 5; // 한 페이지에 표시할 아이템 수
 
   // 캠페인 데이터를 가져오는 함수
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function CampaignManagement() {
     const endpoint =
       selectedState === "all"
         ? "/bd/api/campaigns?all=true"
-        : `/bd/api/campaigns?state=${selectedState}`;
+        : `/bd/api/campaigns?status=${selectedState}`;
 
     axiosInstance
       .get(endpoint)
@@ -50,7 +52,14 @@ export default function CampaignManagement() {
   const handleStateChange = (state) => {
     setSelectedState(state);
     setIsCampaignModalOpen(false);
+    setCurrentPage(1); // 상태 변경 시 페이지를 초기화
   };
+
+  // 현재 페이지에 해당하는 데이터 계산
+  const paginatedData = campaignList.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   // 콘텐츠 렌더링 로직을 함수로 분리하여 가독성 향상
   const renderContent = () => {
@@ -69,10 +78,10 @@ export default function CampaignManagement() {
         />
       );
     }
-    return campaignList.map((campaign) => (
-      // campaign.id와 같이 고유한 값을 key로 사용하는 것을 권장
+    return paginatedData.map((campaign) => (
       <CampaignItem
-        key={campaign.id} // 혹은 campaign.id 같은 고유 ID
+        key={campaign.campaignId}
+        campaignId={campaign.campaignId}
         title={campaign.title}
         money={`${campaign.offerBudget}원`}
         date={`${campaign.startDate}~${campaign.endDate}`}
@@ -111,6 +120,47 @@ export default function CampaignManagement() {
         </div>
       </div>
       <div className={styles.content}>{renderContent()}</div>
+
+      {/* 페이지네이션 */}
+      {campaignList.length > itemsPerPage && (
+        <div className={styles.footer}>
+          <div
+            className={styles.footerLeft}
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          >
+            {"<"}
+          </div>
+          <div className={styles.pageNation}>
+            {Array.from(
+              { length: Math.ceil(campaignList.length / itemsPerPage) },
+              (_, i) => i + 1
+            ).map((page) => (
+              <div
+                key={page}
+                className={`${styles.pageNationItem} ${
+                  currentPage === page ? styles.active : ""
+                }`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
+              </div>
+            ))}
+          </div>
+          <div
+            className={styles.footerRight}
+            onClick={() =>
+              setCurrentPage((prev) =>
+                Math.min(
+                  prev + 1,
+                  Math.ceil(campaignList.length / itemsPerPage)
+                )
+              )
+            }
+          >
+            {">"}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

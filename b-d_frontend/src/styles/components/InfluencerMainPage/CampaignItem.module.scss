@@ -30,12 +30,50 @@
       color: $color-main;
       line-height: 1.75;
       font-weight: $font_weight_bold;
-      .circle {
-        margin-left: vw(14px);
-        width: vw(13px);
-        height: vw(13px);
-        border-radius: 50%;
-        background-color: $color-main;
+      .buttonsWithCircle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px; /* 버튼과 동그라미 간격 */
+        width: 100%;
+
+        .buttons {
+          display: flex;
+          gap: 10px;
+        }
+
+        .acceptButton {
+          color: #007bff; /* 파란색 텍스트 */
+          background: none;
+          border: none;
+          font-size: 16px;
+          font-weight: $font_weight_bold;
+          cursor: pointer;
+        }
+
+        .rejectButton {
+          color: #ff4242; /* 빨간색 텍스트 */
+          background: none;
+          border: none;
+          font-size: 16px;
+          font-weight: $font_weight_bold;
+          cursor: pointer;
+        }
+
+        .yellowCircle {
+          margin-left: vw(14px);
+          width: vw(13px);
+          height: vw(13px);
+          border-radius: 50%;
+          background-color: #ffcc00; /* 노란색 동그라미 */
+        }
+        .circle {
+          margin-left: vw(14px);
+          width: vw(13px);
+          height: vw(13px);
+          border-radius: 50%;
+          background-color: $color-main;
+        }
       }
     }
   }
