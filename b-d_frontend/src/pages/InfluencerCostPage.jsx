@@ -7,15 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 const atmosphere = [
   { id: 1, name: "음식/음료" },
-  { id: 2, name: "인스타그램" },
-  { id: 3, name: "쇼핑/소매" },
-  { id: 4, name: "반려동물" },
-  { id: 5, name: "뷰티/서비스" },
-  { id: 6, name: "운동/건강" },
-  { id: 7, name: "숏폼" },
-  { id: 8, name: "문화/체험" },
-  { id: 9, name: "콘텐츠" },
-  { id: 10, name: "기타" },
+  { id: 2, name: "쇼핑/소매" },
+  { id: 3, name: "반려동물" },
+  { id: 4, name: "뷰티/서비스" },
+  { id: 5, name: "운동/건강" },
+  { id: 6, name: "문화/체험" },
+  { id: 7, name: "콘텐츠" },
+  { id: 8, name: "기타" },
 ];
 
 const InfluencerCostPage = () => {

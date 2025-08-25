@@ -102,7 +102,7 @@
 }
 .buttonGroup {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); // 한줄에 개
+  grid-template-columns: repeat(4, 1fr); // 한줄에 개
   gap: vh(6px) vw(5px); // 행, 열 간격
   justify-items: center; // 버튼 가운데 정렬
   //margin: 24px 0;
