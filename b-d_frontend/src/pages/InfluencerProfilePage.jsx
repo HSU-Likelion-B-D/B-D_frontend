@@ -346,7 +346,7 @@ const InfluencerProfilePage = () => {
 
             <textarea
               name="description"
-              placeholder="가게를 간단히 소개해주세요."
+              placeholder="본인을 간단히 소개해주세요."
               value={formData.description}
               onChange={handleInputChange}
               className={styles.textarea}
