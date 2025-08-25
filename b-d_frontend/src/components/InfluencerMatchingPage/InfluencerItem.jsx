@@ -8,6 +8,7 @@ export default function InfluencerItem({
   setIsProposalModalOpen,
   proposalId, // InfluencerMatchingPage에서 전달
   recommendation, // InfluencerMatchingPage에서 전달
+  setSelectedItem,
 }) {
   const [loading, setLoading] = useState(false);
   const recipientId = recommendation.userId;
@@ -48,6 +49,7 @@ export default function InfluencerItem({
 
           // 필요 시 모달 닫기
           if (setIsProposalModalOpen) setIsProposalModalOpen(true);
+          setSelectedItem(recommendation);
         } else {
           // 성공 플래그 false
           throw new Error(res?.data?.message || "캠페인 생성에 실패했습니다.");

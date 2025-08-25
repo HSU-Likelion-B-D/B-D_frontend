@@ -11,6 +11,7 @@ export default function InfluencerMatchingPage() {
   const [recommendations, setRecommendations] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const navigate = useNavigate();
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const proposalId = sessionStorage.getItem("proposalId"); // createproposal 할때 저장함
 
@@ -80,13 +81,17 @@ export default function InfluencerMatchingPage() {
               setIsProposalModalOpen={setIsProposalModalOpen}
               proposalId={proposalId}
               recommendation={recommendation}
+              setSelectedItem={setSelectedItem}
             />
           ))}
         </div>
       </div>
       {isProposalModalOpen && (
         <div className={styles.proposalModal}>
-          <ProposalModal setIsProposalModalOpen={setIsProposalModalOpen} />
+          <ProposalModal
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            selectedItem={selectedItem}
+          />
         </div>
       )}
     </div>
