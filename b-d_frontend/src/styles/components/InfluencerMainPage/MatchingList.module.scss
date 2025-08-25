@@ -28,7 +28,7 @@
     width: 100%;
     height: 100%;
     padding: 0 vw(18px);
-    @include flex(column, center, start, vh(25px));
+    @include flex(column, center, space-between, vh(25px));
     margin-bottom: 32px;
     position: relative;
 
