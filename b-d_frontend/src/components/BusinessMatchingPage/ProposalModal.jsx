@@ -1,6 +1,6 @@
 import styles from "@/styles/components/BusinessMatchingPage/ProposalModal.module.scss";
 import { useEffect } from "react";
-import { store_img } from "@/assets";
+import { busy_left } from "@/assets";
 
 export default function ProposalModal({
   setIsProposalModalOpen,
@@ -22,9 +22,12 @@ export default function ProposalModal({
           {selectedItem.nickname}님께 제안서를 보낼까요?
         </div>
         <div className={styles.subTitle}>멋진 결과물을 기대하고 있을게요!</div>
-        <img src={store_img} className={styles.influencerImg} />
-        <div className={styles.name}>호호식당 대학로점</div>
-        <div className={styles.description}>유튜브 30초 숏폼 구합니다.</div>
+        <img
+          src={selectedItem.imgUrl || busy_left}
+          className={styles.influencerImg}
+        />
+        <div className={styles.name}>{selectedItem.workPlaceName}</div>
+        <div className={styles.description}>{selectedItem.introduction}</div>
         <div className={styles.buttonContainer}>
           <button
             className={styles.cancelButton}
