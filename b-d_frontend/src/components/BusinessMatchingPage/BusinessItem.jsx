@@ -9,6 +9,7 @@ export default function BusinessItem({
   proposalId, // BusinessMatchingPage에서 전달
   recommendation, // BusinessMatchingPage에서 전달
   imgUrl,
+  setSelectedItem,
 }) {
   const [loading, setLoading] = useState(false);
   const recipientId = recommendation.userId;
@@ -48,6 +49,7 @@ export default function BusinessItem({
           console.log(message || "제안서 전송에 성공했습니다.");
           // 필요 시 모달 닫기
           if (setIsProposalModalOpen) setIsProposalModalOpen(true);
+          setSelectedItem(recommendation);
         } else {
           // 성공 플래그 false
           throw new Error(res?.data?.message || "캠페인 생성에 실패했습니다.");

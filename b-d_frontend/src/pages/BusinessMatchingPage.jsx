@@ -10,6 +10,7 @@ export default function BusinessMatchingPage() {
   const [recommendations, setRecommendations] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const proposalId = sessionStorage.getItem("proposalId");
+  const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
   // 모달이 열릴 때 스크롤을 최상단으로 이동
   useEffect(() => {
@@ -76,13 +77,17 @@ export default function BusinessMatchingPage() {
               proposalId={proposalId}
               recommendation={recommendation}
               imgUrl={recommendation.imgUrl}
+              setSelectedItem={setSelectedItem}
             />
           ))}
         </div>
       </div>
       {isProposalModalOpen && (
         <div className={styles.proposalModal}>
-          <ProposalModal setIsProposalModalOpen={setIsProposalModalOpen} />
+          <ProposalModal
+            setIsProposalModalOpen={setIsProposalModalOpen}
+            selectedItem={selectedItem}
+          />
         </div>
       )}
     </div>
