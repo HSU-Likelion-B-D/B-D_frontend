@@ -4,6 +4,7 @@ import { logo, eye, eye_color } from "@/assets";
 import Button from "../components/SingupPage/Button";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/apis/axiosInstance";
 
 export default function NewPWPage() {
   const navigate = useNavigate();
@@ -22,7 +23,43 @@ export default function NewPWPage() {
   const watchedConfirmPassword = watch("confirmPassword");
 
   const onSubmit = (data) => {
-    console.log("회원가입 데이터:", data);
+    const email = sessionStorage.getItem("email"); // 이전 페이지에서 저장된 이메일 가져오기
+    const password = data.password; // 입력된 새 비밀번호 가져오기
+
+    if (!email || !password) {
+      console.error("이메일 또는 비밀번호가 없습니다.");
+      alert("이메일 또는 비밀번호를 입력해주세요.");
+      return;
+    }
+
+    axiosInstance
+      .post("/bd/user/pwchange", { email, password }) // API 호출
+      .then((res) => {
+        if (res.data.isSuccess) {
+          console.log("비밀번호 변경 성공:", res.data.message);
+          alert("비밀번호가 성공적으로 변경되었습니다.");
+          navigate("/login"); // 성공 시 로그인 페이지로 이동
+        } else {
+          console.error("비밀번호 변경 실패:", res.data.message);
+          alert("비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
+        }
+      })
+      .catch((error) => {
+        const status = error.response?.status;
+        const errorMessage =
+          error.response?.data?.message || "요청 처리 중 문제가 발생했습니다.";
+
+        if (status === 400) {
+          alert("비밀번호 조건이 불일치합니다. 다시 확인해주세요.");
+        } else if (status === 404) {
+          alert("이메일이 존재하지 않습니다.");
+        } else if (status === 500) {
+          alert("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        } else {
+          alert(errorMessage);
+        }
+        console.error("비밀번호 변경 오류:", error);
+      });
   };
 
   const clearPassword = () => {
@@ -166,9 +203,6 @@ export default function NewPWPage() {
               allFilled ? styles.activeSubmitBtn : ""
             }`}
             disabled={isSubmitting || !allFilled}
-            onClick={() => {
-              navigate("/login");
-            }}
           >
             로그인
           </Button>

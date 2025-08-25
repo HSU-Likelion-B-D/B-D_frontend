@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/pages/FindPWPage.module.scss";
 import { logo } from "@/assets";
 import Input from "../components/SingupPage/Input";
 import Button from "../components/SingupPage/Button";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/apis/axiosInstance";
 
 export default function FindPWPage() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function FindPWPage() {
     formState: { errors, isSubmitting },
     watch,
     setValue,
+    setError,
   } = useForm({
     mode: "onChange",
   });
@@ -21,12 +23,25 @@ export default function FindPWPage() {
   const [isVerifySent, setIsVerifySent] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isVerifySuccess, setIsVerifySuccess] = useState(false);
 
   // 이메일 유효성 검사 함수
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
+  // 이메일 입력값 변경 감지
+  const watchedEmail = watch("email");
+
+  // 이메일 값이 변경될 때마다 유효성 검사
+  useEffect(() => {
+    if (watchedEmail) {
+      setIsValidEmail(validateEmail(watchedEmail));
+    } else {
+      setIsValidEmail(false);
+    }
+  }, [watchedEmail]);
 
   // 이메일 입력값 변경 감지
   const handleEmailChange = (e) => {
@@ -42,9 +57,69 @@ export default function FindPWPage() {
   };
 
   const handleVerifySend = () => {
-    setIsVerifySent(true);
+    if (isValidEmail) {
+      setIsVerifySent(true);
+      axiosInstance
+        .post("/bd/user/sendcode", {
+          email: watchedEmail,
+          purpose: "PW_CHANGE",
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    }
   };
 
+  const handleVerifyConfirm = () => {
+    if (isFilled) {
+      axiosInstance
+        .post("/bd/user/verifycode", {
+          email: watchedEmail,
+          code: verificationCode,
+        })
+        .then((res) => {
+          if (res.data.isSuccess) {
+            // 인증 성공
+            alert("인증 성공");
+            // navigate("/new-password");
+            setIsVerifySuccess(true);
+            setError("verificationCode", {
+              type: "success",
+              message: "인증번호가 확인되었습니다.",
+            });
+          }
+        })
+        .catch((error) => {
+          // // API 호출 실패
+          // setIsVerifySuccess(false);
+          // if (error.response.data.httpStatus === 400) {
+          //   setError("verificationCode", {
+          //     type: "manual",
+          //     message: "인증번호가 일치하지 않습니다.",
+          //   });
+          // } else {
+          //   setError("verificationCode", {
+          //     type: "manual",
+          //     message: "인증번호가 존재하지 않거나 만료되었습니다.",
+          //   });
+          // }
+          console.error("인증번호 확인 오류:", error);
+        });
+    }
+  };
+
+  const handleNext = () => {
+    const email = watchedEmail; // 입력된 이메일 가져오기
+
+    if (!email) {
+      console.error("이메일이 없습니다.");
+      alert("이메일을 입력해주세요.");
+      return;
+    }
+
+    sessionStorage.setItem("email", email); // 이메일을 세션 스토리지에 저장
+    navigate("/new-password"); // 다음 페이지로 이동
+  };
   const isFilled = verificationCode.trim() !== "";
   const allFilled = Object.keys(watch()).every(
     (key) => watch(key)?.trim() !== ""
@@ -105,6 +180,7 @@ export default function FindPWPage() {
               className={`${styles.confirmBtn} ${
                 isFilled ? styles.activeConfirmBtn : ""
               }`}
+              onClick={handleVerifyConfirm}
             >
               확인
             </Button>
@@ -134,9 +210,7 @@ export default function FindPWPage() {
               allFilled ? styles.activeSubmitBtn : ""
             }`}
             disabled={isSubmitting || !allFilled}
-            onClick={() => {
-              navigate("/new-password");
-            }}
+            onClick={handleNext}
           >
             다음
           </Button>
