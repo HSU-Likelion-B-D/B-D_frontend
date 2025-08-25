@@ -43,12 +43,30 @@
         }
       }
     }
+    .keywordContainer {
+      margin-top: vh(25px);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: vw(16px);
+      .keywordItem {
+        @include flex(row, center, center);
+        padding: vh(10px) vw(30px);
+        border-radius: vw(12px);
+        border: 3px solid $color-red-01;
+        text-align: center;
+        width: 100%;
+        font-size: rem(20px);
+        color: $color-red-01;
+        font-weight: $font_weight_bold;
+      }
+    }
     .hr {
-      width: vw(796px);
+      width: 100%;
       height: vh(3px);
       background-color: $color-sub-01;
-      margin: vh(52px) 0 vh(53px) 0;
+      margin: vh(22px) 0 vh(53px) 0;
     }
+
     .bottomContainer {
       width: 100%;
       @include flex(row, start, space-between, vw(43px));

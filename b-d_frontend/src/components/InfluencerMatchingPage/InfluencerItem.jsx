@@ -2,6 +2,7 @@ import styles from "@/styles/components/InfluencerMatchingPage/InfluencerItem.mo
 import { main_dilly, star_icon } from "@/assets";
 import axiosInstance from "@/apis/axiosInstance";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function InfluencerItem({
   setIsProposalModalOpen,
@@ -10,19 +11,21 @@ export default function InfluencerItem({
 }) {
   const [loading, setLoading] = useState(false);
   const recipientId = recommendation.userId;
-
+  const navigate = useNavigate();
   const handleSendProposal = () => {
     if (loading) return;
 
     // 필수값 체크
     if (!proposalId || !recipientId) {
-      console.log("proposalId 또는 recipientId가 없습니다.");
+      alert("제안서를 작성해주세요.");
+      navigate("/create-proposal");
       return;
     }
 
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      console.log("로그인이 필요합니다. 다시 로그인해주세요.");
+      alert("로그인이 필요합니다. 다시 로그인해주세요.");
+      navigate("/login");
       return;
     }
 
@@ -51,23 +54,11 @@ export default function InfluencerItem({
         }
       })
       .catch((error) => {
-        console.error("제안서 전송 오류:", error);
-        const status = error?.response?.status;
-        const msg = error?.response?.data?.message || error.message;
-
-        // 명세의 에러 분기(404: 제안서/받는 사람 없음, 500: 서버오류 등)
-        if (status === 401) {
-          console.log(
-            "로그인이 만료되었거나 유효하지 않습니다. 다시 로그인해주세요."
-          );
-        } else if (status === 404) {
-          console.log(msg || "제안서 또는 받는 사람을 찾을 수 없습니다.");
-        } else if (status === 500) {
-          console.log(
-            "내부 서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
-          );
+        if (error.response.status === 409) {
+          alert(error.response.data.message);
         } else {
-          console.log(msg || "요청 처리 중 문제가 발생했습니다.");
+          alert("제안서가 필요합니다. 제안서를 저장해주세요.");
+          navigate("/create-proposal");
         }
       })
       .finally(() => setLoading(false));
@@ -98,8 +89,6 @@ export default function InfluencerItem({
           </div>
         </div>
       </div>
-
-      {/* ✅ 통신 연결 */}
       <button
         className={styles.proposalButton}
         onClick={handleSendProposal}

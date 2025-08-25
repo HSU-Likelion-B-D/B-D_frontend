@@ -9,6 +9,7 @@ import KakaoMap from "@/components/BusinessMyPage/KakaoMap";
 export default function BusinessMyPage() {
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [businessInfo, setBusinessInfo] = useState(null);
+  const [reviewKeywords, setReviewKeywords] = useState([]);
   // 페이지 마운트 시 스크롤을 상단으로 이동
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -34,6 +35,16 @@ export default function BusinessMyPage() {
       .catch((err) => {
         console.error("API 에러:", err);
       });
+  }, []);
+
+  useEffect(() => {
+    axiosInstance.get("/bd/api/review/keywords").then((res) => {
+      console.log("API 응답:", res);
+      console.log("API 응답 데이터 구조:", res.data);
+      if (res.data.isSuccess) {
+        setReviewKeywords(res.data.data.keywords);
+      }
+    });
   }, []);
 
   return (
@@ -66,6 +77,11 @@ export default function BusinessMyPage() {
             </span>{" "}
             선호
           </div>
+        </div>
+        <div className={styles.keywordContainer}>
+          {reviewKeywords.map((keyword) => (
+            <div className={styles.keywordItem}>{keyword}</div>
+          ))}
         </div>
         <hr className={styles.hr} />
         <div className={styles.bottomContainer}>

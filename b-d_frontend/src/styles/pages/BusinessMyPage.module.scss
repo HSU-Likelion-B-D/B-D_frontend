@@ -43,8 +43,25 @@
         }
       }
     }
+    .keywordContainer {
+      margin-top: vh(25px);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: vw(16px);
+      .keywordItem {
+        @include flex(row, center, center);
+        padding: vh(10px) vw(30px);
+        border-radius: vw(12px);
+        border: 3px solid $color-main;
+        text-align: center;
+        width: 100%;
+        font-size: rem(20px);
+        color: $color-main;
+        font-weight: $font_weight_bold;
+      }
+    }
     .hr {
-      width: vw(796px);
+      width: 100%;
       height: vh(3px);
       background-color: $color-sub-01;
       margin: vh(52px) 0 vh(53px) 0;
@@ -76,8 +93,9 @@
       }
     }
     .mapContainer {
-      width: vw(891px);
+      width: 100%;
       @include flex(column, center, center, vh(27px));
+      margin-top: vh(25px);
       .map {
         width: 100%;
         height: vh(268px);

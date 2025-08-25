@@ -20,20 +20,25 @@ export default function LoginPage() {
 
   const onSubmit = (data) => {
     console.log(data);
-    axiosInstance.post("/bd/user/signin", data).then((res) => {
-      console.log(res);
-      if (res.data.isSuccess) {
-        localStorage.setItem("accessToken", res.data.data.token);
-        localStorage.setItem("userType", res.data.data.userRoleType);
-        localStorage.setItem("nickName", res.data.data.nickname);
-        localStorage.setItem("imgUrl", res.data.data.imgUrl);
-        if (res.data.data.userRoleType === "BUSINESS") {
-          navigate("/");
-        } else {
-          navigate("/influencer-main");
+    axiosInstance
+      .post("/bd/user/signin", data)
+      .then((res) => {
+        console.log(res);
+        if (res.data.isSuccess) {
+          localStorage.setItem("accessToken", res.data.data.token);
+          localStorage.setItem("userType", res.data.data.userRoleType);
+          localStorage.setItem("nickName", res.data.data.nickname);
+          localStorage.setItem("imgUrl", res.data.data.imgUrl);
+          if (res.data.data.userRoleType === "BUSINESS") {
+            navigate("/");
+          } else {
+            navigate("/influencer-main");
+          }
         }
-      }
-    });
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
   };
 
   const watchedEmail = watch("email");

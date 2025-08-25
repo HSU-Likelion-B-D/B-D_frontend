@@ -23,13 +23,16 @@ export default function Header({
           visibility: isCreateProposalPage ? "hidden" : "visible",
         }}
       >
-        <div className={styles.iconBox}>
+        <div
+          className={styles.iconBox}
+          onClick={() => alert("채팅 기능은 준비중입니다.")}
+        >
           <img className={styles.icon} src={chat_icon} alt="chat" />
           <div className={styles.count}>1</div>
         </div>
         <div
           className={styles.iconBox}
-          onClick={() => setIsNotificationModalOpen(true)}
+          onClick={() => alert("알림 기능은 준비중입니다.")}
         >
           <img className={styles.icon} src={alarm_icon} alt="alarm" />
           <div className={styles.count}>1</div>

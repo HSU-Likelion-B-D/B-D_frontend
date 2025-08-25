@@ -23,7 +23,6 @@ export default function MainPage() {
       .then((res) => {
         if (res.data.isSuccess) {
           setBusinessInfo(res.data.data);
-          console.log(res.data.data);
         }
       })
       .catch((err) => {
@@ -99,7 +98,9 @@ export default function MainPage() {
                 className={styles.Button}
                 onClick={() => navigate("/payment-manage")}
               >
-                <div className={styles.ButtonTitle}>결제 및 정산 관리</div>
+                <div className={styles.ButtonTitle}>
+                  <span>결제 및 정산</span> 관리
+                </div>
                 <div className={styles.ButtonSubtitle}>
                   비디가 안전한 거래를 도와줄게요!
                 </div>

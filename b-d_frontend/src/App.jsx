@@ -6,6 +6,8 @@ import { MainLayout } from "./components/MainLayout";
 import { InfluencerMainLayout } from "./components/InfluencerMainLayout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { InfluencerBubbleLayout } from "./components/InfluencerBubbleLayout";
+import { BusinessRoute } from "./components/BusinessRoute";
+import { InfluencerRoute } from "./components/InfluencerRoute";
 // Pages
 import LoginPage from "./pages/LoginPage";
 import StartPage from "./pages/StartPage";
@@ -42,46 +44,51 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<ProtectedRoute />}>
-          <Route element={<BubbleLayout />}>
-            <Route
-              path="/info-edit-complete"
-              element={<InfoEditCompletePage />}
-            />
+          <Route element={<BusinessRoute />}>
+            <Route element={<BubbleLayout />}>
+              <Route
+                path="/info-edit-complete"
+                element={<InfoEditCompletePage />}
+              />
+            </Route>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/create-proposal" element={<CreateProposalPage />} />
+              <Route path="/payment-manage" element={<PaymentManagePage />} />
+              <Route
+                path="/influencer-matching"
+                element={<InfluencerMatchingPage />}
+              />
+              <Route path="/business-mypage" element={<BusinessMyPage />} />
+            </Route>
           </Route>
-          <Route element={<InfluencerBubbleLayout />}>
-            <Route
-              path="/influencer-info-edit-complete"
-              element={<InfluencerInfoEditCompletePage />}
-            />
-          </Route>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/create-proposal" element={<CreateProposalPage />} />
-
-            <Route path="/payment-manage" element={<PaymentManagePage />} />
-            <Route
-              path="/influencer-matching"
-              element={<InfluencerMatchingPage />}
-            />
-            <Route path="/business-mypage" element={<BusinessMyPage />} />
-          </Route>
-          <Route element={<InfluencerMainLayout />}>
-            <Route path="/influencer-main" element={<InfluencerMainPage />} />
-            <Route
-              path="/influencer-create-proposal"
-              element={<InfluencerCreateProposalPage />}
-            />
-            <Route
-              path="/business-matching"
-              element={<BusinessMatchingPage />}
-            />
-            <Route
-              path="/influencer-payment-manage"
-              element={<InfluencerPaymentManagePage />}
-            />
-            <Route path="/influencer-mypage" element={<InfluencerMyPage />} />
+          <Route element={<InfluencerRoute />}>
+            <Route element={<InfluencerBubbleLayout />}>
+              <Route
+                path="/influencer-info-edit-complete"
+                element={<InfluencerInfoEditCompletePage />}
+              />
+            </Route>
+            <Route element={<InfluencerMainLayout />}>
+              <Route path="/influencer-main" element={<InfluencerMainPage />} />
+              <Route
+                path="/influencer-create-proposal"
+                element={<InfluencerCreateProposalPage />}
+              />
+              <Route
+                path="/business-matching"
+                element={<BusinessMatchingPage />}
+              />
+              <Route
+                path="/influencer-payment-manage"
+                element={<InfluencerPaymentManagePage />}
+              />
+              <Route path="/influencer-mypage" element={<InfluencerMyPage />} />
+            </Route>
           </Route>
         </Route>
+
+        {/* 로그인 전 페이지 */}
         <Route element={<SimpleLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

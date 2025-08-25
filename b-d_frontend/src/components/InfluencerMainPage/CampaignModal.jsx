@@ -1,7 +1,7 @@
 import styles from "@/styles/components/MainPage/CampaignModal.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function CampaignModal({ onStateChange }) {
+export default function CampaignModal({ onStateChange, selectedState }) {
   const menuItems = [
     { label: "모두보기", value: "all" },
     { label: "대기중", value: "WAITING" },
@@ -10,7 +10,15 @@ export default function CampaignModal({ onStateChange }) {
     { label: "완료", value: "COMPLETED" },
     { label: "취소", value: "CANCELED" },
   ];
-  const [selectedItem, setSelectedItem] = useState(menuItems[0].value);
+  const [selectedItem, setSelectedItem] = useState(
+    selectedState || menuItems[0].value
+  );
+
+  useEffect(() => {
+    if (selectedState && selectedState !== selectedItem) {
+      setSelectedItem(selectedState);
+    }
+  }, [selectedState, selectedItem]);
 
   return (
     <div className={styles.container}>

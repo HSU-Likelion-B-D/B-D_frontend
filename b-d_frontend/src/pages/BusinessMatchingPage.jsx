@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function BusinessMatchingPage() {
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const proposalId = sessionStorage.getItem("proposalId");
   const navigate = useNavigate();
   // 모달이 열릴 때 스크롤을 최상단으로 이동
@@ -16,11 +17,20 @@ export default function BusinessMatchingPage() {
       window.scrollTo({ top: 0 });
     }
   }, [isProposalModalOpen]);
-  useEffect(() => {
-    axiosInstance.get("/bd/api/influencer/me/recommendations").then((res) => {
+  const fetchRecommendations = async () => {
+    try {
+      const res = await axiosInstance.get(
+        "/bd/api/influencer/me/recommendations"
+      );
       setRecommendations(res.data.data);
       console.log(res.data.data);
-    });
+    } catch (error) {
+      console.error("추천 데이터 가져오기 실패:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecommendations();
   }, []);
 
   return (
@@ -41,7 +51,19 @@ export default function BusinessMatchingPage() {
             <div className={styles.subtitle}>당신을 기다리고 있어요!</div>
           </div>
 
-          <button className={styles.refreshButton}>새로고침</button>
+          <button
+            className={styles.refreshButton}
+            disabled={isRefreshing}
+            onClick={async () => {
+              if (!isRefreshing) {
+                setIsRefreshing(true);
+                await fetchRecommendations();
+                setIsRefreshing(false);
+              }
+            }}
+          >
+            새로고침
+          </button>
         </div>
         <div className={styles.description}>
           *블로그는 투데이 수치로 기록됩니다.
@@ -53,6 +75,7 @@ export default function BusinessMatchingPage() {
               setIsProposalModalOpen={setIsProposalModalOpen}
               proposalId={proposalId}
               recommendation={recommendation}
+              imgUrl={recommendation.imgUrl}
             />
           ))}
         </div>

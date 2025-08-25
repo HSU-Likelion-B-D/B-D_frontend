@@ -21,7 +21,6 @@ export default function InfluencerMainPage() {
       .get("/bd/api/influencer/mypage")
       .then((res) => {
         if (res.data.isSuccess) {
-          console.log(res.data.data);
           setInfluencerInfo(res.data.data);
         }
       })
@@ -71,7 +70,9 @@ export default function InfluencerMainPage() {
                 className={styles.Button}
                 onClick={() => navigate("/influencer-payment-manage")}
               >
-                <div className={styles.ButtonTitle}>결제 및 정산 관리</div>
+                <div className={styles.ButtonTitle}>
+                  <span>결제 및 정산</span> 관리
+                </div>
                 <div className={styles.ButtonSubtitle}>
                   비디가 안전한 거래를 도와줄게요!
                 </div>
