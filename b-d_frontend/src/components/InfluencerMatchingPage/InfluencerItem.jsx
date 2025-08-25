@@ -80,7 +80,7 @@ export default function InfluencerItem({
             <div className={styles.starNumber}>
               {recommendation.avgScore}{" "}
               <span className={styles.starCount}>
-                ({recommendation.recommendScore})
+                ({recommendation.reviewCount})
               </span>
             </div>
           </div>
