@@ -53,18 +53,24 @@ export default function CampaignItem({
           </div>
         </div>
         <div className={styles.status}>
-          {status === "대기중" ? (
+          {status === "제안 받음" ? (
             <div className={styles.buttonsWithCircle}>
               <div className={styles.buttons}>
                 <button
                   className={styles.acceptButton}
-                  onClick={() => handleResponse("yes")}
+                  onClick={() => {
+                    handleResponse("yes");
+                    window.location.reload();
+                  }}
                 >
                   수락
                 </button>
                 <button
                   className={styles.rejectButton}
-                  onClick={() => handleResponse("no")}
+                  onClick={() => {
+                    handleResponse("no");
+                    window.location.reload();
+                  }}
                 >
                   거절
                 </button>

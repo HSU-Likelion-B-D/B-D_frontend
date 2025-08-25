@@ -5,7 +5,7 @@ export default function CampaignModal({ onStateChange, selectedState }) {
   const menuItems = [
     { label: "모두보기", value: "all" },
     { label: "대기중", value: "WAITING" },
-    { label: "제안 받은", value: "PROPOSED" },
+    { label: "제안 받음", value: "PROPOSED" },
     { label: "진행중", value: "CONFIRMED_IN_PROGRESS" },
     { label: "완료", value: "COMPLETED" },
     { label: "취소", value: "CANCELED" },

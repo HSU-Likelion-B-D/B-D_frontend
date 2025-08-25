@@ -28,6 +28,7 @@ export default function CampaignItem({
         if (result.data.isSuccess) {
           console.log("캠페인 상태 변경 성공:", result.data);
           console.log(`캠페인 ${response === "yes" ? "수락" : "거절"} 완료`);
+          window.scrollTo({ top: 0 }); //새로고침
         } else {
           console.error("캠페인 상태 변경 실패:", result.data);
           console.log("캠페인 상태 변경에 실패했습니다.");
@@ -51,18 +52,24 @@ export default function CampaignItem({
           </div>
         </div>
         <div className={styles.status}>
-          {status === "대기중" ? (
+          {status === "제안 받음" ? (
             <div className={styles.buttonsWithCircle}>
               <div className={styles.buttons}>
                 <button
                   className={styles.acceptButton}
-                  onClick={() => handleResponse("yes")}
+                  onClick={() => {
+                    handleResponse("yes");
+                    window.location.reload();
+                  }}
                 >
                   수락
                 </button>
                 <button
                   className={styles.rejectButton}
-                  onClick={() => handleResponse("no")}
+                  onClick={() => {
+                    handleResponse("no");
+                    window.location.reload();
+                  }}
                 >
                   거절
                 </button>
