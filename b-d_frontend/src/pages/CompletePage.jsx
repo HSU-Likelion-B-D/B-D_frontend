@@ -25,6 +25,15 @@ const CompletePage = () => {
     const storeAtmosphereData = JSON.parse(
       sessionStorage.getItem("storeAtmosphereData") || "{}"
     );
+    // 시간을 00:00 형식으로 변환하는 함수
+    const formatTime = (timeString) => {
+      if (!timeString) return "00:00";
+      const [hour, minute] = timeString.split(":");
+      const formattedHour = hour ? hour.padStart(2, "0") : "00";
+      const formattedMinute = minute ? minute.padStart(2, "0") : "00";
+      return `${formattedHour}:${formattedMinute}`;
+    };
+
     // 서버로 전송할 데이터 구성
     const accessToken = localStorage.getItem("accessToken");
 
@@ -34,8 +43,8 @@ const CompletePage = () => {
           name: addressData.workPlaceName,
           address: addressData.address,
           detailAddress: addressData.detailAddress,
-          openTime: storeTimeData.openTime,
-          closeTime: storeTimeData.closeTime,
+          openTime: formatTime(storeTimeData.openTime),
+          closeTime: formatTime(storeTimeData.closeTime),
           isOnline: Boolean(storeTimeData.isOnline),
           minBudget: storeCostData.minBudget,
           maxBudget: storeCostData.maxBudget,
@@ -53,8 +62,8 @@ const CompletePage = () => {
           name: addressData.workPlaceName,
           address: addressData.address,
           detailAddress: addressData.detailAddress,
-          openTime: storeTimeData.openTime,
-          closeTime: storeTimeData.closeTime,
+          openTime: formatTime(storeTimeData.openTime),
+          closeTime: formatTime(storeTimeData.closeTime),
           isOnline: Boolean(storeTimeData.isOnline),
           minBudget: storeCostData.minBudget,
           maxBudget: storeCostData.maxBudget,
