@@ -2,7 +2,10 @@ import styles from "@/styles/components/BusinessMatchingPage/ProposalModal.modul
 import { useEffect } from "react";
 import { store_img } from "@/assets";
 
-export default function ProposalModal({ setIsProposalModalOpen }) {
+export default function ProposalModal({
+  setIsProposalModalOpen,
+  selectedItem,
+}) {
   useEffect(() => {
     // 모달이 열릴 때 body 스크롤 차단
     document.body.style.overflow = "hidden";
@@ -16,7 +19,7 @@ export default function ProposalModal({ setIsProposalModalOpen }) {
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.title}>
-          호호식당 대학로점님께 제안서를 보낼까요?
+          {selectedItem.nickname}님께 제안서를 보낼까요?
         </div>
         <div className={styles.subTitle}>멋진 결과물을 기대하고 있을게요!</div>
         <img src={store_img} className={styles.influencerImg} />
